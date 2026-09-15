@@ -238,6 +238,27 @@ class TestConvencoes(unittest.TestCase):
                 self.assertIn('href="metodologia.html"', texto, f"{nome} nao liga a Metodologia")
                 self.assertIn('id="gerado"', texto, f"{nome} nao diz a data da ultima recolha")
 
+    def test_nenhuma_pagina_oferece_um_descarregamento_dos_dados(self):
+        """Decisao do autor a 2026-09-15: a ligacao "Descarregar os dados"
+        saiu do rodape das tres paginas, porque a de Fontes ja mostra
+        todas as linhas com a prova de cada uma e nao ha nada a acrescentar.
+        A Metodologia afirmava que os dados podiam ser descarregados dali:
+        uma afirmacao removida do HTML e mantida no documento publicado
+        continua a ser uma afirmacao falsa. O teste guarda os dois lados,
+        porque foi por eles se corrigirem em sitios diferentes que ja
+        falhou antes. Nao proibe o `DataDownload` dos dados estruturados
+        nem o `<link rel="alternate">`: esses nao sao ligacoes oferecidas
+        a quem le, e o que saiu foi a ligacao visivel."""
+        ancora_com_download = re.compile(r"<a\b[^>]*\bdownload\b")
+        for caminho in sorted((RAIZ / "docs").glob("*.html")):
+            texto = caminho.read_text(encoding="utf-8")
+            with self.subTest(ficheiro=caminho.name):
+                self.assertIsNone(ancora_com_download.search(texto), f"{caminho.name} volta a oferecer o ficheiro")
+        for caminho in (RAIZ / "METODOLOGIA.md", RAIZ / "docs" / "metodologia.html"):
+            texto = caminho.read_text(encoding="utf-8")
+            with self.subTest(ficheiro=caminho.name):
+                self.assertNotIn("descarregad", texto, f"{caminho.name} promete um descarregamento que o site nao tem")
+
     def test_as_frases_do_site_nao_tratam_o_sujeito_por_pronome(self):
         """Decisao do autor a 2026-09-11: as frases falam sempre do
         porquinho e nunca dizem "ele". Um pronome solto deixa de ser satira

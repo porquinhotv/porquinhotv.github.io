@@ -49,4 +49,4 @@ Uma linha errada, uma entrevista que falta, uma prova que não abre: [porquinhot
 
 ## Verificar
 
-Todas as entrevistas estão na página de Fontes, com a prova de cada uma, e os dados completos podem ser descarregados dali. Quem discordar de uma linha tem tudo o que precisa para dizer qual e porquê.
+Todas as entrevistas estão na página de Fontes, com a prova de cada uma. Quem discordar de uma linha tem tudo o que precisa para dizer qual e porquê.
