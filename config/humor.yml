@@ -80,14 +80,14 @@ metricas:
   total:
     - ate: 0
       frases:
-        - Nada. O porquinho bateu no telecomando para ver se estava avariado.
+        - Nada. O porquinho abanou o telecomando para ver se estava avariado.
     - ate: 1
       frases:
         - Uma. Já viu a entrevista, a repetição e o resumo.
     - ate: 3
       frases:
-        - Ainda dá tempo para arrumar o chiqueiro entre uma e outra.
-        - O porquinho chafurda de felicidade na lama!
+        - Ainda dá tempo para rebolar no chiqueiro entre uma e outra.
+        - O porquinho chafurda de felicidade!
     - ate: 9
       frases:
         - Isto já não é aparecer na televisão, é passar por casa.
@@ -96,7 +96,7 @@ metricas:
         - Há convidados e há inquilinos.
     - ate: null
       frases:
-        - Isto já não é uma grelha de programação, é uma assinatura.
+        - Isto já não é uma grelha de programação, é uma subscrição Porquinho TV!
         - O porquinho desistiu de contar de cabeça.
         - Se fosse uma série, já ia na {temporada} temporada.
   # Quantos episodios tem uma temporada de uma serie, e o ordinal escrito

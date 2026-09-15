@@ -83,7 +83,7 @@
    {
     "ate": 0,
     "frases": [
-     "Nada. O porquinho bateu no telecomando para ver se estava avariado."
+     "Nada. O porquinho abanou o telecomando para ver se estava avariado."
     ]
    },
    {
@@ -95,8 +95,8 @@
    {
     "ate": 3,
     "frases": [
-     "Ainda dá tempo para arrumar o chiqueiro entre uma e outra.",
-     "O porquinho chafurda de felicidade na lama!"
+     "Ainda dá tempo para rebolar no chiqueiro entre uma e outra.",
+     "O porquinho chafurda de felicidade!"
     ]
    },
    {
@@ -111,7 +111,7 @@
    {
     "ate": null,
     "frases": [
-     "Isto já não é uma grelha de programação, é uma assinatura.",
+     "Isto já não é uma grelha de programação, é uma subscrição Porquinho TV!",
      "O porquinho desistiu de contar de cabeça.",
      "Se fosse uma série, já ia na {temporada} temporada."
     ]
