@@ -80,22 +80,28 @@ def enderecos_declarados(resposta: str) -> list[str]:
     return [linha.strip() for linha in resposta.splitlines() if "http" in linha]
 
 
-def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios_interesse: list[str] | None = None) -> dict:
+def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios_interesse: list[str] | None = None, padrao: str = "") -> dict:
     """O que esta hipotese devolveu, em numeros comparaveis entre si."""
     corpo = extracao.texto_visivel(html)
     palheiro = normalizar(corpo)
     presentes = [t for t in termos if normalizar(t) and normalizar(t) in palheiro]
     enderecos = enderecos_declarados(html)
 
+    # O padrao do grupo aperta a colheita quando a heuristica por omissao
+    # nao serve: ela exige um hifen no ultimo segmento do caminho, e ha
+    # sites cujos enderecos de artigo nao tem nenhum. Sem isto, uma
+    # hipotese cheia de resultados contava zero pelo motivo errado, que e
+    # o mesmo defeito ja pago quando a pagina da Google se leu como zero
+    # resultados por procurar a palavra errada.
     if dominio_alvo:
-        ligacoes = extracao.ligacoes(html, url, dominio_alvo)
+        ligacoes = extracao.ligacoes(html, url, dominio_alvo, padrao)
     else:
         # Num motor de busca interessa saber para quantos dominios
         # distintos ele aponta: e a medida de ter mesmo devolvido
         # resultados em vez de uma pagina de aviso.
         ligacoes = []
         for dominio in dominios_interesse or []:
-            ligacoes += extracao.ligacoes(html, url, dominio)
+            ligacoes += extracao.ligacoes(html, url, dominio, padrao)
 
     return {
         "responde": True,
@@ -141,7 +147,7 @@ def correr(config: dict, obter=obter_texto, so_grupo: str | None = None, dormir=
                 linha["hipoteses"].append({"url": url, "responde": False, "erro": str(exc)})
                 print(f"    nao responde: {exc}", flush=True)
             else:
-                dados = analisar(html, url, termos, linha["dominio_alvo"], config.get("dominios_de_interesse") or [])
+                dados = analisar(html, url, termos, linha["dominio_alvo"], config.get("dominios_de_interesse") or [], grupo.get("padrao", ""))
                 linha["hipoteses"].append({"url": url, **dados})
                 print(f"    {dados['bytes_texto']} bytes de texto, {dados['ligacoes']} ligacoes, {dados['enderecos']} enderecos declarados, termos {dados['termos_presentes']}", flush=True)
                 if grupo.get("mostrar"):

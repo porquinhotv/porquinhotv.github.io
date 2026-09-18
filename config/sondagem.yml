@@ -611,3 +611,67 @@ grupos:
       - https://www.rtp.pt/play/bg_l_ep/?listProgram=10324&page=12&type=all
       - https://www.rtp.pt/play/bg_l_ep/?listProgram=10324&page=20&type=all
       - https://www.rtp.pt/play/bg_l_ep/?listProgram=10324&page=40&type=all
+
+  - nome: Instagram do proprio como indice de pistas
+    # A decisao editorial de 2026-09-11 aceita uma publicacao na conta do
+    # proprio entrevistado como prova, quando nomeia o canal e fixa o
+    # dia. O valor editorial esta decidido; o que falta medir e a
+    # mecanica: se um indice de pesquisa devolve enderecos de publicacao
+    # (instagram.com/p/, /reel/) para consultas com a forma das
+    # entrevistas. A pagina de destino nao entra no coletor (ver o grupo
+    # do robots, abaixo): o que esta via render sao pistas, abertas no
+    # browser do autor com a ferramenta de verificacao, onde a sessao e
+    # dele e nunca do projeto, e curadas a mao. E o ciclo que ja rendeu
+    # quinze entrevistas numa sessao a 2026-09-11.
+    #
+    # Como ler o relatorio: a coluna das ligacoes conta enderecos de
+    # publicacao por consulta, e essa e a medida do rendimento. A
+    # consulta com mes e ano aponta ao buraco de fevereiro de 2026; se
+    # contar zero quando as outras contam, desconfiar primeiro da forma
+    # da consulta e muda-la, antes de concluir seja o que for sobre o
+    # indice.
+    #
+    # Teto medido a 2026-09-11: 18 consultas por sessao no motor. Este
+    # grupo faz quatro pedidos a esse motor: nao correr na mesma sessao
+    # que os outros grupos que o usam.
+    dominio_alvo: instagram.com
+    # Sem padrao, a heuristica das ligacoes exige um hifen no ultimo
+    # segmento do caminho e descartava em silencio /p/<codigo>: os
+    # codigos de publicacao quase nunca tem hifen. A sonda contaria zero
+    # pelo motivo errado. E o padrao conta so enderecos de publicacao,
+    # de proposito: um endereco de perfil nao e uma pista com data.
+    padrao: '/(p|reel|tv)/[A-Za-z0-9_-]{6,}'
+    hipoteses:
+      - https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+{termo}
+      - https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+andre_ventura_oficial
+      - https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista+fevereiro+2026
+      - https://html.duckduckgo.com/html/?q=andre_ventura_oficial+entrevista+cnn
+      - https://lite.duckduckgo.com/lite/?q=site%3Ainstagram.com+{termo}
+      - https://search.brave.com/search?q=site%3Ainstagram.com+{termo}
+
+  - nome: Instagram, o que o robots declara
+    # Porque este grupo le so o robots.txt e nao pede o perfil:
+    #
+    # - verificado a 2026-09-18: um pedido automatico a pagina do perfil,
+    #   feito por um fetcher que respeita o robots.txt, foi recusado com
+    #   o motivo de o caminho estar declarado fora de alcance;
+    # - leitura de varias fontes de 2026, nao medicao nossa: o acesso
+    #   anonimo as publicacoes foi retirado ao longo de 2024, um
+    #   visitante sem sessao recebe a cabeca do perfil sem a grelha, e a
+    #   forma do HTML servido e interna e mudou a 2026-09-08, obrigando
+    #   quem a le a reescrever a extracao dois dias depois. E o defeito
+    #   exato que a regra de nunca escrever um seletor de um site existe
+    #   para travar;
+    # - as alternativas exigem o que o projeto recusa: sessao com
+    #   credenciais no coletor, ou servico pago com conta e cartao.
+    #
+    # O robots.txt existe para ser lido por maquinas, e o que ele diz
+    # fica na amostra do relatorio, medido do PC de quem corre. Enquanto
+    # declarar os perfis fora de alcance, nenhuma hipotese pede paginas
+    # de perfil nem de publicacao e a leitura direta fica recusada com
+    # este motivo, registado aqui. Se o relatorio mostrar outra coisa, a
+    # decisao revisita-se.
+    dominio_alvo: instagram.com
+    mostrar: true
+    hipoteses:
+      - https://www.instagram.com/robots.txt

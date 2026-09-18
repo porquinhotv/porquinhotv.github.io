@@ -33,6 +33,20 @@ class TestAnalisar(unittest.TestCase):
         r = sondar.analisar(html, "https://x/y", ["ventura entrevista"], "")
         self.assertEqual(r["termos_presentes"], ["ventura entrevista"])
 
+    def test_padrao_do_grupo_apanha_slug_sem_hifen(self):
+        """Sem padrao, a heuristica exige um hifen no ultimo segmento e
+        descarta em silencio um endereco de publicacao como /p/AbC123xYz9,
+        que e a forma dos enderecos de uma rede social. A sonda contaria
+        zero e a leitura seria "o indice nao tem", quando quem descartava
+        era o filtro: o mesmo erro de motivo que a 2026-09-11 leu a pagina
+        da Google como zero resultados."""
+        html = '<html><body><a href="https://rede.exemplo/p/AbC123xYz9/">post</a></body></html>'
+        sem = sondar.analisar(html, "https://motor.exemplo/q", [], "rede.exemplo")
+        self.assertEqual(sem["ligacoes"], 0, "a heuristica sem padrao descarta o slug sem hifen, e e por isso que o padrao do grupo existe")
+        com = sondar.analisar(html, "https://motor.exemplo/q", [], "rede.exemplo", padrao="/p/[A-Za-z0-9_-]{6,}")
+        self.assertEqual(com["ligacoes"], 1)
+        self.assertEqual(com["exemplos"], ["https://rede.exemplo/p/AbC123xYz9"])
+
 
 class TestEnderecosDeclarados(unittest.TestCase):
     """Uma resposta que declara enderecos sem os ligar nao pode contar zero.
