@@ -217,6 +217,15 @@
    "url": "https://tvi.iol.pt/novelas/brad-pitt/ines-de-ramon/ele-tem-63-anos-ela-33-o-amor-de-um-gala-polemico-que-ja-conquistou-duas-das-mulheres-mais-famosas"
   },
   {
+   "excerto": "Sandra Felgueiras aproveitou os primeiros dias de setembro para fazer uma pausa e viajar até Cádis, Espanha.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/sandra-felgueiras/jornalista/em-mes-de-recomecos-sandra-felgueiras-vive-momento-especial-precisava-de-ti",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-17",
+   "titulo": "Em mês de recomeços, Sandra Felgueiras vive momento especial: «Precisava de ti»",
+   "url": "https://tvi.iol.pt/doisas10/sandra-felgueiras/jornalista/em-mes-de-recomecos-sandra-felgueiras-vive-momento-especial-precisava-de-ti"
+  },
+  {
    "excerto": "A vida de Ana Felizardo tem sido marcada por várias dificuldades.",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/doisas10/casamento/familia/encontrou-o-verdadeiro-amor-apos-anos-de-violencia-mas-a-vida-deu-lhe-outra-batalha-nao-desejo-que-aconteca-a-ninguem",
@@ -287,6 +296,15 @@
    "publicado_em": "2026-09-17",
    "titulo": "«Nunca mais se tinha visto uma imagem»: Cristina Ferreira reage à nova fotografia de Renato Seabra",
    "url": "https://tvi.iol.pt/doisas10/renato-seabra/cristina-ferreira/nunca-mais-se-tinha-visto-uma-imagem-cristina-ferreira-reage-a-nova-fotografia-de-renato-seabra"
+  },
+  {
+   "excerto": "O novo programa de entretenimento promete desafios, convidados, histórias, música, humor e muitas surpresas.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/fora-do-baralho/tvi/fora-do-baralho-manuel-luis-goucha-e-joao-patricio-chegam-as-tardes-de-sabado-da-tvi",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "“Fora do Baralho”: Manuel Luís Goucha e João Patrício chegam às tardes de sábado da TVI",
+   "url": "https://tvi.iol.pt/fora-do-baralho/tvi/fora-do-baralho-manuel-luis-goucha-e-joao-patricio-chegam-as-tardes-de-sabado-da-tvi"
   },
   {
    "excerto": "",
@@ -532,33 +550,6 @@
    "url": "https://www.cmjornal.pt/cmtv/videos/detalhe/pergunto-me-quem-e-o-primeiro-ministro-andre-ventura-fala-sobre-luis-neves-um-dia-antes-da-mocao-de-censura"
   },
   {
-   "excerto": "Aqui encontra todas as notícias sobre Andre ventura",
-   "fonte": "motor-cnn-portugal",
-   "id_nativo": "https://cnnportugal.iol.pt/noticias/Andre-ventura",
-   "motivo": "sem_data",
-   "publicado_em": "",
-   "titulo": "Andre ventura | CNN Portugal",
-   "url": "https://cnnportugal.iol.pt/noticias/Andre-ventura"
-  },
-  {
-   "excerto": "Aqui encontra todas as notícias sobre André Ventura",
-   "fonte": "motor-cnn-portugal",
-   "id_nativo": "https://cnnportugal.iol.pt/noticias/Andr%C3%A9-Ventura",
-   "motivo": "sem_data",
-   "publicado_em": "",
-   "titulo": "André Ventura | CNN Portugal",
-   "url": "https://cnnportugal.iol.pt/noticias/Andr%C3%A9-Ventura"
-  },
-  {
-   "excerto": "Aqui encontra todas as notícias sobre Entrevista André Ventura",
-   "fonte": "motor-cnn-portugal",
-   "id_nativo": "https://cnnportugal.iol.pt/noticias/Entrevista-Andr%C3%A9-Ventura",
-   "motivo": "sem_data",
-   "publicado_em": "",
-   "titulo": "Entrevista André Ventura | CNN Portugal",
-   "url": "https://cnnportugal.iol.pt/noticias/Entrevista-Andr%C3%A9-Ventura"
-  },
-  {
    "excerto": "",
    "fonte": "registo-curado",
    "id_nativo": "2218ebb9a169",
@@ -605,5 +596,5 @@
   }
  ],
  "esquema": 2,
- "total": 67
+ "total": 66
 }

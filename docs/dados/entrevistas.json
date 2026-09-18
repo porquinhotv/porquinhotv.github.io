@@ -2354,6 +2354,46 @@
   },
   {
    "canais": [
+    "sic-noticias"
+   ],
+   "canal": "sic-noticias",
+   "confianca": "alta",
+   "data": "2026-02-26",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "d6ba79af2763",
+   "origem": "canal",
+   "primeira_vez": "2026-09-18",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://sicnoticias.pt/pais/politica/2026-02-26-video-o-pais-nunca-ficara-mal-entregue-com-pedro-passos-coelho-diz-andre-ventura-338c053d",
+   "publicado_em": "2026-02-26",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "d6ba79af2763",
+     "canal": "sic-noticias",
+     "confianca": "alta",
+     "data": "2026-02-26",
+     "data_origem": "declarada",
+     "entrevista": "d6ba79af2763",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:88b1ebd42484",
+     "origem": "canal",
+     "primeira_vez": "2026-09-18",
+     "programa": "",
+     "prova_url": "https://sicnoticias.pt/pais/politica/2026-02-26-video-o-pais-nunca-ficara-mal-entregue-com-pedro-passos-coelho-diz-andre-ventura-338c053d",
+     "publicado_em": "2026-02-26",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
     "cnn-portugal"
    ],
    "canal": "cnn-portugal",
@@ -2429,6 +2469,86 @@
      "publicado_em": "2026-03-11",
      "rondas": 0,
      "titulo": "A entrevista completa de André Ventura no NOW"
+    }
+   ]
+  },
+  {
+   "canais": [
+    "now"
+   ],
+   "canal": "now",
+   "confianca": "alta",
+   "data": "2026-04-08",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "46d770813267",
+   "origem": "canal",
+   "primeira_vez": "2026-09-18",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DW4hcZdAVRQ/",
+   "publicado_em": "2026-04-08",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "46d770813267",
+     "canal": "now",
+     "confianca": "alta",
+     "data": "2026-04-08",
+     "data_origem": "declarada",
+     "entrevista": "46d770813267",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:2368a4a28fbe",
+     "origem": "canal",
+     "primeira_vez": "2026-09-18",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DW4hcZdAVRQ/",
+     "publicado_em": "2026-04-08",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
+    "now"
+   ],
+   "canal": "now",
+   "confianca": "alta",
+   "data": "2026-05-06",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "541f7dc0a9fc",
+   "origem": "canal",
+   "primeira_vez": "2026-09-18",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.nowcanal.pt/politica/detalhe/as-pessoas-sabem-que-hoje-o-bandido-tem-mais-direito-do-que-o-policia-afirma-ventura",
+   "publicado_em": "2026-05-06",
+   "rondas": 0,
+   "titulo": "\"As pessoas sabem que hoje o bandido tem mais direito do que o polícia\", afirma Ventura",
+   "transmissoes": [
+    {
+     "bloco": "541f7dc0a9fc",
+     "canal": "now",
+     "confianca": "alta",
+     "data": "2026-05-06",
+     "data_origem": "declarada",
+     "entrevista": "541f7dc0a9fc",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:d1001dd9c679",
+     "origem": "canal",
+     "primeira_vez": "2026-09-18",
+     "programa": "",
+     "prova_url": "https://www.nowcanal.pt/politica/detalhe/as-pessoas-sabem-que-hoje-o-bandido-tem-mais-direito-do-que-o-policia-afirma-ventura",
+     "publicado_em": "2026-05-06",
+     "rondas": 0,
+     "titulo": "\"As pessoas sabem que hoje o bandido tem mais direito do que o polícia\", afirma Ventura"
     }
    ]
   },
@@ -2853,6 +2973,46 @@
   },
   {
    "canais": [
+    "sic-noticias"
+   ],
+   "canal": "sic-noticias",
+   "confianca": "alta",
+   "data": "2026-07-22",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "95231294bfe2",
+   "origem": "canal",
+   "primeira_vez": "2026-09-18",
+   "principal_declarado": false,
+   "programa": "Importa-se de Repetir?",
+   "prova_url": "https://sicnoticias.pt/programas/importa-se-de-repetir--/2026-07-22-video-ventura-espera-que-montenegro-afaste-luis-neves-caso-nao-esteja-condicionado-pelo-mesmo-f446b3cf",
+   "publicado_em": "2026-07-22",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "95231294bfe2",
+     "canal": "sic-noticias",
+     "confianca": "alta",
+     "data": "2026-07-22",
+     "data_origem": "declarada",
+     "entrevista": "95231294bfe2",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:aef8e63e3f7f",
+     "origem": "canal",
+     "primeira_vez": "2026-09-18",
+     "programa": "Importa-se de Repetir?",
+     "prova_url": "https://sicnoticias.pt/programas/importa-se-de-repetir--/2026-07-22-video-ventura-espera-que-montenegro-afaste-luis-neves-caso-nao-esteja-condicionado-pelo-mesmo-f446b3cf",
+     "publicado_em": "2026-07-22",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
     "cmtv"
    ],
    "canal": "cmtv",
@@ -2928,6 +3088,46 @@
      "publicado_em": "2026-07-29",
      "rondas": 0,
      "titulo": "A entrevista a André Ventura na íntegra"
+    }
+   ]
+  },
+  {
+   "canais": [
+    "now"
+   ],
+   "canal": "now",
+   "confianca": "alta",
+   "data": "2026-08-04",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "a5d575e346d7",
+   "origem": "imprensa",
+   "primeira_vez": "2026-09-18",
+   "principal_declarado": false,
+   "programa": "não apurado",
+   "prova_url": "https://www.dn.pt/pol%C3%ADtica/ventura-algum-que-passou-de-investigar-o-primeiro-ministro-a-ministro-dele-uma-bandalheira",
+   "publicado_em": "2026-08-04",
+   "rondas": 0,
+   "titulo": "Ventura: \"Alguém que passou de investigar o primeiro-ministro a ministro dele é uma bandalheira\"",
+   "transmissoes": [
+    {
+     "bloco": "a5d575e346d7",
+     "canal": "now",
+     "confianca": "alta",
+     "data": "2026-08-04",
+     "data_origem": "declarada",
+     "entrevista": "a5d575e346d7",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:59efdd711eb0",
+     "origem": "imprensa",
+     "primeira_vez": "2026-09-18",
+     "programa": "não apurado",
+     "prova_url": "https://www.dn.pt/pol%C3%ADtica/ventura-algum-que-passou-de-investigar-o-primeiro-ministro-a-ministro-dele-uma-bandalheira",
+     "publicado_em": "2026-08-04",
+     "rondas": 0,
+     "titulo": "Ventura: \"Alguém que passou de investigar o primeiro-ministro a ministro dele é uma bandalheira\""
     }
    ]
   },
@@ -3093,5 +3293,5 @@
   }
  ],
  "esquema": 2,
- "total": 73
+ "total": 78
 }
