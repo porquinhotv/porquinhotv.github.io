@@ -57,6 +57,14 @@ LOC = re.compile(r"<loc>\s*(https?://[^<\s]+)\s*</loc>", re.I)
 # Tamanho da amostra de texto guardada por hipotese. Basta para um
 # `robots.txt` inteiro ou para as primeiras linhas de um indice.
 AMOSTRA_CHARS = 400
+# Abaixo deste numero de caracteres, o texto visivel pode nao dizer o que
+# veio. Medido a 2026-09-18: o pedido de `robots.txt` a uma rede social
+# devolveu 630137 bytes de marcacao cujo texto visivel era uma palavra,
+# nove caracteres. A leitura do relatorio seria "o ficheiro esta vazio"
+# quando o que aconteceu foi nao ter vindo ficheiro nenhum. A condicao
+# completa esta em `_ilegivel`: este limiar sozinho apanhava tambem um
+# `robots.txt` curto que se le perfeitamente, e a suite travou-o.
+TEXTO_ILEGIVEL = 200
 
 
 def carregar(caminho: Path = FICHEIRO) -> dict:
@@ -113,7 +121,21 @@ def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios
         "enderecos": len(enderecos),
         "exemplos_enderecos": enderecos[:3],
         "amostra": corpo[:AMOSTRA_CHARS],
+        "amostra_bruta": html[:AMOSTRA_CHARS] if _ilegivel(html, corpo) else "",
     }
+
+
+def _ilegivel(html: str, corpo: str) -> bool:
+    """A resposta nao se le pelo texto visivel, e o bruto e que diz o que veio.
+
+    Duas condicoes, e as duas sao precisas. Texto curto sozinho nao basta:
+    um `robots.txt` de tres linhas tem 68 caracteres e le-se inteiro. O que
+    denuncia o caso real de 2026-09-18 e a desproporcao, nove caracteres de
+    texto para 630137 de corpo, ou seja a remocao de marcacao deitou fora
+    tudo. Um desafio de motor de busca, 305 caracteres que se leem bem, nao
+    entra por nenhuma das duas.
+    """
+    return len(corpo) < TEXTO_ILEGIVEL and len(html) > 10 * max(len(corpo), 1)
 
 
 def nomes_dos_grupos(config: dict) -> list[str]:
@@ -152,6 +174,8 @@ def correr(config: dict, obter=obter_texto, so_grupo: str | None = None, dormir=
                 print(f"    {dados['bytes_texto']} bytes de texto, {dados['ligacoes']} ligacoes, {dados['enderecos']} enderecos declarados, termos {dados['termos_presentes']}", flush=True)
                 if grupo.get("mostrar"):
                     print(f"    | {dados['amostra']}", flush=True)
+                    if dados.get("amostra_bruta"):
+                        print(f"    | bruto: {dados['amostra_bruta']}", flush=True)
             dormir(PAUSA_S)
         resultado["grupos"].append(linha)
     return resultado
@@ -187,6 +211,8 @@ def relatorio(resultado: dict) -> str:
             for h in grupo["hipoteses"]:
                 if h.get("amostra"):
                     linhas.append(f"- {h['url']}: `{h['amostra'][:AMOSTRA_CHARS]}`")
+                if h.get("amostra_bruta"):
+                    linhas.append(f"- {h['url']}, bruto: `{h['amostra_bruta'][:AMOSTRA_CHARS]}`")
         linhas.append("")
     return "\n".join(linhas).rstrip() + "\n"
 

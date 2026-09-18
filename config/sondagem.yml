@@ -634,6 +634,20 @@ grupos:
     # Teto medido a 2026-09-11: 18 consultas por sessao no motor. Este
     # grupo faz quatro pedidos a esse motor: nao correr na mesma sessao
     # que os outros grupos que o usam.
+    #
+    # CORRIDA DE 2026-09-18, e a razao de existirem os tres grupos
+    # seguintes. As duas primeiras consultas renderam cinco enderecos de
+    # publicacao cada, com a forma esperada, incluindo um no caminho da
+    # conta do proprio. A terceira, a quarta e a quinta devolveram 305
+    # caracteres a pedir para selecionar quadrados com patos, ou seja um
+    # desafio de robot, e a sexta levou 429 noutro motor. **O teto util
+    # desta sessao foram duas consultas, nao dezoito.** Com duas
+    # consultas por sessao nao se faz uma consulta por linha em falta, e
+    # a via, tal como esta desenhada aqui, nao cobre o historico.
+    #
+    # O que a corrida NAO disse, e por isso nao se conclui: se o travao
+    # veio do operador `site:`, da cadencia, ou de o motor ter endurecido
+    # desde 11 de setembro. Sao tres causas com remedios diferentes.
     dominio_alvo: instagram.com
     # Sem padrao, a heuristica das ligacoes exige um hifen no ultimo
     # segmento do caminho e descartava em silencio /p/<codigo>: os
@@ -665,13 +679,80 @@ grupos:
     # - as alternativas exigem o que o projeto recusa: sessao com
     #   credenciais no coletor, ou servico pago com conta e cartao.
     #
-    # O robots.txt existe para ser lido por maquinas, e o que ele diz
-    # fica na amostra do relatorio, medido do PC de quem corre. Enquanto
-    # declarar os perfis fora de alcance, nenhuma hipotese pede paginas
-    # de perfil nem de publicacao e a leitura direta fica recusada com
-    # este motivo, registado aqui. Se o relatorio mostrar outra coisa, a
-    # decisao revisita-se.
+    # ATENCAO, corrigido a 2026-09-18: a versao anterior deste comentario
+    # dizia que o que o robots declara ficaria na amostra do relatorio.
+    # Nao ficou. A corrida devolveu 630137 bytes de marcacao com nove
+    # caracteres de texto visivel, ou seja, uma pagina em vez do ficheiro
+    # de texto, e portanto **o que o robots desta rede social declara
+    # continua por medir**. Nada pode ser afirmado sobre ele em documento
+    # nenhum ate uma corrida o trazer. A sonda passou a guardar tambem o
+    # inicio do corpo servido, que e o que distingue ficheiro vazio de
+    # pagina servida.
+    #
+    # Enquanto isto nao estiver medido, nenhuma hipotese pede paginas de
+    # perfil nem de publicacao, e a leitura direta fica recusada pelo
+    # primeiro ponto acima, que esse sim esta verificado.
     dominio_alvo: instagram.com
     mostrar: true
     hipoteses:
       - https://www.instagram.com/robots.txt
+      - https://instagram.com/robots.txt
+
+  - nome: Instagram noutros motores
+    # Segunda volta, 2026-09-18. A pergunta que decide se a via do
+    # Instagram vive ou morre: o rendimento por consulta foi bom, cinco
+    # enderecos de publicacao, e quem travou foi o intermediario. Se
+    # outro motor responder a cinco consultas seguidas com o mesmo
+    # padrao, a via existe e muda-se de motor; se nenhum responder, a via
+    # nao existe por esta porta e retira-se por inteiro.
+    #
+    # Nenhum destes motores pede conta nem chave, que e a condicao do
+    # projeto. Cinco consultas seguidas sao de proposito: o que matou a
+    # primeira corrida foi a terceira consulta, e uma amostra de duas nao
+    # autoriza conclusao nenhuma sobre uma via que precisa de dezenas.
+    #
+    # Como ler: interessa a coluna das ligacoes por motor. Um motor com
+    # 200 e zero ligacoes nas cinco e uma pagina de aviso, nao um motor
+    # que nao tem resultados, e a amostra do texto diz qual dos dois e.
+    dominio_alvo: instagram.com
+    padrao: '/(p|reel|tv)/[A-Za-z0-9_-]{6,}'
+    mostrar: true
+    hipoteses:
+      - https://www.mojeek.com/search?q=site%3Ainstagram.com+{termo}
+      - https://www.mojeek.com/search?q=site%3Ainstagram.com+andre_ventura_oficial
+      - https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+cnn
+      - https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+sic
+      - https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp
+
+  - nome: Instagram noutros motores, segunda porta
+    # Os mesmos cinco pedidos noutro motor, para nao concluir de um so.
+    # Correr em comando separado e alguns minutos depois: duas sessoes
+    # coladas no tempo medem a cadencia em vez de medirem o motor.
+    dominio_alvo: instagram.com
+    padrao: '/(p|reel|tv)/[A-Za-z0-9_-]{6,}'
+    mostrar: true
+    hipoteses:
+      - https://www.startpage.com/sp/search?query=site%3Ainstagram.com+{termo}
+      - https://www.ecosia.org/search?q=site%3Ainstagram.com+{termo}
+      - https://search.marginalia.nu/search?query=site%3Ainstagram.com+{termo}
+      - https://searx.be/search?q=site%3Ainstagram.com+{termo}
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial
+
+  - nome: DuckDuckGo, o operador ou a cadencia
+    # Separa duas das tres causas possiveis do desafio de 2026-09-18, e
+    # so isso: duas consultas, a primeira sem o operador `site:` e a
+    # segunda com ele, na mesma sessao curta. Se a sem operador passar e
+    # a com operador levar desafio, a causa e o operador e a via
+    # reescreve-se sem ele. Se as duas passarem, a causa era a cadencia
+    # da corrida anterior. Se as duas levarem desafio, o motor endureceu
+    # e nao ha nada a afinar deste lado.
+    #
+    # Correr sozinho, em sessao limpa, longe dos outros grupos que usam
+    # este motor. Uma sondagem que comeca com a sessao ja queimada mede a
+    # sessao anterior, nao a hipotese.
+    dominio_alvo: instagram.com
+    padrao: '/(p|reel|tv)/[A-Za-z0-9_-]{6,}'
+    mostrar: true
+    hipoteses:
+      - https://html.duckduckgo.com/html/?q=instagram+andre_ventura_oficial+entrevista
+      - https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+{termo}

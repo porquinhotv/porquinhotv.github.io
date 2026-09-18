@@ -82,6 +82,28 @@ class TestEnderecosDeclarados(unittest.TestCase):
         r = sondar.analisar(robots, "https://exemplo.pt/robots.txt", [], "")
         self.assertIn("Crawl-Delay: 300", r["amostra"])
         self.assertLessEqual(len(r["amostra"]), sondar.AMOSTRA_CHARS)
+        self.assertEqual(r["amostra_bruta"], "", "um ficheiro de texto legivel nao precisa da amostra do bruto")
+
+    def test_pagina_servida_onde_se_pediu_um_ficheiro_de_texto(self):
+        """A 2026-09-18 um pedido de `robots.txt` a uma rede social devolveu
+        630137 bytes de marcacao cujo texto visivel era uma palavra. O
+        relatorio mostrou nove caracteres, e a leitura seria "o ficheiro
+        esta vazio" quando o que aconteceu foi nao ter vindo ficheiro
+        nenhum: um motivo errado, que e um defeito tao grave como uma
+        recusa indevida. A amostra do bruto e o que diz qual dos dois e."""
+        pagina = '<!DOCTYPE html><html lang="en"><head><title>Instagram</title>' + "<script>var x=1;</script>" * 400 + "</head><body></body></html>"
+        r = sondar.analisar(pagina, "https://rede.exemplo/robots.txt", [], "")
+        self.assertLess(r["bytes_texto"], sondar.TEXTO_ILEGIVEL)
+        self.assertTrue(r["amostra_bruta"].startswith("<!DOCTYPE html>"), "sem isto o relatorio nao distingue ficheiro vazio de pagina servida")
+
+    def test_desafio_de_motor_le_se_sem_amostra_do_bruto(self):
+        """O desafio que o motor devolveu a 2026-09-18 tem 305 caracteres de
+        texto e le-se bem. O limiar existe para respostas ilegiveis, nao
+        para encher o relatorio de marcacao onde o texto ja explica."""
+        desafio = "<html><body><p>" + "Please complete the following challenge to confirm this search was made by a human. " * 4 + "</p></body></html>"
+        r = sondar.analisar(desafio, "https://motor.exemplo/q", [], "")
+        self.assertGreater(r["bytes_texto"], sondar.TEXTO_ILEGIVEL)
+        self.assertEqual(r["amostra_bruta"], "")
 
 
 class TestFundir(unittest.TestCase):
