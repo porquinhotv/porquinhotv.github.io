@@ -1,6 +1,6 @@
 # Sondagem de hipoteses
 
-Verificado em 2026-09-10T09:31:51+00:00. Consulta: ventura entrevista.
+Verificado em 2026-09-18T09:21:48+00:00. Consulta: ventura entrevista.
 
 Uma hipotese so serve se responder E trouxer ligacoes. Responder com 200
 e zero ligacoes e uma pagina de aviso, nao um resultado.
@@ -480,3 +480,33 @@ Verificado em 2026-09-10T09:31:51+00:00.
 - https://web.archive.org/cdx/search/cdx?url=sicnoticias.pt/*&filter=original:.*[Aa]ndre[-_][Vv]entura.*&from=2021&to=2021&fl=timestamp,original,statuscode&collapse=urlkey&limit=1000 -> 20210308123824 https://sicnoticias.pt/economia/2020-09-02-Andre-Ventura-pede-divulgacao-publica-e-integral-da-auditoria-ao-Novo-Banco 200
 - https://web.archive.org/cdx/search/cdx?url=sicnoticias.pt/*&filter=original:.*[Aa]ndre[-_][Vv]entura.*&from=2021&to=2021&fl=timestamp,original,statuscode&collapse=urlkey&limit=1000 -> 20210617135736 http://sicnoticias.pt/especiais/autarquicas/2021-06-17-Andre-Ventura-e-candidato-a-Assembleia-Municipal-de-Moura-42ef25b8 301
 - https://web.archive.org/cdx/search/cdx?url=sicnoticias.pt/*&filter=original:.*[Aa]ndre[-_][Vv]entura.*&from=2021&to=2021&fl=timestamp,original,statuscode&collapse=urlkey&limit=1000: `20210326063135 https://sicnoticias.pt/desporto/2020-05-05-O-populismo-racista-do-Andre-Ventura-apenas-serve-para-virar-homens-contra-homens 200 20210308123824 https://sicnoticias.pt/economia/2020-09-02-Andre-Ventura-pede-divulgacao-publica-e-integral-da-auditoria-ao-Novo-Banco 200 20210617135736 http://sicnoticias.pt/especiais/autarquicas/2021-06-17-Andre-Ventura-e-candidato-a-Assembleia-Municipal`
+
+## Instagram do proprio como indice de pistas
+
+Verificado em 2026-09-18T09:20:16+00:00.
+
+| Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
+|---|---|---|---|---|---|
+| https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista | sim | 3737 | 5 | 0 | ventura entrevista, Ventura, André Ventura, Andre Ventura |
+| https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+andre_ventura_oficial | sim | 3604 | 5 | 0 | Ventura, André Ventura, Andre Ventura |
+| https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista+fevereiro+2026 | sim | 305 | 0 | 0 | nenhum |
+| https://html.duckduckgo.com/html/?q=andre_ventura_oficial+entrevista+cnn | sim | 305 | 0 | 0 | nenhum |
+| https://lite.duckduckgo.com/lite/?q=site%3Ainstagram.com+ventura+entrevista | sim | 305 | 0 | 0 | nenhum |
+| https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista | nao (pedido falhou: https://search.brave.com/search?q=site%3Ainst) | | | | |
+
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista -> https://www.instagram.com/reel/DFOe3z7xqxx
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista -> https://www.instagram.com/p/DJ7rDkSqr5F
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista -> https://www.instagram.com/reel/DUWpX2alEbm
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/andre_ventura_oficial/reel/DJoeIn1sYE-
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/reel/DdYlD8CN7Y0
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/reel/DdRcwKpltkh
+
+## Instagram, o que o robots declara
+
+Verificado em 2026-09-18T09:21:48+00:00.
+
+| Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
+|---|---|---|---|---|---|
+| https://www.instagram.com/robots.txt | sim | 9 | 0 | 0 | nenhum |
+
+- https://www.instagram.com/robots.txt: `Instagram`
