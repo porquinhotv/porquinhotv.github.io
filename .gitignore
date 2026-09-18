@@ -17,3 +17,7 @@ kb/
 # Patches entregues a mao. Ficam na pasta do repositorio e ja foi
 # assim que um deles acabou commitado por engano.
 *.patch
+
+# Ficheiro de trabalho das pistas de rede social, se alguem o guardar
+# dentro do repositorio por engano: tem o ritmo de trabalho de uma pessoa.
+pistas-trabalho.json

@@ -1,0 +1,96 @@
+# Pistas vindas de publicacoes em rede social, para revisao a mao.
+#
+# Porque esta ferramenta existe, e o que ela NAO e:
+#
+# A conta do proprio e das estacoes publicam entrevistas com o canal e a
+# hora escritos na legenda. Medido a 2026-09-18 em 51 publicacoes
+# devolvidas por um motor de busca: a legenda vem quase sempre, e a data
+# **nao vem**. Houve tres datas explicitas, todas da mesma publicacao
+# repetida em tres consultas, ou seja uma em 51. Em contrapartida
+# contaram-se 22 marcas de tempo relativas, "hoje" onze vezes, mais
+# "amanha", "esta noite", "logo a noite", "esta manha".
+#
+# Daqui sai tudo o resto. Uma legenda que diz "hoje as 20h30" nao data
+# nada sem se saber o dia em que foi publicada, e esse dia so esta dentro
+# da publicacao, que a maquina nao pode ler. Portanto esta ferramenta
+# **nao e uma fonte** e nunca escreve em `docs/dados`: junta pistas,
+# abre-as uma a uma no browser de quem revê, e a data e o canal sao
+# afirmacoes dessa pessoa, exatamente como no resto de `curadoria.yml`.
+# O que ela automatiza e o trabalho chato a volta: encontrar, nao
+# repetir, sugerir o canal, avisar do que ja existe e escrever o YAML.
+#
+# O ficheiro de trabalho fica fora do repositorio, como as outras sondas
+# feitas a mao: tem caminhos locais e o ritmo de trabalho de uma pessoa.
+
+# O dominio das publicacoes, aqui e nao no codigo: nenhum modulo Python
+# deste projeto conhece o nome de um sitio.
+dominio: instagram.com
+
+# As consultas. O motor e so um indice para chegar a publicacao, nunca
+# prova, e e o unico que respondeu: medido a 2026-09-18, quatro outros
+# devolveram desafios de JavaScript, 403 ou verificacao de browser, e um
+# quinto respondeu sem ter esta rede no indice.
+#
+# Teto medido na mesma corrida: de dez consultas seguidas responderam
+# cinco, as outras com 429 depois das esperas de 20 e 60 segundos. Nao se
+# ganha nada em fazer listas longas: mais vale pouca consulta bem
+# dirigida e correr outra vez noutro dia.
+consultas:
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista+cnn
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista+cmtv
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista+sic
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+entrevista+tvi
+  - https://search.brave.com/search?q=site%3Ainstagram.com+ventura+grande+entrevista
+
+# A conta no caminho do endereco, quando existe, diz de quem e a
+# publicacao. Nao se apertou o crivo a conta do proprio: medido a
+# 2026-09-18, das 27 publicacoes com conta no caminho, 13 eram dele e 14
+# eram de canais e do partido, e sao precisamente essas que nomeiam o
+# canal. Apertar a saida quando o que falta e entrada ja custou uma
+# corrida a este projeto.
+#
+# O canal a direita e o id de config/porquinho.yml. Uma conta de canal
+# sugere esse canal; a conta do proprio, do partido ou de um jornal nao
+# sugere nada, porque a entrevista tanto pode ter sido num canal como
+# noutro, e e a legenda que o diz.
+contas:
+  andre_ventura_oficial:
+  partidochega:
+  jornalexpresso:
+  sicnoticias: sic-noticias
+  rtppt:
+  cnnportugal: cnn-portugal
+  cmjornal: cmtv
+  tvioficial: tvi
+
+# Termos que na legenda sugerem o canal, por id de canal. So sugerem: a
+# pessoa que abre a publicacao e que decide, e pode corrigir.
+#
+# A ordem importa quando um termo esta contido noutro: procura-se do mais
+# especifico para o mais generico, senao uma legenda que diz "SIC
+# Noticias" ficava atribuida ao canal generalista.
+termos_de_canal:
+  - canal: sic-noticias
+    termos: ['SIC Notícias', 'SIC Noticias']
+  - canal: cnn-portugal
+    termos: ['CNN Portugal', 'CNN']
+  - canal: rtp3
+    termos: ['RTP3', 'RTP 3']
+  - canal: rtp1
+    termos: ['RTP1', 'RTP 1']
+  - canal: cmtv
+    termos: ['CMTV', 'CM TV']
+  - canal: now
+    termos: ['NOW']
+  - canal: tvi
+    termos: ['TVI']
+  - canal: sic
+    termos: ['SIC']
+
+# Marcas de tempo relativas contadas na medicao de 2026-09-18. Nao sao
+# usadas para calcular data nenhuma: sao mostradas a quem revê, porque
+# sao elas que dizem se o dia da entrevista e o dia da publicacao ou o
+# seguinte. Quem le e que decide, e essa decisao e a razao de haver
+# revisao a mao.
+marcas_de_tempo: [hoje, amanhã, amanha, logo, esta noite, desta noite, esta manhã, esta manha, esta tarde, hoje à noite, já esta, ja esta, segunda, terça, terca, quarta, quinta, sexta, sábado, sabado, domingo]
