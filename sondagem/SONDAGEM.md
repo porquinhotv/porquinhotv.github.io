@@ -1,6 +1,6 @@
 # Sondagem de hipoteses
 
-Verificado em 2026-09-18T09:21:48+00:00. Consulta: ventura entrevista.
+Verificado em 2026-09-18T11:30:18+00:00. Consulta: ventura entrevista.
 
 Uma hipotese so serve se responder E trouxer ligacoes. Responder com 200
 e zero ligacoes e uma pagina de aviso, nao um resultado.
@@ -503,10 +503,69 @@ Verificado em 2026-09-18T09:20:16+00:00.
 
 ## Instagram, o que o robots declara
 
-Verificado em 2026-09-18T09:21:48+00:00.
+Verificado em 2026-09-18T11:30:18+00:00.
 
 | Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
 |---|---|---|---|---|---|
 | https://www.instagram.com/robots.txt | sim | 9 | 0 | 0 | nenhum |
+| https://instagram.com/robots.txt | sim | 9 | 0 | 0 | nenhum |
 
 - https://www.instagram.com/robots.txt: `Instagram`
+- https://www.instagram.com/robots.txt, bruto: `<!DOCTYPE html><html class="_9dls _ar44" lang="pt" dir="ltr"><head><link data-default-icon="https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp" rel="icon" sizes="192x192" href="https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp" /><meta name="bingbot" content="noarchive" /><meta charset="utf-8" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta n`
+- https://instagram.com/robots.txt: `Instagram`
+- https://instagram.com/robots.txt, bruto: `<!DOCTYPE html><html class="_9dls _ar44" lang="pt" dir="ltr"><head><link data-default-icon="https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp" rel="icon" sizes="192x192" href="https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp" /><meta name="bingbot" content="noarchive" /><meta charset="utf-8" /><meta name="apple-mobile-web-app-status-bar-style" content="default" /><meta n`
+
+## Instagram noutros motores
+
+Verificado em 2026-09-18T09:57:17+00:00.
+
+| Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
+|---|---|---|---|---|---|
+| https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista | sim | 388 | 0 | 0 | nenhum |
+| https://www.mojeek.com/search?q=site%3Ainstagram.com+andre_ventura_oficial | sim | 388 | 0 | 0 | nenhum |
+| https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+cnn | sim | 388 | 0 | 0 | nenhum |
+| https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+sic | sim | 388 | 0 | 0 | nenhum |
+| https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp | sim | 388 | 0 | 0 | nenhum |
+
+- https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista: `Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings`
+- https://www.mojeek.com/search?q=site%3Ainstagram.com+andre_ventura_oficial: `Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings`
+- https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+cnn: `Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings`
+- https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+sic: `Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings`
+- https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp: `Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings`
+
+## Instagram noutros motores, segunda porta
+
+Verificado em 2026-09-18T11:24:29+00:00.
+
+| Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
+|---|---|---|---|---|---|
+| https://www.startpage.com/sp/search?query=site%3Ainstagram.com+ventura+entrevista | sim | 184 | 0 | 0 | nenhum |
+| https://www.ecosia.org/search?q=site%3Ainstagram.com+ventura+entrevista | nao (pedido falhou: https://www.ecosia.org/search?q=site%3Ainstag) | | | | |
+| https://search.marginalia.nu/search?query=site%3Ainstagram.com+ventura+entrevista | sim | 5814 | 0 | 0 | ventura entrevista, Ventura |
+| https://searx.be/search?q=site%3Ainstagram.com+ventura+entrevista | sim | 670 | 0 | 0 | nenhum |
+| https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial | sim | 5017 | 15 | 0 | Ventura, André Ventura, Andre Ventura |
+
+- https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg
+- https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/andre_ventura_oficial/p/C3lbl4MsNxm
+- https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial -> https://www.instagram.com/andre_ventura_oficial/p/C4QTicaMyZk
+- https://www.startpage.com/sp/search?query=site%3Ainstagram.com+ventura+entrevista: `Verificando sua solicitação... Carregando... O Anubis não conseguiu carregar seu JavaScript. O servidor pode estar sobrecarregado. Por favor, recarregue a página para tentar novamente.`
+- https://www.startpage.com/sp/search?query=site%3Ainstagram.com+ventura+entrevista, bruto: `<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script id="anubis_version" type="application/json">"v1.26.4"
+</script><script id="anubis_challenge" type="application/json">{"rules":{"algorithm":"fast","difficulty":6},"challenge":{"issuedAt":"2026-09-18T11:24:30.249170222Z","metadata":{"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537`
+- https://search.marginalia.nu/search?query=site%3Ainstagram.com+ventura+entrevista: `site:instagram.com ventura entrevista - Marginalia Search Users of text-based browsers Consider using the old interface at https://old-search.marginalia.nu/ , as it uses fewer modern CSS tricks, and should work better than the new UI. It's functionally nearly identical, but just renders it using a different layout. Skip To Content Search Sites Explore About Marginalia Search Search Filters Languag`
+- https://searx.be/search?q=site%3Ainstagram.com+ventura+entrevista: `Verifying your browser… Checking your browser Starting verification… This takes a couple of seconds and happens automatically. If you can't pass the test, whitelist your extensions on this website, update your browser and use a modern web browser (Firefox/Chrome/Safari). You may try the automated checks a second time. Some checks may fail once and succeed on a second try. Reload now. Still having `
+- https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial: `site:instagram.com andre_ventura_oficial - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: "Presidente `
+
+## DuckDuckGo, o operador ou a cadencia
+
+Verificado em 2026-09-18T11:30:13+00:00.
+
+| Hipotese | Responde | Texto | Ligacoes | Enderecos | Termos |
+|---|---|---|---|---|---|
+| https://html.duckduckgo.com/html/?q=instagram+andre_ventura_oficial+entrevista | sim | 3656 | 0 | 0 | ventura entrevista, Ventura, André Ventura, Andre Ventura |
+| https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista | sim | 3855 | 0 | 0 | ventura entrevista, Ventura, André Ventura, Andre Ventura |
+
+- https://html.duckduckgo.com/html/?q=instagram+andre_ventura_oficial+entrevista: `instagram andre_ventura_oficial entrevista at DuckDuckGo All Regions Argentina Australia Austria Belgium (fr) Belgium (nl) Brazil Bulgaria Canada (en) Canada (fr) Catalonia Chile China Colombia Croatia Czech Republic Denmark Estonia Finland France Germany Greece Hong Kong Hungary Iceland India (en) Indonesia (en) Ireland Israel (en) Italy Japan Korea Latvia Lithuania Malaysia (en) Mexico Netherlan`
+- https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista: `site:instagram.com ventura entrevista at DuckDuckGo All Regions Argentina Australia Austria Belgium (fr) Belgium (nl) Brazil Bulgaria Canada (en) Canada (fr) Catalonia Chile China Colombia Croatia Czech Republic Denmark Estonia Finland France Germany Greece Hong Kong Hungary Iceland India (en) Indonesia (en) Ireland Israel (en) Italy Japan Korea Latvia Lithuania Malaysia (en) Mexico Netherlands Ne`

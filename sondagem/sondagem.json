@@ -1879,7 +1879,8 @@
    "hipoteses": [
     {
      "amostra": "Instagram",
-     "bytes_html": 630137,
+     "amostra_bruta": "<!DOCTYPE html><html class=\"_9dls _ar44\" lang=\"pt\" dir=\"ltr\"><head><link data-default-icon=\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\" rel=\"icon\" sizes=\"192x192\" href=\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\" /><meta name=\"bingbot\" content=\"noarchive\" /><meta charset=\"utf-8\" /><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\" /><meta n",
+     "bytes_html": 630221,
      "bytes_texto": 9,
      "enderecos": 0,
      "exemplos": [],
@@ -1888,13 +1889,219 @@
      "responde": true,
      "termos_presentes": [],
      "url": "https://www.instagram.com/robots.txt"
+    },
+    {
+     "amostra": "Instagram",
+     "amostra_bruta": "<!DOCTYPE html><html class=\"_9dls _ar44\" lang=\"pt\" dir=\"ltr\"><head><link data-default-icon=\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\" rel=\"icon\" sizes=\"192x192\" href=\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\" /><meta name=\"bingbot\" content=\"noarchive\" /><meta charset=\"utf-8\" /><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\" /><meta n",
+     "bytes_html": 630223,
+     "bytes_texto": 9,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://instagram.com/robots.txt"
     }
    ],
    "mostrar": true,
    "nome": "Instagram, o que o robots declara",
-   "verificado_em": "2026-09-18T09:21:48+00:00"
+   "verificado_em": "2026-09-18T11:30:18+00:00"
+  },
+  {
+   "dominio_alvo": "instagram.com",
+   "hipoteses": [
+    {
+     "amostra": "Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings",
+     "amostra_bruta": "",
+     "bytes_html": 5528,
+     "bytes_texto": 388,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista"
+    },
+    {
+     "amostra": "Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings",
+     "amostra_bruta": "",
+     "bytes_html": 5531,
+     "bytes_texto": 388,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.mojeek.com/search?q=site%3Ainstagram.com+andre_ventura_oficial"
+    },
+    {
+     "amostra": "Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings",
+     "amostra_bruta": "",
+     "bytes_html": 5532,
+     "bytes_texto": 388,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+cnn"
+    },
+    {
+     "amostra": "Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings",
+     "amostra_bruta": "",
+     "bytes_html": 5532,
+     "bytes_texto": 388,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+sic"
+    },
+    {
+     "amostra": "Captcha Search Web Images News Substack Company About Press & Media Careers Contact Us Products Mojeek Ads Focus Web Search API Site Search API Simple Search Boxes Help & Support Support Browsers Mobile API Docs Engage Blog Community Newsletter JavaScript is required to complete this challenge. Please enable it and reload the page. About API Support Blog Feedback Privacy Terms Settings",
+     "amostra_bruta": "",
+     "bytes_html": 5532,
+     "bytes_texto": 388,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp"
+    }
+   ],
+   "mostrar": true,
+   "nome": "Instagram noutros motores",
+   "verificado_em": "2026-09-18T09:57:17+00:00"
+  },
+  {
+   "dominio_alvo": "instagram.com",
+   "hipoteses": [
+    {
+     "amostra": "Verificando sua solicitação... Carregando... O Anubis não conseguiu carregar seu JavaScript. O servidor pode estar sobrecarregado. Por favor, recarregue a página para tentar novamente.",
+     "amostra_bruta": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <head>\n    <script id=\"anubis_version\" type=\"application/json\">\"v1.26.4\"\n</script><script id=\"anubis_challenge\" type=\"application/json\">{\"rules\":{\"algorithm\":\"fast\",\"difficulty\":6},\"challenge\":{\"issuedAt\":\"2026-09-18T11:24:30.249170222Z\",\"metadata\":{\"User-Agent\":\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537",
+     "bytes_html": 22136,
+     "bytes_texto": 184,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://www.startpage.com/sp/search?query=site%3Ainstagram.com+ventura+entrevista"
+    },
+    {
+     "erro": "pedido falhou: https://www.ecosia.org/search?q=site%3Ainstagram.com+ventura+entrevista: HTTP Error 403: Forbidden",
+     "responde": false,
+     "url": "https://www.ecosia.org/search?q=site%3Ainstagram.com+ventura+entrevista"
+    },
+    {
+     "amostra": "site:instagram.com ventura entrevista - Marginalia Search Users of text-based browsers Consider using the old interface at https://old-search.marginalia.nu/ , as it uses fewer modern CSS tricks, and should work better than the new UI. It's functionally nearly identical, but just renders it using a different layout. Skip To Content Search Sites Explore About Marginalia Search Search Filters Languag",
+     "amostra_bruta": "",
+     "bytes_html": 38120,
+     "bytes_texto": 5814,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [
+      "ventura entrevista",
+      "Ventura"
+     ],
+     "url": "https://search.marginalia.nu/search?query=site%3Ainstagram.com+ventura+entrevista"
+    },
+    {
+     "amostra": "Verifying your browser… Checking your browser Starting verification… This takes a couple of seconds and happens automatically. If you can't pass the test, whitelist your extensions on this website, update your browser and use a modern web browser (Firefox/Chrome/Safari). You may try the automated checks a second time. Some checks may fail once and succeed on a second try. Reload now. Still having ",
+     "amostra_bruta": "",
+     "bytes_html": 11324,
+     "bytes_texto": 670,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [],
+     "url": "https://searx.be/search?q=site%3Ainstagram.com+ventura+entrevista"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente ",
+     "amostra_bruta": "",
+     "bytes_html": 189349,
+     "bytes_texto": 5017,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg",
+      "https://www.instagram.com/andre_ventura_oficial/p/C3lbl4MsNxm",
+      "https://www.instagram.com/andre_ventura_oficial/p/C4QTicaMyZk"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 15,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial"
+    }
+   ],
+   "mostrar": true,
+   "nome": "Instagram noutros motores, segunda porta",
+   "verificado_em": "2026-09-18T11:24:29+00:00"
+  },
+  {
+   "dominio_alvo": "instagram.com",
+   "hipoteses": [
+    {
+     "amostra": "instagram andre_ventura_oficial entrevista at DuckDuckGo All Regions Argentina Australia Austria Belgium (fr) Belgium (nl) Brazil Bulgaria Canada (en) Canada (fr) Catalonia Chile China Colombia Croatia Czech Republic Denmark Estonia Finland France Germany Greece Hong Kong Hungary Iceland India (en) Indonesia (en) Ireland Israel (en) Italy Japan Korea Latvia Lithuania Malaysia (en) Mexico Netherlan",
+     "amostra_bruta": "",
+     "bytes_html": 34405,
+     "bytes_texto": 3656,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [
+      "ventura entrevista",
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://html.duckduckgo.com/html/?q=instagram+andre_ventura_oficial+entrevista"
+    },
+    {
+     "amostra": "site:instagram.com ventura entrevista at DuckDuckGo All Regions Argentina Australia Austria Belgium (fr) Belgium (nl) Brazil Bulgaria Canada (en) Canada (fr) Catalonia Chile China Colombia Croatia Czech Republic Denmark Estonia Finland France Germany Greece Hong Kong Hungary Iceland India (en) Indonesia (en) Ireland Israel (en) Italy Japan Korea Latvia Lithuania Malaysia (en) Mexico Netherlands Ne",
+     "amostra_bruta": "",
+     "bytes_html": 33714,
+     "bytes_texto": 3855,
+     "enderecos": 0,
+     "exemplos": [],
+     "exemplos_enderecos": [],
+     "ligacoes": 0,
+     "responde": true,
+     "termos_presentes": [
+      "ventura entrevista",
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+ventura+entrevista"
+    }
+   ],
+   "mostrar": true,
+   "nome": "DuckDuckGo, o operador ou a cadencia",
+   "verificado_em": "2026-09-18T11:30:13+00:00"
   }
  ],
  "termo": "ventura entrevista",
- "verificado_em": "2026-09-18T09:21:48+00:00"
+ "verificado_em": "2026-09-18T11:30:18+00:00"
 }
