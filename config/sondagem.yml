@@ -699,6 +699,12 @@ grupos:
       - https://instagram.com/robots.txt
 
   - nome: Instagram noutros motores
+    # RESULTADO, 2026-09-18: morreu, e fica registado para ninguem voltar
+    # a tentar por aqui. As cinco consultas devolveram 388 caracteres a
+    # dizer que e preciso JavaScript para completar um desafio. Nao e um
+    # motor sem resultados: e um motor que nao responde a quem nao corre
+    # um browser, e correr um browser nao esta em causa neste projeto.
+    #
     # Segunda volta, 2026-09-18. A pergunta que decide se a via do
     # Instagram vive ou morre: o rendimento por consulta foi bom, cinco
     # enderecos de publicacao, e quem travou foi o intermediario. Se
@@ -725,6 +731,22 @@ grupos:
       - https://www.mojeek.com/search?q=site%3Ainstagram.com+ventura+entrevista+rtp
 
   - nome: Instagram noutros motores, segunda porta
+    # RESULTADO, 2026-09-18, quatro mortes e uma porta aberta:
+    #
+    # - um motor devolveu uma prova de trabalho em JavaScript, 184
+    #   caracteres de texto. So se soube o que era porque a amostra do
+    #   bruto passou a ser guardada: sem ela, lia-se como pagina vazia;
+    # - outro recusou com 403;
+    # - outro pediu verificacao de browser;
+    # - um respondeu normalmente, 5814 caracteres, e trouxe zero
+    #   enderecos. Este e o unico caso de ausencia e nao de bloqueio: o
+    #   motor indexa sitios pequenos e nao tem esta rede social. Nao ha
+    #   nada a afinar, simplesmente nao esta la;
+    # - **o quinto respondeu com 15 enderecos, todos no caminho da conta
+    #   do proprio**, depois de absorver dois 429 com as esperas de 20 e
+    #   60 segundos que a rede ja faz. E a unica via viva, e e por isso
+    #   que existe o grupo seguinte.
+    #
     # Os mesmos cinco pedidos noutro motor, para nao concluir de um so.
     # Correr em comando separado e alguns minutos depois: duas sessoes
     # coladas no tempo medem a cadencia em vez de medirem o motor.
@@ -739,6 +761,20 @@ grupos:
       - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial
 
   - nome: DuckDuckGo, o operador ou a cadencia
+    # RESULTADO, 2026-09-18, e uma correcao ao que este ficheiro dizia
+    # umas linhas acima. Em sessao limpa as duas consultas passaram sem
+    # desafio, **incluindo a que leva o operador**: portanto o travao da
+    # corrida anterior foi a cadencia, nao o operador, e a frase que
+    # falava de um teto de duas consultas estava errada.
+    #
+    # O que ficou por explicar, e nao se conclui sem medir: as duas
+    # consultas trouxeram zero enderecos, quando horas antes a mesma
+    # consulta trouxera cinco. Pode ser o motor a devolver resultados sem
+    # esta rede social, ou uma pagina sem resultados nenhuns, e com 400
+    # caracteres de amostra nao se distingue, porque nesse tamanho so
+    # cabe o menu de regioes. E dai vem o `amostra_chars` do grupo
+    # seguinte.
+    #
     # Separa duas das tres causas possiveis do desafio de 2026-09-18, e
     # so isso: duas consultas, a primeira sem o operador `site:` e a
     # segunda com ele, na mesma sessao curta. Se a sem operador passar e
@@ -756,3 +792,53 @@ grupos:
     hipoteses:
       - https://html.duckduckgo.com/html/?q=instagram+andre_ventura_oficial+entrevista
       - https://html.duckduckgo.com/html/?q=site%3Ainstagram.com+{termo}
+
+  - nome: Brave na dimensao em que se usa
+    # Terceira volta, 2026-09-18. A via do Instagram esta reduzida a este
+    # motor, o unico que respondeu com enderecos da conta do proprio: 15
+    # numa consulta, todos no caminho `/andre_ventura_oficial/`. Faltam
+    # duas medicoes antes de a via poder ser proposta, e este grupo faz
+    # as duas ao mesmo tempo.
+    #
+    # PRIMEIRA: o teto. Uma consulta que rende nao autoriza conclusao
+    # nenhuma sobre dez, e este motor ja devolveu 429 duas vezes seguidas
+    # antes de responder. Dez consultas seguidas medem o que 851 linhas
+    # exigiriam, nao o que uma exige. Ler a coluna das ligacoes por
+    # consulta e contar quantas responderam de todo: se metade cair, a
+    # via nao cobre o historico e retira-se.
+    #
+    # SEGUNDA, e a que decide: **a data**. Um endereco de publicacao nao
+    # diz quando a entrevista foi, e a pagina da rede social nao pode ser
+    # lida pela maquina. Ou a data vem escrita no resumo que o motor
+    # mostra ao lado do resultado, e entao a via e barata, ou tem de vir
+    # de uma pessoa a abrir cada endereco, e entao sao dezenas de
+    # aberturas manuais e isso e uma decisao editorial, nao um detalhe de
+    # implementacao. Por isso este grupo pede uma amostra grande: com os
+    # 400 por omissao so se ve o menu do motor.
+    #
+    # Como ler o que a consola imprime: procurar nas amostras se ao lado
+    # do endereco aparece uma data, seja em que forma for, e se essa data
+    # e a da publicacao ou a de indexacao. Sao coisas diferentes e uma
+    # delas nao serve de prova.
+    #
+    # Demora: estimativa, nao medida. Com os 429 a serem absorvidos por
+    # esperas de 20 e 60 segundos, dez consultas podem levar de dois a
+    # quinze minutos. Correr sozinho.
+    dominio_alvo: instagram.com
+    # So o caminho da conta do proprio. Os enderecos sem conta no caminho
+    # que a primeira corrida trouxe nao se sabe de quem sao, e uma pista
+    # que obriga a abrir para saber de quem e nao poupa trabalho nenhum.
+    padrao: '/andre_ventura_oficial/(p|reel|tv)/[A-Za-z0-9_-]{6,}'
+    amostra_chars: 3000
+    mostrar: true
+    hipoteses:
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+cnn
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+sic
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+rtp
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+tvi
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+cmtv
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+fevereiro+2026
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+janeiro+2026
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+2019
+      - https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+debate

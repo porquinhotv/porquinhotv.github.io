@@ -84,6 +84,19 @@ class TestEnderecosDeclarados(unittest.TestCase):
         self.assertLessEqual(len(r["amostra"]), sondar.AMOSTRA_CHARS)
         self.assertEqual(r["amostra_bruta"], "", "um ficheiro de texto legivel nao precisa da amostra do bruto")
 
+    def test_amostra_do_grupo_alcanca_os_resumos_dos_resultados(self):
+        """A 2026-09-18 a amostra de 400 caracteres de um motor trouxe so o
+        menu de regioes e nenhum resultado, e a pergunta era o que vem
+        escrito ao lado de cada resultado, que e onde poderia estar a data.
+        Sem o tamanho por grupo, o relatorio responde sempre a pergunta
+        errada."""
+        menu = "All Regions Argentina Australia Austria Belgium Brazil Bulgaria Canada Catalonia Chile China " * 6
+        texto = f"<html><body><p>{menu}</p><p>Publicado a 12 de marco de 2024, entrevista ao canal</p></body></html>"
+        curta = sondar.analisar(texto, "https://motor.exemplo/q", [], "")
+        self.assertNotIn("12 de marco de 2024", curta["amostra"])
+        larga = sondar.analisar(texto, "https://motor.exemplo/q", [], "", amostra_chars=3000)
+        self.assertIn("12 de marco de 2024", larga["amostra"])
+
     def test_pagina_servida_onde_se_pediu_um_ficheiro_de_texto(self):
         """A 2026-09-18 um pedido de `robots.txt` a uma rede social devolveu
         630137 bytes de marcacao cujo texto visivel era uma palavra. O

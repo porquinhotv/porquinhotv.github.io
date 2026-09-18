@@ -54,8 +54,12 @@ PASTA = RAIZ / "sondagem"
 PAUSA_S = 1.5
 # Enderecos declarados num mapa de sitio ou num indice de mapas.
 LOC = re.compile(r"<loc>\s*(https?://[^<\s]+)\s*</loc>", re.I)
-# Tamanho da amostra de texto guardada por hipotese. Basta para um
-# `robots.txt` inteiro ou para as primeiras linhas de um indice.
+# Tamanho por omissao da amostra de texto guardada por hipotese. Basta
+# para um `robots.txt` inteiro ou para as primeiras linhas de um indice.
+# Um grupo pode pedir mais com `amostra_chars`, e a razao esta medida a
+# 2026-09-18: num motor de busca estes 400 caracteres sao consumidos pelo
+# menu de regioes e o relatorio nao mostra um unico resultado, quando a
+# pergunta era precisamente o que vem escrito ao lado de cada resultado.
 AMOSTRA_CHARS = 400
 # Abaixo deste numero de caracteres, o texto visivel pode nao dizer o que
 # veio. Medido a 2026-09-18: o pedido de `robots.txt` a uma rede social
@@ -88,7 +92,7 @@ def enderecos_declarados(resposta: str) -> list[str]:
     return [linha.strip() for linha in resposta.splitlines() if "http" in linha]
 
 
-def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios_interesse: list[str] | None = None, padrao: str = "") -> dict:
+def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios_interesse: list[str] | None = None, padrao: str = "", amostra_chars: int = AMOSTRA_CHARS) -> dict:
     """O que esta hipotese devolveu, em numeros comparaveis entre si."""
     corpo = extracao.texto_visivel(html)
     palheiro = normalizar(corpo)
@@ -120,8 +124,8 @@ def analisar(html: str, url: str, termos: list[str], dominio_alvo: str, dominios
         "exemplos": ligacoes[:3],
         "enderecos": len(enderecos),
         "exemplos_enderecos": enderecos[:3],
-        "amostra": corpo[:AMOSTRA_CHARS],
-        "amostra_bruta": html[:AMOSTRA_CHARS] if _ilegivel(html, corpo) else "",
+        "amostra": corpo[:amostra_chars],
+        "amostra_bruta": html[:amostra_chars] if _ilegivel(html, corpo) else "",
     }
 
 
@@ -169,7 +173,7 @@ def correr(config: dict, obter=obter_texto, so_grupo: str | None = None, dormir=
                 linha["hipoteses"].append({"url": url, "responde": False, "erro": str(exc)})
                 print(f"    nao responde: {exc}", flush=True)
             else:
-                dados = analisar(html, url, termos, linha["dominio_alvo"], config.get("dominios_de_interesse") or [], grupo.get("padrao", ""))
+                dados = analisar(html, url, termos, linha["dominio_alvo"], config.get("dominios_de_interesse") or [], grupo.get("padrao", ""), grupo.get("amostra_chars", AMOSTRA_CHARS))
                 linha["hipoteses"].append({"url": url, **dados})
                 print(f"    {dados['bytes_texto']} bytes de texto, {dados['ligacoes']} ligacoes, {dados['enderecos']} enderecos declarados, termos {dados['termos_presentes']}", flush=True)
                 if grupo.get("mostrar"):
@@ -210,9 +214,9 @@ def relatorio(resultado: dict) -> str:
         if grupo.get("mostrar"):
             for h in grupo["hipoteses"]:
                 if h.get("amostra"):
-                    linhas.append(f"- {h['url']}: `{h['amostra'][:AMOSTRA_CHARS]}`")
+                    linhas.append(f"- {h['url']}: `{h['amostra']}`")
                 if h.get("amostra_bruta"):
-                    linhas.append(f"- {h['url']}, bruto: `{h['amostra_bruta'][:AMOSTRA_CHARS]}`")
+                    linhas.append(f"- {h['url']}, bruto: `{h['amostra_bruta']}`")
         linhas.append("")
     return "\n".join(linhas).rstrip() + "\n"
 
