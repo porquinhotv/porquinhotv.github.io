@@ -409,6 +409,85 @@ entrevistas:
     canal: sic-noticias
     prova: https://sicnoticias.pt/pais/2024-08-01-video-andre-ventura-sobre-o-caso-das-gemeas-o-presidente-da-republica-diz-que-responde-perante-o-povo-mas-onde--no-cafe--3dc94cca
 
+  # Cinco entrevistas de 2026 acrescentadas a 2026-09-18. Vieram da lista
+  # de 2026 que o autor comparou com a pagina de Fontes: das oito que o
+  # site nao tinha, estas cinco tem prova aberta e lida pelo autor. Duas
+  # ficam por provar, nao por desmentidas (NOW a 2026-07-04 e a
+  # 2026-05-24); a de 2026-02-08 e a noite eleitoral da segunda volta e o
+  # autor julgou-a nao elegivel, porque declaracoes numa noite eleitoral
+  # nao sao entrevista exclusiva a um canal.
+  #
+  # Nenhuma das cinco estava na quarentena nem nos candidatos: nenhuma
+  # fonte as trouxe, nao foram recusadas. As cinco sao da NOW e da SIC
+  # Noticias, dois dos canais que a KB 0.4 mede sem cobertura automatica.
+  #
+  # Guardas corridas pela regra de 0.1.3, contra o dataset publicado a
+  # 2026-09-18: nenhuma das cinco datas tem linha no site, nem ha linha do
+  # mesmo canal ou do mesmo grupo a um dia de distancia. Nao ha nada a
+  # agrupar nem a absorver.
+  - data: 2026-08-04
+    canal: now
+    origem: imprensa
+    programa: não apurado
+    prova: https://www.dn.pt/pol%C3%ADtica/ventura-algum-que-passou-de-investigar-o-primeiro-ministro-a-ministro-dele-uma-bandalheira
+    titulo: 'Ventura: "Alguém que passou de investigar o primeiro-ministro a ministro dele é uma bandalheira"'
+    # A peca do DN, publicada a 4 de agosto de 2026 as 21:48, diz "esta
+    # terça-feira, 4 de agosto" e "Em entrevista ao Now", e relata o que la
+    # foi dito. Cumpre as quatro condicoes da prova de imprensa. Lida nesta
+    # sessao e pelo autor.
+    #
+    # O `programa` escreve-se como nao apurado porque o titulo traz dois
+    # pontos: sem o campo, a deducao daria "Ventura" como nome do programa.
+  - data: 2026-07-22
+    canal: sic-noticias
+    programa: Importa-se de Repetir?
+    prova: https://sicnoticias.pt/programas/importa-se-de-repetir--/2026-07-22-video-ventura-espera-que-montenegro-afaste-luis-neves-caso-nao-esteja-condicionado-pelo-mesmo-f446b3cf
+    # A data esta no caminho do endereco, e o dominio e o do canal de
+    # informacao do grupo (decisao 28). A pagina da SIC foi lida pelo autor;
+    # daqui nao abre, pela razao da KB 6.5. O formato e o programa estao
+    # confirmados por uma peca do Observador de 23 de julho, que diz "Em
+    # entrevista na SIC Notícias, no programa Importa-se de repetir?". O
+    # `programa` vai escrito porque o caminho e essa peca o nomeiam.
+  - data: 2026-05-06
+    canal: now
+    prova: https://www.nowcanal.pt/politica/detalhe/as-pessoas-sabem-que-hoje-o-bandido-tem-mais-direito-do-que-o-policia-afirma-ventura
+    titulo: '"As pessoas sabem que hoje o bandido tem mais direito do que o polícia", afirma Ventura'
+    # A pagina do canal diz "esteve esta quarta-feira no NOW" e "em
+    # entrevista ao NOW", e 6 de maio de 2026 foi quarta-feira. Lida pelo
+    # autor; daqui so pelo excerto do motor de busca, porque o `robots.txt`
+    # da NOW recusa agentes automaticos.
+    #
+    # Ha uma segunda pagina do mesmo canal, de 7 de maio, que diz "Em
+    # entrevista exclusiva ao NOW" sobre o mesmo caso da esquadra do Rato.
+    # E a mesma entrevista publicada no dia seguinte e NAO se acrescenta:
+    # com a data da publicacao passaria por outra.
+  - data: 2026-04-08
+    canal: now
+    prova: https://www.instagram.com/p/DW4hcZdAVRQ/
+    publicado_em: 2026-04-08
+    # Publicacao na conta oficial do proprio entrevistado, que conta pela
+    # decisao 27: o autor abriu-a, confirmou a conta e leu o canal e o dia.
+    # Abril nao tinha nenhuma linha no site.
+    #
+    # O identificador da publicacao da 8 de abril de 2026 as 20:55 de
+    # Lisboa. O metodo (os primeiros 41 bits do identificador em
+    # milissegundos desde a epoca do Instagram, 1314220021721) foi validado
+    # nas duas publicacoes de Instagram que ja estavam nesta lista, e bateu
+    # ao dia com as datas de 2025-08-05 e 2025-04-03. Serve para
+    # confirmar o dia, nao e a prova, pela regra da KB 0.6.
+    #
+    # O custo da decisao 27 vale aqui por inteiro: um anuncio do proprio
+    # nao e um registo de quem emitiu. Sem `titulo`: a publicacao nao foi
+    # lida por esta ferramenta, e um titulo inventado seria um campo falso.
+  - data: 2026-02-26
+    canal: sic-noticias
+    prova: https://sicnoticias.pt/pais/politica/2026-02-26-video-o-pais-nunca-ficara-mal-entregue-com-pedro-passos-coelho-diz-andre-ventura-338c053d
+    # O endereco nao diz entrevista e soa a declaracao avulsa. O formato
+    # esta confirmado duas vezes: pela leitura da pagina pelo autor e por
+    # uma peca do Observador que cita a mesma frase "Em entrevista à SIC
+    # Notícias". A data esta no caminho. Sem `titulo` nem `programa`, pela
+    # mesma razao da linha de 2024-08-01.
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
