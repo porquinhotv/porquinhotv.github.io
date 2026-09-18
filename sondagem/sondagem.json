@@ -2100,8 +2100,145 @@
    "mostrar": true,
    "nome": "DuckDuckGo, o operador ou a cadencia",
    "verificado_em": "2026-09-18T11:30:13+00:00"
+  },
+  {
+   "dominio_alvo": "instagram.com",
+   "hipoteses": [
+    {
+     "erro": "pedido falhou: https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista: HTTP Error 429: Too Many Requests",
+     "responde": false,
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial entrevista cnn - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › p › DP4QA5ejXKe Acompanha a grande entrevista logo à noite na TVI/CNN, ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DM0uNSAocBR Numa entrevista em exclusivo à CNN Portugal André ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DGyWXhKvmKE O nosso Presidente André Ventura estará hoje na CNN ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › cnnportugal › reel › DExmPPfsVNL CNN Portugal | Pedro Santos Guerreiro entrevista André ... 1M Followers, 246 Following, 19K Posts - CNN Portugal (@cnnportugal) on Instagram: \"A força da informação, 24 horas por dia, em direto e em português. Acompanhe no canal 7, em cnnportugal.pt e descarregue a app. #emtodasasfrentes\" Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › p › DPd0DYQjM4z ENTREVISTA || André Ventura ocupou o vazio ... - Instagram Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DQchMdlEfBq É hoje! A partir das 20h25, acompanha na CMTV. Grande ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › C2iKydBr-ON Acompanha esta noite, grande entrevista de André ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DJ92RZgsh1o Hoje, às 20h30, na CMTV: Entrevista com André Ventura. Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › Cc4yOoPoD0r Instagram Create an account or log in to Instagram - Share what you're into with the people who get you. Pesquisar em outro lugar Google Bing Mojeek Instagram instagram.com › partidochega › p › C3iZ5qxokXN Acompanha hoje a entrevista do nosso Presidente André ... 19 de fevereiro de 2024 - Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andre_ventura_oficial › p › DJ90iyMtk1R André Claro Amaral Ventura (@andre_ventura_oficial) • Instagram ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › jornalexpresso › p › C3bZkoyN-Cf \"Em entrevista, André Ventura afirma que se deve garantir ... 1M Followers, 237 Following, 26K P",
+     "amostra_bruta": "",
+     "bytes_html": 181674,
+     "bytes_texto": 5019,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/p/DJ90iyMtk1R",
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3ZzDu7MynO"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 2,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+cnn"
+    },
+    {
+     "erro": "pedido falhou: https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+sic: HTTP Error 429: Too Many Requests",
+     "responde": false,
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+sic"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial entrevista rtp - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › rtppt › reel › C4u2EqiBqY7 Quarta | 23H | RTP3 | RTP Play | Vítor Gonçalves entrevista ... 364K seguidores, 300 siguiendo, 13K publicaciones - RTP (@rtppt) en Instagram: \"Grupo de Media de Serviço Público 🇵🇹 📺 Televisão 📻 Rádio 🌐 Web\" Instagram instagram.com › p › DQg7NabiU_2 A RTP prepara oito Grandes Entrevistas especiais com os ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › partidochega › p › C4F6xkqoR1L Partido CHEGA! 🇵🇹 on Instagram Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › partidochega › p › C2SmPcxI1a5 Veja a grande entrevista ao nosso Presidente André ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) • Instagram photos and videos 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › jornalexpresso › p › C3bZkoyN-Cf \"Em entrevista, André Ventura afirma que se deve garantir ... 1M Followers, 237 Following, 26K Posts - Expresso (@jornalexpresso) on Instagram: \"As notícias que lhe dão liberdade para pensar. Acompanhe-as aqui 👇\" Instagram instagram.com › partidochega › p › C3iZ5qxokXN Acompanha hoje a entrevista do nosso Presidente André ... 19 de fevereiro de 2024 - Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › rtppt › reel › C5x96beNew4 ⏰ ENTREVISTA COM ANDRÉ VILLAS-BOAS | ... 364K seguidores, 300 siguiendo, 13K publicaciones - RTP (@rtppt) en Instagram: \"Grupo de Media de Serviço Público 🇵🇹 📺 Televisão 📻 Rádio 🌐 Web\" Instagram instagram.com › p › DT0DaInCNVD Sob um clima de confronto desde o primeiro minuto, André ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andre_ventura_oficial › reel › C3nAcris5cg Cheguei esta manhã de bicicleta à Casa Feliz, na SIC. Dia ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Pesquisar em outro lugar Google Bing Mojeek Instagram instagram.com › p › DTd80S3DMu6 A desinformação associada às presidenciais soma mais ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DTeCO5yDAE- Sobre o proto-fascista que \"diz as verdades\": \" ... - Instagram Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › ",
+     "amostra_bruta": "",
+     "bytes_html": 242836,
+     "bytes_texto": 5882,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg",
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3ZzDu7MynO",
+      "https://www.instagram.com/andre_ventura_oficial/p/C3IOYAxMuzm"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 3,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+rtp"
+    },
+    {
+     "erro": "pedido falhou: https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+tvi: HTTP Error 429: Too Many Requests",
+     "responde": false,
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+tvi"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial entrevista cmtv - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › p › DJ92RZgsh1o Hoje, às 20h30, na CMTV: Entrevista com André Ventura. Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › partidochega › p › C3iZ5qxokXN Acompanha hoje a entrevista do nosso Presidente André ... 19 de fevereiro de 2024 - Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DZ5i1shDEjw É hoje! A partir das 20H50, a grande entrevista na CMTV. ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › C_p88_LqTAS O nosso Presidente André Ventura vai estar hoje na CMTV ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andre_ventura_oficial › p › DJ90iyMtk1R André Claro Amaral Ventura (@andre_ventura_oficial) • Instagram ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › sicnoticias › reel › DFOe3z7xqxx Na entrevista desta noite à SIC Notícias, André Ventura foi ... 1M followers, 66 following, 28K posts – SIC Notícias (@sicnoticias) on Instagram: \"Tv. Web. App. O destino da informação\" Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › p › DGtFYuCM7PX Mais logo o nosso Presidente André Ventura estará na ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › rtppt › reel › C4u2EqiBqY7 Quarta | 23H | RTP3 | RTP Play | Vítor Gonçalves entrevista ... 364K seguidores, 300 siguiendo, 13K publicaciones - RTP (@rtppt) en Instagram: \"Grupo de Media de Serviço Público 🇵🇹 📺 Televisão 📻 Rádio 🌐 Web\" Instagram instagram.com › jornalexpresso › p › C3bZkoyN-Cf \"Em entrevista, André Ventura afirma que se deve garantir ... 1M Followers, 237 Following, 26K Posts - Expresso (@jornalexpresso) on Instagram: \"As notícias que lhe dão liberdade para pensar. Acompanhe-as aqui 👇\" Pesquisar em outro lugar Google Bing Mojeek Instagram instagram.com › p › DGyWXhKvmKE O nosso Presidente André Ventura estará hoje na CNN ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › partidochega › p › C2SmPcxI1a5 Veja a grande entrevista ao nosso Presidente André ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › Cc4yOoPoD0r I",
+     "amostra_bruta": "",
+     "bytes_html": 182110,
+     "bytes_texto": 5144,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/p/DJ90iyMtk1R",
+      "https://www.instagram.com/andre_ventura_oficial/p/C4QTicaMyZk",
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 3,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+entrevista+cmtv"
+    },
+    {
+     "erro": "pedido falhou: https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+fevereiro+2026: HTTP Error 429: Too Many Requests",
+     "responde": false,
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+fevereiro+2026"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial janeiro 2026 - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) • Instagram photos and videos 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › reels André Claro Amaral Ventura (@andre_ventura_oficial) Bem-vindo/a ao Instagram. Inicia sessão para veres o que os teus amigos, familiares e interesses têm andado a captar e a partilhar em todo o mundo . Instagram instagram.com › andre_ventura_oficial › p › C3IOYAxMuzm André Claro Amaral Ventura on Instagram 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › p › C4QTicaMyZk Todos ao Largo Camões, em Lisboa, para o encerramento ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › reel › C3nAcris5cg Cheguei esta manhã de bicicleta à Casa Feliz, na SIC. Dia ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › p › DSjKQ9Yl04W Viana no apoio a André Ventura, na arruada hoje ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andre_ventura_oficial › reel › C3ZzDu7MynO André Claro Amaral Ventura on Instagram: \"🙃🙃🙃\" 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › p › DOq2JV8DVyj levar o Chega à segunda volta das eleições presidenciais. ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram secure.instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) Crie uma conta ou entre no Instagram: compartilhe seus interesses com as pessoas que entendem você. Instagram instagram.com › andre_ventura_oficial › p › C3lbl4MsNxm Amanhã estarei, a partir das 10h50, na Casa Feliz, da SIC, ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Pesquisar em outro lugar Google Bing Mojeek Instagram instagram.com › p › DJfS2masEos É já esta terça-feira que se realiza mais um grande jantar- ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › p › DTVGX69CGN4 Cada nova sondagem fala por si. @andre_ventura_oficial ... Create",
+     "amostra_bruta": "",
+     "bytes_html": 231213,
+     "bytes_texto": 5680,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/p/C3IOYAxMuzm",
+      "https://www.instagram.com/andre_ventura_oficial/p/C4QTicaMyZk",
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 5,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+janeiro+2026"
+    },
+    {
+     "amostra": "site:instagram.com andre_ventura_oficial 2019 - Brave Search Perguntar Tudo Imagens Notícias Vídeos Mapas Goggles Mostrando somente resultados de instagram.com Limpar filtros Instagram instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@ andre _ ventura _ oficial ) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › p › C3lbl4MsNxm Amanhã estarei, a partir das 10h50, na Casa Feliz, da SIC, ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › reel › C3nAcris5cg Cheguei esta manhã de bicicleta à Casa Feliz, na SIC. Dia ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › p › C4QTicaMyZk Todos ao Largo Camões, em Lisboa, para o encerramento ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › related_profiles André Claro Amaral Ventura (@andre_ventura_oficial) • Instagram ... 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › p › C3IOYAxMuzm André Claro Amaral Ventura on Instagram 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram instagram.com › andre_ventura_oficial › reel › C3ZzDu7MynO André Claro Amaral Ventura on Instagram: \"🙃🙃🙃\" 903K followers, 825 following, 6,945 posts – André Claro Amaral Ventura (@andre_ventura_oficial) on Instagram: \"Presidente do @partidochega 🇵🇹\" Instagram secure.instagram.com › andre_ventura_oficial André Claro Amaral Ventura (@andre_ventura_oficial) Crie uma conta ou entre no Instagram: compartilhe seus interesses com as pessoas que entendem você. Instagram instagram.com › p › DTsaUghgN5_ André Ventura @andre_ventura_oficial , uma das ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › aventurass Instagram Create an account or log in to Instagram - Share what you're into with the people who get you. Pesquisar em outro lugar Google Bing Mojeek Instagram instagram.com › p › DUA5qutAPEa @andre_ventura_oficial 🙏🇧🇷👏👏👏 Dina Marques Nunes é ... Create an account or log in to Instagram - Share what you're into with the people who get you. Instagram instagram.com › andrea_ventura_2019 Andrea Ventura (@andrea_ventura_2019) • Instagram photos and videos 583 Followers, 167 Following, 238 Posts - Andrea Ventura (@andrea_ ventura ",
+     "amostra_bruta": "",
+     "bytes_html": 197679,
+     "bytes_texto": 5200,
+     "enderecos": 0,
+     "exemplos": [
+      "https://www.instagram.com/andre_ventura_oficial/p/C3lbl4MsNxm",
+      "https://www.instagram.com/andre_ventura_oficial/reel/C3nAcris5cg",
+      "https://www.instagram.com/andre_ventura_oficial/p/C4QTicaMyZk"
+     ],
+     "exemplos_enderecos": [],
+     "ligacoes": 5,
+     "responde": true,
+     "termos_presentes": [
+      "Ventura",
+      "André Ventura",
+      "Andre Ventura"
+     ],
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+2019"
+    },
+    {
+     "erro": "pedido falhou: https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+debate: HTTP Error 429: Too Many Requests",
+     "responde": false,
+     "url": "https://search.brave.com/search?q=site%3Ainstagram.com+andre_ventura_oficial+debate"
+    }
+   ],
+   "mostrar": true,
+   "nome": "Brave na dimensao em que se usa",
+   "verificado_em": "2026-09-18T12:26:41+00:00"
   }
  ],
  "termo": "ventura entrevista",
- "verificado_em": "2026-09-18T11:30:18+00:00"
+ "verificado_em": "2026-09-18T12:26:41+00:00"
 }
