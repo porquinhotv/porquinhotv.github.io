@@ -64,6 +64,15 @@
    "url": "https://www.rtp.pt/play/p5994/e586404/radicais-livres-2a-serie"
   },
   {
+   "excerto": "Antonio Ventura - Campanha do kiwi",
+   "fonte": "busca-rtp1",
+   "id_nativo": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa",
+   "motivo": "formato_nao_apurado",
+   "publicado_em": "2022-03-05",
+   "titulo": "José Candeias (Podcast)",
+   "url": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa"
+  },
+  {
    "excerto": "Emiliano Ventura - Emiliano Ventura",
    "fonte": "busca-rtp1",
    "id_nativo": "https://www.rtp.pt/play/p9149/e628428/afinal-ha-tempo",
@@ -127,15 +136,6 @@
    "url": "https://www.rtp.pt/play/p10324/e888399/grande-entrevista"
   },
   {
-   "excerto": "O camarada Ventura… - Uma entrevista à antena 1 que pode obrigar o governo a recuar nas propostas laborais. Uma greve que fez efeito. Os debates pr",
-   "fonte": "busca-rtp1",
-   "id_nativo": "https://www.rtp.pt/play/p283/e895598/contraditorio",
-   "motivo": "formato_nao_apurado",
-   "publicado_em": "2025-12-12",
-   "titulo": "Contraditório",
-   "url": "https://www.rtp.pt/play/p283/e895598/contraditorio"
-  },
-  {
    "excerto": "",
    "fonte": "busca-rtp1",
    "id_nativo": "busca-rtp1:72e937281cc7",
@@ -181,33 +181,6 @@
    "url": "https://tvi.iol.pt/cristina-ferreira/roda-da-sorte/roda-da-sorte-o-novo-concurso-de-cristina-ferreira-estreia-dia-21-de-setembro-e-ja-se-pode-inscrever"
   },
   {
-   "excerto": "A profissão desconhecida do ator Diogo Morgado. Poucos sabem que também faz isto",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/diogo-morgado/ator/a-vida-desconhecida-de-diogo-morgado-esta-e-a-outra-profissao-do-ator-que-poucos-conhecem",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "A vida desconhecida de Diogo Morgado. Esta é a outra profissão do ator que poucos conhecem",
-   "url": "https://tvi.iol.pt/novelas/diogo-morgado/ator/a-vida-desconhecida-de-diogo-morgado-esta-e-a-outra-profissao-do-ator-que-poucos-conhecem"
-  },
-  {
-   "excerto": "Miguel revelou a Catarina Miranda como conheceu Érica e admitiu suspeitar que a colega está apaixonada por si, após uma noite marcada pela tensão entre os dois.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/miguel-vicente/erica-silva/afinal-o-que-aconteceu-entre-miguel-vicente-e-erica-silva-fora-da-casa-toda-a-verdade-exposta",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Afinal, o que aconteceu entre Miguel Vicente e Érica Silva fora da casa? Toda a verdade exposta",
-   "url": "https://tvi.iol.pt/bigbrother/miguel-vicente/erica-silva/afinal-o-que-aconteceu-entre-miguel-vicente-e-erica-silva-fora-da-casa-toda-a-verdade-exposta"
-  },
-  {
-   "excerto": "Joana Machado Madeira tinha 19 anos e Eduardo Madeira 39 quando começaram a namorar. Agora, celebram 13 anos de casamento",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/eduardo-madeira/joana-madeira/ela-tinha-19-anos-e-ele-39-quando-se-apaixonaram-enfrentaram-o-preconceito-mas-hoje-provam-que-o-amor-venceu",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Ela tinha 19 anos e ele 39 quando se apaixonaram. Enfrentaram o preconceito, mas hoje provam que o amor venceu",
-   "url": "https://tvi.iol.pt/novelas/eduardo-madeira/joana-madeira/ela-tinha-19-anos-e-ele-39-quando-se-apaixonaram-enfrentaram-o-preconceito-mas-hoje-provam-que-o-amor-venceu"
-  },
-  {
    "excerto": "Brad Pitt e Ines de Rámon: a história de amor do galã que já foi casado com Jennifer Aniston e Angelina Jolie",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/novelas/brad-pitt/ines-de-ramon/ele-tem-63-anos-ela-33-o-amor-de-um-gala-polemico-que-ja-conquistou-duas-das-mulheres-mais-famosas",
@@ -215,24 +188,6 @@
    "publicado_em": "2026-09-17",
    "titulo": "Ele tem 63 anos, ela 33. O amor de um galã polémico, que já conquistou duas das mulheres mais famosas",
    "url": "https://tvi.iol.pt/novelas/brad-pitt/ines-de-ramon/ele-tem-63-anos-ela-33-o-amor-de-um-gala-polemico-que-ja-conquistou-duas-das-mulheres-mais-famosas"
-  },
-  {
-   "excerto": "Sandra Felgueiras aproveitou os primeiros dias de setembro para fazer uma pausa e viajar até Cádis, Espanha.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/sandra-felgueiras/jornalista/em-mes-de-recomecos-sandra-felgueiras-vive-momento-especial-precisava-de-ti",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Em mês de recomeços, Sandra Felgueiras vive momento especial: «Precisava de ti»",
-   "url": "https://tvi.iol.pt/doisas10/sandra-felgueiras/jornalista/em-mes-de-recomecos-sandra-felgueiras-vive-momento-especial-precisava-de-ti"
-  },
-  {
-   "excerto": "A vida de Ana Felizardo tem sido marcada por várias dificuldades.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/casamento/familia/encontrou-o-verdadeiro-amor-apos-anos-de-violencia-mas-a-vida-deu-lhe-outra-batalha-nao-desejo-que-aconteca-a-ninguem",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Encontrou o verdadeiro amor após anos de violência, mas a vida deu-lhe outra batalha: «Não desejo que aconteça a ninguém»",
-   "url": "https://tvi.iol.pt/doisas10/casamento/familia/encontrou-o-verdadeiro-amor-apos-anos-de-violencia-mas-a-vida-deu-lhe-outra-batalha-nao-desejo-que-aconteca-a-ninguem"
   },
   {
    "excerto": "A atriz Sara Salgado afastou-se da representação e vive agora uma vida de luxo",
@@ -244,67 +199,103 @@
    "url": "https://tvi.iol.pt/novelas/sara-salgado/atriz/foi-atriz-nos-morangos-com-acucar-mas-agora-e-multimilionaria-e-tem-acesso-aos-eventos-mais-exclusivos-de-portugal"
   },
   {
-   "excerto": "Inês Aires Pereira não escondeu a opinião sobre o jogo de Francisco Monteiro no Big Brother All Stars. Durante uma conversa com Cristina Ferreira, a atriz revelou ainda quais são os concorrentes que mais a têm conquistado nesta edição do reality show.",
+   "excerto": "O irmão voltou às manchetes e ela acabou também debaixo dos holofotes. Veja como está a irmã de Renato Seabra.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/francisco-monteiro/cristina-ferreira/francisco-monteiro-esta-a-enervar-esta-conhecida-atriz-portuguesa-e-a-confissao-foi-feita-a-cristina-ferreira",
+   "id_nativo": "https://tvi.iol.pt/vmais/joana-seabra/renato-seabra/fotografia-recente-de-renato-seabra-reacende-atencoes-sobre-a-irma-saiba-porque",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-17",
-   "titulo": "Francisco Monteiro está a «enervar» esta conhecida atriz portuguesa. E a confissão foi feita a Cristina Ferreira",
-   "url": "https://tvi.iol.pt/bigbrother/francisco-monteiro/cristina-ferreira/francisco-monteiro-esta-a-enervar-esta-conhecida-atriz-portuguesa-e-a-confissao-foi-feita-a-cristina-ferreira"
+   "titulo": "Fotografia recente de Renato Seabra reacende atenções sobre a irmã: saiba porquê",
+   "url": "https://tvi.iol.pt/vmais/joana-seabra/renato-seabra/fotografia-recente-de-renato-seabra-reacende-atencoes-sobre-a-irma-saiba-porque"
   },
   {
-   "excerto": "No Big Brother All Stars, o ranking de popularidade da segunda semana já foi divulgado. Conheça os resultados.",
+   "excerto": "Uma decisão de David Diamond acabou por ter consequências sérias no Big Brother All Stars. Depois de os concorrentes desrespeitarem uma ordem do Big Brother, Maria Botelho Moniz entrou em contacto com a casa e anunciou uma sanção que apanhou vários concorrentes de surpresa.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/helena-isabel/ranking-popularidade/muito-se-tem-falado-da-popularidade-no-bb-all-stars-e-ja-saiu-o-ranking-novo-descubra-se-helena-isabel-foi-destronada",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/sancoes/david-diamond/sancao-pesada-uma-decisao-inesperada-que-deixou-a-casa-em-choque-tudo-pode-mudar-no-jogo",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-17",
-   "titulo": "Muito se tem falado da popularidade no BB All Stars e já saiu o ranking novo: Descubra se Helena Isabel foi destronada",
-   "url": "https://tvi.iol.pt/bigbrother/helena-isabel/ranking-popularidade/muito-se-tem-falado-da-popularidade-no-bb-all-stars-e-ja-saiu-o-ranking-novo-descubra-se-helena-isabel-foi-destronada"
+   "titulo": "Sanção pesada! Uma decisão inesperada que deixou a casa em choque. Tudo pode mudar no jogo",
+   "url": "https://tvi.iol.pt/bigbrother/sancoes/david-diamond/sancao-pesada-uma-decisao-inesperada-que-deixou-a-casa-em-choque-tudo-pode-mudar-no-jogo"
   },
   {
-   "excerto": "Elisabete Moutinho e Pedro Pinto estão separados. O fim da relação foi tema de conversa no ‘Dois às 10’ durante a habitual rubrica ‘Conversas de Café’, com Cinha Jardim, Adriano Silva Martins e Gonçalo Quinaz.",
+   "excerto": "Bruna Marinheiro tinha acabado de ser mãe quando recebeu uma notícia que lhe mudou a vida. Aos 30 anos, foi diagnosticada com cancro do intestino, mais concretamente uma neoplasia do reto, e tinha um filho de apenas um ano.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/elisabete-moutinho/secret-story/pedro-pinto-esclarece-separacao-de-elisabete-moutinho-e-revela-o-motivo-do-fim",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Pedro Pinto esclarece separação de Elisabete Moutinho e revela o motivo do fim",
-   "url": "https://tvi.iol.pt/doisas10/elisabete-moutinho/secret-story/pedro-pinto-esclarece-separacao-de-elisabete-moutinho-e-revela-o-motivo-do-fim"
-  },
-  {
-   "excerto": "Madalena (Fernanda Serrano) decide mudar radicalmente de vida depois de Duarte (Rafael Paes) a incentivar a recuperar a autoestima. Enquanto enfrenta Frederico (Marco Delgado), pede-lhe o divórcio e sofre uma nova tentativa de controlo do marido, Matilde (Júlia Vale) vê a relação",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-madalena-pede-o-divorcio-e-paga-caro-por-isso",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Reviravolta em «Coração de Mãe»: Madalena pede o divórcio... e paga caro por isso",
-   "url": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-madalena-pede-o-divorcio-e-paga-caro-por-isso"
-  },
-  {
-   "excerto": "A Madrasta: Francisca droga João Maria para o incriminar",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/francisca/joao-maria/vem-ai-a-madrasta-maldade-de-francisca-nao-tem-fim-e-desta-vez-o-alvo-e-joao-maria",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Vem aí «A Madrasta». Maldade de Francisca não tem fim e desta vez o alvo é João Maria",
-   "url": "https://tvi.iol.pt/novelas/francisca/joao-maria/vem-ai-a-madrasta-maldade-de-francisca-nao-tem-fim-e-desta-vez-o-alvo-e-joao-maria"
-  },
-  {
-   "excerto": "Uma nova fotografia de Renato Seabra, atualmente com 36 anos, voltou a chamar a atenção em Portugal.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/renato-seabra/cristina-ferreira/nunca-mais-se-tinha-visto-uma-imagem-cristina-ferreira-reage-a-nova-fotografia-de-renato-seabra",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "«Nunca mais se tinha visto uma imagem»: Cristina Ferreira reage à nova fotografia de Renato Seabra",
-   "url": "https://tvi.iol.pt/doisas10/renato-seabra/cristina-ferreira/nunca-mais-se-tinha-visto-uma-imagem-cristina-ferreira-reage-a-nova-fotografia-de-renato-seabra"
-  },
-  {
-   "excerto": "O novo programa de entretenimento promete desafios, convidados, histórias, música, humor e muitas surpresas.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/fora-do-baralho/tvi/fora-do-baralho-manuel-luis-goucha-e-joao-patricio-chegam-as-tardes-de-sabado-da-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/cancro/familia/com-o-filho-nos-bracos-bruna-foi-diagnosticada-com-cancro-como-e-que-vai-ser-se-eu-nao-estiver",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-18",
-   "titulo": "“Fora do Baralho”: Manuel Luís Goucha e João Patrício chegam às tardes de sábado da TVI",
-   "url": "https://tvi.iol.pt/fora-do-baralho/tvi/fora-do-baralho-manuel-luis-goucha-e-joao-patricio-chegam-as-tardes-de-sabado-da-tvi"
+   "titulo": "Com o filho nos braços, Bruna foi diagnosticada com cancro: «Como é que vai ser se eu não estiver?»",
+   "url": "https://tvi.iol.pt/doisas10/cancro/familia/com-o-filho-nos-bracos-bruna-foi-diagnosticada-com-cancro-como-e-que-vai-ser-se-eu-nao-estiver"
+  },
+  {
+   "excerto": "A atriz Inês Aires Pereira reage à participação de Francisco Monteiro no Big Brother All Stars e deixa um recado ao concorrente, que já venceu um reality show",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/ines-aires-pereira/18-09-2026/ines-aires-pereira-esta-incomodada-com-esta-atitude-de-francisco-monteiro-no-bb-all-stars-e-este-e-o-conselho-que-lhe-deixa",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Inês Aires Pereira está incomodada com esta atitude de Francisco Monteiro no BB All Stars. E este é o conselho que lhe deixa",
+   "url": "https://tvi.iol.pt/novelas/ines-aires-pereira/18-09-2026/ines-aires-pereira-esta-incomodada-com-esta-atitude-de-francisco-monteiro-no-bb-all-stars-e-este-e-o-conselho-que-lhe-deixa"
+  },
+  {
+   "excerto": "Inês Gama e Dylan Fonte preparam anúncio especial. Tudo será revelado este sábado na TVI.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/ines-gama/dylan-fonte/ines-gama-e-dylan-fonte-anunciam-novidade-em-primeira-mao-e-ja-ha-reacoes-bebe-a-caminho",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Inês Gama e Dylan Fonte anunciam novidade em primeira mão. E já há reações: «Bebé a caminho!»",
+   "url": "https://tvi.iol.pt/bigbrother/ines-gama/dylan-fonte/ines-gama-e-dylan-fonte-anunciam-novidade-em-primeira-mao-e-ja-ha-reacoes-bebe-a-caminho"
+  },
+  {
+   "excerto": "É pouco conhecida, mas tem uma fortuna superior à de Taylor Swift, Brad Pitt e Tom Cruise. Falamos de Jami Gertz",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/jami-gertz/atriz/mais-rica-do-que-tom-cruise-taylor-swift-e-jennifer-lopez-os-milhoes-desta-atriz-vem-de-outra-profissao",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Mais rica do que Tom Cruise, Taylor Swift e Jennifer Lopez: os milhões desta atriz vêm de outra profissão",
+   "url": "https://tvi.iol.pt/novelas/jami-gertz/atriz/mais-rica-do-que-tom-cruise-taylor-swift-e-jennifer-lopez-os-milhoes-desta-atriz-vem-de-outra-profissao"
+  },
+  {
+   "excerto": "Quem são as gémeas portuguesas que estão agora no círculo de Georgina Rodríguez e Cristiano Ronaldo? Uma delas é namorada de um conhecido futebolista",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/matilde-neiva/maria-neiva/quem-sao-as-gemeas-portuguesas-que-conquistaram-georgina-rodriguez-e-entraram-no-circulo-restrito-de-cristiano-ronaldo",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Quem são as gémeas portuguesas que conquistaram Georgina Rodríguez e entraram no círculo restrito de Cristiano Ronaldo?",
+   "url": "https://tvi.iol.pt/novelas/matilde-neiva/maria-neiva/quem-sao-as-gemeas-portuguesas-que-conquistaram-georgina-rodriguez-e-entraram-no-circulo-restrito-de-cristiano-ronaldo"
+  },
+  {
+   "excerto": "João (Diogo Morgado) descobre que Linda (Joana Solnado) tem sentimentos por Bento (Paulo Rocha) depois de perceber que a companheira lhe esconde um segredo. Confrontada com os sacos de roupa de luxo oferecidos por Bento e incapaz de continuar a mentir, Linda admite a verdade e põ",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-linda-admite-sentimentos-por-bento-e-termina-tudo-com-joao",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Reviravolta em «Coração de Mãe»: Linda admite sentimentos por Bento e termina tudo com João",
+   "url": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-linda-admite-sentimentos-por-bento-e-termina-tudo-com-joao"
+  },
+  {
+   "excerto": "Marco Costa voltou a viajar até à Turquia na companhia de Carla, mãe da sua ex-companheira, Carolina Pinto. Apesar da separação anunciada no início deste ano, o pasteleiro fez questão de cumprir um compromisso que tinha assumido com a família.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/separado-de-carolina-pinto-marco-costa-cumpre-promessa-feita-a-familia-da-ex-companheira-a-vida-mudou-mas-minha-palavra-ficou",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Separado de Carolina Pinto, Marco Costa cumpre promessa feita à família da ex-companheira: «A vida mudou, mas a minha palavra ficou»",
+   "url": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/separado-de-carolina-pinto-marco-costa-cumpre-promessa-feita-a-familia-da-ex-companheira-a-vida-mudou-mas-minha-palavra-ficou"
+  },
+  {
+   "excerto": "Luís Gonçalves conquistou um privilégio no Especial do Big Brother All Stars e teve acesso a uma informação inédita do exterior, que nem o público conhecia.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/novos-concorrentes/nem-o-publico-sabe-luis-goncalves-descobre-o-que-vai-acontecer-no-big-brother-all-stars",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "«Nem o público sabe...» Luís Gonçalves descobre o que vai acontecer no Big Brother All Stars",
+   "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/novos-concorrentes/nem-o-publico-sabe-luis-goncalves-descobre-o-que-vai-acontecer-no-big-brother-all-stars"
+  },
+  {
+   "excerto": "Foi através das redes sociais que o casal partilhou a notícia",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/millie-bobby-brown/jake-bongiovi/ola-pequenino-casal-de-atores-surpreende-ao-anunciar-a-adocao-de-um-filho",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "«Olá, pequenino!»: casal de atores surpreende ao anunciar a adoção de um filho",
+   "url": "https://tvi.iol.pt/vmais/millie-bobby-brown/jake-bongiovi/ola-pequenino-casal-de-atores-surpreende-ao-anunciar-a-adocao-de-um-filho"
   },
   {
    "excerto": "",
@@ -532,24 +523,6 @@
    "url": "https://www.rtp.pt/play/p10324/e954552/grande-entrevista"
   },
   {
-   "excerto": "Em entrevista à CMTV, líder do Chega disse que um voto em Seguro, Gouveia e Melo ou Marques Mendes seria 'mais do mesmo'.",
-   "fonte": "motor-cmtv",
-   "id_nativo": "https://www.cmjornal.pt/cmtv/videos/detalhe/andre-ventura-sobre-as-presidenciais-e-a-unica-eleicao-que-vencendo-ninguem-pode-bloquear",
-   "motivo": "formato_nao_apurado",
-   "publicado_em": "2025-11-20",
-   "titulo": "Andr&#233; Ventura sobre as presidenciais: &quot;&#201; a &#250;nica elei&#231;&#227;o que, vencendo, ningu&#233;m pode bloquear&quot;",
-   "url": "https://www.cmjornal.pt/cmtv/videos/detalhe/andre-ventura-sobre-as-presidenciais-e-a-unica-eleicao-que-vencendo-ninguem-pode-bloquear"
-  },
-  {
-   "excerto": "Em entrevista exclusiva à CMTV, o líder do Chega critica a forma com o Ministro da Administração Interna tem reagido às polémicas que o envolvem.",
-   "fonte": "motor-cmtv",
-   "id_nativo": "https://www.cmjornal.pt/cmtv/videos/detalhe/pergunto-me-quem-e-o-primeiro-ministro-andre-ventura-fala-sobre-luis-neves-um-dia-antes-da-mocao-de-censura",
-   "motivo": "ja_registado (curadoria)",
-   "publicado_em": "2026-09-07",
-   "titulo": "&quot;Pergunto-me quem &#233; o primeiro-ministro&quot;: Andr&#233; Ventura fala sobre Lu&#237;s Neves um dia antes da mo&#231;&#227;o de censura",
-   "url": "https://www.cmjornal.pt/cmtv/videos/detalhe/pergunto-me-quem-e-o-primeiro-ministro-andre-ventura-fala-sobre-luis-neves-um-dia-antes-da-mocao-de-censura"
-  },
-  {
    "excerto": "",
    "fonte": "registo-curado",
    "id_nativo": "2218ebb9a169",
@@ -596,5 +569,5 @@
   }
  ],
  "esquema": 2,
- "total": 66
+ "total": 63
 }
