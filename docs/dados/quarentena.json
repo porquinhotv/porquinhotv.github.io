@@ -64,15 +64,6 @@
    "url": "https://www.rtp.pt/play/p5994/e586404/radicais-livres-2a-serie"
   },
   {
-   "excerto": "Antonio Ventura - Campanha do kiwi",
-   "fonte": "busca-rtp1",
-   "id_nativo": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa",
-   "motivo": "formato_nao_apurado",
-   "publicado_em": "2022-03-05",
-   "titulo": "José Candeias (Podcast)",
-   "url": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa"
-  },
-  {
    "excerto": "Emiliano Ventura - Emiliano Ventura",
    "fonte": "busca-rtp1",
    "id_nativo": "https://www.rtp.pt/play/p9149/e628428/afinal-ha-tempo",
@@ -181,15 +172,6 @@
    "url": "https://tvi.iol.pt/cristina-ferreira/roda-da-sorte/roda-da-sorte-o-novo-concurso-de-cristina-ferreira-estreia-dia-21-de-setembro-e-ja-se-pode-inscrever"
   },
   {
-   "excerto": "Brad Pitt e Ines de Rámon: a história de amor do galã que já foi casado com Jennifer Aniston e Angelina Jolie",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/brad-pitt/ines-de-ramon/ele-tem-63-anos-ela-33-o-amor-de-um-gala-polemico-que-ja-conquistou-duas-das-mulheres-mais-famosas",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Ele tem 63 anos, ela 33. O amor de um galã polémico, que já conquistou duas das mulheres mais famosas",
-   "url": "https://tvi.iol.pt/novelas/brad-pitt/ines-de-ramon/ele-tem-63-anos-ela-33-o-amor-de-um-gala-polemico-que-ja-conquistou-duas-das-mulheres-mais-famosas"
-  },
-  {
    "excerto": "A atriz Sara Salgado afastou-se da representação e vive agora uma vida de luxo",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/novelas/sara-salgado/atriz/foi-atriz-nos-morangos-com-acucar-mas-agora-e-multimilionaria-e-tem-acesso-aos-eventos-mais-exclusivos-de-portugal",
@@ -197,15 +179,6 @@
    "publicado_em": "2026-09-17",
    "titulo": "Foi atriz nos Morangos com Açúcar, mas agora é multimilionária e tem acesso aos eventos mais exclusivos de Portugal",
    "url": "https://tvi.iol.pt/novelas/sara-salgado/atriz/foi-atriz-nos-morangos-com-acucar-mas-agora-e-multimilionaria-e-tem-acesso-aos-eventos-mais-exclusivos-de-portugal"
-  },
-  {
-   "excerto": "O irmão voltou às manchetes e ela acabou também debaixo dos holofotes. Veja como está a irmã de Renato Seabra.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/vmais/joana-seabra/renato-seabra/fotografia-recente-de-renato-seabra-reacende-atencoes-sobre-a-irma-saiba-porque",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-17",
-   "titulo": "Fotografia recente de Renato Seabra reacende atenções sobre a irmã: saiba porquê",
-   "url": "https://tvi.iol.pt/vmais/joana-seabra/renato-seabra/fotografia-recente-de-renato-seabra-reacende-atencoes-sobre-a-irma-saiba-porque"
   },
   {
    "excerto": "Uma decisão de David Diamond acabou por ter consequências sérias no Big Brother All Stars. Depois de os concorrentes desrespeitarem uma ordem do Big Brother, Maria Botelho Moniz entrou em contacto com a casa e anunciou uma sanção que apanhou vários concorrentes de surpresa.",
@@ -226,6 +199,24 @@
    "url": "https://tvi.iol.pt/doisas10/cancro/familia/com-o-filho-nos-bracos-bruna-foi-diagnosticada-com-cancro-como-e-que-vai-ser-se-eu-nao-estiver"
   },
   {
+   "excerto": "A notícia surpreendeu tudo e todos, mas as mais de cinco décadas que os separam não impediram que vivessem uma bonita história de amor",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/al-pacino/noor-alfallah/famoso-ator-vai-ser-pai-aos-83-anos-com-namorada-54-anos-mais-nova",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Ele tem mais de 80 anos e ela 32. Quando este famoso ator anunciou que ia ser pai, ninguém queria acreditar",
+   "url": "https://tvi.iol.pt/vmais/al-pacino/noor-alfallah/famoso-ator-vai-ser-pai-aos-83-anos-com-namorada-54-anos-mais-nova"
+  },
+  {
+   "excerto": "Ao longo da sua carreira, fez parte de várias novelas e séries que marcaram gerações, muitas delas na TVI",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/helena-laureano/atriz/foi-uma-das-mulheres-mais-bonitas-da-tv-portuguesa-hoje-com-uma-imagem-muito-diferente-lamenta-a-falta-de-oportunidades",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-18",
+   "titulo": "Foi uma das mulheres mais bonitas da TV portuguesa. Hoje, com uma imagem muito diferente, lamenta a falta de oportunidades",
+   "url": "https://tvi.iol.pt/vmais/helena-laureano/atriz/foi-uma-das-mulheres-mais-bonitas-da-tv-portuguesa-hoje-com-uma-imagem-muito-diferente-lamenta-a-falta-de-oportunidades"
+  },
+  {
    "excerto": "A atriz Inês Aires Pereira reage à participação de Francisco Monteiro no Big Brother All Stars e deixa um recado ao concorrente, que já venceu um reality show",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/novelas/ines-aires-pereira/18-09-2026/ines-aires-pereira-esta-incomodada-com-esta-atitude-de-francisco-monteiro-no-bb-all-stars-e-este-e-o-conselho-que-lhe-deixa",
@@ -233,15 +224,6 @@
    "publicado_em": "2026-09-18",
    "titulo": "Inês Aires Pereira está incomodada com esta atitude de Francisco Monteiro no BB All Stars. E este é o conselho que lhe deixa",
    "url": "https://tvi.iol.pt/novelas/ines-aires-pereira/18-09-2026/ines-aires-pereira-esta-incomodada-com-esta-atitude-de-francisco-monteiro-no-bb-all-stars-e-este-e-o-conselho-que-lhe-deixa"
-  },
-  {
-   "excerto": "Inês Gama e Dylan Fonte preparam anúncio especial. Tudo será revelado este sábado na TVI.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/ines-gama/dylan-fonte/ines-gama-e-dylan-fonte-anunciam-novidade-em-primeira-mao-e-ja-ha-reacoes-bebe-a-caminho",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-18",
-   "titulo": "Inês Gama e Dylan Fonte anunciam novidade em primeira mão. E já há reações: «Bebé a caminho!»",
-   "url": "https://tvi.iol.pt/bigbrother/ines-gama/dylan-fonte/ines-gama-e-dylan-fonte-anunciam-novidade-em-primeira-mao-e-ja-ha-reacoes-bebe-a-caminho"
   },
   {
    "excerto": "É pouco conhecida, mas tem uma fortuna superior à de Taylor Swift, Brad Pitt e Tom Cruise. Falamos de Jami Gertz",
@@ -253,15 +235,6 @@
    "url": "https://tvi.iol.pt/novelas/jami-gertz/atriz/mais-rica-do-que-tom-cruise-taylor-swift-e-jennifer-lopez-os-milhoes-desta-atriz-vem-de-outra-profissao"
   },
   {
-   "excerto": "Quem são as gémeas portuguesas que estão agora no círculo de Georgina Rodríguez e Cristiano Ronaldo? Uma delas é namorada de um conhecido futebolista",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/matilde-neiva/maria-neiva/quem-sao-as-gemeas-portuguesas-que-conquistaram-georgina-rodriguez-e-entraram-no-circulo-restrito-de-cristiano-ronaldo",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-18",
-   "titulo": "Quem são as gémeas portuguesas que conquistaram Georgina Rodríguez e entraram no círculo restrito de Cristiano Ronaldo?",
-   "url": "https://tvi.iol.pt/novelas/matilde-neiva/maria-neiva/quem-sao-as-gemeas-portuguesas-que-conquistaram-georgina-rodriguez-e-entraram-no-circulo-restrito-de-cristiano-ronaldo"
-  },
-  {
    "excerto": "João (Diogo Morgado) descobre que Linda (Joana Solnado) tem sentimentos por Bento (Paulo Rocha) depois de perceber que a companheira lhe esconde um segredo. Confrontada com os sacos de roupa de luxo oferecidos por Bento e incapaz de continuar a mentir, Linda admite a verdade e põ",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-linda-admite-sentimentos-por-bento-e-termina-tudo-com-joao",
@@ -271,13 +244,13 @@
    "url": "https://tvi.iol.pt/novelas/coracao-de-mae/tvi/reviravolta-em-coracao-de-mae-linda-admite-sentimentos-por-bento-e-termina-tudo-com-joao"
   },
   {
-   "excerto": "Marco Costa voltou a viajar até à Turquia na companhia de Carla, mãe da sua ex-companheira, Carolina Pinto. Apesar da separação anunciada no início deste ano, o pasteleiro fez questão de cumprir um compromisso que tinha assumido com a família.",
+   "excerto": "Perante os comentários nas redes sociais, a atriz e criadora de conteúdos digitais decidiu falar do assunto publicamente",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/separado-de-carolina-pinto-marco-costa-cumpre-promessa-feita-a-familia-da-ex-companheira-a-vida-mudou-mas-minha-palavra-ficou",
+   "id_nativo": "https://tvi.iol.pt/vmais/sandra-silva/joao-borges/separaram-se-ha-poucos-meses-e-ex-marido-ja-assumiu-nova-relacao-atriz-portuguesa-reage-a-rumores-de-traicao",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-18",
-   "titulo": "Separado de Carolina Pinto, Marco Costa cumpre promessa feita à família da ex-companheira: «A vida mudou, mas a minha palavra ficou»",
-   "url": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/separado-de-carolina-pinto-marco-costa-cumpre-promessa-feita-a-familia-da-ex-companheira-a-vida-mudou-mas-minha-palavra-ficou"
+   "titulo": "Separaram-se há poucos meses e o ex-marido já assumiu nova relação: atriz portuguesa reage a rumores de traição",
+   "url": "https://tvi.iol.pt/vmais/sandra-silva/joao-borges/separaram-se-ha-poucos-meses-e-ex-marido-ja-assumiu-nova-relacao-atriz-portuguesa-reage-a-rumores-de-traicao"
   },
   {
    "excerto": "Luís Gonçalves conquistou um privilégio no Especial do Big Brother All Stars e teve acesso a uma informação inédita do exterior, que nem o público conhecia.",
@@ -289,13 +262,31 @@
    "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/novos-concorrentes/nem-o-publico-sabe-luis-goncalves-descobre-o-que-vai-acontecer-no-big-brother-all-stars"
   },
   {
-   "excerto": "Foi através das redes sociais que o casal partilhou a notícia",
+   "excerto": "Afonso Leitão decidiu entrar na polémica depois da discussão explosiva entre Catarina Miranda e Luís Gonçalves. O líder do «Big Brother All Stars» trouxe a antiga relação da ribatejana para o confronto e , cá fora, o ex-namorado de Catarina não resistiu a reagir.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/vmais/millie-bobby-brown/jake-bongiovi/ola-pequenino-casal-de-atores-surpreende-ao-anunciar-a-adocao-de-um-filho",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/afonso-leitao/catarina-miranda/afonso-leitao-nao-fica-indiferente-apos-luis-mencionar-traicao-e-catarina-miranda-perder-a-cabeca",
    "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-18",
-   "titulo": "«Olá, pequenino!»: casal de atores surpreende ao anunciar a adoção de um filho",
-   "url": "https://tvi.iol.pt/vmais/millie-bobby-brown/jake-bongiovi/ola-pequenino-casal-de-atores-surpreende-ao-anunciar-a-adocao-de-um-filho"
+   "publicado_em": "2026-09-19",
+   "titulo": "Afonso Leitão não fica indiferente após Luís mencionar «traição» e Catarina Miranda perder a cabeça",
+   "url": "https://tvi.iol.pt/bigbrother/afonso-leitao/catarina-miranda/afonso-leitao-nao-fica-indiferente-apos-luis-mencionar-traicao-e-catarina-miranda-perder-a-cabeca"
+  },
+  {
+   "excerto": "Poucos se lembram, mas Érica Silva já atirou uma cadeira a Diogo Marcelino. Hoje, vivem juntos no «Big Brother All Stars»",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/erica-silva/diogo-marcelino/nem-todos-viram-ainda-mas-erica-silva-ja-foi-expulsa-por-agressao-e-foi-contra-diogo-marcelino",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-19",
+   "titulo": "Nem todos viram ainda, mas Érica Silva já foi expulsa por agressão. E foi contra Diogo Marcelino",
+   "url": "https://tvi.iol.pt/bigbrother/erica-silva/diogo-marcelino/nem-todos-viram-ainda-mas-erica-silva-ja-foi-expulsa-por-agressao-e-foi-contra-diogo-marcelino"
+  },
+  {
+   "excerto": "Com um valor estimado em 35 milhões de euros e 900 metros quadrados, esta mansão não deixa ninguém indiferente",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/cristiano-ronaldo/casa-milionaria/torneiras-de-ouro-piscina-interior-com-passagem-subterranea-e-muitos-outros-luxos-entramos-na-casa-milionaria-de-cristiano-ronaldo",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-19",
+   "titulo": "Torneiras de ouro, piscina interior com passagem subterrânea e muitos outros luxos: entrámos na casa milionária de Cristiano Ronaldo",
+   "url": "https://tvi.iol.pt/vmais/cristiano-ronaldo/casa-milionaria/torneiras-de-ouro-piscina-interior-com-passagem-subterranea-e-muitos-outros-luxos-entramos-na-casa-milionaria-de-cristiano-ronaldo"
   },
   {
    "excerto": "",
@@ -569,5 +560,5 @@
   }
  ],
  "esquema": 2,
- "total": 63
+ "total": 62
 }
