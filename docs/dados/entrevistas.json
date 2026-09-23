@@ -3290,8 +3290,48 @@
      "titulo": "É hoje! A partir das 22H, acompanha no NOW"
     }
    ]
+  },
+  {
+   "canais": [
+    "cnn-portugal"
+   ],
+   "canal": "cnn-portugal",
+   "confianca": "alta",
+   "data": "2026-09-22",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "c8a8ef95abad",
+   "origem": "canal",
+   "primeira_vez": "2026-09-23",
+   "principal_declarado": false,
+   "programa": "Entrevista exclusiva",
+   "prova_url": "https://cnnportugal.iol.pt/videos/a-entrevista-a-andre-ventura-na-integra/6ab2e9290cf22b9f8904c709",
+   "publicado_em": "2026-09-22",
+   "rondas": 0,
+   "titulo": "A entrevista a André Ventura na íntegra",
+   "transmissoes": [
+    {
+     "bloco": "c8a8ef95abad",
+     "canal": "cnn-portugal",
+     "confianca": "alta",
+     "data": "2026-09-22",
+     "data_origem": "declarada",
+     "entrevista": "c8a8ef95abad",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:c64bab56bc26",
+     "origem": "canal",
+     "primeira_vez": "2026-09-23",
+     "programa": "Entrevista exclusiva",
+     "prova_url": "https://cnnportugal.iol.pt/videos/a-entrevista-a-andre-ventura-na-integra/6ab2e9290cf22b9f8904c709",
+     "publicado_em": "2026-09-22",
+     "rondas": 0,
+     "titulo": "A entrevista a André Ventura na íntegra"
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 78
+ "total": 79
 }
