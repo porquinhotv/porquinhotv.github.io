@@ -488,6 +488,22 @@ entrevistas:
     # Notícias". A data esta no caminho. Sem `titulo` nem `programa`, pela
     # mesma razao da linha de 2024-08-01.
 
+  # Acrescentada a 2026-09-23. Pagina do proprio canal aberta e lida
+  # diretamente: `meta-iol:data: 22-09-2026 22:28`, `programme_name:
+  # Entrevista exclusiva`, jornalista Ana Sofia Cardoso, sujeito e Andre
+  # Ventura. Nada deduzido do dominio.
+  #
+  # Guarda corrida contra este ficheiro pela regra de 0.1.3: nao ha
+  # nenhuma linha do grupo Media Capital (TVI) neste dia nem a um dia de
+  # distancia. Falta confirmar contra o dataset publicado
+  # (docs/dados/entrevistas.json), que pode ter linhas que este ficheiro
+  # nao tem.
+  - data: 2026-09-22
+    canal: cnn-portugal
+    programa: Entrevista exclusiva
+    prova: https://cnnportugal.iol.pt/videos/a-entrevista-a-andre-ventura-na-integra/6ab2e9290cf22b9f8904c709
+    titulo: 'A entrevista a André Ventura na íntegra'
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
