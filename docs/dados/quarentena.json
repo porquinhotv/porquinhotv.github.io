@@ -64,6 +64,15 @@
    "url": "https://www.rtp.pt/play/p5994/e586404/radicais-livres-2a-serie"
   },
   {
+   "excerto": "Antonio Ventura - Campanha do kiwi",
+   "fonte": "busca-rtp1",
+   "id_nativo": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa",
+   "motivo": "formato_nao_apurado",
+   "publicado_em": "2022-03-05",
+   "titulo": "José Candeias (Podcast)",
+   "url": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa"
+  },
+  {
    "excerto": "Emiliano Ventura - Emiliano Ventura",
    "fonte": "busca-rtp1",
    "id_nativo": "https://www.rtp.pt/play/p9149/e628428/afinal-ha-tempo",
@@ -127,6 +136,15 @@
    "url": "https://www.rtp.pt/play/p10324/e888399/grande-entrevista"
   },
   {
+   "excerto": "O camarada Ventura… - Uma entrevista à antena 1 que pode obrigar o governo a recuar nas propostas laborais. Uma greve que fez efeito. Os debates pr",
+   "fonte": "busca-rtp1",
+   "id_nativo": "https://www.rtp.pt/play/p283/e895598/contraditorio",
+   "motivo": "formato_nao_apurado",
+   "publicado_em": "2025-12-12",
+   "titulo": "Contraditório",
+   "url": "https://www.rtp.pt/play/p283/e895598/contraditorio"
+  },
+  {
    "excerto": "",
    "fonte": "busca-rtp1",
    "id_nativo": "busca-rtp1:72e937281cc7",
@@ -172,130 +190,31 @@
    "url": "https://tvi.iol.pt/cristina-ferreira/roda-da-sorte/roda-da-sorte-o-novo-concurso-de-cristina-ferreira-estreia-dia-21-de-setembro-e-ja-se-pode-inscrever"
   },
   {
-   "excerto": "Jorge Palma era casado com a atriz Rita Tomé. O músico morreu aos 76 anos",
+   "excerto": "A equipa de Catarina Miranda recorreu, esta quarta-feira, 23 de setembro, às redes sociais para emitir um comunicado sobre o tratamento que a concorrente tem recebido dentro da casa do Big Brother All Stars.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/jorge-palma/rita-tome/jorge-palma-foi-casado-com-uma-atriz-a-historia-de-amor-caricata-com-a-mulher-que-nunca-lhe-largou-a-mao",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Jorge Palma foi casado com uma atriz. A história de amor caricata com a mulher que nunca lhe largou a mão",
-   "url": "https://tvi.iol.pt/novelas/jorge-palma/rita-tome/jorge-palma-foi-casado-com-uma-atriz-a-historia-de-amor-caricata-com-a-mulher-que-nunca-lhe-largou-a-mao"
-  },
-  {
-   "excerto": "Maria Nunes dá vida a Sol em «Coração de Mãe» e fala sobre a importância de representar pessoas com problemas de visão. A jovem atriz está também a realizar o sonho de fazer uma novela.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/sol/maria-nunes/nasceu-com-um-problema-de-visao-hoje-conquista-o-publico-como-sol-e-deixa-uma-mensagem-arrebatadora",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Nasceu com um problema de visão. Hoje conquista o público como Sol e deixa uma mensagem arrebatadora",
-   "url": "https://tvi.iol.pt/novelas/sol/maria-nunes/nasceu-com-um-problema-de-visao-hoje-conquista-o-publico-como-sol-e-deixa-uma-mensagem-arrebatadora"
-  },
-  {
-   "excerto": "Rita Ribeiro vive entre a representação e o mundo da música",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/rita-ribeiro/atriz/tem-71-anos-e-uma-energia-invejavel-esta-atriz-portuguesa-impressiona-de-biquini",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Tem 71 anos e uma energia invejável: esta atriz portuguesa impressiona de biquíni",
-   "url": "https://tvi.iol.pt/novelas/rita-ribeiro/atriz/tem-71-anos-e-uma-energia-invejavel-esta-atriz-portuguesa-impressiona-de-biquini"
-  },
-  {
-   "excerto": "O regresso de Dudu e Rosinha à mansão parece trazer alívio à família, mas depressa desencadeia novos confrontos. Enquanto Dudu exige respostas sobre Carmen, o seu estado de saúde agrava-se e Maria de Fátima vê-se obrigada a confrontar, finalmente, o papel que terá na salvação do ",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/terra-forte/tvi/vem-ai-em-terra-forte-dudu-colapsa-e-o-caos-faz-cair-a-mascara-de-maria-de-fatima",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Vem aí em «Terra Forte»: Dudu colapsa e o caos faz cair a máscara de Maria de Fátima",
-   "url": "https://tvi.iol.pt/novelas/terra-forte/tvi/vem-ai-em-terra-forte-dudu-colapsa-e-o-caos-faz-cair-a-mascara-de-maria-de-fatima"
-  },
-  {
-   "excerto": "O regresso de Dudu e Rosinha depois da fuga a Buenos Aires provoca novos conflitos na mansão. Enquanto a família censura a atitude dos jovens, Dani tenta garantir que Carmen permaneça por perto até à operação que pode salvar Dudu — uma decisão que obriga todos a conviverem com um",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/terra-forte/tvi/vem-terra-forte-a-fuga-terminou-dudu-e-rosinha-voltam-mas-escondem-um-grande-segredo",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Vem «Terra Forte» - A fuga terminou: Dudu e Rosinha voltam, mas escondem um grande segredo",
-   "url": "https://tvi.iol.pt/novelas/terra-forte/tvi/vem-terra-forte-a-fuga-terminou-dudu-e-rosinha-voltam-mas-escondem-um-grande-segredo"
-  },
-  {
-   "excerto": "Vive em Portugal e é considerada uma das atrizes mais bonitas do Mundo. Tem 50 anos. Falamos de Giovanna Antonelli",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/giovanna-antonelli/atriz/vive-em-portugal-e-e-uma-das-atrizes-mais-bonitas-do-mundo-tem-50-anos-e-fotos-de-uma-sensualidade-incrivel",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-22",
-   "titulo": "Vive em Portugal e é uma das atrizes mais bonitas do Mundo. Tem 50 anos e fotos de uma sensualidade incrível",
-   "url": "https://tvi.iol.pt/novelas/giovanna-antonelli/atriz/vive-em-portugal-e-e-uma-das-atrizes-mais-bonitas-do-mundo-tem-50-anos-e-fotos-de-uma-sensualidade-incrivel"
-  },
-  {
-   "excerto": "Após quatro relacionamentos com mulheres, o ator Marcos Caruso fala abertamente da relação que mantém com um homem: «Estou muito feliz. Tenho filhos, netos, marido e ex-mulheres»",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/marcos-caruso/ator/ator-viveu-tres-casamentos-com-mulheres-mas-nunca-foi-tao-feliz-como-agora-ao-lado-de-um-homem",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/catarina-miranda/fora-da-casa-equipa-de-catarina-miranda-chega-ao-limite-e-toma-posicao-o-motivo-esta-a-gerar-polemica",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-23",
-   "titulo": "Ator viveu três casamentos com mulheres, mas nunca foi tão feliz como agora, ao lado de um homem",
-   "url": "https://tvi.iol.pt/novelas/marcos-caruso/ator/ator-viveu-tres-casamentos-com-mulheres-mas-nunca-foi-tao-feliz-como-agora-ao-lado-de-um-homem"
+   "titulo": "Fora da casa, equipa de Catarina Miranda chega ao limite e toma posição. O motivo está a gerar polémica",
+   "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/catarina-miranda/fora-da-casa-equipa-de-catarina-miranda-chega-ao-limite-e-toma-posicao-o-motivo-esta-a-gerar-polemica"
   },
   {
-   "excerto": "Saiba o que aconteceu",
+   "excerto": "É um dos galãs da TVI, não tem redes sociais e cortou os caracóis. Fernando Pires está irreconhecível",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/vmais/adriano-silva-martins/v-fama/cara-famosa-da-tvi-sente-se-mal-em-casa-e-acaba-nas-urgencias-do-hospital-foi-a-empregada-quem-ligou-para-o-112",
+   "id_nativo": "https://tvi.iol.pt/novelas/fernando-pires/segredos-de-familia/nao-tem-redes-sociais-mas-cortou-os-caracois-este-gala-esta-de-regresso-a-tvi-e-esta-irreconhecivel",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-23",
-   "titulo": "Cara famosa da TVI sente-se mal em casa e acaba nas urgências do hospital. Foi a empregada quem ligou para o 112",
-   "url": "https://tvi.iol.pt/vmais/adriano-silva-martins/v-fama/cara-famosa-da-tvi-sente-se-mal-em-casa-e-acaba-nas-urgencias-do-hospital-foi-a-empregada-quem-ligou-para-o-112"
+   "titulo": "Não tem redes sociais, mas cortou os caracóis... este galã está de regresso à TVI e está irreconhecível",
+   "url": "https://tvi.iol.pt/novelas/fernando-pires/segredos-de-familia/nao-tem-redes-sociais-mas-cortou-os-caracois-este-gala-esta-de-regresso-a-tvi-e-esta-irreconhecivel"
   },
   {
-   "excerto": "Bernardo Girão, é pai ao lado de Cláudia e revelou num podcast o diagnóstico de infertilidade que recebeu antes de terem um filho.",
+   "excerto": "O relato arrepiante de Diogo Carmona: do atropelamento por um comboio ao salvamento por um bombeiro",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/bernardo-girao/claudia/casal-de-reality-show-a-beira-da-separacao-infertil-foi-a-palavra-que-mudou-tudo",
+   "id_nativo": "https://tvi.iol.pt/novelas/diogo-carmona/comboio/os-detalhes-desconhecidos-diogo-carmona-relata-o-momento-em-que-foi-atropelado-por-um-comboio-ate-ser-salvo-por-um-heroi",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-09-23",
-   "titulo": "Casal de reality show à beira da separação? \"Infértil\" foi a palavra que mudou tudo",
-   "url": "https://tvi.iol.pt/bigbrother/bernardo-girao/claudia/casal-de-reality-show-a-beira-da-separacao-infertil-foi-a-palavra-que-mudou-tudo"
-  },
-  {
-   "excerto": "A polémica da “conchinha” continua a dar que falar dentro da casa do Big Brother All Stars e acabou por ganhar novos contornos. Durante o Direto, Vera e Pedro voltaram a confrontar-se perante os colegas, com a concorrente a mostrar-se visivelmente incomodada e a deixar um aviso q",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/vera/pedro/confronto-aceso-e-troca-de-acusacoes-o-clima-e-de-tensao-entre-vera-e-pedro-e-a-concorrente-fez-um-aviso-que-ninguem-estava-a-espera",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Confronto aceso e troca de acusações: O clima é de tensão entre Vera e Pedro e a concorrente fez um aviso que ninguém estava à espera",
-   "url": "https://tvi.iol.pt/bigbrother/vera/pedro/confronto-aceso-e-troca-de-acusacoes-o-clima-e-de-tensao-entre-vera-e-pedro-e-a-concorrente-fez-um-aviso-que-ninguem-estava-a-espera"
-  },
-  {
-   "excerto": "Lourenço Ortigão e Kelly Bailey conheceram-se em 2017, enquanto gravavam a novela de sucesso da TVI, “A Herdeira”. Desde então, a relação cresceu e o casal construiu uma família.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/novelas/kelly-bailey/conheceram-se-na-tvi-e-foram-pais-do-segundo-filho-esta-e-a-historia-de-amor-que-tem-conquistado-os-portugueses",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Conheceram-se na TVI e foram pais do segundo filho. Esta é a história de amor que tem conquistado os portugueses",
-   "url": "https://tvi.iol.pt/doisas10/novelas/kelly-bailey/conheceram-se-na-tvi-e-foram-pais-do-segundo-filho-esta-e-a-historia-de-amor-que-tem-conquistado-os-portugueses"
-  },
-  {
-   "excerto": "Vem aí em Coração de Mãe: Finalmente, Bento explica aos filhos o que andava a esconder sobre a morte da mãe, a sua primeira mulher",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/bento/segredo/coracao-de-mae-este-e-o-doloroso-segredo-que-bento-esconde-sobre-a-morte-da-primeira-mulher",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Coração de Mãe: Este é o doloroso segredo que Bento esconde sobre a morte da primeira mulher",
-   "url": "https://tvi.iol.pt/novelas/bento/segredo/coracao-de-mae-este-e-o-doloroso-segredo-que-bento-esconde-sobre-a-morte-da-primeira-mulher"
-  },
-  {
-   "excerto": "Vai acontecer em breve, em Coração de Mãe, o pedido de casamento de João a Linda. O momento tinha tudo para ser perfeito: família, amigos e as palavras certas. Mas a resposta de Linda deixa todos incrédulos.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/linda/joao/coracao-de-mae-joao-ajoelha-se-diante-de-linda-e-pede-a-em-casamento-o-que-acontece-depois-e-inesperado",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Coração de Mãe: João ajoelha-se diante de Linda e pede-a em casamento. O que acontece depois é inesperado",
-   "url": "https://tvi.iol.pt/novelas/linda/joao/coracao-de-mae-joao-ajoelha-se-diante-de-linda-e-pede-a-em-casamento-o-que-acontece-depois-e-inesperado"
-  },
-  {
-   "excerto": "Sofia Cerveira e Gonçalo Diniz construíram uma história de amor marcada por momentos felizes, mas também por uma das fases mais difíceis das suas vidas.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/novelas/apresentadora/ele-lutou-pela-vida-e-ela-esteve-sempre-la-11-anos-depois-apresentadora-de-tv-e-ator-ainda-estao-juntos-tenho-tanta-sorte-em-te-ter",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Ele lutou pela vida e ela esteve sempre lá. 11 anos depois, apresentadora de TV e ator ainda estão juntos: «Tenho tanta sorte em te ter»",
-   "url": "https://tvi.iol.pt/doisas10/novelas/apresentadora/ele-lutou-pela-vida-e-ela-esteve-sempre-la-11-anos-depois-apresentadora-de-tv-e-ator-ainda-estao-juntos-tenho-tanta-sorte-em-te-ter"
+   "titulo": "Os detalhes desconhecidos. Diogo Carmona relata o momento em que foi atropelado por um comboio até ser salvo por um herói",
+   "url": "https://tvi.iol.pt/novelas/diogo-carmona/comboio/os-detalhes-desconhecidos-diogo-carmona-relata-o-momento-em-que-foi-atropelado-por-um-comboio-ate-ser-salvo-por-um-heroi"
   },
   {
    "excerto": "Daniela Santos fez uma revelação inesperada sobre a sua entrada no Big Brother All Stars. A concorrente contou aos colegas como reagiram algumas das pessoas mais próximas quando souberam da sua decisão",
@@ -307,13 +226,67 @@
    "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/daniela-santos/surpreendente-daniela-santos-revela-pergunta-que-o-pai-do-filho-lhe-fez-antes-de-entrar-no-big-brother-all-stars"
   },
   {
-   "excerto": "As sucessivas discussões entre Érica Silva e Miguel Vicente no Big Brother All Stars têm levantado questões sobre o passado dos dois. Agora, surge uma nova versão sobre a ligação entre os concorrentes.",
+   "excerto": "Rui Veloso, amigo de longa data de Jorge Palma, faz revelações sobre os últimos dias do músico, antes de falecer aos 76 anos",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/erica-silva/miguel-vicente/erica-silva-e-miguel-vicente-tiveram-um-caso-amigo-da-concorrente-revela-novos-detalhes",
+   "id_nativo": "https://tvi.iol.pt/novelas/jorge-palma/filhos/a-ultima-decisao-que-jorge-palma-tomou-dias-antes-de-morrer-pelos-filhos-e-de-arrepiar",
    "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Érica Silva e Miguel Vicente tiveram um caso? Amigo da concorrente revela novos detalhes",
-   "url": "https://tvi.iol.pt/bigbrother/erica-silva/miguel-vicente/erica-silva-e-miguel-vicente-tiveram-um-caso-amigo-da-concorrente-revela-novos-detalhes"
+   "publicado_em": "2026-09-24",
+   "titulo": "A última decisão que Jorge Palma tomou dias antes de morrer pelos filhos é de arrepiar",
+   "url": "https://tvi.iol.pt/novelas/jorge-palma/filhos/a-ultima-decisao-que-jorge-palma-tomou-dias-antes-de-morrer-pelos-filhos-e-de-arrepiar"
+  },
+  {
+   "excerto": "Ninguém esperava esta notícia!",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/thiago-lacerda/vanessa-loes/apos-25-anos-juntos-e-tres-filhos-em-comum-famoso-casal-de-atores-anuncia-separacao-um-momento-de-muita-dor",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Após 25 anos juntos e três filhos em comum, famoso casal de atores anuncia separação: «Um momento de muita dor»",
+   "url": "https://tvi.iol.pt/vmais/thiago-lacerda/vanessa-loes/apos-25-anos-juntos-e-tres-filhos-em-comum-famoso-casal-de-atores-anuncia-separacao-um-momento-de-muita-dor"
+  },
+  {
+   "excerto": "«É pensarmos no pior pesadelo da nossa vida e multiplicarmos por um milhão». É desta forma que Catarina tenta explicar a dor que sente diariamente desde a morte de Ricardo, o homem que descreve como o amor da sua vida.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/luto/familia/catarina-ficou-viuva-aos-28-anos-com-uma-filha-de-cinco-meses-nos-bracos-nao-consigo-conceber-que-nao-vai-conhecer-o-pai",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Catarina ficou viúva aos 28 anos com uma filha de cinco meses nos braços: «Não consigo conceber que não vai conhecer o pai»",
+   "url": "https://tvi.iol.pt/doisas10/luto/familia/catarina-ficou-viuva-aos-28-anos-com-uma-filha-de-cinco-meses-nos-bracos-nao-consigo-conceber-que-nao-vai-conhecer-o-pai"
+  },
+  {
+   "excerto": "Marcos Tenório Bastinhas é entrevistado Jornal Nacional e, a propósito da conversa, importa recordar um dos momentos mais marcantes em que falou publicamente sobre a fase mais difícil da sua vida.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/marcos-tenorio-bastinhas/dalia-madruga/da-depressao-ao-regresso-triunfal-marcos-tenorio-bastinhas-emocionou-a-mulher-dalia-madruga-tive-pensamentos-de-alguem-que-nao-queria-estar-aqui",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Da depressão ao regresso triunfal. Marcos Tenório Bastinhas emocionou a mulher, Dália Madruga: «Tive pensamentos de alguém que não queria estar aqui»",
+   "url": "https://tvi.iol.pt/doisas10/marcos-tenorio-bastinhas/dalia-madruga/da-depressao-ao-regresso-triunfal-marcos-tenorio-bastinhas-emocionou-a-mulher-dalia-madruga-tive-pensamentos-de-alguem-que-nao-queria-estar-aqui"
+  },
+  {
+   "excerto": "Renato confronta Felicia sobre o tiro a Pedro",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/felicia/pedro/exclusivo-a-madrasta-sera-felicia-a-autora-do-tiro-a-pedro-renato-confronta-a-com-a-verdade",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Exclusivo A Madrasta: Será Felicia a autora do tiro a Pedro? Renato confronta-a com a verdade",
+   "url": "https://tvi.iol.pt/novelas/felicia/pedro/exclusivo-a-madrasta-sera-felicia-a-autora-do-tiro-a-pedro-renato-confronta-a-com-a-verdade"
+  },
+  {
+   "excerto": "A estreia de Jorge Jesus ao comando da Seleção Nacional está a gerar grande expectativa e os holofotes não estão apenas centrados no novo selecionador. Também a vida pessoal do filho mais novo, Mauro Reis de Jesus, tem dado que falar.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/jorge-jesus/selecao-portuguesa/jorge-jesus-estreia-se-no-comando-da-selecao-nacional-na-bancada-e-o-filho-quem-rouba-as-atencoes",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Jorge Jesus estreia-se no comando da Seleção Nacional. Na bancada, é o filho quem rouba as atenções",
+   "url": "https://tvi.iol.pt/doisas10/jorge-jesus/selecao-portuguesa/jorge-jesus-estreia-se-no-comando-da-selecao-nacional-na-bancada-e-o-filho-quem-rouba-as-atencoes"
+  },
+  {
+   "excerto": "Anabela Teresa Vicente começou a trabalhar aos 15 anos, numa fábrica de louça, e acabou por construir uma carreira de sucesso no setor agropecuário. Sem formação superior na área, entrou no mundo da suinicultura depois de casar e transformou, ao lado do marido, uma pequena explor",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/empresaria/empreendedora/sem-estudos-a-mulher-que-criava-porcos-construiu-um-imperio-no-setor-agropecuario-hoje-fatura-mais-de-mil-milhoes-de-euros",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-24",
+   "titulo": "Sem estudos, \"a mulher que criava porcos\" construiu um império no setor agropecuário. Hoje, fatura mais de mil milhões de euros",
+   "url": "https://tvi.iol.pt/doisas10/empresaria/empreendedora/sem-estudos-a-mulher-que-criava-porcos-construiu-um-imperio-no-setor-agropecuario-hoje-fatura-mais-de-mil-milhoes-de-euros"
   },
   {
    "excerto": "",
@@ -323,15 +296,6 @@
    "publicado_em": "2026-09-02",
    "titulo": "Ventura 'agarra-se' a vice-presidente da Câmara do Funchal",
    "url": "https://www.jm-madeira.pt/v%C3%ADdeo/regi-o/30004362/ventura-agarra-se-a-vice-presidente-da-camara-do-funchal.html"
-  },
-  {
-   "excerto": "Manuel Castro Almeida - E depois da tempestade, qual é a resposta do Governo? O Ministro da Economia e da Coesão Territorial, Manuel Castro Almeida,",
-   "fonte": "lista-rtp-grande-entrevista",
-   "id_nativo": "https://www.rtp.pt/play/p10324/e907116/grande-entrevista",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-02-04",
-   "titulo": "Grande Entrevista",
-   "url": "https://www.rtp.pt/play/p10324/e907116/grande-entrevista"
   },
   {
    "excerto": "José Luís Carneiro - Programa com José Luís Carneiro, secretário-geral do Partido Socialista",
@@ -541,6 +505,15 @@
    "url": "https://www.rtp.pt/play/p10324/e954552/grande-entrevista"
   },
   {
+   "excerto": "Fabian Figueiredo - Fabian Figueiredo, deputado do Bloco de Esquerda, decidiu falar da violência que rodeou a sua infância e marcou o resto da sua v",
+   "fonte": "lista-rtp-grande-entrevista",
+   "id_nativo": "https://www.rtp.pt/play/p10324/e956122/grande-entrevista",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-23",
+   "titulo": "Grande Entrevista",
+   "url": "https://www.rtp.pt/play/p10324/e956122/grande-entrevista"
+  },
+  {
    "excerto": "",
    "fonte": "registo-curado",
    "id_nativo": "2218ebb9a169",
@@ -587,5 +560,5 @@
   }
  ],
  "esquema": 2,
- "total": 65
+ "total": 62
 }
