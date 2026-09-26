@@ -136,15 +136,6 @@
    "url": "https://www.rtp.pt/play/p10324/e888399/grande-entrevista"
   },
   {
-   "excerto": "O camarada Ventura… - Uma entrevista à antena 1 que pode obrigar o governo a recuar nas propostas laborais. Uma greve que fez efeito. Os debates pr",
-   "fonte": "busca-rtp1",
-   "id_nativo": "https://www.rtp.pt/play/p283/e895598/contraditorio",
-   "motivo": "formato_nao_apurado",
-   "publicado_em": "2025-12-12",
-   "titulo": "Contraditório",
-   "url": "https://www.rtp.pt/play/p283/e895598/contraditorio"
-  },
-  {
    "excerto": "",
    "fonte": "busca-rtp1",
    "id_nativo": "busca-rtp1:72e937281cc7",
@@ -190,69 +181,6 @@
    "url": "https://tvi.iol.pt/cristina-ferreira/roda-da-sorte/roda-da-sorte-o-novo-concurso-de-cristina-ferreira-estreia-dia-21-de-setembro-e-ja-se-pode-inscrever"
   },
   {
-   "excerto": "A equipa de Catarina Miranda recorreu, esta quarta-feira, 23 de setembro, às redes sociais para emitir um comunicado sobre o tratamento que a concorrente tem recebido dentro da casa do Big Brother All Stars.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/catarina-miranda/fora-da-casa-equipa-de-catarina-miranda-chega-ao-limite-e-toma-posicao-o-motivo-esta-a-gerar-polemica",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Fora da casa, equipa de Catarina Miranda chega ao limite e toma posição. O motivo está a gerar polémica",
-   "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/catarina-miranda/fora-da-casa-equipa-de-catarina-miranda-chega-ao-limite-e-toma-posicao-o-motivo-esta-a-gerar-polemica"
-  },
-  {
-   "excerto": "É um dos galãs da TVI, não tem redes sociais e cortou os caracóis. Fernando Pires está irreconhecível",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/fernando-pires/segredos-de-familia/nao-tem-redes-sociais-mas-cortou-os-caracois-este-gala-esta-de-regresso-a-tvi-e-esta-irreconhecivel",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Não tem redes sociais, mas cortou os caracóis... este galã está de regresso à TVI e está irreconhecível",
-   "url": "https://tvi.iol.pt/novelas/fernando-pires/segredos-de-familia/nao-tem-redes-sociais-mas-cortou-os-caracois-este-gala-esta-de-regresso-a-tvi-e-esta-irreconhecivel"
-  },
-  {
-   "excerto": "O relato arrepiante de Diogo Carmona: do atropelamento por um comboio ao salvamento por um bombeiro",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/diogo-carmona/comboio/os-detalhes-desconhecidos-diogo-carmona-relata-o-momento-em-que-foi-atropelado-por-um-comboio-ate-ser-salvo-por-um-heroi",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Os detalhes desconhecidos. Diogo Carmona relata o momento em que foi atropelado por um comboio até ser salvo por um herói",
-   "url": "https://tvi.iol.pt/novelas/diogo-carmona/comboio/os-detalhes-desconhecidos-diogo-carmona-relata-o-momento-em-que-foi-atropelado-por-um-comboio-ate-ser-salvo-por-um-heroi"
-  },
-  {
-   "excerto": "Daniela Santos fez uma revelação inesperada sobre a sua entrada no Big Brother All Stars. A concorrente contou aos colegas como reagiram algumas das pessoas mais próximas quando souberam da sua decisão",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/daniela-santos/surpreendente-daniela-santos-revela-pergunta-que-o-pai-do-filho-lhe-fez-antes-de-entrar-no-big-brother-all-stars",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-23",
-   "titulo": "Sem papas na língua. A confissão de Daniela Santos sobre o que ouviu do pai do filho antes de entrar na casa do Big Brother All Stars",
-   "url": "https://tvi.iol.pt/bigbrother/big-brother-all-stars/daniela-santos/surpreendente-daniela-santos-revela-pergunta-que-o-pai-do-filho-lhe-fez-antes-de-entrar-no-big-brother-all-stars"
-  },
-  {
-   "excerto": "Rui Veloso, amigo de longa data de Jorge Palma, faz revelações sobre os últimos dias do músico, antes de falecer aos 76 anos",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/jorge-palma/filhos/a-ultima-decisao-que-jorge-palma-tomou-dias-antes-de-morrer-pelos-filhos-e-de-arrepiar",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-24",
-   "titulo": "A última decisão que Jorge Palma tomou dias antes de morrer pelos filhos é de arrepiar",
-   "url": "https://tvi.iol.pt/novelas/jorge-palma/filhos/a-ultima-decisao-que-jorge-palma-tomou-dias-antes-de-morrer-pelos-filhos-e-de-arrepiar"
-  },
-  {
-   "excerto": "Ninguém esperava esta notícia!",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/vmais/thiago-lacerda/vanessa-loes/apos-25-anos-juntos-e-tres-filhos-em-comum-famoso-casal-de-atores-anuncia-separacao-um-momento-de-muita-dor",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-24",
-   "titulo": "Após 25 anos juntos e três filhos em comum, famoso casal de atores anuncia separação: «Um momento de muita dor»",
-   "url": "https://tvi.iol.pt/vmais/thiago-lacerda/vanessa-loes/apos-25-anos-juntos-e-tres-filhos-em-comum-famoso-casal-de-atores-anuncia-separacao-um-momento-de-muita-dor"
-  },
-  {
-   "excerto": "«É pensarmos no pior pesadelo da nossa vida e multiplicarmos por um milhão». É desta forma que Catarina tenta explicar a dor que sente diariamente desde a morte de Ricardo, o homem que descreve como o amor da sua vida.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/luto/familia/catarina-ficou-viuva-aos-28-anos-com-uma-filha-de-cinco-meses-nos-bracos-nao-consigo-conceber-que-nao-vai-conhecer-o-pai",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-24",
-   "titulo": "Catarina ficou viúva aos 28 anos com uma filha de cinco meses nos braços: «Não consigo conceber que não vai conhecer o pai»",
-   "url": "https://tvi.iol.pt/doisas10/luto/familia/catarina-ficou-viuva-aos-28-anos-com-uma-filha-de-cinco-meses-nos-bracos-nao-consigo-conceber-que-nao-vai-conhecer-o-pai"
-  },
-  {
    "excerto": "Marcos Tenório Bastinhas é entrevistado Jornal Nacional e, a propósito da conversa, importa recordar um dos momentos mais marcantes em que falou publicamente sobre a fase mais difícil da sua vida.",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/doisas10/marcos-tenorio-bastinhas/dalia-madruga/da-depressao-ao-regresso-triunfal-marcos-tenorio-bastinhas-emocionou-a-mulher-dalia-madruga-tive-pensamentos-de-alguem-que-nao-queria-estar-aqui",
@@ -262,24 +190,6 @@
    "url": "https://tvi.iol.pt/doisas10/marcos-tenorio-bastinhas/dalia-madruga/da-depressao-ao-regresso-triunfal-marcos-tenorio-bastinhas-emocionou-a-mulher-dalia-madruga-tive-pensamentos-de-alguem-que-nao-queria-estar-aqui"
   },
   {
-   "excerto": "Renato confronta Felicia sobre o tiro a Pedro",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/felicia/pedro/exclusivo-a-madrasta-sera-felicia-a-autora-do-tiro-a-pedro-renato-confronta-a-com-a-verdade",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-24",
-   "titulo": "Exclusivo A Madrasta: Será Felicia a autora do tiro a Pedro? Renato confronta-a com a verdade",
-   "url": "https://tvi.iol.pt/novelas/felicia/pedro/exclusivo-a-madrasta-sera-felicia-a-autora-do-tiro-a-pedro-renato-confronta-a-com-a-verdade"
-  },
-  {
-   "excerto": "A estreia de Jorge Jesus ao comando da Seleção Nacional está a gerar grande expectativa e os holofotes não estão apenas centrados no novo selecionador. Também a vida pessoal do filho mais novo, Mauro Reis de Jesus, tem dado que falar.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/jorge-jesus/selecao-portuguesa/jorge-jesus-estreia-se-no-comando-da-selecao-nacional-na-bancada-e-o-filho-quem-rouba-as-atencoes",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-09-24",
-   "titulo": "Jorge Jesus estreia-se no comando da Seleção Nacional. Na bancada, é o filho quem rouba as atenções",
-   "url": "https://tvi.iol.pt/doisas10/jorge-jesus/selecao-portuguesa/jorge-jesus-estreia-se-no-comando-da-selecao-nacional-na-bancada-e-o-filho-quem-rouba-as-atencoes"
-  },
-  {
    "excerto": "Anabela Teresa Vicente começou a trabalhar aos 15 anos, numa fábrica de louça, e acabou por construir uma carreira de sucesso no setor agropecuário. Sem formação superior na área, entrou no mundo da suinicultura depois de casar e transformou, ao lado do marido, uma pequena explor",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/doisas10/empresaria/empreendedora/sem-estudos-a-mulher-que-criava-porcos-construiu-um-imperio-no-setor-agropecuario-hoje-fatura-mais-de-mil-milhoes-de-euros",
@@ -287,6 +197,114 @@
    "publicado_em": "2026-09-24",
    "titulo": "Sem estudos, \"a mulher que criava porcos\" construiu um império no setor agropecuário. Hoje, fatura mais de mil milhões de euros",
    "url": "https://tvi.iol.pt/doisas10/empresaria/empreendedora/sem-estudos-a-mulher-que-criava-porcos-construiu-um-imperio-no-setor-agropecuario-hoje-fatura-mais-de-mil-milhoes-de-euros"
+  },
+  {
+   "excerto": "Durante anos, manteve a sua vida pessoal longe dos holofotes",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/miguel-falabella/alexandre-altoe/apos-ter-sido-casado-com-uma-mulher-ator-muito-acarinhado-pelos-portugueses-assume-se-feliz-ao-lado-de-um-homem-30-anos-mais-novo",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Após ter sido casado com uma mulher, ator muito acarinhado pelos portugueses assume-se feliz ao lado de um homem 30 anos mais novo",
+   "url": "https://tvi.iol.pt/vmais/miguel-falabella/alexandre-altoe/apos-ter-sido-casado-com-uma-mulher-ator-muito-acarinhado-pelos-portugueses-assume-se-feliz-ao-lado-de-um-homem-30-anos-mais-novo"
+  },
+  {
+   "excerto": "Cristina Ferreira voltou a provar que o «Roda da Sorte» é muito mais do que um simples concurso. A apresentadora ajudou a concretizar um sonho de Tomás, um dos convidados do programa, que há muito desejava recriar uma das suas entradas num reality show.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/cristina-ferreira/sonho/esta-a-conquistar-o-pais-cristina-ferreira-realiza-sonho-de-convidado-em-direto-e-o-resultado-tornou-se-viral",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Está a conquistar o país: Cristina Ferreira realiza sonho de convidado em direto. E o resultado tornou-se viral",
+   "url": "https://tvi.iol.pt/bigbrother/cristina-ferreira/sonho/esta-a-conquistar-o-pais-cristina-ferreira-realiza-sonho-de-convidado-em-direto-e-o-resultado-tornou-se-viral"
+  },
+  {
+   "excerto": "Depois de saberem que Maria esteve presa por burla, Miguel e Beatriz continuam revoltados com a aproximação de Diana à família. Porém, a morte de Xavier pode trazer uma nova esperança para a inocência de Diana — e a página desaparecida do diário de Patrícia poderá guardar a ident",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/a-madrasta/tvi/exclusivo-a-madrasta-diana-encontra-nova-pista-para-descobrir-quem-matou-artur",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Exclusivo «A Madrasta»: Diana encontra nova pista para descobrir quem matou Artur",
+   "url": "https://tvi.iol.pt/novelas/a-madrasta/tvi/exclusivo-a-madrasta-diana-encontra-nova-pista-para-descobrir-quem-matou-artur"
+  },
+  {
+   "excerto": "Uma bonita história de amor, que começou da forma mais inesperada",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/conceicao-queiroz/frederico-caldeira-ramos/manteve-a-relacao-em-segredo-durante-meses-mas-agora-famosa-jornalista-da-tvi-mostra-se-mais-feliz-do-que-nunca",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Manteve a relação em segredo durante meses, mas agora famosa jornalista da TVI mostra-se mais feliz do que nunca",
+   "url": "https://tvi.iol.pt/vmais/conceicao-queiroz/frederico-caldeira-ramos/manteve-a-relacao-em-segredo-durante-meses-mas-agora-famosa-jornalista-da-tvi-mostra-se-mais-feliz-do-que-nunca"
+  },
+  {
+   "excerto": "Após a difícil separação de Paulo Vintém, pai da sua filha, a atriz parece estar a viver uma fase muito feliz a nível pessoal",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/vmais/marta-melro/novo-namorado/marta-melro-tem-novo-namorado-video-romantico-deixa-fas-encantados-o-coracao-voltou-a-ter-dono",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Marta Melro tem novo namorado? Vídeo romântico deixa fãs encantados: «O coração voltou a ter dono»",
+   "url": "https://tvi.iol.pt/vmais/marta-melro/novo-namorado/marta-melro-tem-novo-namorado-video-romantico-deixa-fas-encantados-o-coracao-voltou-a-ter-dono"
+  },
+  {
+   "excerto": "Sem estabilidade financeira e psicológica e enquanto terminava uma licenciatura, Joana descobriu que estava grávida.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/familia/gravidez/na-consulta-para-interromper-a-gravidez-joana-descobriu-que-estava-a-espera-de-gemeos-esta-foi-a-sua-decisao",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Na consulta para interromper a gravidez, Joana descobriu que estava à espera de gémeos. Esta foi a sua decisão",
+   "url": "https://tvi.iol.pt/doisas10/familia/gravidez/na-consulta-para-interromper-a-gravidez-joana-descobriu-que-estava-a-espera-de-gemeos-esta-foi-a-sua-decisao"
+  },
+  {
+   "excerto": "Catarina Gouveia está prestes a ser mãe pela segunda vez. E um gesto de uma desconhecida deixo-a sem palavras",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/catarina-gouveia/atriz/na-reta-final-da-gravidez-catarina-gouveia-e-abordada-por-desconhecida-e-acaba-quase-em-palavras",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Na reta final da gravidez, Catarina Gouveia é abordada por desconhecida. E acaba quase sem palavras",
+   "url": "https://tvi.iol.pt/novelas/catarina-gouveia/atriz/na-reta-final-da-gravidez-catarina-gouveia-e-abordada-por-desconhecida-e-acaba-quase-em-palavras"
+  },
+  {
+   "excerto": "Há muito para visitar em Portugal.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/outono/portugal/nem-porto-nem-lisboa-jornalistas-estrangeiros-elegem-esta-cidade-portuguesa-como-destino-de-outono",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Nem Porto nem Lisboa. Jornalistas estrangeiros elegem esta cidade portuguesa como destino de outono",
+   "url": "https://tvi.iol.pt/doisas10/outono/portugal/nem-porto-nem-lisboa-jornalistas-estrangeiros-elegem-esta-cidade-portuguesa-como-destino-de-outono"
+  },
+  {
+   "excerto": "Marta Melro está mesmo apaixonada. A atriz voltou a sorrir ao lado do jornalista e fotógrafo André Drogas",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/marta-melro/andre-drogas/no-video-mais-romantico-de-sempre-marta-melro-confirma-estar-apaixonada-e-mostra-quem-e-o-novo-namorado",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "No vídeo mais romântico de sempre, Marta Melro confirma estar apaixonada e mostra quem é o novo namorado",
+   "url": "https://tvi.iol.pt/novelas/marta-melro/andre-drogas/no-video-mais-romantico-de-sempre-marta-melro-confirma-estar-apaixonada-e-mostra-quem-e-o-novo-namorado"
+  },
+  {
+   "excerto": "Cláudio Ramos levantou o véu sobre o que vai acontecer já este fim de semana no «Big Brother All Stars». O apresentador revelou que haverá duas galas, expulsões em ambos os dias, novas curvas da vida e, ainda, novos concorrentes a entrar na casa.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/maria-botelho-moniz/claudio-ramos/novos-concorrentes-dupla-expulsao-e-galas-decisivas-todas-as-novidades-que-estao-a-caminho-do-big-brother-all-stars",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "Novos concorrentes, dupla expulsão e galas decisivas: Todas as novidades que estão a caminho do Big Brother All Stars",
+   "url": "https://tvi.iol.pt/bigbrother/maria-botelho-moniz/claudio-ramos/novos-concorrentes-dupla-expulsao-e-galas-decisivas-todas-as-novidades-que-estao-a-caminho-do-big-brother-all-stars"
+  },
+  {
+   "excerto": "Anos de dor após uma operação a uma hérnia terminam em eutanásia. Ator Arnaud Denis tinha 43 anos",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/arnaud-denis/morte/o-que-comecou-com-uma-operacao-a-uma-hernia-terminou-em-morte-famoso-ator-parte-aos-43-anos",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "O que começou com uma operação a uma hérnia terminou em morte. Famoso ator parte aos 43 anos",
+   "url": "https://tvi.iol.pt/novelas/arnaud-denis/morte/o-que-comecou-com-uma-operacao-a-uma-hernia-terminou-em-morte-famoso-ator-parte-aos-43-anos"
+  },
+  {
+   "excerto": "Maria Arrais, filha de Susana Arrais, já fez parte de vários sucessos da ficção da TVI. Tem 23 anos e herdou a beleza da mãe",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/maria-arrais/susana-arrais/e-filha-de-uma-conceituada-atriz-portuguesa-e-herdou-a-sua-beleza-tem-23-anos-e-e-uma-bomba",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-09-25",
+   "titulo": "É filha de uma conceituada atriz portuguesa e herdou a sua beleza. Tem 23 anos e é uma bomba",
+   "url": "https://tvi.iol.pt/novelas/maria-arrais/susana-arrais/e-filha-de-uma-conceituada-atriz-portuguesa-e-herdou-a-sua-beleza-tem-23-anos-e-e-uma-bomba"
   },
   {
    "excerto": "",
@@ -560,5 +578,5 @@
   }
  ],
  "esquema": 2,
- "total": 62
+ "total": 64
 }
