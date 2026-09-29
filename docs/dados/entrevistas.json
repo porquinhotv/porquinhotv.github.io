@@ -3330,8 +3330,48 @@
      "titulo": "A entrevista a André Ventura na íntegra"
     }
    ]
+  },
+  {
+   "canais": [
+    "rtp3"
+   ],
+   "canal": "rtp3",
+   "confianca": "alta",
+   "data": "2026-09-28",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "56dd619099d1",
+   "origem": "canal",
+   "primeira_vez": "2026-09-29",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/Dd14rXcoAi6/",
+   "publicado_em": "2026-09-28",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "56dd619099d1",
+     "canal": "rtp3",
+     "confianca": "alta",
+     "data": "2026-09-28",
+     "data_origem": "declarada",
+     "entrevista": "56dd619099d1",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:3a4a4345bf5a",
+     "origem": "canal",
+     "primeira_vez": "2026-09-29",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/Dd14rXcoAi6/",
+     "publicado_em": "2026-09-28",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 79
+ "total": 80
 }
