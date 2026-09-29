@@ -504,6 +504,35 @@ entrevistas:
     prova: https://cnnportugal.iol.pt/videos/a-entrevista-a-andre-ventura-na-integra/6ab2e9290cf22b9f8904c709
     titulo: 'A entrevista a André Ventura na íntegra'
 
+  # Acrescentada a 2026-09-29, dada pelo autor: canal RTP3, publicacao
+  # de Instagram. NAO ABRI A PAGINA: o Instagram bloqueia o acesso
+  # automatico (robots.txt), a mesma razao por que esta fonte so entra
+  # pela leitura do autor no navegador dele (ver KB, requisito de
+  # 2026-09-18). Canal e dia sao a leitura dele, nao uma verificacao
+  # minha.
+  #
+  # O dia esta corroborado, nao provado, pelo metodo ja validado duas
+  # vezes na KB (2025-08-05 e 2025-04-03): os primeiros 41 bits do
+  # identificador do shortcode, em milissegundos desde a epoca do
+  # Instagram (1314220021721), descodificam para 2026-09-28 as 20:00
+  # de Lisboa. Bate com "ontem" a partir de hoje, 2026-09-29.
+  #
+  # Sem `titulo` nem `programa`: a pagina nao foi lida por esta
+  # ferramenta, e inventa-los seria um campo falso.
+  #
+  # RTP3 chamou-se RTPN antes do rebranding; e o mesmo canal, o autor so
+  # deu o nome antigo como referencia. Nao e RTP1: as duas sao canais
+  # diferentes na tabela, ver 0.4 e os pares do servico publico em
+  # `mesma_entrevista`.
+  #
+  # Guarda corrida contra este ficheiro: nao ha nenhuma linha de RTP1 ou
+  # RTP3 em 2026-09-28 nem a um dia de distancia, por isso nao ha nada a
+  # agrupar em `mesma_entrevista`. Falta confirmar contra o dataset
+  # publicado (docs/dados/entrevistas.json).
+  - data: 2026-09-28
+    canal: rtp3
+    prova: https://www.instagram.com/p/Dd14rXcoAi6/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
