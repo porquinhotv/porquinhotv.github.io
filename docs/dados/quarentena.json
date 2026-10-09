@@ -64,15 +64,6 @@
    "url": "https://www.rtp.pt/play/p5994/e586404/radicais-livres-2a-serie"
   },
   {
-   "excerto": "Antonio Ventura - Campanha do kiwi",
-   "fonte": "busca-rtp1",
-   "id_nativo": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa",
-   "motivo": "formato_nao_apurado",
-   "publicado_em": "2022-03-05",
-   "titulo": "José Candeias (Podcast)",
-   "url": "https://www.rtp.pt/play/p855/e602549/jose-candeias-ha-conversa"
-  },
-  {
    "excerto": "Emiliano Ventura - Emiliano Ventura",
    "fonte": "busca-rtp1",
    "id_nativo": "https://www.rtp.pt/play/p9149/e628428/afinal-ha-tempo",
@@ -136,6 +127,15 @@
    "url": "https://www.rtp.pt/play/p10324/e888399/grande-entrevista"
   },
   {
+   "excerto": "O camarada Ventura… - Uma entrevista à antena 1 que pode obrigar o governo a recuar nas propostas laborais. Uma greve que fez efeito. Os debates pr",
+   "fonte": "busca-rtp1",
+   "id_nativo": "https://www.rtp.pt/play/p283/e895598/contraditorio",
+   "motivo": "formato_nao_apurado",
+   "publicado_em": "2025-12-12",
+   "titulo": "Contraditório",
+   "url": "https://www.rtp.pt/play/p283/e895598/contraditorio"
+  },
+  {
    "excerto": "",
    "fonte": "busca-rtp1",
    "id_nativo": "busca-rtp1:72e937281cc7",
@@ -181,69 +181,6 @@
    "url": "https://tvi.iol.pt/assembleia-da-republica/5-de-outubro/ja-imaginou-sentar-se-no-lugar-do-primeiro-ministro-assembleia-da-republica-volta-a-abrir-portas-a-todos-no-5-de-outubro"
   },
   {
-   "excerto": "Saiba o que vai acontecer em breve, na novela da TVI",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/antonia/raimundo/exclusivo-coracao-de-mae-antonia-descobre-a-doenca-terminal-de-raimundo-e-faz-comentario-inesperado-sobre-o-funeral",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-06",
-   "titulo": "Exclusivo «Coração de Mãe»: Antónia descobre a doença terminal de Raimundo e faz comentário inesperado sobre o funeral",
-   "url": "https://tvi.iol.pt/novelas/antonia/raimundo/exclusivo-coracao-de-mae-antonia-descobre-a-doenca-terminal-de-raimundo-e-faz-comentario-inesperado-sobre-o-funeral"
-  },
-  {
-   "excerto": "Bárbara Tinoco já é uma mulher casada. Cantora surpreende no casamento",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/barbara-tinoco/casamento/nao-teve-nada-de-tradicional-mas-e-o-casamento-do-ano-famosa-artista-portuguesa-troca-aliancas-com-o-amor-da-sua-vida",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-06",
-   "titulo": "Não teve nada de tradicional, mas é o casamento do ano. Famosa artista portuguesa troca alianças com o amor da sua vida",
-   "url": "https://tvi.iol.pt/novelas/barbara-tinoco/casamento/nao-teve-nada-de-tradicional-mas-e-o-casamento-do-ano-famosa-artista-portuguesa-troca-aliancas-com-o-amor-da-sua-vida"
-  },
-  {
-   "excerto": "Mafalda Diamond perdeu a paciência com Miguel Vicente e decidiu falar. A jovem acusa-o de hipocrisia e deixa um aviso polémico",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/mafalda-diamond/miguel-vicente/tem-historias-de-que-nao-se-ia-orgulhar-e-a-crianca-ja-estava-feita-mafalda-diamond-lanca-bomba-sobre-miguel-vicente",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "\"Tem histórias de que não se ia orgulhar. E a criança já estava feita\": Mafalda Diamond \"lança bomba\" sobre Miguel Vicente",
-   "url": "https://tvi.iol.pt/bigbrother/mafalda-diamond/miguel-vicente/tem-historias-de-que-nao-se-ia-orgulhar-e-a-crianca-ja-estava-feita-mafalda-diamond-lanca-bomba-sobre-miguel-vicente"
-  },
-  {
-   "excerto": "Cristina Ferreira terminou o dia ao lado de João Monteiro, na Ericeira, e partilhou com os seguidores alguns dos momentos vividos junto ao mar.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/cristina-ferreira/joao-monteiro/com-joao-monteiro-cristina-ferreira-mostra-onde-termina-os-dias-a-sorte-de-viver-ao-lado-de-quem-se-ama-junto-ao-mar-com-este-por-do-sol",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Com João Monteiro, Cristina Ferreira mostra onde termina os dias: «A sorte de viver ao lado de quem se ama, junto ao mar, com este pôr do sol»",
-   "url": "https://tvi.iol.pt/doisas10/cristina-ferreira/joao-monteiro/com-joao-monteiro-cristina-ferreira-mostra-onde-termina-os-dias-a-sorte-de-viver-ao-lado-de-quem-se-ama-junto-ao-mar-com-este-por-do-sol"
-  },
-  {
-   "excerto": "O ator Pedro Lima morreu em 2020 e deixou o país em choque.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/pedro-lima/joao-francisco-lima/depois-da-morte-de-pedro-lima-o-filho-criou-um-projeto-que-ja-ajudou-milhares-de-pessoas-e-prepara-novo-desafio",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Depois da morte de Pedro Lima, o filho criou um projeto que já ajudou milhares de pessoas e prepara novo desafio",
-   "url": "https://tvi.iol.pt/novelas/pedro-lima/joao-francisco-lima/depois-da-morte-de-pedro-lima-o-filho-criou-um-projeto-que-ja-ajudou-milhares-de-pessoas-e-prepara-novo-desafio"
-  },
-  {
-   "excerto": "Hoje é uma das mulheres mais elegantes, bonitas e irreverentes de Portugal.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/vmais/sofia-aparicio/mulher-camaleao/era-assim-em-crianca-tornou-se-icone-da-moda-estrela-da-televisao-e-uma-voz-ativa-em-varias-causas-sociais-e-politicas",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Era assim em criança: tornou-se ícone da moda, estrela da televisão e uma voz ativa em várias causas sociais e políticas",
-   "url": "https://tvi.iol.pt/vmais/sofia-aparicio/mulher-camaleao/era-assim-em-crianca-tornou-se-icone-da-moda-estrela-da-televisao-e-uma-voz-ativa-em-varias-causas-sociais-e-politicas"
-  },
-  {
-   "excerto": "O que aconteceu em palco surpreendeu toda a gente.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/jose-eduardo/carlos-coutinho-vilhena/estava-afastado-dos-palcos-ha-mais-de-20-anos-agora-regressou-e-foi-aplaudido-de-pe-por-milhares-de-pessoas",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Estava afastado dos palcos há mais de 20 anos. Agora regressou e foi aplaudido de pé por milhares de pessoas",
-   "url": "https://tvi.iol.pt/novelas/jose-eduardo/carlos-coutinho-vilhena/estava-afastado-dos-palcos-ha-mais-de-20-anos-agora-regressou-e-foi-aplaudido-de-pe-por-milhares-de-pessoas"
-  },
-  {
    "excerto": "Sílvia Rizzo tem uma filha linda e a semelhança entre as duas impressiona",
    "fonte": "busca-tvi",
    "id_nativo": "https://tvi.iol.pt/novelas/silvia-rizzo/filha/filha-de-silvia-rizzo-ja-e-uma-mulher-e-a-semelhanca-com-a-mae-impressiona-sao-iguais",
@@ -253,40 +190,22 @@
    "url": "https://tvi.iol.pt/novelas/silvia-rizzo/filha/filha-de-silvia-rizzo-ja-e-uma-mulher-e-a-semelhanca-com-a-mae-impressiona-sao-iguais"
   },
   {
-   "excerto": "Pedro Bianchi Prata aproveitou um dia em família antes de voltar a fazer as malas e partir para a Eslovénia. Partilhou nas redes sociais vários momentos ternurentos ao lado do filho, Vicente.",
+   "excerto": "A família deixou uma homenagem emotiva: «A tua voz viverá para sempre»",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/maria-botelho-moniz/pedro-bianchi-prata/numa-partilha-emotiva-pedro-bianchi-prata-confessa-o-que-mais-lhe-custa-desde-o-nascimento-do-filho-vicente",
+   "id_nativo": "https://tvi.iol.pt/vmais/freddie-jackson/morte-de-freddie-jackson/morreu-um-dos-cantores-mais-acarinhados-de-sempre-descansa-em-paz",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-10-07",
-   "titulo": "Numa partilha emotiva, Pedro Bianchi Prata confessa o que mais lhe custa desde o nascimento do filho Vicente",
-   "url": "https://tvi.iol.pt/doisas10/maria-botelho-moniz/pedro-bianchi-prata/numa-partilha-emotiva-pedro-bianchi-prata-confessa-o-que-mais-lhe-custa-desde-o-nascimento-do-filho-vicente"
+   "titulo": "Morreu um dos cantores mais acarinhados de sempre: «Descansa em paz»",
+   "url": "https://tvi.iol.pt/vmais/freddie-jackson/morte-de-freddie-jackson/morreu-um-dos-cantores-mais-acarinhados-de-sempre-descansa-em-paz"
   },
   {
-   "excerto": "Uma situação inesperada levou o Big Brother a intervir e a deixar um alerta dentro da casa. O momento acabou por surpreender os concorrentes e a reação de Miguel Vicente não passou despercebida. Veja o que aconteceu!",
+   "excerto": "Um vestido que não deixou ninguém indiferente.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/miguel-vicente/david-diamond/o-que-ninguem-esperava-comunicado-do-big-brother-deixa-a-casa-em-sentido-miguel-vicente-em-alerta-e-reacao-surpreende-a-casa-eis-o-momento",
+   "id_nativo": "https://tvi.iol.pt/novelas/barbara-tinoco/feodor-bivol/nem-jessica-athayde-resistiu-ao-vestido-de-barbara-tinoco-tenho-vontade-de-voltar-a-casar",
    "motivo": "sem_sujeito",
    "publicado_em": "2026-10-07",
-   "titulo": "O que ninguém esperava! Comunicado do Big Brother deixa a casa em sentido: Miguel Vicente em alerta e reação surpreende a casa. Eis o momento",
-   "url": "https://tvi.iol.pt/bigbrother/miguel-vicente/david-diamond/o-que-ninguem-esperava-comunicado-do-big-brother-deixa-a-casa-em-sentido-miguel-vicente-em-alerta-e-reacao-surpreende-a-casa-eis-o-momento"
-  },
-  {
-   "excerto": "Uma conhecida artista usou este vestido de noiva e agora várias atrizes portuguesas estão rendidas",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/vestido-de-noiva/barbara-tinoco/o-vestido-de-noiva-que-deixou-varias-atrizes-portuguesas-loucas-e-foi-usado-por-uma-artista-muito-conhecida",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "O vestido de noiva que deixou várias atrizes portuguesas loucas. E foi usado por uma artista muito conhecida",
-   "url": "https://tvi.iol.pt/novelas/vestido-de-noiva/barbara-tinoco/o-vestido-de-noiva-que-deixou-varias-atrizes-portuguesas-loucas-e-foi-usado-por-uma-artista-muito-conhecida"
-  },
-  {
-   "excerto": "Mafalda Diamond não escondeu a irritação com Miguel Vicente e decidiu falar sobre o passado do concorrente, acusando-o de hipocrisia e garantindo saber de situações que este não gostaria que fossem conhecidas.",
-   "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/doisas10/david-diamond/miguel-vicente/para-defender-o-pai-mafalda-diamond-perde-a-paciencia-com-miguel-vicente-e-faz-revelacao-bombastica-a-crianca-ja-estava-feita",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Para defender o pai, Mafalda Diamond perde a paciência com Miguel Vicente e faz revelação bombástica: «A criança já estava feita»",
-   "url": "https://tvi.iol.pt/doisas10/david-diamond/miguel-vicente/para-defender-o-pai-mafalda-diamond-perde-a-paciencia-com-miguel-vicente-e-faz-revelacao-bombastica-a-crianca-ja-estava-feita"
+   "titulo": "Nem Jessica Athayde resistiu ao vestido de Bárbara Tinoco: “Tenho vontade de voltar a casar”",
+   "url": "https://tvi.iol.pt/novelas/barbara-tinoco/feodor-bivol/nem-jessica-athayde-resistiu-ao-vestido-de-barbara-tinoco-tenho-vontade-de-voltar-a-casar"
   },
   {
    "excerto": "A atriz é recordada como uma das personagens mais icónicas.",
@@ -298,31 +217,112 @@
    "url": "https://tvi.iol.pt/novelas/morangos-com-acucar/carla-vasconcelos/reconhece-esta-menina-foi-uma-das-personagens-mais-adoradas-de-morangos-com-acucar"
   },
   {
-   "excerto": "Rita Almeida tem partilhado alguns dos hábitos que fazem parte da sua rotina e que a ajudam a manter a forma depois da transformação física. A ex-concorrente do Big Brother voltou a surpreender os seguidores e revelou mais um dos seus truques. Saiba tudo.",
+   "excerto": "Dolores Aveiro quebrou o silêncio sobre o episódio que envolve Cristiano Ronaldo e Jorge Jesus.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/bigbrother/rita-almeida/big-brother/rita-almeida-revela-o-segredo-para-nao-voltar-a-ganhar-peso-depois-de-uma-grande-transformacao",
+   "id_nativo": "https://tvi.iol.pt/doisas10/cristiano-ronaldo/dolores-aveiro/a-reacao-mais-esperada-dolores-aveiro-nao-segurou-as-lagrimas-ao-abordar-a-polemica-de-cristiano-ronaldo-deus-vai-se-encarregar",
    "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Rita Almeida revela o segredo para não voltar a ganhar peso após grande transformação",
-   "url": "https://tvi.iol.pt/bigbrother/rita-almeida/big-brother/rita-almeida-revela-o-segredo-para-nao-voltar-a-ganhar-peso-depois-de-uma-grande-transformacao"
+   "publicado_em": "2026-10-08",
+   "titulo": "A reação mais esperada. Dolores Aveiro não segurou as lágrimas ao abordar a polémica de Cristiano Ronaldo: «Deus vai-se encarregar»",
+   "url": "https://tvi.iol.pt/doisas10/cristiano-ronaldo/dolores-aveiro/a-reacao-mais-esperada-dolores-aveiro-nao-segurou-as-lagrimas-ao-abordar-a-polemica-de-cristiano-ronaldo-deus-vai-se-encarregar"
   },
   {
-   "excerto": "Saiu de casa para uma consulta do filho bebé. Horas depois, estava morta",
+   "excerto": "Há 25 anos, apaixonaram-se numa novela. Hoje são um dos casais mais sólidos da ficção portuguesa",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/morte/giane-alves/tinha-apenas-32-anos-famosa-morre-durante-uma-consulta-do-filho-bebe-e-deixa-o-pais-em-choque",
+   "id_nativo": "https://tvi.iol.pt/novelas/pepe-rapazote/mafalda-vilhena/apaixonaram-se-durante-um-beijo-tecnico-numa-novela-e-ninguem-imaginava-que-ainda-estariam-juntos-25-anos-depois",
    "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Tinha apenas 32 anos. Famosa morre durante uma consulta do filho bebé e deixa o país em choque",
-   "url": "https://tvi.iol.pt/novelas/morte/giane-alves/tinha-apenas-32-anos-famosa-morre-durante-uma-consulta-do-filho-bebe-e-deixa-o-pais-em-choque"
+   "publicado_em": "2026-10-08",
+   "titulo": "Apaixonaram-se durante um beijo técnico numa novela. E ninguém imaginava que ainda estariam juntos 25 anos depois",
+   "url": "https://tvi.iol.pt/novelas/pepe-rapazote/mafalda-vilhena/apaixonaram-se-durante-um-beijo-tecnico-numa-novela-e-ninguem-imaginava-que-ainda-estariam-juntos-25-anos-depois"
   },
   {
-   "excerto": "Um momento imperdível.",
+   "excerto": "A atriz ficou surpreendida com as reações.",
    "fonte": "busca-tvi",
-   "id_nativo": "https://tvi.iol.pt/novelas/geral/20261007/vem-ai-em-terra-forte-flor-fica-em-choque-ao-ver-maria-de-fatima",
+   "id_nativo": "https://tvi.iol.pt/novelas/rita-pereira/terra-forte/depois-de-polemica-rita-pereira-reage-as-criticas-de-forma-inesperada",
    "motivo": "sem_sujeito",
-   "publicado_em": "2026-10-07",
-   "titulo": "Vem aí em «Terra Forte»: Flor fica em choque ao ver Maria de Fátima",
-   "url": "https://tvi.iol.pt/novelas/geral/20261007/vem-ai-em-terra-forte-flor-fica-em-choque-ao-ver-maria-de-fatima"
+   "publicado_em": "2026-10-08",
+   "titulo": "Depois de polémica, Rita Pereira reage às críticas de forma inesperada",
+   "url": "https://tvi.iol.pt/novelas/rita-pereira/terra-forte/depois-de-polemica-rita-pereira-reage-as-criticas-de-forma-inesperada"
+  },
+  {
+   "excerto": "Lurdes Baeta está a viver uma nova fase da vida amorosa. A jornalista da TVI assinalou recentemente um ano de relação com Gonçalo Carvalho, numa declaração romântica nas redes sociais.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/jornalista/lurdes-baeta/depois-de-um-casamento-de-25-anos-jornalista-da-tvi-celebra-um-ano-do-seu-novo-amor-acho-que-nos-saiu-o-premio-grande",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Depois de um casamento de 25 anos, jornalista da TVI celebra um ano do seu novo amor: «Acho que nos saiu o prémio grande»",
+   "url": "https://tvi.iol.pt/doisas10/jornalista/lurdes-baeta/depois-de-um-casamento-de-25-anos-jornalista-da-tvi-celebra-um-ano-do-seu-novo-amor-acho-que-nos-saiu-o-premio-grande"
+  },
+  {
+   "excerto": "Marco Costa recorreu às redes sociais para partilhar uma reflexão sobre a rotina de muitos pais e mães separados.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/desde-a-separacao-de-carolina-pinto-marco-costa-vive-uma-nova-realidade-nao-e-facil",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Desde a separação de Carolina Pinto, Marco Costa vive uma nova realidade: «Não é fácil»",
+   "url": "https://tvi.iol.pt/doisas10/marco-costa/carolina-pinto/desde-a-separacao-de-carolina-pinto-marco-costa-vive-uma-nova-realidade-nao-e-facil"
+  },
+  {
+   "excerto": "Cláudio Coelho ficou conhecido do público pela participação na Casa dos Segredos, onde protagonizou uma história que ainda hoje é recordada. Anos depois, o nome do ex-concorrente voltou a surgir associado ao universo dos reality shows e, agora, uma mudança na sua imagem está a da",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/helena-isabel/irreconhecivel/envolveu-se-com-helena-isabel-e-agora-surge-irreconhecivel-este-e-o-antes-e-depois-que-o-vai-deixar-boquiaberto",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Envolveu-se com Helena Isabel e agora surge irreconhecível. Este é o antes e depois que o vai deixar boquiaberto",
+   "url": "https://tvi.iol.pt/bigbrother/helena-isabel/irreconhecivel/envolveu-se-com-helena-isabel-e-agora-surge-irreconhecivel-este-e-o-antes-e-depois-que-o-vai-deixar-boquiaberto"
+  },
+  {
+   "excerto": "Kika Cerqueira Gomes brilha em Paris e surpreende com novo visual. Além disso, o vestido sem costas não deixou ninguém indiferente",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/kika-cerqueira-gomes/balmain/esta-portuguesa-tem-o-mundo-a-seus-pes-o-novo-penteado-e-o-vestido-mais-falados-do-momento",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Esta portuguesa tem o Mundo a seus pés. O novo penteado e o vestido mais falados do momento",
+   "url": "https://tvi.iol.pt/novelas/kika-cerqueira-gomes/balmain/esta-portuguesa-tem-o-mundo-a-seus-pes-o-novo-penteado-e-o-vestido-mais-falados-do-momento"
+  },
+  {
+   "excerto": "Sónia Jesus mantém-se no 1.º lugar, seguida de Francisco Monteiro e Helena Isabel.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/catarina-miranda/popularidade/ja-saiu-o-novo-ranking-de-popularidade-do-bb-all-stars-e-catarina-miranda-nao-para-de-subir",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Já saiu o novo ranking de popularidade do BB All Stars. E Catarina Miranda não para de subir",
+   "url": "https://tvi.iol.pt/bigbrother/catarina-miranda/popularidade/ja-saiu-o-novo-ranking-de-popularidade-do-bb-all-stars-e-catarina-miranda-nao-para-de-subir"
+  },
+  {
+   "excerto": "Pepê Rapazote mostra foto rara da filha mais nova. Já tem 16 anos",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/pepe-rapazote/filha/quase-nunca-aparece-em-publico-foto-rara-da-filha-mais-nova-de-pepe-rapazote-da-que-falar",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Quase nunca aparece em público. Foto rara da filha mais nova de Pêpê Rapazote dá que falar",
+   "url": "https://tvi.iol.pt/novelas/pepe-rapazote/filha/quase-nunca-aparece-em-publico-foto-rara-da-filha-mais-nova-de-pepe-rapazote-da-que-falar"
+  },
+  {
+   "excerto": "Coração de Mãe: Silvestre vai cometer um crime assustador. Mas há um detalhe que pode estar ligado ao seu passado",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/silvestre/crime/serial-killer-este-e-o-lado-assustador-e-desconhecido-de-silvestre",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Serial killer? Este é o lado assustador e desconhecido de Silvestre",
+   "url": "https://tvi.iol.pt/novelas/silvestre/crime/serial-killer-este-e-o-lado-assustador-e-desconhecido-de-silvestre"
+  },
+  {
+   "excerto": "Enquanto Sónia Jesus participa no Big Brother All Stars, a sua família passou por um momento muito importante.",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/bigbrother/sonia-jesus/vitor-soares/sonia-jesus-nem-sonha-mas-fora-da-casa-a-familia-viveu-um-momento-marcante-e-vito-estava-la",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "Sónia Jesus nem sonha, mas fora da casa a família viveu um momento marcante. E Vitó estava lá",
+   "url": "https://tvi.iol.pt/bigbrother/sonia-jesus/vitor-soares/sonia-jesus-nem-sonha-mas-fora-da-casa-a-familia-viveu-um-momento-marcante-e-vito-estava-la"
+  },
+  {
+   "excerto": "Mauro Jesus, filho de Jorge Jesus, é grande amigo de José Condessa. A ligação que poucos conhecem",
+   "fonte": "busca-tvi",
+   "id_nativo": "https://tvi.iol.pt/novelas/jorge-jesus/filho/e-o-grande-apoio-de-jorge-jesus-nos-momentos-dificeis-e-e-ainda-amigo-de-um-famoso-ator-portugues",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-08",
+   "titulo": "É o grande apoio de Jorge Jesus nos momentos difíceis. E é ainda amigo de um famoso ator português",
+   "url": "https://tvi.iol.pt/novelas/jorge-jesus/filho/e-o-grande-apoio-de-jorge-jesus-nos-momentos-dificeis-e-e-ainda-amigo-de-um-famoso-ator-portugues"
   },
   {
    "excerto": "",
@@ -332,15 +332,6 @@
    "publicado_em": "2026-09-02",
    "titulo": "Ventura 'agarra-se' a vice-presidente da Câmara do Funchal",
    "url": "https://www.jm-madeira.pt/v%C3%ADdeo/regi-o/30004362/ventura-agarra-se-a-vice-presidente-da-camara-do-funchal.html"
-  },
-  {
-   "excerto": "José Luís Carneiro - Programa com José Luís Carneiro, secretário-geral do Partido Socialista",
-   "fonte": "lista-rtp-grande-entrevista",
-   "id_nativo": "https://www.rtp.pt/play/p10324/e910085/grande-entrevista",
-   "motivo": "sem_sujeito",
-   "publicado_em": "2026-02-18",
-   "titulo": "Grande Entrevista",
-   "url": "https://www.rtp.pt/play/p10324/e910085/grande-entrevista"
   },
   {
    "excerto": "Maria da Graça Carvalho - Que ilações se devem retirar das consequências das tempestades que devastaram a região centro do país? Maria da Graç",
@@ -548,6 +539,15 @@
    "publicado_em": "2026-09-23",
    "titulo": "Grande Entrevista",
    "url": "https://www.rtp.pt/play/p10324/e956122/grande-entrevista"
+  },
+  {
+   "excerto": "Ricardo Mendes - É um dos fundadores da Tekever que começou, ainda em 2001, a desenvolver “software”. Chegou a CEO da empresa em 2018, liderando",
+   "fonte": "lista-rtp-grande-entrevista",
+   "id_nativo": "https://www.rtp.pt/play/p10324/e959202/grande-entrevista",
+   "motivo": "sem_sujeito",
+   "publicado_em": "2026-10-07",
+   "titulo": "Grande Entrevista",
+   "url": "https://www.rtp.pt/play/p10324/e959202/grande-entrevista"
   },
   {
    "excerto": "",
