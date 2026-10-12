@@ -1,41 +1,24 @@
 name: adicionar
 
-# O formulario para acrescentar uma entrevista. Pedido do autor a
-# 2026-10-12: dar o dia, o canal e a ligacao, e a entrevista aparecer no
-# site, sem patch, sem PowerShell e sem disparar a recolha inteira.
+# O formulario para acrescentar entrevistas, uma ou varias. Pedido do
+# autor a 2026-10-12: dar o dia, o canal e a ligacao, e a entrevista
+# aparecer no site, sem patch, sem PowerShell e sem disparar a recolha
+# inteira.
 #
 # Preenche-se em Actions, "adicionar", "Run workflow", tambem no
-# telemovel. Demora cerca de um minuto ate ao commit (estimativa, nao
-# medida), mais o tempo de publicacao do GitHub Pages.
+# telemovel. Uma entrada e o dia, o canal e a ligacao, por qualquer ordem;
+# varias separam-se por ponto e virgula, porque a caixa e de uma linha so
+# e o browser apaga as mudancas de linha de um texto colado. Tudo ou nada:
+# se uma entrada falha, nenhuma e escrita. Ver ferramentas/adicionar.py.
 #
 # O canal e o dia sao a leitura de quem preenche, como em todo o
 # `config/curadoria.yml`, e e isso que da a esta via a isencao da prova de
-# formato e das rondas. Ver ferramentas/adicionar.py.
+# formato e das rondas.
 on:
   workflow_dispatch:
     inputs:
-      data:
-        description: 'Dia em que a entrevista passou (AAAA-MM-DD, AAAAMMDD ou DD-MM-AAAA)'
-        required: true
-        type: string
-      canal:
-        description: 'Canal'
-        required: true
-        type: choice
-        # Os mesmos ids de config/porquinho.yml, pela mesma ordem. Ha teste
-        # que falha se as duas listas se afastarem.
-        options:
-          - rtp1
-          - rtp2
-          - sic
-          - tvi
-          - sic-noticias
-          - rtp3
-          - cnn-portugal
-          - now
-          - cmtv
-      prova:
-        description: 'Ligacao da prova (a publicacao, a pagina do canal ou a noticia)'
+      entradas:
+        description: 'Dia, canal e ligacao. Varias: separar com ; (ex.: 2026-10-05 NOW https://... ; 08-10-2026 CMTV https://...)'
         required: true
         type: string
 
@@ -73,19 +56,18 @@ jobs:
       # do script: um `${{ }}` dentro de `run` e texto colado no shell, e
       # uma ligacao com aspas ou `$(...)` correria como comando. Ha teste.
       - name: Acrescentar e publicar
+        shell: bash
         env:
-          DATA: ${{ inputs.data }}
-          CANAL: ${{ inputs.canal }}
-          PROVA: ${{ inputs.prova }}
+          ENTRADAS: ${{ inputs.entradas }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
-            # Recusa sem escrever nada se a linha nao serve; o motivo fica
-            # no resumo da corrida.
-            python -m ferramentas.adicionar --data "$DATA" --canal "$CANAL" --prova "$PROVA" || exit 1
+            # Recusa sem escrever nada se alguma linha nao serve; o motivo
+            # de cada uma fica no resumo da corrida.
+            python -m ferramentas.adicionar --entradas "$ENTRADAS" || exit 1
             # A mesma barreira da recolha diaria: uma regressao nunca chega
             # a escrever dados.
             python -m unittest discover -s tests -t . || exit 1
@@ -93,10 +75,12 @@ jobs:
             # So a curadoria: sem rede, em menos de um segundo (medido a
             # 2026-10-12, 0,4 s). As outras fontes continuam a correr as
             # 06:00, e a quarentena delas fica como estava.
-            python -m recolha.principal --fonte curadoria --ronda "adicionar-$(date -u +%Y-%m-%dT%H%M%S)"
+            python -m recolha.principal --fonte curadoria --ronda "adicionar-$(date -u +%Y-%m-%dT%H%M%S)" | tee saida.txt
+            grep -E "entrevistas exclusivas publicadas|retiradas por veto" saida.txt >> "$GITHUB_STEP_SUMMARY" || true
+            rm -f saida.txt
             python -m ferramentas.gerar_seo
             git add config/curadoria.yml docs
-            git commit -q -m "curadoria: acrescenta $CANAL $DATA"
+            git commit -q -m "curadoria: acrescenta entrevistas pelo formulario"
             if git push origin HEAD:main; then
               exit 0
             fi

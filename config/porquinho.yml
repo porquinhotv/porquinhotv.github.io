@@ -62,6 +62,12 @@ sujeito:
 
 # Os nove canais medidos. O id e o que aparece nos dados; o nome e o que
 # aparece no site. A cor de cada canal vive no CSS, com o mesmo id.
+#
+# `sinonimos` serve so o formulario `adicionar`: e como o
+# autor escreve o canal quando copia uma entrada (2026-10-12: "RTPN",
+# "NOW", "CMTV"). O formulario aceita tambem o id e o nome, sem acentos
+# nem maiusculas. Um sinonimo que apontasse para dois canais e recusado
+# ao ler, e ha teste: o canal nunca se adivinha.
 canais:
   - id: rtp1
     nome: RTP1
@@ -73,16 +79,20 @@ canais:
     nome: TVI
   - id: sic-noticias
     nome: SIC Notícias
+    sinonimos: [SICN, SIC N]
   - id: rtp3
     # O canal chamou-se RTPN e emite como RTP Notícias; o autor pediu os
     # dois nomes a 2026-10-12, para quem o conhece por um ou pelo outro.
     nome: RTP3/RTP Notícias
+    sinonimos: [RTPN, RTP N]
   - id: cnn-portugal
     nome: CNN Portugal
+    sinonimos: [CNN]
   - id: now
     nome: NOW
   - id: cmtv
     nome: CMTV
+    sinonimos: [CM TV]
 
 # Quando a fonte nao declara o programa, ele e deduzido do titulo: a
 # parte antes do primeiro destes separadores, desde que nao seja o nome

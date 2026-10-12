@@ -1,0 +1,93 @@
+name: remover
+
+# O formulario para retirar provas do site, uma ou varias. Pedido do autor
+# a 2026-10-12.
+#
+# Cada ligacao entra na lista `remover` de `config/curadoria.yml` com o
+# motivo, que fica publicado na quarentena da pagina de Fontes. Nada se
+# apaga: desfazer e apagar a linha do veto. Tudo ou nada: uma ligacao que
+# nao esta no site trava o lote, para um erro de copia nunca parecer um
+# veto feito. Ver ferramentas/remover.py.
+#
+# O que se retira e uma prova. Uma entrevista que passou em dois canais
+# continua contada pela outra prova, e o resumo da corrida diz qual.
+on:
+  workflow_dispatch:
+    inputs:
+      provas:
+        description: 'Ligacoes a retirar, separadas por espacos ou ;'
+        required: true
+        type: string
+      motivo:
+        description: 'Porque saem (fica publicado na pagina de Fontes)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+# Sem grupo de concorrencia, de proposito. Um grupo do GitHub guarda uma
+# so corrida pendente e cancela a anterior: tres formularios seguidos
+# perdiam o do meio. Em vez disso, cada tentativa parte do `main` acabado
+# de ler e refaz tudo, e um push rejeitado recomeca do inicio.
+#
+# O custo, dito: se um formulario publicar durante a recolha das 06:00, a
+# recolha pode falhar o rebase e perder essa manha. Nada se perde para
+# sempre, porque o dataset e append-only e a recolha seguinte volta a ver
+# o mesmo; a curadoria nunca se perde, porque esta no `config`.
+jobs:
+  remover:
+    runs-on: ubuntu-latest
+    env:
+      TZ: UTC
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      # Os campos entram por variaveis de ambiente e nunca escritos dentro
+      # do script: um `${{ }}` dentro de `run` e texto colado no shell, e
+      # uma ligacao com aspas ou `$(...)` correria como comando. Ha teste.
+      - name: Retirar e publicar
+        shell: bash
+        env:
+          PROVAS: ${{ inputs.provas }}
+          MOTIVO: ${{ inputs.motivo }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            # Recusa sem escrever nada se alguma linha nao serve; o motivo
+            # de cada uma fica no resumo da corrida.
+            python -m ferramentas.remover --provas "$PROVAS" --motivo "$MOTIVO" || exit 1
+            # A mesma barreira da recolha diaria: uma regressao nunca chega
+            # a escrever dados.
+            python -m unittest discover -s tests -t . || exit 1
+            node --test tests/frontend/*.test.js || exit 1
+            # So a curadoria: sem rede, em menos de um segundo (medido a
+            # 2026-10-12, 0,4 s). As outras fontes continuam a correr as
+            # 06:00, e a quarentena delas fica como estava.
+            python -m recolha.principal --fonte curadoria --ronda "remover-$(date -u +%Y-%m-%dT%H%M%S)" | tee saida.txt
+            grep -E "entrevistas exclusivas publicadas|retiradas por veto" saida.txt >> "$GITHUB_STEP_SUMMARY" || true
+            rm -f saida.txt
+            python -m ferramentas.gerar_seo
+            git add config/curadoria.yml docs
+            git commit -q -m "curadoria: retira provas pelo formulario"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "push rejeitado, a refazer a partir do main (tentativa $i/5)"
+            sleep $((i * 3))
+          done
+          echo "nao foi possivel publicar depois de 5 tentativas" >&2
+          exit 1
