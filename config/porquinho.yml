@@ -74,7 +74,9 @@ canais:
   - id: sic-noticias
     nome: SIC Notícias
   - id: rtp3
-    nome: RTP3
+    # O canal chamou-se RTPN e emite como RTP Notícias; o autor pediu os
+    # dois nomes a 2026-10-12, para quem o conhece por um ou pelo outro.
+    nome: RTP3/RTP Notícias
   - id: cnn-portugal
     nome: CNN Portugal
   - id: now

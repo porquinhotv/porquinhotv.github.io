@@ -533,6 +533,41 @@ entrevistas:
     canal: rtp3
     prova: https://www.instagram.com/p/Dd14rXcoAi6/
 
+  # Acrescentadas a 2026-10-12, dadas pelo autor: tres publicacoes de
+  # Instagram, com o canal e o dia lidos por ele. NAO ABRI AS PAGINAS,
+  # pela mesma razao da linha de 2026-09-28: o Instagram recusa o acesso
+  # automatico. Canal, dia e conta que publicou sao a leitura dele, que
+  # conta pelas decisoes 26 e 27 da KB.
+  #
+  # Os tres dias estao corroborados, nao provados, pelo mesmo metodo dos
+  # identificadores (41 bits em milissegundos desde 1314220021721), que
+  # reproduz ao minuto a linha de 2026-09-28 acima. Hora de Lisboa:
+  #   DeH9qyUCSZS  2026-10-05 20:30
+  #   DePnmSHjbR0  2026-10-08 19:51
+  #   DeZ6Klqlsyr  2026-10-12 19:45
+  # Publicadas ao fim da tarde do proprio dia, o que e o padrao de um
+  # anuncio da entrevista dessa noite. Sem `publicado_em`: e o mesmo dia.
+  #
+  # "RTPN" na mensagem do autor e o nome antigo da RTP3, como na linha
+  # de 2026-09-28. Fica `rtp3` e nao `rtp1`.
+  #
+  # Guarda corrida contra este ficheiro e contra o dataset publicado
+  # (docs/dados/entrevistas.json, 80 entradas): nenhuma linha de nenhum
+  # canal entre 2026-09-29 e 2026-10-12, por isso nao ha duplicacao a um
+  # dia de distancia nem nada a agrupar em `mesma_entrevista`.
+  #
+  # Sem `titulo` nem `programa`: as paginas nao foram lidas por esta
+  # ferramenta, e inventa-los seria um campo falso.
+  - data: 2026-10-05
+    canal: now
+    prova: https://www.instagram.com/p/DeH9qyUCSZS/
+  - data: 2026-10-08
+    canal: cmtv
+    prova: https://www.instagram.com/p/DePnmSHjbR0/
+  - data: 2026-10-12
+    canal: rtp3
+    prova: https://www.instagram.com/p/DeZ6Klqlsyr/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela

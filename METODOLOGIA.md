@@ -4,7 +4,7 @@ O Porquinho TV conta as entrevistas exclusivas dadas por André Ventura na telev
 
 ## O que conta
 
-Uma **entrevista exclusiva** é um segmento em que André Ventura é o único entrevistado, responde a perguntas de um jornalista do canal, e passou num dos nove canais medidos: RTP1, RTP2, SIC, TVI, SIC Notícias, RTP3, CNN Portugal, NOW e CMTV.
+Uma **entrevista exclusiva** é um segmento em que André Ventura é o único entrevistado, responde a perguntas de um jornalista do canal, e passou num dos nove canais medidos: RTP1, RTP2, SIC, TVI, SIC Notícias, RTP3/RTP Notícias, CNN Portugal, NOW e CMTV.
 
 O site conta de 2024 em diante. Dos anos anteriores há registos, mas não são de confiança, e preferimos melhorá-los antes de os mostrar.
 
@@ -29,7 +29,7 @@ O site conta **entrevistas exclusivas**. Uma entrevista conta uma vez, mesmo qua
 
 **Quando uma entrevista passa em dois canais**, o que acontece entre canais do mesmo grupo, ela conta uma vez e fica atribuída a um deles. A página de Fontes diz a qual ficou atribuída, escreve ao lado que passou também no outro, e dá a ligação da prova de cada um dos canais: quem discordar da atribuição abre as duas páginas a partir dali.
 
-**O que isto custa:** uma entrevista transmitida na RTP1 e na RTP3 aparece na repartição por canal num canal só. Em troca, a soma dos números por canal é exactamente o total publicado.
+**O que isto custa:** uma entrevista transmitida na RTP1 e na RTP3/RTP Notícias aparece na repartição por canal num canal só. Em troca, a soma dos números por canal é exactamente o total publicado.
 
 Duas entrevistas no mesmo dia e no mesmo canal, uma de manhã e outra à noite, contam as duas.
 
