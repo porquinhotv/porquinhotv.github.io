@@ -39,6 +39,8 @@ As entrevistas são procuradas todos os dias nas páginas dos próprios canais e
 
 Nem todos os canais se deixam ler por uma máquina. Quando a pesquisa automática não chega, ou quando o que ela devolve levanta dúvida, a página é aberta e lida por uma pessoa, e a entrevista só entra se a página disser, por palavras, o canal e o dia. É assim que se resolvem os casos em que dois canais do mesmo grupo publicam o mesmo vídeo: **o canal lê-se do que a página afirma, nunca do endereço onde ela está alojada.**
 
+Grande parte das entrevistas entra pela leitura das publicações da conta oficial do próprio entrevistado, que anuncia as entrevistas com o canal e a hora. Cada publicação é aberta e lida por uma pessoa, que escreve o canal e o dia; a ligação para a publicação fica como prova. **O que isto custa:** um anúncio do entrevistado não é o registo de quem emitiu. Uma entrevista anunciada e depois cancelada só sai do site se alguém der por isso, e uma publicação apagada deixa a linha sem prova. Quem encontrar um caso destes, escreva para o contacto em baixo.
+
 A data que conta é o dia em que a entrevista passou. Quando a fonte só declara a data de publicação, fica essa, e o calendário marca esses dias de forma diferente.
 
 Isto é sempre uma conta por baixo. Uma entrevista que nem o canal nem a imprensa publicaram online não deixa rasto, e o porquinho não a fareja. Na dúvida, o site fica curto: inflacionar uma contagem é o pior que aqui pode acontecer.

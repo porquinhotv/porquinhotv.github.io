@@ -37,6 +37,8 @@ Antes de ativar uma fonte nova, `python -m ferramentas.descobrir <url>` mostra o
 
 ## Contribuir com uma entrevista
 
+**Para acrescentar uma entrevista, o caminho normal é o formulário:** Actions, `adicionar`, "Run workflow", com o dia, o canal e a ligação. O workflow corre `python -m ferramentas.adicionar`, que recusa uma prova repetida, vetada ou já publicada (também quando a ligação vem do telemóvel com parâmetros), avisa se o dia não bate com a hora da publicação ou se o canal já tem uma entrevista a um dia de distância, e escreve a linha em `config/curadoria.yml` sem tocar no resto do ficheiro. Depois corre os testes, publica só a curadoria (`--fonte curadoria`, sem rede) e regenera o HTML. A data é sempre a escrita por quem leu: a hora da publicação serve só para avisar. A `--fonte` substitui apenas a quarentena dessa fonte; as outras ficam como a última recolha completa as deixou.
+
 Para acrescentar ou retirar uma entrevista à mão, usar `config/curadoria.yml`: a lista `entrevistas` precisa apenas de `data`, `canal` e `prova` (mais `origem: imprensa` se a prova for uma notícia), e a lista `remover` leva a `prova` e o `motivo`. Uma linha removida passa a aparecer na quarentena com o motivo, em vez de desaparecer.
 
 Quando a mesma entrevista passou em dois canais, as duas linhas ficam como estão e junta-se uma entrada à lista `mesma_entrevista` do mesmo ficheiro, com a `chave` do grupo, o `canal` a que a entrevista fica atribuída, o `motivo` e as `provas`. O canal escreve-se sempre: não há regra que o deduza, e deduzi-lo do domínio já custou oito linhas erradas em oito.

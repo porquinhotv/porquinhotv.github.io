@@ -204,6 +204,8 @@ def correr(so_fonte: str | None = None, dry_run: bool = False, paginas: int = 0,
     if not dry_run:
         armazem.guardar(publicadas)
         resumo.guardar(agregados)
+        if so_fonte:
+            quarentena = armazem.fundir_quarentena(armazem.carregar_quarentena(), quarentena, so_fonte)
         armazem.guardar_quarentena(quarentena)
         confirmacao.guardar(candidatos)
 

@@ -87,6 +87,36 @@ def guardar(entrevistas: list[dict], caminho: Path = ENTREVISTAS) -> None:
     _escrever(caminho, {"esquema": ESQUEMA, "total": len(entrevistas), "entrevistas": entrevistas})
 
 
+def carregar_quarentena(caminho: Path = QUARENTENA) -> list[dict]:
+    if not caminho.exists():
+        return []
+    return json.loads(caminho.read_text(encoding="utf-8")).get("entradas", [])
+
+
+def fundir_quarentena(anteriores: list[dict], novas: list[dict], so_fonte: str) -> list[dict]:
+    """A quarentena de uma corrida que leu uma fonte so.
+
+    A corrida inteira substitui a fotografia, e essa regra fica. Mas uma
+    corrida so de uma fonte nao viu as outras, e substituir apagava o
+    diagnostico delas sem que ninguem o decidisse: medido a 2026-10-12, a
+    corrida so da curadoria punha a quarentena publicada de 66 entradas a
+    zero. Fica o que as outras fontes deixaram, e o desta fonte e
+    substituido pelo desta corrida.
+
+    Os vetos escritos a mao reaparecem em todas as corridas com a fonte da
+    linha vetada, que nao e a desta: o que se repete por inteiro entra uma
+    vez.
+    """
+    fundidas: list[dict] = []
+    vistas: set[str] = set()
+    for entrada in [e for e in anteriores if e.get("fonte") != so_fonte] + novas:
+        chave = json.dumps(entrada, ensure_ascii=False, sort_keys=True)
+        if chave not in vistas:
+            vistas.add(chave)
+            fundidas.append(entrada)
+    return fundidas
+
+
 def guardar_quarentena(entradas: list[dict], caminho: Path = QUARENTENA) -> None:
     """Rejeitados desta corrida, com motivo. Substituido a cada corrida:
     e uma fotografia, nao um historico."""
