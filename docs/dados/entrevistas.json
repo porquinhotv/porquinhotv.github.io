@@ -57,7 +57,7 @@
    "programa": "Presidenciais 2021",
    "prova_url": "https://www.rtp.pt/play/p8076/e512484/entrevistas-eleicoes-presidenciais-2021",
    "publicado_em": "2020-12-15",
-   "rondas": 33,
+   "rondas": 34,
    "titulo": "Presidenciais 2021 - Entrevistas",
    "transmissoes": [
     {
@@ -75,7 +75,7 @@
      "programa": "Presidenciais 2021",
      "prova_url": "https://www.rtp.pt/play/p8076/e512484/entrevistas-eleicoes-presidenciais-2021",
      "publicado_em": "2020-12-15",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Presidenciais 2021 - Entrevistas"
     }
    ]
@@ -97,7 +97,7 @@
    "programa": "Eleições Legislativas 2022",
    "prova_url": "https://www.rtp.pt/play/p9596/e585994/eleicoes-legislativas-2022-entrevistas-lideres-partidarios",
    "publicado_em": "2021-12-01",
-   "rondas": 33,
+   "rondas": 34,
    "titulo": "Eleições Legislativas 2022 - Entrevistas Líderes Partidários",
    "transmissoes": [
     {
@@ -115,7 +115,7 @@
      "programa": "Eleições Legislativas 2022",
      "prova_url": "https://www.rtp.pt/play/p9596/e585994/eleicoes-legislativas-2022-entrevistas-lideres-partidarios",
      "publicado_em": "2021-12-01",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Eleições Legislativas 2022 - Entrevistas Líderes Partidários"
     }
    ]
@@ -137,7 +137,7 @@
    "programa": "Grande Entrevista",
    "prova_url": "https://www.rtp.pt/play/p9766/e648005/grande-entrevista",
    "publicado_em": "2022-10-19",
-   "rondas": 33,
+   "rondas": 34,
    "titulo": "Grande Entrevista - André Ventura - ep. 41",
    "transmissoes": [
     {
@@ -155,7 +155,7 @@
      "programa": "Grande Entrevista",
      "prova_url": "https://www.rtp.pt/play/p9766/e648005/grande-entrevista",
      "publicado_em": "2022-10-19",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista - André Ventura - ep. 41"
     }
    ]
@@ -337,7 +337,7 @@
    "programa": "Eleições Legislativas 2024",
    "prova_url": "https://www.rtp.pt/play/p13071/e752537/eleicoes-legislativas-2024-entrevistas-lideres-partidarios",
    "publicado_em": "2024-03-04",
-   "rondas": 33,
+   "rondas": 34,
    "titulo": "Eleições Legislativas 2024 - Entrevistas Líderes Partidários - André Ventura - ep. 6",
    "transmissoes": [
     {
@@ -355,7 +355,7 @@
      "programa": "Eleições Legislativas 2024",
      "prova_url": "https://www.rtp.pt/play/p13071/e752537/eleicoes-legislativas-2024-entrevistas-lideres-partidarios",
      "publicado_em": "2024-03-04",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Eleições Legislativas 2024 - Entrevistas Líderes Partidários - André Ventura - ep. 6"
     }
    ]
@@ -476,7 +476,7 @@
      "programa": "",
      "prova_url": "https://www.rtp.pt/play/p10324/e756469/grande-entrevista",
      "publicado_em": "2024-03-20",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista"
     },
     {
@@ -1512,7 +1512,7 @@
      "programa": "",
      "prova_url": "https://www.rtp.pt/play/p10324/e855476/grande-entrevista",
      "publicado_em": "2025-06-04",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista"
     },
     {
@@ -1950,7 +1950,7 @@
      "programa": "Grande Entrevista",
      "prova_url": "https://www.rtp.pt/play/p15797/e887091/grande-entrevista-candidatos-a-presidencia-da-republica",
      "publicado_em": "2025-11-04",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista - Candidatos à Presidência da República - André Ventura - ep. 2"
     },
     {
@@ -2209,7 +2209,7 @@
      "programa": "Grande Entrevista",
      "prova_url": "https://www.rtp.pt/play/p16214/e903851/grande-entrevista",
      "publicado_em": "2026-01-21",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista - André Ventura - ep. 2"
     },
     {
@@ -2868,7 +2868,7 @@
      "programa": "",
      "prova_url": "https://www.rtp.pt/play/p10324/e938640/grande-entrevista",
      "publicado_em": "2026-06-24",
-     "rondas": 33,
+     "rondas": 34,
      "titulo": "Grande Entrevista"
     },
     {
@@ -3370,8 +3370,128 @@
      "titulo": ""
     }
    ]
+  },
+  {
+   "canais": [
+    "now"
+   ],
+   "canal": "now",
+   "confianca": "alta",
+   "data": "2026-10-05",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "a086b861ab3f",
+   "origem": "canal",
+   "primeira_vez": "2026-10-12",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DeH9qyUCSZS/",
+   "publicado_em": "2026-10-05",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "a086b861ab3f",
+     "canal": "now",
+     "confianca": "alta",
+     "data": "2026-10-05",
+     "data_origem": "declarada",
+     "entrevista": "a086b861ab3f",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:e955adf27b2a",
+     "origem": "canal",
+     "primeira_vez": "2026-10-12",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DeH9qyUCSZS/",
+     "publicado_em": "2026-10-05",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
+    "cmtv"
+   ],
+   "canal": "cmtv",
+   "confianca": "alta",
+   "data": "2026-10-08",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "b05d3c94a1fd",
+   "origem": "canal",
+   "primeira_vez": "2026-10-12",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DePnmSHjbR0/",
+   "publicado_em": "2026-10-08",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "b05d3c94a1fd",
+     "canal": "cmtv",
+     "confianca": "alta",
+     "data": "2026-10-08",
+     "data_origem": "declarada",
+     "entrevista": "b05d3c94a1fd",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:ad48627f7fbc",
+     "origem": "canal",
+     "primeira_vez": "2026-10-12",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DePnmSHjbR0/",
+     "publicado_em": "2026-10-08",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
+    "rtp3"
+   ],
+   "canal": "rtp3",
+   "confianca": "alta",
+   "data": "2026-10-12",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "3963d91b8e83",
+   "origem": "canal",
+   "primeira_vez": "2026-10-12",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DeZ6Klqlsyr/",
+   "publicado_em": "2026-10-12",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "3963d91b8e83",
+     "canal": "rtp3",
+     "confianca": "alta",
+     "data": "2026-10-12",
+     "data_origem": "declarada",
+     "entrevista": "3963d91b8e83",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:0627ba75ddf8",
+     "origem": "canal",
+     "primeira_vez": "2026-10-12",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DeZ6Klqlsyr/",
+     "publicado_em": "2026-10-12",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 80
+ "total": 83
 }
