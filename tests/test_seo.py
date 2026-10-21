@@ -6,8 +6,9 @@ Cada teste aqui trava um erro concreto:
 - as paginas voltarem a entregar um esqueleto sem conteudo a quem nao
   executa JavaScript, que e o caso de todos os agentes de recolha dos
   modelos de linguagem;
-- um titulo citado de um terceiro, com um travessao, partir a suite no
-  dia em que a entrevista entrar;
+- um texto de um terceiro, com um travessao, partir a suite no dia em
+  que a entrevista entrar;
+- a pagina de fontes mostrar colunas diferentes com e sem JavaScript;
 - os marcadores desaparecerem de uma pagina e o bloco deixar de ser
   escrito sem que nada falhe.
 """
@@ -67,15 +68,41 @@ class TestConteudoSemJavaScript(unittest.TestCase):
             if canal["entrevistas"]:
                 self.assertIn(f"{canal['nome']}: {canal['entrevistas']}", gerado)
 
-    def test_um_travessao_num_titulo_citado_nao_chega_ao_html(self):
-        """Os titulos vem dos canais e da imprensa, e ha um teste que
-        proibe travessoes em tudo o que e versionado. Sem esta troca, uma
-        entrevista nova parava a recolha seguinte."""
+    def test_um_travessao_em_texto_de_terceiro_nao_chega_ao_html(self):
+        """Ha um teste que proibe travessoes em tudo o que e versionado,
+        e o bloco escreve texto que veio dos dados. Sem esta troca, um
+        campo de terceiros com um travessao parava a recolha seguinte."""
+        self.assertEqual(seo.texto("Entrevista \u2014 parte 1 \u2013 fim"), "Entrevista - parte 1 - fim")
+
+    def test_o_programa_e_o_titulo_nao_chegam_a_pagina_de_fontes(self):
+        """A coluna de programa saiu a 2026-10-21: o que se conta e o
+        canal. Medido nos dados de 2026-10-21: o programa vinha vazio ou
+        "nao apurado" em 54 das 79 linhas visiveis. Trava o regresso da
+        coluna pela porta do gerador."""
         entrevista = dict(self.lista[0])
-        entrevista["titulo"] = "Entrevista \u2014 parte 1"
+        entrevista["programa"] = "Programa-sentinela"
+        entrevista["titulo"] = "Titulo-sentinela"
         gerado = seo.corpo_fontes(self.cfg, self.resumo, [entrevista])
-        self.assertNotIn("\u2014", gerado)
-        self.assertIn("Entrevista - parte 1", gerado)
+        self.assertNotIn("Programa-sentinela", gerado)
+        self.assertNotIn("Titulo-sentinela", gerado)
+        self.assertNotIn("<th>Programa</th>", gerado)
+        linha = re.search(r"<tr><td>.*?</tr>", gerado).group(0)
+        self.assertEqual(linha.count("<td>"), len(seo.COLUNAS_FONTES))
+
+    def test_a_tabela_sem_javascript_tem_as_colunas_do_site(self):
+        """A pagina de fontes e desenhada duas vezes: pelo `fontes.js` no
+        browser e pelo gerador para quem le sem JavaScript. Se uma das
+        duas mudar de colunas sozinha, um motor e um visitante leem
+        tabelas diferentes da mesma pagina."""
+        js = (RAIZ / "docs" / "fontes.js").read_text(encoding="utf-8")
+        achado = re.search(r'el\("tr", \{\}, \[([^\]]*)\]\.map', js)
+        self.assertIsNotNone(achado, "cabecalho da tabela nao encontrado em docs/fontes.js")
+        do_js = tuple(re.findall(r'"([^"]+)"', achado.group(1)))
+        self.assertEqual(do_js, seo.COLUNAS_FONTES)
+        publicado = (RAIZ / "docs" / "fontes.html").read_text(encoding="utf-8")
+        bloco = publicado.split(seo.INICIO_CORPO)[1].split(seo.FIM_CORPO)[0]
+        for cabecalho in re.findall(r"<thead>(.*?)</thead>", bloco):
+            self.assertEqual(tuple(re.findall(r"<th>(.*?)</th>", cabecalho)), seo.COLUNAS_FONTES)
 
     def test_um_titulo_com_etiqueta_nao_fecha_o_bloco_de_dados(self):
         """Um `<` num titulo fecharia o `<script>` a meio e levava o

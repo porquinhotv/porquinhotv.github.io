@@ -45,10 +45,11 @@ FIM_HEAD = "<!-- /seo:head -->"
 INICIO_CORPO = "<!-- seo:corpo -->"
 FIM_CORPO = "<!-- /seo:corpo -->"
 
-# Um travessao num titulo citado de um terceiro nao e escrita do projeto,
-# mas o teste que os proibe le o ficheiro publicado e nao sabe distinguir
-# um do outro. Trocar por hifen ao escrever no bloco custa nada e evita
-# que uma entrevista nova parta a suite no dia em que entrar.
+# Um travessao em texto de um terceiro nao e escrita do projeto, mas o
+# teste que os proibe le o ficheiro publicado e nao sabe distinguir um do
+# outro. Desde 2026-10-21 os titulos das pecas ja nao entram no bloco
+# (saiu a coluna de programa da pagina de fontes); a troca fica porque
+# custa nada e cobre qualquer campo de dados que volte a entrar.
 TRAVESSOES = {"\u2014": "-", "\u2013": "-"}
 
 
@@ -285,12 +286,22 @@ def corpo_calendario(cfg: dict, resumo: dict, lista: list) -> str:
     return "\n".join(linhas)
 
 
+# Sem coluna de programa desde 2026-10-21: o que se conta e o canal, e o
+# programa e o titulo eram texto copiado das paginas de prova, muitas
+# vezes vazio ou "nao apurado" (54 das 79 linhas visiveis em 2026-10-21).
+# Os campos continuam nos dados; so deixam de ser mostrados. Tem de ser
+# as mesmas colunas que `docs/fontes.js` desenha, senao quem le sem
+# JavaScript ve outra tabela; ha um teste.
+COLUNAS_FONTES = ("Data", "Canal", "Prova")
+
+
 def corpo_fontes(cfg: dict, resumo: dict, lista: list) -> str:
     """A tabela toda em HTML, com uma ligacao por prova. E a pagina com
     mais valor para quem le sem JavaScript: sem ela, o site afirma um
     numero e nao mostra uma unica prova."""
     nomes = nomes_dos_canais(resumo)
     sujeito = sujeito_de(resumo)
+    cabecalho = "".join(f"<th>{c}</th>" for c in COLUNAS_FONTES)
     linhas = [INICIO_CORPO]
     anos = sorted({e["data"][:4] for e in lista}, reverse=True)
     for ano in anos:
@@ -298,16 +309,12 @@ def corpo_fontes(cfg: dict, resumo: dict, lista: list) -> str:
         plural = "entrevista exclusiva" if len(do_ano) == 1 else "entrevistas exclusivas"
         linhas.append("<section>")
         linhas.append(f"<h2>{ano}: {len(do_ano)} {plural}</h2>")
-        linhas.append('<table class="tabela"><thead><tr><th>Data</th><th>Canal</th>'
-                      "<th>Programa</th><th>Prova</th></tr></thead><tbody>")
+        linhas.append(f'<table class="tabela"><thead><tr>{cabecalho}</tr></thead><tbody>')
         for e in do_ano:
             canal = texto(nomes.get(e.get("canal"), e.get("canal")))
             outros = [nomes.get(c, c) for c in (e.get("canais") or [])[1:]]
             if outros:
                 canal += " (também na " + texto(", ".join(outros)) + ")"
-            programa = e.get("programa", "")
-            if e.get("titulo"):
-                programa = f"{programa}: {e['titulo']}"
             provas = []
             transmissoes = e.get("transmissoes") or [e]
             varias = len(transmissoes) > 1
@@ -318,7 +325,7 @@ def corpo_fontes(cfg: dict, resumo: dict, lista: list) -> str:
                 provas.append(f'<a href="{texto(t.get("prova_url", ""))}" rel="noopener noreferrer" '
                               f'target="_blank">{texto(rotulo)}</a>{texto(marca)}')
             linhas.append(f"<tr><td>{texto(e['data'])}</td><td>{canal}</td>"
-                          f"<td>{texto(programa)}</td><td>{', '.join(provas)}</td></tr>")
+                          f"<td>{', '.join(provas)}</td></tr>")
         linhas.append("</tbody></table>")
         linhas.append("</section>")
     if not anos:

@@ -38,9 +38,15 @@
     return celula;
   }
 
+  /* Sem coluna de programa desde 2026-10-21: o que se conta e o canal, e o
+     programa e o titulo eram texto copiado das paginas de prova, muitas
+     vezes vazio ou "nao apurado" (54 das 79 linhas visiveis em
+     2026-10-21). Os campos continuam nos dados; so deixam de ser
+     mostrados. As colunas tem de ser as mesmas do bloco pre-renderizado
+     em `ferramentas/seo.py`, e ha um teste que o verifica. */
   function tabela(linhas, nomeDe) {
     var t = el("table", { class: "tabela" });
-    t.appendChild(el("thead", {}, [el("tr", {}, ["Data", "Canal", "Programa", "Prova"].map(function (h) { return el("th", { text: h }); }))]));
+    t.appendChild(el("thead", {}, [el("tr", {}, ["Data", "Canal", "Prova"].map(function (h) { return el("th", { text: h }); }))]));
     var corpo = el("tbody");
     linhas.forEach(function (l) {
       var canal = el("td", { class: "canal", text: nomeDe[l.canal] || l.canal });
@@ -49,11 +55,7 @@
       if (nota) { canal.appendChild(nota); }
       var data = el("td", { text: l.data });
       if (l.data_origem !== "declarada") { data.appendChild(el("span", { class: "parcial", text: " (publicação)" })); }
-      corpo.appendChild(el("tr", {}, [
-        data, canal,
-        el("td", { text: l.programa + (l.titulo ? ": " + l.titulo : "") }),
-        provas(l, nomeDe)
-      ]));
+      corpo.appendChild(el("tr", {}, [data, canal, provas(l, nomeDe)]));
     });
     t.appendChild(corpo);
     return t;
