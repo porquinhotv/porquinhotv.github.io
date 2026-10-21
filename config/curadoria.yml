@@ -568,6 +568,12 @@ entrevistas:
     canal: rtp3
     prova: https://www.instagram.com/p/DeZ6Klqlsyr/
 
+  # Formulario `adicionar`, 2026-10-21: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-10-13 19:04 de Lisboa, pelo identificador.
+  - data: 2026-10-13
+    canal: cnn-portugal
+    prova: https://www.instagram.com/p/DecaP5aFuCQ/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
