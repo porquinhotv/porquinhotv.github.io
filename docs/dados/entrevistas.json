@@ -3530,8 +3530,48 @@
      "titulo": ""
     }
    ]
+  },
+  {
+   "canais": [
+    "sic-noticias"
+   ],
+   "canal": "sic-noticias",
+   "confianca": "alta",
+   "data": "2026-10-20",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "2b99bc98d108",
+   "origem": "canal",
+   "primeira_vez": "2026-10-21",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/Deull-wj1IE/",
+   "publicado_em": "2026-10-20",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "2b99bc98d108",
+     "canal": "sic-noticias",
+     "confianca": "alta",
+     "data": "2026-10-20",
+     "data_origem": "declarada",
+     "entrevista": "2b99bc98d108",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:881d74b94f20",
+     "origem": "canal",
+     "primeira_vez": "2026-10-21",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/Deull-wj1IE/",
+     "publicado_em": "2026-10-20",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 84
+ "total": 85
 }
