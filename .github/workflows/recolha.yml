@@ -1,14 +1,20 @@
 name: recolha
 
+# Sem agendamento desde 2026-10-27, por decisao do autor. Com o historico
+# consolidado, cada entrevista nova entra a mao pelo formulario
+# `adicionar`, que publica sozinho, e a Metodologia diz isso por
+# palavras: a pesquisa automatica deixou de correr. Um cron de volta
+# publicaria todas as manhas linhas que ninguem leu, e a Metodologia
+# passava a afirmar uma coisa falsa sem nenhum erro a avisar. Ha teste.
+#
+# Fica a corrida a pedido, para manutencao. Voltar a agendar isto obriga
+# a reescrever a seccao "De onde vem os numeros" da Metodologia na mesma
+# operacao.
+#
+# Saiu tambem o job `porta`: so existia para escolher, das duas entradas
+# do cron, a que caia nas 06:00 de Lisboa, e numa corrida a pedido
+# deixava passar sempre.
 on:
-  schedule:
-    # As 06:00 de Lisboa. O cron do GitHub e sempre UTC e nao conhece a
-    # hora de verao, por isso ha duas entradas e o job `porta` deixa
-    # passar so a que cai nas 06 de Lisboa (05 UTC no verao, 06 UTC no
-    # inverno). O agendador atrasa habitualmente 5 a 30 minutos, e a
-    # verificacao e por hora inteira para tolerar esse atraso.
-    - cron: '0 5 * * *'
-    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -20,24 +26,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  porta:
-    runs-on: ubuntu-latest
-    outputs:
-      passa: ${{ steps.hora.outputs.passa }}
-    steps:
-      - id: hora
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "passa=sim" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          hora=$(TZ=Europe/Lisbon date +%H)
-          echo "hora em Lisboa: $hora"
-          if [ "$hora" = "06" ]; then echo "passa=sim" >> "$GITHUB_OUTPUT"; else echo "passa=nao" >> "$GITHUB_OUTPUT"; fi
-
   recolher:
-    needs: porta
-    if: needs.porta.outputs.passa == 'sim'
     runs-on: ubuntu-latest
     env:
       TZ: UTC
@@ -76,7 +65,7 @@ jobs:
       #
       # Sem nada a espera de confirmacao, a segunda ronda nao teria nada
       # para confirmar e nao se corre: sao menos pedidos aos canais e ao
-      # motor de busca em todos os dias em que nao ha entrevista.
+      # motor de busca em cada corrida sem nada por confirmar.
       - name: Recolher, primeira ronda
         run: python -m recolha.principal --ronda "$(date -u +%Y-%m-%d)-r1" --estado estado.json
 

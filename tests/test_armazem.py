@@ -32,7 +32,7 @@ class TestFundir(unittest.TestCase):
 
         Desde 2026-09-11 o ficheiro publicado e uma lista de entrevistas
         com as transmissoes dentro, e o armazem guarda transmissoes: se a
-        volta nao fosse exacta, uma corrida diaria perdia linhas ou
+        volta nao fosse exacta, uma corrida perdia linhas ou
         reescrevia `primeira_vez` sem ninguem dar por isso."""
         e = criterio.avaliar(item(), self.fonte, self.config, [])
         with tempfile.TemporaryDirectory() as pasta:

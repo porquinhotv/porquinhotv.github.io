@@ -191,7 +191,7 @@ def correr(so_fonte: str | None = None, dry_run: bool = False, paginas: int = 0,
     print(f"{prefixo}{len(quarentena)} itens em quarentena nesta corrida")
     _contar_recusas(quarentena, prefixo)
     # `por_confirmar` e o que ficou a aguardar rondas, e e o que o
-    # workflow diario le para decidir se corre uma segunda ronda. Ate
+    # workflow `recolha` le para decidir se corre uma segunda ronda. Ate
     # 2026-09-10 esta variavel era reescrita aqui com a contagem do
     # motivo de quarentena `por_confirmar` (fonte automatica sem
     # duracao), que era outra coisa: com esse motivo a zero, a segunda

@@ -12,7 +12,7 @@ O site publica, por período (semana, mês, ano, desde sempre), um número só: 
 - Uma transmissão vinda de fonte automática não entra na primeira vez que é vista: só entra depois de o mesmo bloco aparecer em rondas distintas. O registo de avistamentos está em `docs/dados/candidatos.json`, e ao lado de cada linha ficam as rondas e o número de fontes distintas que a viram. Ver a Metodologia para o que isto protege e o que não protege.
 - `recolha/` aplica o critério em `config/porquinho.yml`, dobra as transmissões em entrevistas (`recolha/entrevistas.py`) e escreve `docs/dados/entrevistas.json` (uma entrada por entrevista, com as transmissões dentro; append-only ao nível da transmissão), `docs/dados/quarentena.json` (tudo o que ficou de fora, com motivo) e `docs/dados/resumo.json` (os agregados).
 - `docs/` é o site. Sem CDN e sem fontes remotas. A fonte tipográfica é servida localmente, licença OFL ao lado.
-- Uma GitHub Action corre a recolha todos os dias e publica as alterações.
+- Desde 2026-10-27 não há recolha agendada. Com o histórico consolidado, cada entrevista nova entra pelo formulário `adicionar` (ver em baixo), que publica sozinho; o workflow `recolha` fica para correr a pedido.
 
 A [Metodologia](METODOLOGIA.md) diz o que conta, o que não conta e onde o método falha.
 
@@ -20,8 +20,8 @@ A [Metodologia](METODOLOGIA.md) diz o que conta, o que não conta e onde o méto
 
 ```bash
 pip install -r requirements.txt
-python -m unittest discover -s tests -t .      # 68 testes, offline
-node --test tests/frontend/*.test.js           # 13 testes a logica do site, sem browser
+python -m unittest discover -s tests -t .      # 430 testes, offline
+node --test tests/frontend/*.test.js           # 33 testes a logica do site, sem browser
 python -m recolha.principal --dry-run          # nao escreve nada
 python -m recolha.principal                    # escreve docs/dados
 python -m recolha.principal --paginas 15       # mais fundo no tempo (historico)
@@ -29,7 +29,7 @@ python -m ferramentas.gerar_seo                # metadados, sitemap e o conteudo
 python -m http.server -d docs 8000
 ```
 
-O site constrói as páginas com JavaScript a partir de `docs/dados`, e os agentes de recolha dos modelos de linguagem não executam JavaScript. Por isso `ferramentas/gerar_seo.py` escreve dentro do HTML, entre marcadores, o mesmo que o JavaScript escreveria: o total, a repartição por canal e a lista completa das provas. Corre sozinho no workflow `recolha`; à mão, correr sempre depois de mexer em `config/seo.yml`, e a seguir também `python -m ferramentas.gerar_metodologia`.
+O site constrói as páginas com JavaScript a partir de `docs/dados`, e os agentes de recolha dos modelos de linguagem não executam JavaScript. Por isso `ferramentas/gerar_seo.py` escreve dentro do HTML, entre marcadores, o mesmo que o JavaScript escreveria: o total, a repartição por canal e a lista completa das provas. Corre sozinho em todos os workflows que escrevem dados (`adicionar`, `remover`, `recolha` e `historico`); à mão, correr sempre depois de mexer em `config/seo.yml`, e a seguir também `python -m ferramentas.gerar_metodologia`.
 
 Antes de ativar uma fonte nova, `python -m ferramentas.descobrir <url>` mostra o que a página anuncia e o que o feed contém.
 

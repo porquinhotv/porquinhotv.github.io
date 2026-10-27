@@ -31,10 +31,11 @@ permissions:
 # perdiam o do meio. Em vez disso, cada tentativa parte do `main` acabado
 # de ler e refaz tudo, e um push rejeitado recomeca do inicio.
 #
-# O custo, dito: se um formulario publicar durante a recolha das 06:00, a
-# recolha pode falhar o rebase e perder essa manha. Nada se perde para
-# sempre, porque o dataset e append-only e a recolha seguinte volta a ver
-# o mesmo; a curadoria nunca se perde, porque esta no `config`.
+# O custo, dito: se um formulario publicar durante uma corrida a pedido
+# da `recolha` ou do `historico`, essa corrida pode falhar o rebase e nao
+# publicar. Nada se perde para sempre, porque o dataset e append-only e a
+# corrida seguinte volta a ver o mesmo; a curadoria nunca se perde,
+# porque esta no `config`. A recolha deixou de ser agendada a 2026-10-27.
 jobs:
   remover:
     runs-on: ubuntu-latest
@@ -70,13 +71,14 @@ jobs:
             # Recusa sem escrever nada se alguma linha nao serve; o motivo
             # de cada uma fica no resumo da corrida.
             python -m ferramentas.remover --provas "$PROVAS" --motivo "$MOTIVO" || exit 1
-            # A mesma barreira da recolha diaria: uma regressao nunca chega
+            # A mesma barreira da recolha: uma regressao nunca chega
             # a escrever dados.
             python -m unittest discover -s tests -t . || exit 1
             node --test tests/frontend/*.test.js || exit 1
             # So a curadoria: sem rede, em menos de um segundo (medido a
-            # 2026-10-12, 0,4 s). As outras fontes continuam a correr as
-            # 06:00, e a quarentena delas fica como estava.
+            # 2026-10-12, 0,4 s). As outras fontes so correm quando a
+            # `recolha` e disparada a mao, e a quarentena delas fica como
+            # estava.
             python -m recolha.principal --fonte curadoria --ronda "remover-$(date -u +%Y-%m-%dT%H%M%S)" | tee saida.txt
             grep -E "entrevistas exclusivas publicadas|retiradas por veto" saida.txt >> "$GITHUB_STEP_SUMMARY" || true
             rm -f saida.txt

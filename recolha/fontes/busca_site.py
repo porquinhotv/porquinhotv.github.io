@@ -7,7 +7,7 @@ de JavaScript. E melhor fonte do que qualquer motor de busca externo:
 - e a fonte primaria, que e o que a Metodologia manda procurar primeiro;
 - nao ha ninguem a bloquear o acesso, ao contrario dos motores de busca,
   que respondem a maquinas de datacenter com muro de consentimento ou
-  captcha e tornariam a recolha diaria uma coisa que funciona uma vez;
+  captcha e tornariam a recolha uma coisa que funciona uma vez;
 - da o URL do proprio canal como prova, que e o que cada linha do site
   precisa de ter.
 
@@ -89,7 +89,7 @@ class FonteBuscaSite(PluginDeFonte):
 
         # Um limite existe para uma pesquisa que devolva a pagina inteira
         # do site em vez de resultados. Sem ele, um padrao mal apertado
-        # transformava uma corrida diaria em milhares de pedidos.
+        # transformava uma corrida em milhares de pedidos.
         if self.fonte.max_candidatos and len(candidatos) > self.fonte.max_candidatos:
             if registo is not None:
                 registo.append(f"{self.fonte.id}: {len(candidatos)} candidatos, limitado a {self.fonte.max_candidatos}")

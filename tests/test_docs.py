@@ -198,6 +198,21 @@ class TestArtefactosGerados(unittest.TestCase):
         self.assertIn("rm -f docs/dados/entrevistas.json", workflow)
         self.assertNotIn("emissoes.json", workflow)
 
+    def test_nenhum_workflow_corre_sozinho(self):
+        """Desde 2026-10-27 a Metodologia afirma que a pesquisa automatica
+        deixou de correr e que cada entrevista nova entra a mao. Um
+        `schedule` de volta num workflow que escreve dados publicaria todas
+        as manhas linhas que ninguem leu, e a pagina passava a afirmar uma
+        coisa falsa sem nenhum erro a avisar. Ate essa data o `recolha`
+        tinha dois cron, as 05 e as 06 UTC."""
+        for caminho in sorted((RAIZ / ".github" / "workflows").glob("*.yml")):
+            workflow = yaml.safe_load(caminho.read_text(encoding="utf-8"))
+            # O YAML 1.1 le a chave `on` como o booleano True.
+            gatilhos = workflow.get("on", workflow.get(True)) or {}
+            with self.subTest(workflow=caminho.name):
+                self.assertNotIn("schedule", gatilhos)
+                self.assertIn("workflow_dispatch", gatilhos)
+
     def test_nenhum_documento_versionado_promete_tempo(self):
         """Uma suposicao que cai tem de cair em todas as suas copias. As
         frases que o site e a Metodologia usavam para prometer tempo nao

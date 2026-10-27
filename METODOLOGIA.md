@@ -35,15 +35,27 @@ Duas entrevistas no mesmo dia e no mesmo canal, uma de manhã e outra à noite, 
 
 ## De onde vêm os números
 
-As entrevistas são procuradas todos os dias nas páginas dos próprios canais e na imprensa. O que a pesquisa devolve não entra logo: cada página é lida, e uma entrevista só é publicada depois de o mesmo canal e o mesmo dia aparecerem em mais do que uma leitura.
+Os números foram construídos em duas fases, com métodos diferentes. O site diz qual, porque cada uma tem custos próprios.
 
-Nem todos os canais se deixam ler por uma máquina. Quando a pesquisa automática não chega, ou quando o que ela devolve levanta dúvida, a página é aberta e lida por uma pessoa, e a entrevista só entra se a página disser, por palavras, o canal e o dia. É assim que se resolvem os casos em que dois canais do mesmo grupo publicam o mesmo vídeo: **o canal lê-se do que a página afirma, nunca do endereço onde ela está alojada.**
+**Primeira fase: o histórico.** As entrevistas de 2024 em diante foram reunidas por pesquisa automática nas páginas dos próprios canais e na imprensa. O que a pesquisa devolvia não entrava logo: cada página era lida, e uma entrevista só era publicada depois de o mesmo canal e o mesmo dia aparecerem em mais do que uma leitura. Onde a máquina não chegava, ou onde o que devolvia levantava dúvida, a página foi aberta e lida por uma pessoa.
 
-Grande parte das entrevistas entra pela leitura das publicações da conta oficial do próprio entrevistado, que anuncia as entrevistas com o canal e a hora. Cada publicação é aberta e lida por uma pessoa, que escreve o canal e o dia; a ligação para a publicação fica como prova. **O que isto custa:** um anúncio do entrevistado não é o registo de quem emitiu. Uma entrevista anunciada e depois cancelada só sai do site se alguém der por isso, e uma publicação apagada deixa a linha sem prova. Quem encontrar um caso destes, escreva para o contacto em baixo.
+**Segunda fase: a manutenção.** Com o histórico consolidado, a pesquisa automática deixou de correr. Cada entrevista nova entra à mão: uma pessoa abre a prova, confirma que ela nomeia o entrevistado, o canal e o dia, e regista essas três coisas com a ligação. Nada entra sem esse passo.
 
-A data que conta é o dia em que a entrevista passou. Quando a fonte só declara a data de publicação, fica essa, e o calendário marca esses dias de forma diferente.
+**Porquê.** A pesquisa automática serviu para percorrer anos de arquivo, o que ninguém faria à mão. Para acompanhar o dia a dia deixou de ser o melhor instrumento: a maior parte dos canais não declara de forma legível por uma máquina o canal e a data de uma entrevista, e os erros mais difíceis de corrigir vieram precisamente de páginas que a máquina atribuiu ao canal errado. Uma entrevista nova de cada vez cabe numa leitura humana completa. A regra que decide o que conta não mudou; mudou quem a aplica.
 
-Isto é sempre uma conta por baixo. Uma entrevista que nem o canal nem a imprensa publicaram online não deixa rasto, e o porquinho não a fareja. Na dúvida, o site fica curto: inflacionar uma contagem é o pior que aqui pode acontecer.
+**O critério é o mesmo.** A prova tem de dizer, por palavras, o canal e o dia. **O canal lê-se do que a página afirma, nunca do endereço onde ela está alojada**: é assim que se resolvem os casos em que dois canais do mesmo grupo publicam o mesmo vídeo. Grande parte das entrevistas entra pelas publicações da conta oficial do próprio entrevistado, que anuncia cada entrevista com o canal e a hora; a ligação para a publicação fica como prova.
+
+**O que isto custa:**
+
+- a contagem depende de alguém dar pela entrevista. Uma entrevista que ninguém registou não aparece, e uma entrevista nova pode demorar a aparecer;
+- cada entrada nova assenta numa leitura, não em várias. A garantia passa a ser a prova estar à vista: qualquer pessoa abre a ligação e confere o canal e o dia;
+- um anúncio do entrevistado não é o registo de quem emitiu. Uma entrevista anunciada e depois cancelada só sai do site se alguém der por isso, e uma publicação apagada deixa a linha sem prova.
+
+Quem encontrar um caso destes, escreva para o contacto em baixo.
+
+A data que conta é o dia em que a entrevista passou. Quando a prova só fixa a data em que foi publicada, fica essa, e o calendário marca esses dias de forma diferente.
+
+Isto é sempre uma conta por baixo. Uma entrevista que não deixou rasto público, ou que ninguém registou, não entra, e o porquinho não a fareja. Na dúvida, o site fica curto: inflacionar uma contagem é o pior que aqui pode acontecer.
 
 ## Correções e sugestões
 

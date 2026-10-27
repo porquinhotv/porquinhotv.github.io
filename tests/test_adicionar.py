@@ -304,7 +304,7 @@ class TestFormularios(unittest.TestCase):
                 self.assertNotIn("concurrency", workflow["jobs"][nome])
 
     def test_os_formularios_correm_os_testes_antes_de_publicar(self):
-        """A mesma barreira da recolha diaria: uma regressao nunca chega a
+        """A mesma barreira da recolha: uma regressao nunca chega a
         escrever dados."""
         for nome, caminho in WORKFLOWS.items():
             texto = caminho.read_text(encoding="utf-8")

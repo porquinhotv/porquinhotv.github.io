@@ -88,7 +88,7 @@ class TestIntegracaoComAsFontes(unittest.TestCase):
 
 
 class TestSegundaRondaNoMesmoDia(unittest.TestCase):
-    """A recolha diaria corre uma segunda ronda no mesmo dia, com
+    """A recolha corre uma segunda ronda no mesmo dia, com
     identificador proprio, para publicar no dia em vez de no seguinte."""
 
     def test_identificadores_distintos_confirmam_no_mesmo_dia(self):

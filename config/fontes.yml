@@ -100,7 +100,7 @@ fontes:
   # heuristica generica (dois segmentos de caminho e um slug com hifen).
   #
   # Para o historico: subir paginas_max. Cada pagina a mais sao mais
-  # pedidos, por isso o valor de todos os dias e baixo de proposito, e a
+  # pedidos, por isso o valor de manutencao e baixo de proposito, e a
   # corrida de historico corre com --paginas para o subir sem editar
   # isto.
   # ------------------------------------------------------------------
@@ -162,7 +162,7 @@ fontes:
   # recusaria metade deles. O nome consta da lista de programas de
   # entrevista da configuracao editorial, que e onde essa decisao vive.
   #
-  # `paginas_max` fica em 2 porque a corrida diaria so precisa dos
+  # `paginas_max` fica em 2 porque a corrida de manutencao so precisa dos
   # episodios recentes: 24 episodios sao cerca de meio ano. A corrida de
   # historico vai ao fundo com `--paginas 20`, que e um numero acima do
   # fim medido da lista; uma pagina vazia nao custa nada.
@@ -224,7 +224,7 @@ fontes:
   # Fica como suplemento, nao como fonte principal: uma pagina por canal
   # e trinta segundos de pausa, o que da seis pedidos por ronda em vez de
   # trinta. Vinte resultados por canal, escolhidos por relevancia, e
-  # pouco para o historico mas util todos os dias.
+  # pouco para o historico mas util numa corrida de manutencao.
 
   - id: motor-sic
     tipo: busca_site
