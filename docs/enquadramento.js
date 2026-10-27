@@ -17,28 +17,32 @@
   /* Dois formatos, decididos pelo autor a 2026-10-27: stories por
      omissao, e 4:5 para o feed do Facebook, do X e do Instagram.
 
-     Nas stories, o Instagram tapa o topo com a barra de progresso e o
-     perfil, e o fundo com a caixa de resposta. A orientacao publica da
-     Meta e deixar livres cerca de 250 pixeis em cima e em baixo; e uma
-     leitura de documentacao, nao uma medicao deste projeto. Por isso a
-     janela comeca aos 200 (o perfil e semitransparente e so lhe toca na
-     margem), a marca fica acima dos 1700 e o que fica tapado em baixo e
-     so a erva. No 4:5 nao ha interface por cima, e as margens sao as do
-     cartao do site. */
+     A pagina ocupa a imagem de ponta a ponta, sem moldura, e a marca fica
+     numa faixa em baixo. Decisao do autor a 2026-10-27, depois de ver a
+     primeira versao numa story: a moldura preta, as margens e a erva em
+     baixo eram confusao visual e tiravam largura a pagina.
+
+     A marca desce ate onde a interface do Instagram a deixa. Medido na
+     captura do autor do editor de stories, a 2026-10-27: a caixa "Add a
+     caption" comeca por volta dos 1815 pixeis da imagem. O fundo do icone
+     fica nos 1786. O topo da imagem fica por baixo dos botoes do editor,
+     como em qualquer story; e a pagina que la esta, nao a marca.
+
+     O esbatido e a passagem da pagina para a faixa da marca: sem moldura,
+     um corte seco a meio de um cartao parecia um erro. No 4:5 nao ha
+     interface por cima. */
   var FORMATOS = {
     historia: {
       id: "historia", rotulo: "Stories 9:16", sufixo: "stories",
       largura: 1080, altura: 1920,
-      janela: { x: 48, y: 200, w: 984, h: 1320, raio: 36, borda: 6, sombra: 12 },
-      marca: { cy: 1622, icone: 112, nome: 76, endereco: 36, intervalo: 26 },
-      erva: 1760
+      janela: { x: 0, y: 0, w: 1080, h: 1630, esbatido: 40 },
+      marca: { cy: 1730, icone: 112, nome: 76, endereco: 36, intervalo: 26 }
     },
     publicacao: {
       id: "publicacao", rotulo: "Publicação 4:5", sufixo: "4x5",
       largura: 1080, altura: 1350,
-      janela: { x: 48, y: 48, w: 984, h: 1036, raio: 32, borda: 6, sombra: 10 },
-      marca: { cy: 1178, icone: 92, nome: 62, endereco: 30, intervalo: 22 },
-      erva: 1274
+      janela: { x: 0, y: 0, w: 1080, h: 1160, esbatido: 32 },
+      marca: { cy: 1258, icone: 92, nome: 62, endereco: 30, intervalo: 22 }
     }
   };
   var ORDEM = ["historia", "publicacao"];
@@ -59,30 +63,49 @@
     return s;
   }
 
-  /* O enquadramento inicial e o que estava no ecra quando se carregou no
-     botao: a janela contem a zona visivel inteira, alinhada pelo topo,
-     porque e por ai que quem le comeca. Quando o ecra e mais largo do que
-     a coluna de conteudo (no desktop sao 860 pixeis num ecra de 1366), a
-     largura que conta e a da coluna: os lados sao ceu liso, e contar com
-     eles poria o texto a um terco do tamanho sem mostrar nada a mais. */
-  function inicial(pagina, visivel, coluna, janela) {
+  /* A zona do ecra que conta. Quando o ecra e mais largo do que a coluna
+     de conteudo (no desktop sao 860 pixeis num ecra de 1366), a largura
+     que conta e a da coluna: os lados sao ceu liso, e contar com eles
+     poria o texto a um terco do tamanho sem mostrar nada a mais. */
+  function regiao(visivel, coluna) {
     var r = { x: visivel.x, y: visivel.y, w: visivel.w, h: visivel.h };
     if (coluna && coluna.w > 0 && coluna.w < r.w) {
       var esq = Math.max(r.x, coluna.x);
       var dir = Math.min(r.x + r.w, coluna.x + coluna.w);
       if (dir > esq) { r.x = esq; r.w = dir - esq; }
     }
-    var s = Math.min(janela.w / r.w, janela.h / r.h);
-    var enq = { s: s, x: r.x + r.w / 2 - janela.w / (2 * s), y: r.y };
-    return limitar(enq, pagina, janela, limites(pagina, janela, s));
+    return r;
   }
 
-  /* Afastar ate caber a largura toda da pagina, e nunca menos do que o
-     inicial; aproximar ate quatro vezes. Mais longe so acrescenta ceu
-     dos lados, mais perto e um pixel ampliado. */
-  function limites(pagina, janela, sInicial) {
+  /* O enquadramento inicial enche a largura da janela com a largura do
+     que se via, a comecar no topo do ecra, porque e por ai que quem le
+     comeca; o que nao cabe em altura fica de fora em baixo. Decisao do
+     autor a 2026-10-27: a primeira versao fazia caber o ecra inteiro, e
+     num telemovel (390x844 numa janela de 984x1320) isso deixava duas
+     faixas de ceu de 120 pixeis da pagina de cada lado e o texto a 62% do
+     tamanho. O autor prefere perder altura e encher a imagem. No desktop
+     nao muda nada: ai a coluna ja enchia a largura antes de faltar altura. */
+  function inicial(pagina, visivel, coluna, janela) {
+    var r = regiao(visivel, coluna);
+    var s = janela.w / r.w;
+    return limitar({ s: s, x: r.x, y: r.y }, pagina, janela, limites(pagina, janela, s, escalaQueContem(visivel, coluna, janela)));
+  }
+
+  /* A escala a que o ecra inteiro cabe na janela, com as faixas de ceu
+     que isso traz. Ja nao e o inicial, mas continua a ser um sitio onde a
+     pessoa pode querer chegar a afastar. */
+  function escalaQueContem(visivel, coluna, janela) {
+    var r = regiao(visivel, coluna);
+    return Math.min(janela.w / r.w, janela.h / r.h);
+  }
+
+  /* Afastar ate caber a largura toda da pagina, ou ate caber o ecra
+     inteiro, o que for mais longe, e nunca menos do que o inicial;
+     aproximar ate quatro vezes. Mais longe so acrescenta ceu dos lados,
+     mais perto e um pixel ampliado. */
+  function limites(pagina, janela, sInicial, sContem) {
     var largura = janela.w / pagina.w;
-    var sMin = Math.min(largura, sInicial);
+    var sMin = Math.min(largura, sInicial, sContem > 0 ? sContem : sInicial);
     return { sMin: sMin, sMax: Math.max(largura, sInicial) * 4 };
   }
 
@@ -181,6 +204,7 @@
     PASSOS: PASSOS,
     escalaDeCaptura: escalaDeCaptura,
     inicial: inicial,
+    escalaQueContem: escalaQueContem,
     limites: limites,
     limitar: limitar,
     mover: mover,

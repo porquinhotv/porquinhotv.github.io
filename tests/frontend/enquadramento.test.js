@@ -16,16 +16,47 @@ function vista(enq, janela) {
   return { x0: enq.x, y0: enq.y, x1: enq.x + janela.w / enq.s, y1: enq.y + janela.h / enq.s };
 }
 
-test("o enquadramento inicial mostra o ecra inteiro do telemovel, e comeca onde o ecra comecava", () => {
-  // Pedido do autor: partilhar exatamente o que se ve. Pagina principal
-  // num ecra de 390x844, depois de descer 500 pixeis.
+test("no telemovel a imagem enche a largura, sem faixas de ceu, e comeca onde o ecra comecava", () => {
+  // Decisao do autor a 2026-10-27, depois de ver a primeira versao: fazer
+  // caber o ecra inteiro deixava 120 pixeis de ceu de cada lado. Prefere
+  // perder altura. Pagina principal num ecra de 390x844, depois de descer
+  // 500 pixeis, medida no Chromium.
   const pagina = { w: 390, h: 3174 };
   const visivel = { x: 0, y: 500, w: 390, h: 844 };
-  const enq = E.inicial(pagina, visivel, { x: 0, w: 390 }, HISTORIA.janela);
+  const j = HISTORIA.janela;
+  const enq = E.inicial(pagina, visivel, { x: 0, w: 390 }, j);
+  const r = E.recorte(enq, pagina, j);
+  quase(r.dx, 0, "nada de ceu a esquerda");
+  quase(r.dw, j.w, "nada de ceu a direita");
+  quase(r.sx, 0, "a largura do ecra inteira");
+  quase(r.sw, 390, "e so ela");
+  quase(r.sy, 500, "a imagem comeca no topo do ecra");
+  quase(r.dh, j.h, "a janela enche em altura");
+  assert.ok(r.sy + r.sh < 500 + 844, "o que nao cabe fica de fora em baixo");
+});
+
+test("nas Fontes em mobile a largura que conta e a do ecra, nao a da pagina alargada", () => {
+  // A tabela poe a pagina com 500 pixeis num ecra de 390. Encher com 500
+  // mostrava o que nao estava no ecra; encher com 390 e o que se via.
+  const pagina = { w: 500, h: 6272 };
+  const enq = E.inicial(pagina, { x: 0, y: 1200, w: 390, h: 844 }, { x: 0, w: 390 }, HISTORIA.janela);
   const v = vista(enq, HISTORIA.janela);
-  quase(v.y0, 500, "a imagem comeca no topo do ecra");
-  assert.ok(v.y1 >= 500 + 844 - 1e-6, "o fundo do ecra cabe");
-  assert.ok(v.x0 <= 0 && v.x1 >= 390, "a largura do ecra cabe");
+  quase(v.x0, 0, "comeca na esquerda do ecra");
+  quase(v.x1, 390, "acaba na direita do ecra");
+});
+
+test("afastar continua a chegar ao ecra inteiro, se a pessoa o quiser", () => {
+  // As faixas deixaram de ser o inicial, mas nao foram proibidas: quem
+  // quiser a altura toda do ecra afasta e tem-na.
+  const pagina = { w: 390, h: 3174 };
+  const visivel = { x: 0, y: 500, w: 390, h: 844 };
+  const j = HISTORIA.janela;
+  const s0 = E.inicial(pagina, visivel, null, j).s;
+  const sContem = E.escalaQueContem(visivel, null, j);
+  const lim = E.limites(pagina, j, s0, sContem);
+  assert.ok(lim.sMin <= sContem, "o afastamento chega ao ecra inteiro");
+  const v = vista(E.limitar({ s: sContem, x: 0, y: 500 }, pagina, j, lim), j);
+  assert.ok(v.y1 >= 500 + 844 - 1e-6, "e o fundo do ecra cabe");
 });
 
 test("no desktop conta a coluna de conteudo, e nao o ceu dos lados", () => {
@@ -123,16 +154,24 @@ test("o controlo de aproximacao vai e volta sem perder a escala", () => {
   assert.equal(E.controloDaEscala(2, { sMin: 2, sMax: 2 }), 0, "limites iguais nao dividem por zero");
 });
 
-test("a marca fica fora das zonas que o Instagram tapa nas stories", () => {
-  // Orientacao publica da Meta, nao medicao propria: cerca de 250 pixeis
-  // tapados em cima e em baixo. A marca e obrigatoria em todas as imagens
-  // e nao pode ficar debaixo da caixa de resposta.
+test("a imagem vai de ponta a ponta, sem moldura, e a marca fica acima da caixa de legenda", () => {
+  // Decisao do autor a 2026-10-27, depois de ver a primeira versao numa
+  // story: sem moldura, sem margens, sem erva em baixo, e a marca mais
+  // abaixo. Medido na captura dele do editor de stories: a caixa "Add a
+  // caption" comeca por volta dos 1815 pixeis. A marca tem de acabar antes.
   const m = HISTORIA.marca;
-  assert.ok(m.cy + m.icone / 2 <= HISTORIA.altura - 220, "marca acima da caixa de resposta");
-  assert.ok(HISTORIA.janela.y + HISTORIA.janela.h + HISTORIA.janela.sombra < m.cy - m.icone / 2, "a janela nao toca na marca");
+  assert.ok(m.cy + m.icone / 2 <= 1800, "marca acima da caixa de legenda");
+  assert.ok(m.cy > 1622, "mais abaixo do que na primeira versao");
   for (const f of [HISTORIA, PUBLICACAO]) {
-    assert.ok(f.janela.y + f.janela.h + f.janela.sombra < f.marca.cy - f.marca.icone / 2, `${f.id}: janela e marca separadas`);
-    assert.ok(f.marca.cy + f.marca.icone / 2 < f.erva, `${f.id}: marca acima da erva`);
+    assert.equal(f.janela.x, 0, `${f.id}: sem margem a esquerda`);
+    assert.equal(f.janela.y, 0, `${f.id}: sem margem em cima`);
+    assert.equal(f.janela.w, f.largura, `${f.id}: a pagina ocupa a largura toda`);
+    for (const campo of ["borda", "sombra", "raio"]) {
+      assert.equal(f.janela[campo], undefined, `${f.id}: a moldura voltou (${campo})`);
+    }
+    assert.equal(f.erva, undefined, `${f.id}: a erva voltou`);
+    assert.ok(f.janela.y + f.janela.h < f.marca.cy - f.marca.icone / 2, `${f.id}: a pagina nao toca na marca`);
+    assert.ok(f.marca.cy + f.marca.icone / 2 < f.altura, `${f.id}: a marca cabe na imagem`);
     assert.equal(f.largura, 1080, `${f.id}: largura das redes`);
   }
   assert.equal(HISTORIA.altura / HISTORIA.largura, 16 / 9);

@@ -62,8 +62,7 @@
      paleta. As reservas so servem se a variavel faltar. */
   function paleta() {
     return {
-      ceu: cor("--ceu", "#CFEAF7"), ceuClaro: cor("--ceu-claro", "#EAF6FB"),
-      erva: cor("--erva", "#7CB85C"), ervaEscura: cor("--erva-escura", "#5E9A45"),
+      ceuClaro: cor("--ceu-claro", "#EAF6FB"),
       tinta: cor("--tinta", "#2B2118"), tintaSuave: cor("--tinta-suave", "#6B5E52"),
       fonte: cor("--fonte", "Fredoka, sans-serif")
     };
@@ -195,14 +194,13 @@
 
   /* ---- composicao --------------------------------------------------- */
 
-  function caminho(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
+  /* A mesma cor com transparencia total, para o esbatido. So se sabe
+     fazer com #RRGGBB, que e como o estilo.css as escreve; com outra
+     forma, a pagina acaba num corte seco, que e feio mas nao e errado. */
+  function transparente(hex) {
+    var m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex);
+    if (!m) { return null; }
+    return "rgba(" + parseInt(m[1], 16) + "," + parseInt(m[2], 16) + "," + parseInt(m[3], 16) + ",0)";
   }
 
   /* Desenha a imagem inteira em pixeis de saida; k converte para o canvas
@@ -216,26 +214,15 @@
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
 
-    var fundo = ctx.createLinearGradient(0, 0, 0, f.altura * 0.45);
-    fundo.addColorStop(0, p.ceu);
-    fundo.addColorStop(1, p.ceuClaro);
-    ctx.fillStyle = fundo;
+    // Fundo da pagina e da faixa da marca: a mesma cor que o fim de todas
+    // as paginas do site, para a passagem nao se notar.
+    ctx.fillStyle = p.ceuClaro;
     ctx.fillRect(0, 0, f.largura, f.altura);
 
-    ctx.fillStyle = p.erva;
-    ctx.fillRect(0, f.erva, f.largura, f.altura - f.erva);
-    ctx.fillStyle = p.ervaEscura;
-    ctx.fillRect(0, f.altura - 14, f.largura, 14);
-
-    ctx.fillStyle = p.tinta;
-    caminho(ctx, j.x + j.sombra, j.y + j.sombra, j.w, j.h, j.raio);
-    ctx.fill();
-
     ctx.save();
-    caminho(ctx, j.x, j.y, j.w, j.h, j.raio);
+    ctx.beginPath();
+    ctx.rect(j.x, j.y, j.w, j.h);
     ctx.clip();
-    ctx.fillStyle = p.ceuClaro;
-    ctx.fillRect(j.x, j.y, j.w, j.h);
     var r = E.recorte(estado.enq, estado.pagina, j);
     if (r) {
       var ef = estado.escalaFoto;
@@ -245,10 +232,16 @@
       if (sw > 0 && sh > 0) { ctx.drawImage(estado.foto, sx, sy, sw, sh, j.x + r.dx, j.y + r.dy, r.dw, r.dh); }
     }
     ctx.restore();
-    ctx.lineWidth = j.borda;
-    ctx.strokeStyle = p.tinta;
-    caminho(ctx, j.x, j.y, j.w, j.h, j.raio);
-    ctx.stroke();
+
+    var vazio = transparente(p.ceuClaro);
+    if (vazio && j.esbatido > 0) {
+      var fim = j.y + j.h;
+      var esb = ctx.createLinearGradient(0, fim - j.esbatido, 0, fim);
+      esb.addColorStop(0, vazio);
+      esb.addColorStop(1, p.ceuClaro);
+      ctx.fillStyle = esb;
+      ctx.fillRect(j.x, fim - j.esbatido, j.w, j.esbatido);
+    }
 
     // A marca: porquinho, nome e endereco, centrados como um bloco so.
     var site = endereco();
@@ -314,7 +307,8 @@
 
   function recalcularLimites() {
     var j = janela();
-    estado.lim = E.limites(estado.pagina, j, E.inicial(estado.pagina, estado.visivel, estado.coluna, j).s);
+    estado.lim = E.limites(estado.pagina, j, E.inicial(estado.pagina, estado.visivel, estado.coluna, j).s,
+      E.escalaQueContem(estado.visivel, estado.coluna, j));
   }
 
   function repor() {
