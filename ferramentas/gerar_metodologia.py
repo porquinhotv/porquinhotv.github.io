@@ -56,7 +56,12 @@ CABECA = """<!doctype html>
 <h2>Metodologia</h2>
 """
 
+# O botao de partilha esta em todas as paginas, decisao do autor a
+# 2026-10-27, e esta pagina nao e escrita a mao: os scripts tem de vir
+# daqui pela mesma razao que o bloco de metadados.
 CAUDA = """</main>
+<script src="enquadramento.js"></script>
+<script src="partilha.js"></script>
 </body>
 </html>
 """

@@ -307,3 +307,119 @@ section h2 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; letter-spaci
   .porco *, .porco .fly-orbit, .porco .fly, .porco .asa { animation: none !important; }
   .porco .lagrima, .porco .zzz { opacity: 1; }
 }
+
+/* ---- partilha ------------------------------------------------------ */
+
+/* Botao fixo, presente em todas as paginas e em qualquer posicao, com o
+   traco dos botoes do menu: contorno de tinta e sombra deslocada. Fica
+   acima da zona segura do iPhone. */
+.ptv-partilhar {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 50;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: var(--rosa);
+  color: var(--tinta);
+  border: 3px solid var(--tinta);
+  border-radius: 48% 52% 46% 54%;
+  box-shadow: 3px 4px 0 var(--tinta);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.ptv-partilhar:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 var(--tinta); }
+.ptv-partilhar:active { transform: translate(2px, 3px); box-shadow: 1px 1px 0 var(--tinta); }
+.ptv-partilhar:focus-visible { outline: 4px solid var(--lama); outline-offset: 3px; }
+.ptv-partilhar[aria-disabled="true"] { opacity: 0.55; cursor: progress; transform: none; box-shadow: 3px 4px 0 var(--tinta); }
+
+/* Ate a coluna de conteudo deixar margem a direita, o botao cairia em
+   cima da ultima linha do rodape. A folga so existe onde e precisa. */
+@media (max-width: 1000px) {
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
+
+.ptv-partilha-dialogo {
+  width: min(520px, calc(100vw - 24px));
+  height: min(900px, calc(100vh - 24px));
+  height: min(900px, calc(100dvh - 24px));
+  max-width: none;
+  max-height: none;
+  padding: 14px 16px;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  border: 3px solid var(--tinta);
+  border-radius: 22px 18px 24px 20px;
+  box-shadow: 4px 5px 0 var(--tinta);
+  overscroll-behavior: contain;
+}
+.ptv-partilha-dialogo[open] { display: flex; flex-direction: column; gap: 10px; }
+.ptv-partilha-dialogo::backdrop { background: rgba(43, 33, 24, 0.55); }
+
+@media (max-width: 560px) {
+  .ptv-partilha-dialogo {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+.pp-cabeca { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pp-cabeca h2 { margin: 0; font-size: 1.25rem; font-weight: 700; }
+
+.pp-palco { position: relative; flex: 1 1 auto; min-height: 180px; display: flex; align-items: center; justify-content: center; }
+.pp-previa { display: block; border-radius: 10px; box-shadow: 0 0 0 2px var(--linha); background: var(--ceu-claro); touch-action: none; cursor: grab; }
+.pp-previa:active { cursor: grabbing; }
+.pp-previa:focus-visible { outline: 3px solid var(--lama); outline-offset: 3px; }
+.pp-aguarde { position: absolute; margin: 0; font-weight: 600; display: none; }
+.pp-a-fotografar .pp-aguarde { display: block; }
+.pp-a-fotografar .pp-previa { visibility: hidden; }
+
+.pp-dica { margin: 0; text-align: center; font-size: 0.9rem; color: var(--tinta-suave); }
+
+.pp-formatos { justify-content: center; margin: 0; }
+.pp-formatos button[aria-pressed="true"] { background: var(--rosa); box-shadow: 2px 3px 0 var(--tinta); }
+.pp-formatos button:disabled { opacity: 0.55; cursor: progress; }
+
+.pp-zoom { display: flex; align-items: center; gap: 8px; }
+.pp-zoom input[type="range"] { flex: 1 1 auto; min-width: 0; accent-color: var(--lama); }
+
+.pp-botao {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 6px 14px;
+  background: var(--branco);
+  color: var(--tinta);
+  border: 3px solid var(--tinta);
+  border-radius: 14px 10px 14px 10px;
+  box-shadow: 2px 3px 0 var(--tinta);
+  cursor: pointer;
+}
+.pp-botao:active { transform: translate(1px, 2px); box-shadow: 1px 1px 0 var(--tinta); }
+.pp-botao:focus-visible { outline: 3px solid var(--lama); outline-offset: 2px; }
+.pp-botao:disabled { opacity: 0.55; cursor: progress; transform: none; }
+.pp-botao[hidden] { display: none; }
+.pp-principal { background: var(--rosa); }
+.pp-redondo { width: 44px; padding: 0; border-radius: 50%; font-size: 1.3rem; line-height: 1; }
+.pp-fechar { width: 44px; padding: 0; border-radius: 50%; font-size: 1.5rem; line-height: 1; }
+
+.pp-acoes { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.pp-estado { margin: 0; min-height: 1.3em; text-align: center; font-size: 0.92rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ptv-partilhar, .pp-botao { transition: none; }
+}
+
+@media print {
+  .ptv-partilhar { display: none; }
+}

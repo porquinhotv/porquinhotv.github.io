@@ -38,12 +38,21 @@ var PTVDOM = (function () {
      porque o rodape passou a ser o mesmo nas tres paginas a 2026-09-11:
      escrito num sitio so, nao ha forma de se desencontrar entre elas. */
   function marcarGerado(resumo) {
+    marcarPronto();
     var no = document.getElementById("gerado");
     if (!no || !resumo || !resumo.gerado_em) { return; }
     no.textContent = "Última recolha: " + String(resumo.gerado_em).replace("T", " ").replace("+00:00", " UTC");
   }
 
+  /* O botao de partilha (partilha.js) so fica ativo depois disto, para
+     nunca fotografar um "A carregar". Marca-se tambem no erro: o painel
+     de erro e o estado final da pagina, e o botao nao pode ficar preso. */
+  function marcarPronto() {
+    document.documentElement.setAttribute("data-pronto", "");
+  }
+
   function mostrarErro(mensagem) {
+    marcarPronto();
     var painel = document.getElementById("painel");
     if (!painel) { return; }
     painel.innerHTML = "";

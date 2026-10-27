@@ -10,6 +10,7 @@
 - a palavra "emissao" nao sobrevive em nada que o publico leia.
 """
 
+import hashlib
 import re
 import unittest
 
@@ -41,6 +42,12 @@ URL_PERMITIDO = re.compile(
 # lesse como pedidos, a unica forma de passar era esconde-las de quem le
 # a pagina sem JavaScript.
 NAO_SAO_PEDIDOS = re.compile(r"<a\b[^>]*>|<script type=\"application/ld\+json\">.*?</script>", re.DOTALL)
+# A biblioteca de captura do botao de partilha, servida daqui. A versao e
+# a impressao digital ficam fixadas: a integridade do pacote foi
+# conferida contra o registo npm a 2026-10-27, e uma troca de versao tem
+# de ser uma decisao, com nova medicao de fidelidade, e nao um acidente.
+BIBLIOTECA_DE_CAPTURA = RAIZ / "docs" / "vendor" / "modern-screenshot.js"
+BIBLIOTECA_SHA256 = "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b"  # modern-screenshot 4.7.0, dist/index.js
 NOMES_PROIBIDOS_NO_CODIGO = re.compile(r"\b(ventura|chega|rtp\d?|sic|tvi|cnn|cmtv|milhazes|rogeiro)\b", re.IGNORECASE)
 
 
@@ -281,7 +288,12 @@ class TestConvencoes(unittest.TestCase):
         pagina de Fontes nao poderia mostrar as provas sem JavaScript.
         Sem este teste voltam CDN, tipos de letra remotos e tudo o resto
         que este site nao serve a partir de terceiros."""
-        for caminho in sorted((RAIZ / "docs").glob("*.html")) + sorted((RAIZ / "docs").glob("*.js")) + sorted((RAIZ / "docs").glob("*.css")):
+        alvos = sorted((RAIZ / "docs").glob("*.html")) + sorted((RAIZ / "docs").glob("*.js")) + sorted((RAIZ / "docs").glob("*.css"))
+        # A biblioteca de captura corre no site como o resto: tambem nao pode
+        # pedir nada a ninguem. Verificado a 2026-10-27: so traz o espaco de
+        # nomes do SVG.
+        alvos += sorted((RAIZ / "docs" / "vendor").glob("*.js"))
+        for caminho in alvos:
             with self.subTest(ficheiro=caminho.name):
                 texto = NAO_SAO_PEDIDOS.sub(" ", caminho.read_text(encoding="utf-8"))
                 for url in re.findall(r"https?://[^\s\"'<>)]+", texto):
@@ -296,6 +308,52 @@ class TestConvencoes(unittest.TestCase):
             with self.subTest(ficheiro=caminho.name):
                 self.assertIn("cloud.umami.is/script.js", caminho.read_text(encoding="utf-8"),
                               f"{caminho.name} nao conta as visitas")
+
+    def test_o_botao_de_partilha_esta_em_todas_as_paginas(self):
+        """Decisao do autor a 2026-10-27: o botao de partilha esta em todas
+        as paginas, para ser coerente. A Metodologia e gerada, e um script
+        colado a mao nela desaparecia na geracao seguinte sem erro, como ja
+        aconteceu ao contador de visitas; por isso o teste le os ficheiros
+        publicados. A ordem conta: o partilha.js usa o enquadramento.js, e
+        os dois vem depois dos scripts da pagina, que marcam os dados como
+        prontos."""
+        for caminho in sorted((RAIZ / "docs").glob("*.html")):
+            texto = caminho.read_text(encoding="utf-8")
+            with self.subTest(ficheiro=caminho.name):
+                enq = texto.find('<script src="enquadramento.js"></script>')
+                par = texto.find('<script src="partilha.js"></script>')
+                self.assertGreater(enq, -1, f"{caminho.name} nao carrega o enquadramento.js")
+                self.assertGreater(par, enq, f"{caminho.name} nao carrega o partilha.js a seguir")
+                outros = [m.start() for m in re.finditer(r'<script src="(?!enquadramento|partilha)[^"]+"></script>', texto)]
+                self.assertTrue(all(o < enq for o in outros), f"{caminho.name} carrega a partilha antes da pagina")
+
+    def test_a_biblioteca_de_captura_e_a_medida_e_traz_a_licenca(self):
+        """A biblioteca foi escolhida por medicao de fidelidade contra a
+        captura nativa do Chromium, numa versao concreta. Outra versao,
+        mesmo do mesmo autor, e outra medicao por fazer. A licenca MIT
+        obriga a acompanhar o codigo com o aviso, e o site serve-o daqui.
+        O caminho escrito no partilha.js tem de existir: se o ficheiro
+        mudasse de sitio, o botao abria o editor e falhava so ai."""
+        self.assertEqual(hashlib.sha256(BIBLIOTECA_DE_CAPTURA.read_bytes()).hexdigest(), BIBLIOTECA_SHA256)
+        self.assertNotIn(b"\r\n", BIBLIOTECA_DE_CAPTURA.read_bytes())
+        licenca = (RAIZ / "docs" / "vendor" / "LICENSE-modern-screenshot.txt").read_text(encoding="utf-8")
+        self.assertIn("MIT", licenca)
+        partilha = (RAIZ / "docs" / "partilha.js").read_text(encoding="utf-8")
+        caminho = re.search(r'var BIBLIOTECA = "([^"]+)"', partilha).group(1)
+        self.assertEqual(RAIZ / "docs" / caminho, BIBLIOTECA_DE_CAPTURA)
+
+    def test_o_botao_so_fica_ativo_quando_os_dados_chegam(self):
+        """O botao espera pelo data-pronto para nunca fotografar um "A
+        carregar". O sinal vive no comum.js e tem de sair nos dois finais
+        possiveis do carregamento: sem ele no erro, o botao ficava preso
+        desativado numa pagina que ja nao vai mudar."""
+        comum = (RAIZ / "docs" / "comum.js").read_text(encoding="utf-8")
+        for funcao in ("marcarGerado", "mostrarErro"):
+            corpo = re.search(r"function " + funcao + r"\([^)]*\) \{(.*?)\n  \}", comum, re.DOTALL).group(1)
+            with self.subTest(funcao=funcao):
+                self.assertIn("marcarPronto()", corpo)
+        self.assertIn('setAttribute("data-pronto"', comum)
+        self.assertIn('hasAttribute("data-pronto")', (RAIZ / "docs" / "partilha.js").read_text(encoding="utf-8"))
 
     def test_o_contacto_do_site_e_um_mailto_e_nao_um_formulario(self):
         """Um formulario que envia precisa de um receptor, e o receptor e
