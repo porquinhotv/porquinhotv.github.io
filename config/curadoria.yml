@@ -580,6 +580,12 @@ entrevistas:
     canal: sic-noticias
     prova: https://www.instagram.com/p/Deull-wj1IE/
 
+  # Formulario `adicionar`, 2026-10-27: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-10-26 20:00 de Lisboa, pelo identificador.
+  - data: 2026-10-26
+    canal: cmtv
+    prova: https://www.instagram.com/p/De-FzrPAabp/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela

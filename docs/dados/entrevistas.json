@@ -3570,8 +3570,48 @@
      "titulo": ""
     }
    ]
+  },
+  {
+   "canais": [
+    "cmtv"
+   ],
+   "canal": "cmtv",
+   "confianca": "alta",
+   "data": "2026-10-26",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "27b2cdf779ee",
+   "origem": "canal",
+   "primeira_vez": "2026-10-27",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/De-FzrPAabp/",
+   "publicado_em": "2026-10-26",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "27b2cdf779ee",
+     "canal": "cmtv",
+     "confianca": "alta",
+     "data": "2026-10-26",
+     "data_origem": "declarada",
+     "entrevista": "27b2cdf779ee",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:d4ac5f8f81fc",
+     "origem": "canal",
+     "primeira_vez": "2026-10-27",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/De-FzrPAabp/",
+     "publicado_em": "2026-10-26",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 85
+ "total": 86
 }

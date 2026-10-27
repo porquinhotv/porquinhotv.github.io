@@ -714,6 +714,15 @@
     }
    },
    "data": "2026-10-20"
+  },
+  {
+   "canais": {
+    "cmtv": {
+     "declaradas": 1,
+     "entrevistas": 1
+    }
+   },
+   "data": "2026-10-26"
   }
  ],
  "esquema": 3,
@@ -725,7 +734,7 @@
   "motor-rtp3",
   "registo-curado"
  ],
- "gerado_em": "2026-10-21T06:53:19+00:00",
+ "gerado_em": "2026-10-27T06:49:28+00:00",
  "por_ano": [
   {
    "ano": "2024",
@@ -737,7 +746,7 @@
   },
   {
    "ano": "2026",
-   "entrevistas": 36
+   "entrevistas": 37
   }
  ],
  "por_canal": [
@@ -783,7 +792,7 @@
   },
   {
    "canal": "cmtv",
-   "entrevistas": 13,
+   "entrevistas": 14,
    "nome": "CMTV"
   }
  ],
@@ -1099,6 +1108,10 @@
   {
    "data": "2026-10-20",
    "entrevistas": 1
+  },
+  {
+   "data": "2026-10-26",
+   "entrevistas": 1
   }
  ],
  "por_mes": [
@@ -1203,13 +1216,13 @@
    "mes": "2026-09"
   },
   {
-   "entrevistas": 5,
+   "entrevistas": 6,
    "mes": "2026-10"
   }
  ],
  "por_origem": {
   "canal": {
-   "entrevistas": 64
+   "entrevistas": 65
   },
   "imprensa": {
    "entrevistas": 15
@@ -1447,6 +1460,10 @@
   {
    "entrevistas": 1,
    "semana": "2026-W43"
+  },
+  {
+   "entrevistas": 1,
+   "semana": "2026-W44"
   }
  ],
  "primeiro_registo": "2024-02-21",
@@ -1461,7 +1478,7 @@
    "de": "2024-03-20",
    "dias": 2
   },
-  "ultima_data": "2026-10-20"
+  "ultima_data": "2026-10-26"
  },
  "sujeito": {
   "id": "ventura",
@@ -1475,7 +1492,7 @@
   "pergunta": "Quantas entrevistas exclusivas deu André Ventura na televisão portuguesa?"
  },
  "totais": {
-  "entrevistas": 79
+  "entrevistas": 80
  },
- "ultimo_registo": "2026-10-20"
+ "ultimo_registo": "2026-10-26"
 }
