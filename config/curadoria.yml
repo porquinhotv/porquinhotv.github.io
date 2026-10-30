@@ -586,6 +586,12 @@ entrevistas:
     canal: cmtv
     prova: https://www.instagram.com/p/De-FzrPAabp/
 
+  # Formulario `adicionar`, 2026-10-30: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-10-29 17:15 de Lisboa, pelo identificador.
+  - data: 2026-10-29
+    canal: cnn-portugal
+    prova: https://www.instagram.com/p/DfFhXsdFlMO/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela

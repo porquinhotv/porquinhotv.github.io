@@ -3610,8 +3610,48 @@
      "titulo": ""
     }
    ]
+  },
+  {
+   "canais": [
+    "cnn-portugal"
+   ],
+   "canal": "cnn-portugal",
+   "confianca": "alta",
+   "data": "2026-10-29",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "76e8e35c566c",
+   "origem": "canal",
+   "primeira_vez": "2026-10-30",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DfFhXsdFlMO/",
+   "publicado_em": "2026-10-29",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "76e8e35c566c",
+     "canal": "cnn-portugal",
+     "confianca": "alta",
+     "data": "2026-10-29",
+     "data_origem": "declarada",
+     "entrevista": "76e8e35c566c",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:cef7e1c94224",
+     "origem": "canal",
+     "primeira_vez": "2026-10-30",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DfFhXsdFlMO/",
+     "publicado_em": "2026-10-29",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 86
+ "total": 87
 }
