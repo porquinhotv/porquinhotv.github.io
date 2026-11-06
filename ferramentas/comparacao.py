@@ -15,13 +15,16 @@ Tres regras, cada uma com a razao:
 1. So conta `estado: confirmada`. Uma linha por verificar fica no
    ficheiro com o motivo, para a decisao ficar registada, e nao entra em
    numero nenhum: "nao sei" nao e "sim".
-2. Ha uma janela so, a mesma para todos, incluindo o sujeito: comeca no
-   dia em que a pessoa mais recente no cargo o assumiu e acaba no ultimo
-   dia ate onde se procuraram as entrevistas das outras pessoas
-   (`janela.ate`). Por isso so se mostra o que cai dentro dela: comparar
-   tres anos de uma pessoa com ano e meio de outra nao e comparavel, e um
-   numero do sujeito cortado noutro dia que nao o da pagina inicial
-   parecia um erro (81 contra 82, apontado pelo autor a 2026-11-06).
+2. Cada pessoa conta-se desde que o site conta ou desde que assumiu o
+   cargo, o que for mais tarde, e todas ate ao mesmo dia de fecho
+   (`janela.ate`), incluindo o sujeito. Os periodos diferentes mostram-se
+   numa linha do tempo comum, com a faixa de quem entrou mais tarde
+   riscada antes da entrada, e o ritmo (uma entrevista a cada N dias)
+   mede cada um no seu periodo. A comparacao directa, numero contra
+   numero, faz-se so na janela comum (`janela.desde` a `janela.ate`):
+   tres anos de uma pessoa ao lado de ano e meio de outra nao se comparam
+   pelo total. Pedido do autor a 2026-11-06: dar o peso visual a todas as
+   entrevistas do sujeito, sendo honesto quanto a quem entrou quando.
 3. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
    nomes dos canais vem do resumo publicado, como no resto do gerador.
 
@@ -53,20 +56,27 @@ FORMATOS = ("informativa", "entretenimento")
 # acontece com os textos satiricos da pagina principal.
 ESPACOS = {
     "titulo": set(),
-    "intro": {"desde", "ate"},
+    "periodo": {"desde", "ate"},
+    "intro": set(),
+    "desde_cartao": {"data"},
+    "ritmo": {"dias"},
+    "ritmo_zero": set(),
+    "linha_titulo": set(),
+    "linha_legenda": set(),
+    "janela_titulo": {"desde", "ate"},
     "frase_razao": {"nome", "razao"},
     "frase_zero": {"nome"},
     "frase_empate": {"nome", "n"},
     "remate": set(),
-    "ritmo": {"dias"},
-    "ritmo_zero": set(),
     "provas_titulo": set(),
     "provas_legenda": {"fontes"},
-    "nenhuma_na_janela": {"data", "canal"},
     "metodo_titulo": set(),
-    "metodo": {"desde", "ate", "total"},
+    "metodo": {"inicio", "desde", "ate"},
     "por_verificar": {"k"},
 }
+
+# Abreviaturas dos meses no eixo da linha do tempo.
+MESES_CURTOS = ("jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez")
 
 # Nao e configuracao editorial: e a lingua em que as datas se escrevem.
 # Para a frase "por cada entrevista de X, o porquinho deu mais de duas".
@@ -154,7 +164,14 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
         except ValueError as e:
             erros.append(str(e))
             continue
-        pessoas.append({"id": pid, "nome": p.get("nome", ""), "cargo": p.get("cargo", ""), "desde": inicio})
+        if inicio > visivel_desde and not (p.get("marco") and p.get("antes")):
+            erros.append(f"{onde}: entra depois do inicio do site; faltam `marco` e `antes`, que a linha do tempo mostra")
+        for chave in ("marco", "antes", "desde_texto"):
+            if _espacos(str(p.get(chave) or "")):
+                erros.append(f"{onde}: `{chave}` nao tem espacos para preencher")
+        pessoas.append({"id": pid, "nome": p.get("nome", ""), "cargo": p.get("cargo", ""), "desde": inicio,
+                        "marco": p.get("marco") or "", "antes": p.get("antes") or "",
+                        "desde_texto": p.get("desde_texto") or ""})
     if not pessoas:
         erros.append("pessoas: nenhuma")
     inicio_de = {p["id"]: p["desde"] for p in pessoas}
@@ -220,29 +237,28 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
 
 
 def contar(norm: dict, lista: list, visivel_desde: dt.date) -> dict:
-    """As contagens da pagina, todas dentro da janela. O sujeito conta-se
-    sobre a lista publicada, a mesma que o resto do site mostra (ja com
-    uma entrevista por linha, mesmo quando passou em dois canais)."""
+    """As contagens da pagina. O sujeito conta-se sobre a lista publicada,
+    a mesma que o resto do site mostra (ja com uma entrevista por linha,
+    mesmo quando passou em dois canais). Todos acabam no mesmo dia."""
     desde, ate = norm["desde"], norm["ate"]
-
-    def na_janela(dia: dt.date) -> bool:
-        return desde <= dia <= ate
-
-    dias = [data(e["data"], "entrevistas.json") for e in lista]
-    sujeito = {"janela": sum(na_janela(d) for d in dias),
-               "total": sum(visivel_desde <= d for d in dias)}
+    dias_sujeito = sorted(d for d in (data(e["data"], "entrevistas.json") for e in lista)
+                          if visivel_desde <= d <= ate)
+    sujeito = {"inicio": visivel_desde, "dias": dias_sujeito, "total": len(dias_sujeito),
+               "janela": sum(desde <= d for d in dias_sujeito),
+               "duracao": (ate - visivel_desde).days + 1}
     pessoas = []
     for p in norm["pessoas"]:
+        inicio = max(p["desde"], visivel_desde)
         suas = [e for e in norm["entrevistas"] if e["pessoa"] == p["id"]]
-        confirmadas = [e for e in suas if e["estado"] == "confirmada"]
-        linhas = sorted((e for e in confirmadas if na_janela(e["data"])),
+        linhas = sorted((e for e in suas if e["estado"] == "confirmada" and inicio <= e["data"] <= ate),
                         key=lambda e: (e["data"], e["canal"]), reverse=True)
-        anteriores = sorted((e for e in confirmadas if e["data"] < desde), key=lambda e: e["data"])
-        pessoas.append(dict(p, janela=len(linhas), linhas=linhas,
-                            ultima_antes=anteriores[-1] if anteriores else None,
+        pessoas.append(dict(p, inicio=inicio, linhas=linhas, total=len(linhas),
+                            dias=sorted(e["data"] for e in linhas),
+                            janela=sum(desde <= e["data"] for e in linhas),
+                            duracao=(ate - inicio).days + 1,
                             por_verificar=sum(1 for e in suas if e["estado"] == "por_verificar"
-                                              and na_janela(e["data"]))))
-    return {"sujeito": sujeito, "pessoas": pessoas, "dias": (ate - desde).days + 1}
+                                              and inicio <= e["data"] <= ate)))
+    return {"sujeito": sujeito, "pessoas": pessoas}
 
 
 def _preencher(modelo: str, **valores) -> str:
@@ -280,18 +296,61 @@ def frases_da_comparacao(t: dict, n_sujeito: int, pessoas: list) -> list:
     return frases
 
 
-def _cartao(nome: str, cargo: str, n: int, dias: int, t: dict, classe: str) -> list:
-    """Um cartao por pessoa: o numero, um quadrado por entrevista e o ritmo.
-    Os quadrados sao a mesma unidade para todos, por isso a diferenca le-se
-    sem escala nenhuma."""
-    ritmo = _preencher(t["ritmo"], dias=round(dias / n)) if n else _preencher(t["ritmo_zero"])
-    quadrados = "".join("<i></i>" for _ in range(n))
+def _ritmo(t: dict, n: int, duracao: int) -> str:
+    return _preencher(t["ritmo"], dias=round(duracao / n)) if n else _preencher(t["ritmo_zero"])
+
+
+def _cartao(nome: str, cargo: str, n: int, desde: str, ritmo: str, classe: str) -> list:
     return [f'<article class="{" ".join(c for c in ("pessoa", classe) if c)}">',
             f"<h3>{seo.texto(nome)}<small>{seo.texto(cargo)}</small></h3>",
             f'<p class="quantas">{n}</p>',
-            f'<p class="quadrados" aria-hidden="true">{quadrados}</p>',
+            f'<p class="desde">{desde}</p>',
             f'<p class="ritmo">{ritmo}</p>',
             "</article>"]
+
+
+def _meses(inicio: dt.date, fim: dt.date) -> list:
+    meses, (a, m) = [], (inicio.year, inicio.month)
+    while (a, m) <= (fim.year, fim.month):
+        meses.append((a, m))
+        a, m = (a + 1, 1) if m == 12 else (a, m + 1)
+    return meses
+
+
+def _faixa(nome: str, dias: list, inicio_pessoa: dt.date, meses: list, antes: str, classe: str) -> list:
+    """Uma faixa da linha do tempo: um quadrado por entrevista, no mes em
+    que passou. Os meses antes de a pessoa entrar ficam riscados e dizem
+    porque, para que uma faixa vazia nunca pareca uma pessoa calada."""
+    por_mes: dict = {}
+    for d in dias:
+        por_mes[(d.year, d.month)] = por_mes.get((d.year, d.month), 0) + 1
+    celulas = []
+    for a, m in meses:
+        antes_de_entrar = (a, m) < (inicio_pessoa.year, inicio_pessoa.month)
+        quadrados = "".join("<i></i>" for _ in range(por_mes.get((a, m), 0)))
+        classe_mes = ' class="antes"' if antes_de_entrar else ""
+        celulas.append(f"<span{classe_mes}>{quadrados}</span>")
+    n_antes = sum((a, m) < (inicio_pessoa.year, inicio_pessoa.month) for a, m in meses)
+    if n_antes:
+        celulas.append(f'<em style="width: calc({n_antes} / var(--meses) * 100%)">{seo.texto(antes)}</em>')
+    atributo = f" {classe}" if classe else ""
+    return [f'<div class="faixa{atributo}">', f'<p class="faixa-nome">{seo.texto(nome)}: {len(dias)}</p>',
+            f'<div class="meses">{"".join(celulas)}</div>', "</div>"]
+
+
+def _eixo(meses: list) -> str:
+    """Os anos por baixo da linha do tempo, cada um sobre os seus meses, e
+    o primeiro e o ultimo mes por extenso: a pagina diz o periodo sem
+    obrigar ninguem a contar colunas."""
+    partes, i = [], 0
+    while i < len(meses):
+        ano = meses[i][0]
+        j = i
+        while j < len(meses) and meses[j][0] == ano:
+            j += 1
+        partes.append(f'<span style="grid-column: {i + 1} / span {j - i}">{ano}</span>')
+        i = j
+    return f'<div class="eixo">{"".join(partes)}</div>'
 
 
 def _tabela(linhas: list, nomes: dict, rotulos: dict) -> list:
@@ -318,41 +377,60 @@ def desenhar(norm: dict, contas: dict, resumo: dict, visivel_desde: dt.date) -> 
     t = norm["textos"]
     nomes = seo.nomes_dos_canais(resumo)
     sujeito = seo.sujeito_de(resumo)
-    desde, ate = por_extenso(norm["desde"]), por_extenso(norm["ate"])
-    pessoas = contas["pessoas"]
-    n_sujeito = contas["sujeito"]["janela"]
+    ate = norm["ate"]
+    s, pessoas = contas["sujeito"], contas["pessoas"]
+    ordem = sorted(pessoas, key=lambda p: (p["inicio"], -p["total"]))
 
     linhas = [seo.INICIO_CORPO, '<section class="cartao comparativo">',
               f"<h2>{_preencher(t['titulo'])}</h2>",
-              f'<p class="legenda-secao">{_preencher(t["intro"], desde=desde, ate=ate)}</p>',
+              f'<p class="periodo">{_preencher(t["periodo"], desde=por_extenso(visivel_desde), ate=por_extenso(ate))}</p>',
+              f'<p class="legenda-secao">{_preencher(t["intro"])}</p>',
               '<div class="trio">']
-    linhas += _cartao(sujeito, norm["cargo_sujeito"], n_sujeito, contas["dias"], t, "porquinho")
-    for p in sorted(pessoas, key=lambda p: -p["janela"]):
-        linhas += _cartao(p["nome"], p["cargo"], p["janela"], contas["dias"], t, "")
+    linhas += _cartao(sujeito, norm["cargo_sujeito"], s["total"],
+                      _preencher(t["desde_cartao"], data=por_extenso(visivel_desde)),
+                      _ritmo(t, s["total"], s["duracao"]), "porquinho")
+    for p in ordem:
+        desde = _preencher(t["desde_cartao"], data=por_extenso(p["inicio"]))
+        if p["desde_texto"] and p["inicio"] > visivel_desde:
+            desde += ", " + seo.texto(p["desde_texto"])
+        linhas += _cartao(p["nome"], p["cargo"], p["total"], desde, _ritmo(t, p["total"], p["duracao"]), "")
     linhas.append("</div>")
-    linhas.append('<p class="veredicto">' + " ".join(frases_da_comparacao(t, n_sujeito, pessoas)) + "</p>")
-    linhas.append("</section>")
+
+    meses = _meses(visivel_desde, ate)
+    linhas += [f"<h3>{_preencher(t['linha_titulo'])}</h3>",
+               f'<div class="linha-tempo" style="--meses: {len(meses)}">']
+    linhas += _faixa(sujeito, s["dias"], visivel_desde, meses, "", "porquinho")
+    for p in ordem:
+        linhas += _faixa(p["nome"], p["dias"], p["inicio"], meses, p["antes"], "")
+    linhas += [_eixo(meses), "</div>"]
+    primeiro, ultimo = meses[0], meses[-1]
+    marcos = [f"{por_extenso(p['inicio'])}: {seo.texto(p['marco'])}." for p in ordem if p["inicio"] > visivel_desde]
+    legenda = f"{MESES_CURTOS[primeiro[1] - 1]} {primeiro[0]} a {MESES_CURTOS[ultimo[1] - 1]} {ultimo[0]}. "
+    linhas.append(f'<p class="legenda-secao">{legenda}{_preencher(t["linha_legenda"])} {" ".join(marcos)}</p>')
+
+    desde_j, ate_j = por_extenso(norm["desde"]), por_extenso(ate)
+    linhas += [f'<h3>{_preencher(t["janela_titulo"], desde=desde_j, ate=ate_j)}</h3>',
+               '<p class="mesmo-periodo">' + " · ".join(
+                   [f"<strong>{seo.texto(sujeito)} {s['janela']}</strong>"]
+                   + [f"{seo.texto(p['nome'])} {p['janela']}" for p in sorted(pessoas, key=lambda p: -p["janela"])])
+               + "</p>",
+               '<p class="veredicto">' + " ".join(frases_da_comparacao(t, s["janela"], pessoas)) + "</p>",
+               "</section>"]
 
     fontes = '<a href="fontes.html">página de Fontes</a>'
     linhas += ['<section class="provas-dos-outros">', f"<h2>{_preencher(t['provas_titulo'])}</h2>",
                f'<p class="legenda-secao">{_preencher(t["provas_legenda"], fontes=fontes)}</p>']
-    for p in sorted(pessoas, key=lambda p: -p["janela"]):
-        linhas.append(f"<h3>{seo.texto(p['nome'])}: {_plural(p['janela'])}</h3>")
+    for p in ordem:
+        linhas.append(f"<h3>{seo.texto(p['nome'])}: {_plural(p['total'])}, "
+                      f"{_preencher(t['desde_cartao'], data=por_extenso(p['inicio']))}</h3>")
         if p["linhas"]:
             linhas += _tabela(p["linhas"], nomes, norm["rotulos"])
-        elif p["ultima_antes"]:
-            u = p["ultima_antes"]
-            frase = _preencher(t["nenhuma_na_janela"], data=por_extenso(u["data"]),
-                               canal=seo.texto(nomes.get(u["canal"], u["canal"])))
-            rotulo = seo.texto(norm["rotulos"][u["tipo_prova"]])
-            linhas.append(f'<p class="legenda-secao">{frase} <a href="{seo.texto(u["prova"])}" '
-                          f'rel="noopener noreferrer" target="_blank">{rotulo}</a>.</p>')
         if p["por_verificar"]:
             linhas.append(f'<p class="legenda-secao">{_preencher(t["por_verificar"], k=p["por_verificar"])}</p>')
     linhas.append("</section>")
 
     linhas += ["<section>", f"<h2>{_preencher(t['metodo_titulo'])}</h2>"]
-    linhas += [f"<p>{_preencher(par, desde=desde, ate=ate, total=contas['sujeito']['total'])}</p>"
+    linhas += [f"<p>{_preencher(par, inicio=por_extenso(visivel_desde), desde=desde_j, ate=ate_j)}</p>"
                for par in t["metodo"]]
     linhas.append('<p><a href="metodologia.html">Como o resto do site é contado</a>.</p>')
     linhas += ["</section>", seo.FIM_CORPO]
@@ -381,10 +459,12 @@ def main() -> int:
     visivel = visivel_de(resumo)
     norm = validar(carregar(), canais_validos(), visivel)
     contas = contar(norm, lista, visivel)
-    print(f"janela: {norm['desde']} a {norm['ate']} ({contas['dias']} dias)")
-    print(f"  {seo.sujeito_de(resumo)}: {contas['sujeito']['janela']} (desde {visivel}: {contas['sujeito']['total']})")
+    s = contas["sujeito"]
+    print(f"fecho: {norm['ate']}; periodo comum desde {norm['desde']}")
+    print(f"  {seo.sujeito_de(resumo)}: {s['total']} desde {visivel}, {s['janela']} no periodo comum")
     for p in contas["pessoas"]:
-        print(f"  {p['nome']}: {p['janela']}, por verificar {p['por_verificar']}")
+        print(f"  {p['nome']}: {p['total']} desde {p['inicio']}, {p['janela']} no periodo comum, "
+              f"por verificar {p['por_verificar']}")
     return 0
 
 

@@ -5,8 +5,9 @@ Cada teste trava um erro concreto:
 - uma linha por verificar entrar na contagem;
 - o numero do sujeito crescer depois de o levantamento dos outros ter
   fechado, e o contraste crescer sozinho;
-- a pagina mostrar periodos diferentes lado a lado, ou um numero do
-  sujeito que nao bate com a pagina inicial;
+- a pagina por periodos diferentes a competir pelo total, esconder que
+  alguem entrou mais tarde, ou mostrar um numero do sujeito que nao bate
+  com a pagina inicial;
 - uma entrevista em dois canais contar duas vezes, ou duas entrevistas
   no mesmo dia em canais diferentes contarem uma;
 - um erro no YAML (canal mal escrito, prova em falta, linha repetida,
@@ -53,7 +54,8 @@ def cfg_minima(entrevistas=()):
         "sujeito": {"cargo": "cargo do sujeito"},
         "pessoas": [
             {"id": "a", "nome": "Pessoa A", "cargo": "cargo A", "desde": "2024-01-01"},
-            {"id": "b", "nome": "Pessoa B", "cargo": "cargo B", "desde": "2025-06-28"},
+            {"id": "b", "nome": "Pessoa B", "cargo": "cargo B", "desde": "2025-06-28",
+             "marco": "Pessoa B assume o cargo", "antes": "ainda sem o cargo"},
         ],
         "rotulos_de_prova": {"canal": "ver", "imprensa": "notícia"},
         "textos": copy.deepcopy(real["textos"]),
@@ -104,7 +106,7 @@ class TestContagem(unittest.TestCase):
         lista = [{"data": "2025-06-27"}, {"data": "2025-06-28"}, {"data": "2026-10-30"}, {"data": "2026-11-03"},
                  {"data": "2024-01-01"}]
         s = contas(cfg_minima(), lista)["sujeito"]
-        self.assertEqual(s["janela"], 2)
+        self.assertEqual((s["janela"], s["total"]), (2, 4))
 
     def test_uma_entrevista_em_dois_canais_conta_uma_vez(self):
         """O levantamento tem dois casos de simulcast, os dois num par de
@@ -125,22 +127,29 @@ class TestContagem(unittest.TestCase):
                           linha(pessoa="b", data="2025-10-29", canal="c2")])
         self.assertEqual(pessoa(contas(cfg), "b")["janela"], 2)
 
-    def test_nada_fora_da_janela_entra_na_comparacao(self):
-        """A primeira versao punha lado a lado tres anos de uma pessoa e ano
-        e meio de outra, e um bloco "desde 2024" com o sujeito cortado a 30
-        out (81) ao lado da pagina inicial (82). O autor apontou as duas
-        coisas a 2026-11-06: ha uma janela so, e uma linha anterior a ela
-        so aparece para dizer quando foi a ultima de quem nao tem nenhuma."""
-        cfg = cfg_minima([linha(data="2024-05-01", prova="https://exemplo.pt/antiga"),
-                          linha(data="2025-06-20", prova="https://exemplo.pt/ultima-antes")])
-        a = pessoa(contas(cfg), "a")
-        self.assertEqual(a["janela"], 0)
-        self.assertEqual(a["ultima_antes"]["prova"], "https://exemplo.pt/ultima-antes")
-        gerado = comparacao.corpo(RESUMO, [{"data": "2024-03-01"}], cfg, CANAIS)
-        self.assertIn("https://exemplo.pt/ultima-antes", gerado)
-        self.assertNotIn("https://exemplo.pt/antiga", gerado)
-        self.assertNotIn("<tr><td>2025-06-20", gerado)
-        self.assertIn('<p class="quantas">0</p>', gerado)  # o sujeito de 2024 fica fora
+    def test_quem_entrou_mais_tarde_tem_a_faixa_riscada_e_nao_compete_pelo_total(self):
+        """O autor pediu a 2026-11-06 todas as entrevistas do sujeito a
+        vista, com a ressalva de que o segundo lider so entrou a 2025-06-28.
+        A faixa dele fica riscada antes dessa data e diz porque, para uma
+        faixa vazia nunca parecer uma pessoa calada; e a comparacao numero
+        contra numero faz-se so no periodo comum."""
+        cfg = cfg_minima([linha(pessoa="b", data="2025-07-01")])
+        b = pessoa(contas(cfg), "b")
+        self.assertEqual((b["inicio"], b["total"], b["janela"]), (dt.date(2025, 6, 28), 1, 1))
+        gerado = comparacao.corpo(RESUMO, [{"data": "2024-03-01"}, {"data": "2025-07-02"}], cfg, CANAIS)
+        self.assertEqual(gerado.count('<span class="antes">'), 17)  # jan 2024 a mai 2025
+        self.assertIn("ainda sem o cargo", gerado)
+        self.assertIn("28 de junho de 2025: Pessoa B assume o cargo.", gerado)
+        self.assertIn("<strong>Sujeito 1</strong>", gerado)  # so a de 2025-07-02 no periodo comum
+
+    def test_o_ritmo_mede_cada_um_no_seu_periodo(self):
+        """Os totais cobrem periodos diferentes; o ritmo e o que os poe na
+        mesma medida. Medido sobre o periodo do sujeito, o de quem entrou
+        mais tarde ficava artificialmente lento."""
+        cfg = cfg_minima([linha(pessoa="b", data="2025-07-01")])
+        c = contas(cfg, [{"data": "2024-01-01"}])
+        self.assertEqual(pessoa(c, "b")["duracao"], (dt.date(2026, 10, 30) - dt.date(2025, 6, 28)).days + 1)
+        self.assertEqual(c["sujeito"]["duracao"], (dt.date(2026, 10, 30) - dt.date(2024, 1, 1)).days + 1)
 
 
 class TestTexto(unittest.TestCase):
@@ -166,14 +175,19 @@ class TestTexto(unittest.TestCase):
         empate = comparacao.frases_da_comparacao(t, 25, [{"nome": "A", "janela": 25}])
         self.assertEqual(empate, [comparacao._preencher(t["frase_empate"], nome="A", n=25)])
 
-    def test_a_pagina_reconcilia_o_numero_do_sujeito_com_a_inicial(self):
-        """A pagina inicial conta desde 2024 e esta conta a janela. Dois
-        numeros diferentes para a mesma pessoa sem explicacao parecem um
-        erro, que foi o que o autor viu a 2026-11-06. A pagina diz por
-        palavras o total da inicial, tirado do mesmo resumo."""
-        resumo, _ = seo.dados()
+    def test_o_numero_do_sujeito_bate_com_a_pagina_inicial(self):
+        """A primeira versao mostrava 81 (cortado a 30 out) e a pagina
+        inicial 82; o autor viu-o a 2026-11-06. O cartao do sujeito conta
+        desde o mesmo dia que a inicial, e com o fecho no dia da ultima
+        publicacao o numero e o mesmo; o periodo vem escrito por extenso."""
+        resumo, entrevistas = seo.dados()
+        cfg = comparacao.carregar()
+        ate = comparacao.data(cfg["janela"]["ate"], "janela.ate")
+        esperado = sum(1 for e in seo.visiveis(resumo, entrevistas) if dt.date.fromisoformat(e["data"]) <= ate)
         texto = (RAIZ / "docs" / "comparacao.html").read_text(encoding="utf-8")
-        self.assertIn(f"o porquinho tem {resumo['totais']['entrevistas']},", texto)
+        self.assertIn(f'<article class="pessoa porquinho">\n<h3>{resumo["sujeito"]["nome"]}', texto)
+        self.assertIn(f'<p class="quantas">{esperado}</p>', texto)
+        self.assertIn(f"<p class=\"periodo\">1 de janeiro de 2024 a {comparacao.por_extenso(ate)}</p>", texto)
 
 
 class TestValidacao(unittest.TestCase):
@@ -215,11 +229,10 @@ class TestValidacao(unittest.TestCase):
 
 
 class TestPublicado(unittest.TestCase):
-    def test_a_pagina_traz_as_provas_da_janela_e_nenhuma_por_verificar(self):
+    def test_a_pagina_traz_todas_as_provas_contadas_e_nenhuma_por_verificar(self):
         """E a unica pagina do site onde estas provas aparecem. Uma linha
         contada sem a ligacao a vista era um numero que ninguem podia
-        conferir, e uma por verificar com ligacao parecia contada. Fora da
-        janela so aparece a ultima de quem nao tem nenhuma dentro."""
+        conferir, e uma por verificar com ligacao parecia contada."""
         resumo, entrevistas = seo.dados()
         visivel = comparacao.visivel_de(resumo)
         norm = comparacao.validar(comparacao.carregar(), comparacao.canais_validos(), visivel)
@@ -229,7 +242,6 @@ class TestPublicado(unittest.TestCase):
         mostradas = [e for p in contas_["pessoas"] for e in p["linhas"]]
         self.assertEqual(bloco.count("<tr><td>"), len(mostradas))
         esperadas = {e["prova"] for e in mostradas}
-        esperadas |= {p["ultima_antes"]["prova"] for p in contas_["pessoas"] if not p["linhas"] and p["ultima_antes"]}
         for e in norm["entrevistas"]:
             with self.subTest(prova=e["prova"]):
                 self.assertEqual(html.escape(e["prova"], quote=True) in bloco, e["prova"] in esperadas)

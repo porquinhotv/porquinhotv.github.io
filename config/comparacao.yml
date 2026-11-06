@@ -33,14 +33,16 @@
 # Decisoes do autor a 2026-11-06: pagina nova no menu; satira so sobre o
 # porquinho, as outras duas pessoas em tom factual; o site oficial de um
 # partido vale como prova, pela mesma razao por que vale a conta do
-# proprio entrevistado. Mais tarde no mesmo dia: uma janela so para os
-# tres, e nada fora dela, porque tres anos de uma pessoa nao se comparam
-# com ano e meio de outra.
+# proprio entrevistado. Mais tarde no mesmo dia: todas as entrevistas do
+# sujeito desde 2024 a vista, numa linha do tempo comum, com a faixa de
+# quem entrou mais tarde riscada antes da entrada; o numero contra numero
+# so no periodo comum, porque tres anos de uma pessoa nao se comparam com
+# ano e meio de outra.
 
 versao: 1
 
-# A janela comeca no dia em que a pessoa mais recente no cargo o assumiu,
-# para que todos sejam medidos no mesmo periodo. Acaba no ultimo dia ate
+# `desde` e o inicio do periodo comum: o dia em que a pessoa mais recente
+# no cargo o assumiu. So ai se compara numero contra numero. Acaba no ultimo dia ate
 # onde se procuraram as entrevistas das outras duas pessoas. O sujeito e
 # contado ate ao mesmo dia: sem isso, o numero dele continuava a crescer
 # com cada entrevista nova e o das outras ficava parado, e o contraste
@@ -59,10 +61,11 @@ janela:
 sujeito:
   cargo: presidente do Chega
 
-# `desde`: a partir de quando a pessoa entra nas contagens; as linhas
-# anteriores a janela ficam no ficheiro como registo e a pagina so usa a
-# ultima delas, para dizer quando foi a entrevista mais recente de quem
-# nao tem nenhuma na janela. A `nota` e so para quem le este ficheiro.
+# `desde`: a partir de quando a pessoa entra nas contagens. Quem entra
+# depois do inicio do site (2024-01-01) tem `marco` (a frase da linha do
+# tempo nesse dia), `antes` (o que a faixa riscada diz) e, opcional,
+# `desde_texto` (o que o cartao acrescenta a data). A `nota` e so para
+# quem le este ficheiro.
 pessoas:
   - id: montenegro
     nome: Luís Montenegro
@@ -83,6 +86,9 @@ pessoas:
     nome: José Luís Carneiro
     cargo: secretário-geral do PS
     desde: 2025-06-28
+    marco: José Luís Carneiro passa a liderar o PS
+    antes: ainda não liderava o PS
+    desde_texto: quando passou a liderar o PS
 
 # Rotulo da ligacao na tabela das provas. A pagina diz que tipo de prova
 # e, para quem le saber, antes de abrir, que uma linha assenta no site de
@@ -95,31 +101,34 @@ rotulos_de_prova:
   partido: site do partido
 
 textos:
-  titulo: O porquinho ao lado dos outros
+  titulo: Entrevistas exclusivas na televisão portuguesa
+  periodo: '{desde} a {ate}'
   intro: >-
-    Entrevistas exclusivas na televisão portuguesa de {desde}, o dia em que
-    José Luís Carneiro passou a liderar o PS, a {ate}. O mesmo período, as
-    mesmas regras e os mesmos nove canais para os três.
+    Todas as do porquinho desde que o site conta, ao lado das do
+    primeiro-ministro e do secretário-geral do PS, com as mesmas regras e
+    os mesmos nove canais.
+  desde_cartao: desde {data}
+  ritmo: uma a cada {dias} dias
+  ritmo_zero: nenhuma
+  linha_titulo: Mês a mês
+  linha_legenda: Cada quadrado é uma entrevista exclusiva, no mês em que passou.
+  janela_titulo: 'No mesmo período, de {desde} a {ate}'
   frase_razao: Por cada entrevista de {nome}, o porquinho deu {razao}.
   frase_zero: '{nome} não deu nenhuma.'
   frase_empate: '{nome} deu {n}, tantas ou mais do que o porquinho.'
   remate: Onde há lama, há câmaras.
-  ritmo: uma a cada {dias} dias
-  ritmo_zero: nenhuma
   provas_titulo: As provas dos outros dois
   provas_legenda: >-
     Cada linha tem a ligação que prova o canal e o dia. As do porquinho
     estão na {fontes}.
-  nenhuma_na_janela: >-
-    Nenhuma na janela. A última foi a {data}, na {canal}, antes de a
-    janela começar:
   metodo_titulo: Como se contou
   metodo:
     - >-
-      Uma janela só, de {desde} a {ate}, igual para os três: comparar três
-      anos de um com ano e meio de outro não seria comparar. Na página
-      inicial o porquinho tem {total}, que são as entrevistas desde o
-      início de 2024; aqui conta-se só esta janela.
+      Cada um conta desde que o site conta, {inicio}, ou desde que assumiu
+      o cargo, e todos até {ate}. Os totais cobrem períodos diferentes e
+      por isso não se comparam entre si: o ritmo mede cada um no seu
+      período, e a comparação número contra número faz-se só no período
+      comum, desde {desde}.
     - >-
       Com as regras do resto do site: entrevista exclusiva, informativa ou
       de entretenimento, num dos nove canais, com uma prova pública que
