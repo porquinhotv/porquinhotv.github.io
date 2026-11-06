@@ -52,12 +52,24 @@ sujeito:
 
 # `desde`: a partir de quando a pessoa entra nas contagens. Uma pessoa com
 # `desde` posterior ao inicio do ambito visivel do site (2024-01-01) so
-# aparece na janela comum, e a `nota_periodo` diz porque.
+# aparece na janela comum, e a `nota_periodo` diz porque. A `nota` e so
+# para quem le este ficheiro: a pagina nao a mostra.
 pessoas:
   - id: montenegro
     nome: Luís Montenegro
     cargo: primeiro-ministro, PSD
     desde: 2024-01-01
+    nota: >-
+      Prova independente do zero na janela comum, acrescentada a
+      2026-11-06: o SOL de 18 set 2026 escreve que a última entrevista
+      formal do primeiro-ministro a uma televisão ou rádio foi a da RTP,
+      em junho de 2025, em Bruxelas (a de 2025-06-25 abaixo). Limites do
+      artigo: só conta entrevistas formais, por isso não cobre programas
+      de entretenimento; refere uma entrevista à Antena 1 em julho de
+      2025, que é rádio e aqui não conta; e não cobre de 18 set a 30 out
+      2026, intervalo em que a pesquisa de 2026-11-06 também não encontrou
+      nenhuma.
+      https://sol.iol.pt/politica/noticias/montenegro-impoe-regras-ao-estilo-de-trump/20260918/6aac587a0cf23b0ed4fd8bb2
   - id: carneiro
     nome: José Luís Carneiro
     cargo: secretário-geral do PS
