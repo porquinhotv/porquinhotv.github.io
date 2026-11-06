@@ -19,13 +19,23 @@ Tres regras, cada uma com a razao:
    cargo, o que for mais tarde, e todas ate ao mesmo dia de fecho
    (`janela.ate`), incluindo o sujeito. Os periodos diferentes mostram-se
    numa linha do tempo comum, com a faixa de quem entrou mais tarde
-   riscada antes da entrada, e o ritmo (uma entrevista a cada N dias)
-   mede cada um no seu periodo. A comparacao directa, numero contra
+   riscada antes da entrada. A comparacao directa, numero contra
    numero, faz-se so na janela comum (`janela.desde` a `janela.ate`):
    tres anos de uma pessoa ao lado de ano e meio de outra nao se comparam
    pelo total. Pedido do autor a 2026-11-06: dar o peso visual a todas as
    entrevistas do sujeito, sendo honesto quanto a quem entrou quando.
-3. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
+3. O ritmo (uma entrevista a cada N dias) mede so o ultimo ano ate ao
+   fecho, igual para todos, e a pagina diz isso numa nota. Pedido do
+   autor a 2026-11-06: medido desde o inicio, o ritmo ficava datado (o
+   do primeiro-ministro, uma a cada 87 dias, vinha todo de 2024 e da
+   primeira metade de 2025, e no ultimo ano nao houve nenhuma) e
+   enviesado (periodos de tamanho diferente para cada um). Com o fecho a
+   2026-11-06: sujeito 41 no ultimo ano, uma a cada 9 dias (13 desde
+   2024); secretario-geral do PS 19, uma a cada 19 (20 desde que entrou);
+   primeiro-ministro nenhuma. Quem entrar a meio do ultimo ano mede-se
+   desde que entrou, para nao contar como silencio meses em que ainda
+   nao estava la.
+4. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
    nomes dos canais vem do resumo publicado, como no resto do gerador.
 
 A validacao falha alto e diz todos os problemas de uma vez. Como corre
@@ -61,6 +71,7 @@ ESPACOS = {
     "desde_cartao": {"data"},
     "ritmo": {"dias"},
     "ritmo_zero": set(),
+    "ritmo_nota": {"desde", "ate"},
     "linha_titulo": set(),
     "linha_legenda": set(),
     "janela_titulo": {"desde", "ate"},
@@ -71,7 +82,7 @@ ESPACOS = {
     "provas_titulo": set(),
     "provas_legenda": {"fontes"},
     "metodo_titulo": set(),
-    "metodo": {"inicio", "desde", "ate"},
+    "metodo": {"inicio", "desde", "ate", "ano"},
     "por_verificar": {"k"},
 }
 
@@ -236,29 +247,48 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
             "rotulos": rotulos, "textos": textos, "entrevistas": entrevistas}
 
 
+def inicio_do_ultimo_ano(ate: dt.date) -> dt.date:
+    """O dia a seguir ao mesmo dia do ano anterior: 2026-11-06 da
+    2025-11-07, um ano de calendario inteiro (365 ou 366 dias). Um fecho a
+    29 de fevereiro recua para 28."""
+    try:
+        anterior = ate.replace(year=ate.year - 1)
+    except ValueError:
+        anterior = ate.replace(year=ate.year - 1, day=28)
+    return anterior + dt.timedelta(days=1)
+
+
+def _ultimo_ano(dias: list, inicio: dt.date, ano: dt.date, ate: dt.date) -> dict:
+    comeco = max(inicio, ano)
+    return {"ano": sum(comeco <= d for d in dias), "ano_duracao": (ate - comeco).days + 1}
+
+
 def contar(norm: dict, lista: list, visivel_desde: dt.date) -> dict:
     """As contagens da pagina. O sujeito conta-se sobre a lista publicada,
     a mesma que o resto do site mostra (ja com uma entrevista por linha,
     mesmo quando passou em dois canais). Todos acabam no mesmo dia."""
     desde, ate = norm["desde"], norm["ate"]
+    ano = inicio_do_ultimo_ano(ate)
     dias_sujeito = sorted(d for d in (data(e["data"], "entrevistas.json") for e in lista)
                           if visivel_desde <= d <= ate)
     sujeito = {"inicio": visivel_desde, "dias": dias_sujeito, "total": len(dias_sujeito),
                "janela": sum(desde <= d for d in dias_sujeito),
-               "duracao": (ate - visivel_desde).days + 1}
+               "duracao": (ate - visivel_desde).days + 1,
+               **_ultimo_ano(dias_sujeito, visivel_desde, ano, ate)}
     pessoas = []
     for p in norm["pessoas"]:
         inicio = max(p["desde"], visivel_desde)
         suas = [e for e in norm["entrevistas"] if e["pessoa"] == p["id"]]
         linhas = sorted((e for e in suas if e["estado"] == "confirmada" and inicio <= e["data"] <= ate),
                         key=lambda e: (e["data"], e["canal"]), reverse=True)
-        pessoas.append(dict(p, inicio=inicio, linhas=linhas, total=len(linhas),
-                            dias=sorted(e["data"] for e in linhas),
+        dias = sorted(e["data"] for e in linhas)
+        pessoas.append(dict(p, inicio=inicio, linhas=linhas, total=len(linhas), dias=dias,
+                            **_ultimo_ano(dias, inicio, ano, ate),
                             janela=sum(desde <= e["data"] for e in linhas),
                             duracao=(ate - inicio).days + 1,
                             por_verificar=sum(1 for e in suas if e["estado"] == "por_verificar"
                                               and inicio <= e["data"] <= ate)))
-    return {"sujeito": sujeito, "pessoas": pessoas}
+    return {"sujeito": sujeito, "pessoas": pessoas, "ano": ano}
 
 
 def _preencher(modelo: str, **valores) -> str:
@@ -388,13 +418,15 @@ def desenhar(norm: dict, contas: dict, resumo: dict, visivel_desde: dt.date) -> 
               '<div class="trio">']
     linhas += _cartao(sujeito, norm["cargo_sujeito"], s["total"],
                       _preencher(t["desde_cartao"], data=por_extenso(visivel_desde)),
-                      _ritmo(t, s["total"], s["duracao"]), "porquinho")
+                      _ritmo(t, s["ano"], s["ano_duracao"]), "porquinho")
     for p in ordem:
         desde = _preencher(t["desde_cartao"], data=por_extenso(p["inicio"]))
         if p["desde_texto"] and p["inicio"] > visivel_desde:
             desde += ", " + seo.texto(p["desde_texto"])
-        linhas += _cartao(p["nome"], p["cargo"], p["total"], desde, _ritmo(t, p["total"], p["duracao"]), "")
+        linhas += _cartao(p["nome"], p["cargo"], p["total"], desde, _ritmo(t, p["ano"], p["ano_duracao"]), "")
     linhas.append("</div>")
+    ano_texto = por_extenso(contas["ano"])
+    linhas.append(f'<p class="nota-ritmo">{_preencher(t["ritmo_nota"], desde=ano_texto, ate=por_extenso(ate))}</p>')
 
     meses = _meses(visivel_desde, ate)
     linhas += [f"<h3>{_preencher(t['linha_titulo'])}</h3>",
@@ -430,7 +462,7 @@ def desenhar(norm: dict, contas: dict, resumo: dict, visivel_desde: dt.date) -> 
     linhas.append("</section>")
 
     linhas += ["<section>", f"<h2>{_preencher(t['metodo_titulo'])}</h2>"]
-    linhas += [f"<p>{_preencher(par, inicio=por_extenso(visivel_desde), desde=desde_j, ate=ate_j)}</p>"
+    linhas += [f"<p>{_preencher(par, inicio=por_extenso(visivel_desde), desde=desde_j, ate=ate_j, ano=ano_texto)}</p>"
                for par in t["metodo"]]
     linhas.append('<p><a href="metodologia.html">Como o resto do site é contado</a>.</p>')
     linhas += ["</section>", seo.FIM_CORPO]

@@ -187,6 +187,7 @@ section h2 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; letter-spaci
 .pessoa .quantas { margin: 6px 0 2px; font-size: clamp(2.2rem, 7vw, 3rem); font-weight: 700; line-height: 1; color: var(--lama); }
 .pessoa .desde { margin: 0; font-size: 0.9rem; font-weight: 600; }
 .pessoa .ritmo { margin: 2px 0 0; font-size: 0.9rem; color: var(--tinta-suave); }
+.nota-ritmo { margin: 8px 0 0; font-size: 0.8rem; color: var(--tinta-suave); }
 .pessoa.porquinho { grid-column: 1 / -1; background: var(--focinho); }
 .pessoa.porquinho .quantas { font-size: clamp(3.4rem, 13vw, 5rem); }
 

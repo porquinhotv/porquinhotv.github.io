@@ -5,6 +5,7 @@ Cada teste trava um erro concreto:
 - uma linha por verificar entrar na contagem;
 - o numero do sujeito crescer depois de o levantamento dos outros ter
   fechado, e o contraste crescer sozinho;
+- um ritmo datado, medido sobre meses que ja nao descrevem o presente;
 - a pagina por periodos diferentes a competir pelo total, esconder que
   alguem entrou mais tarde, ou mostrar um numero do sujeito que nao bate
   com a pagina inicial;
@@ -142,14 +143,35 @@ class TestContagem(unittest.TestCase):
         self.assertIn("28 de junho de 2025: Pessoa B assume o cargo.", gerado)
         self.assertIn("<strong>Sujeito 1</strong>", gerado)  # so a de 2025-07-02 no periodo comum
 
-    def test_o_ritmo_mede_cada_um_no_seu_periodo(self):
-        """Os totais cobrem periodos diferentes; o ritmo e o que os poe na
-        mesma medida. Medido sobre o periodo do sujeito, o de quem entrou
-        mais tarde ficava artificialmente lento."""
-        cfg = cfg_minima([linha(pessoa="b", data="2025-07-01")])
-        c = contas(cfg, [{"data": "2024-01-01"}])
-        self.assertEqual(pessoa(c, "b")["duracao"], (dt.date(2026, 10, 30) - dt.date(2025, 6, 28)).days + 1)
-        self.assertEqual(c["sujeito"]["duracao"], (dt.date(2026, 10, 30) - dt.date(2024, 1, 1)).days + 1)
+    def test_o_ritmo_mede_so_o_ultimo_ano(self):
+        """Medido desde o inicio, o ritmo do primeiro-ministro dava uma a
+        cada 87 dias com o fecho a 2026-11-06, todas antes de 26 de junho
+        de 2025: um numero datado, que descrevia um ritmo que ja nao
+        existia. Mede-se so o ultimo ano ate ao fecho, igual para todos;
+        uma entrevista de ha mais de um ano conta no total e nao no ritmo,
+        e o cartao diz "nenhuma no ultimo ano" em vez de um ritmo."""
+        cfg = cfg_minima([linha(pessoa="a", data="2024-03-01"), linha(pessoa="a", data="2025-10-30"),
+                          linha(pessoa="b", data="2025-11-01"), linha(pessoa="b", data="2026-10-30", canal="c2")])
+        c = contas(cfg, [{"data": "2024-01-01"}, {"data": "2025-10-31"}])
+        self.assertEqual(c["ano"], dt.date(2025, 10, 31))
+        self.assertEqual((pessoa(c, "a")["total"], pessoa(c, "a")["ano"]), (2, 0))
+        self.assertEqual((pessoa(c, "b")["ano"], pessoa(c, "b")["ano_duracao"]), (2, 365))
+        self.assertEqual((c["sujeito"]["total"], c["sujeito"]["ano"]), (2, 1))
+        gerado = comparacao.corpo(RESUMO, [{"data": "2024-01-01"}, {"data": "2025-10-31"}], cfg, CANAIS)
+        self.assertIn("uma a cada 182 dias no último ano", gerado)  # 365 / 2, da pessoa B
+        self.assertIn("nenhuma no último ano", gerado)
+        self.assertIn("de 31 de outubro de 2025 a 30 de outubro de 2026", gerado)
+
+    def test_quem_entra_a_meio_do_ano_mede_se_desde_que_entrou(self):
+        """Contar como silencio os meses em que alguem ainda nao estava no
+        cargo tornava o seu ritmo artificialmente lento."""
+        cfg = cfg_minima([linha(pessoa="b", data="2026-07-01")])
+        cfg["pessoas"][1]["desde"] = "2026-06-01"
+        self.assertEqual(pessoa(contas(cfg), "b")["ano_duracao"], (dt.date(2026, 10, 30) - dt.date(2026, 6, 1)).days + 1)
+
+    def test_o_ultimo_ano_e_um_ano_de_calendario(self):
+        self.assertEqual(comparacao.inicio_do_ultimo_ano(dt.date(2026, 11, 6)), dt.date(2025, 11, 7))
+        self.assertEqual(comparacao.inicio_do_ultimo_ano(dt.date(2028, 2, 29)), dt.date(2027, 3, 1))
 
 
 class TestTexto(unittest.TestCase):

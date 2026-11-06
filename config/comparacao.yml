@@ -108,8 +108,16 @@ textos:
     primeiro-ministro e do secretário-geral do PS, com as mesmas regras e
     os mesmos nove canais.
   desde_cartao: desde {data}
-  ritmo: uma a cada {dias} dias
-  ritmo_zero: nenhuma
+  # O ritmo mede so o ultimo ano ate ao fecho (ver ferramentas/comparacao.py).
+  # Com o fecho a 2026-11-06: porquinho uma a cada 9 dias (13 desde 2024),
+  # Carneiro uma a cada 19 (20 desde que entrou), Montenegro nenhuma
+  # (12 desde 2024, todas antes de 26 de junho de 2025).
+  ritmo: uma a cada {dias} dias no último ano
+  ritmo_zero: nenhuma no último ano
+  ritmo_nota: >-
+    O ritmo conta só o último ano, de {desde} a {ate}, igual para os três.
+    Medido desde o início, ficava datado e enviesado: períodos de tamanho
+    diferente para cada um, e meses antigos a pesar tanto como os de agora.
   linha_titulo: Mês a mês
   linha_legenda: Cada quadrado é uma entrevista exclusiva, no mês em que passou.
   janela_titulo: 'No mesmo período, de {desde} a {ate}'
@@ -126,9 +134,9 @@ textos:
     - >-
       Cada um conta desde que o site conta, {inicio}, ou desde que assumiu
       o cargo, e todos até {ate}. Os totais cobrem períodos diferentes e
-      por isso não se comparam entre si: o ritmo mede cada um no seu
-      período, e a comparação número contra número faz-se só no período
-      comum, desde {desde}.
+      por isso não se comparam entre si: o ritmo mede os três no último
+      ano, desde {ano}, e a comparação número contra número faz-se só no
+      período comum, desde {desde}.
     - >-
       Com as regras do resto do site: entrevista exclusiva, informativa ou
       de entretenimento, num dos nove canais, com uma prova pública que

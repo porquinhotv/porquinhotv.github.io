@@ -21,7 +21,7 @@ A [Metodologia](METODOLOGIA.md) diz o que conta, o que não conta e onde o méto
 
 ```bash
 pip install -r requirements.txt
-python -m unittest discover -s tests -t .      # 442 testes, offline
+python -m unittest discover -s tests -t .      # 444 testes, offline
 node --test tests/frontend/*.test.js           # 33 testes a logica do site, sem browser
 python -m recolha.principal --dry-run          # nao escreve nada
 python -m recolha.principal                    # escreve docs/dados
