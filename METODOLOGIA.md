@@ -63,7 +63,7 @@ A página de Comparação põe ao lado do porquinho as entrevistas exclusivas de
 
 **De onde vêm esses números.** De um levantamento feito para essa página, por pesquisa, e confirmado prova a prova. Não vêm da recolha que construiu o histórico do porquinho. Para estes dois, vale também como prova uma publicação no site oficial do partido, pela mesma razão por que vale a conta do próprio entrevistado. Uma entrevista sem prova que fixe o dia e o canal fica de fora, e a página diz quantas ficaram.
 
-**O que isto custa:** os números dos outros dois são mínimos. Uma entrevista que o levantamento não encontrou não entra, e cada uma que falte aumenta a distância para o porquinho. Por isso a janela é a mesma para os três e acaba no dia em que o levantamento fechou, também para o porquinho: as entrevistas do porquinho depois dessa data contam no resto do site, mas não na comparação.
+**O que isto custa:** os números dos outros dois são mínimos. Uma entrevista que o levantamento não encontrou não entra, e cada uma que falte aumenta a distância para o porquinho. Por isso há uma janela só, igual para os três: começa no dia em que José Luís Carneiro passou a liderar o PS e acaba no último dia até onde se procuraram as entrevistas dos outros dois, também para o porquinho. Nada fora dela entra na comparação, porque três anos de um ao lado de ano e meio de outro não seriam comparáveis.
 
 ## Correções e sugestões
 

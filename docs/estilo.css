@@ -177,16 +177,20 @@ section h2 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; letter-spaci
 .canais .valor { font-size: 0.92rem; color: var(--tinta-suave); white-space: nowrap; }
 .canais .zero .valor { font-style: italic; }
 
-/* pagina de comparacao: uma barra por pessoa, a mesma escala dentro de
-   cada periodo. A largura vem escrita no HTML pelo gerador. */
-.frente { list-style: none; margin: 10px 0 12px; padding: 0; display: grid; gap: 12px; }
-.frente li { display: grid; grid-template-columns: 200px 1fr 3em; gap: 12px; align-items: center; }
-.frente .quem { font-weight: 600; line-height: 1.2; }
-.frente .quem small { display: block; font-weight: 400; font-size: 0.85rem; color: var(--tinta-suave); }
-.frente .pista { height: 22px; background: var(--branco); border: 3px solid var(--tinta); border-radius: 999px; overflow: hidden; }
-.frente .pista span { display: block; height: 100%; background: var(--lama-clara); }
-.frente .porquinho .pista span { background: var(--rosa-escuro); }
-.frente .valor { font-size: 1.6rem; font-weight: 700; color: var(--lama); text-align: right; }
+/* pagina de comparacao: um cartao por pessoa, um quadrado por entrevista.
+   Os quadrados sao a mesma unidade nos tres cartoes, por isso a diferenca
+   le-se sem escala nem eixo. */
+.trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 14px 0 6px; }
+.pessoa { background: var(--branco); border: 3px solid var(--tinta); border-radius: 16px 18px 14px 20px; padding: 12px 14px; }
+.pessoa h3 { margin: 0; font-size: 1.05rem; line-height: 1.2; }
+.pessoa h3 small { display: block; font-weight: 400; font-size: 0.85rem; color: var(--tinta-suave); }
+.pessoa .quantas { margin: 6px 0 4px; font-size: clamp(2.4rem, 7vw, 3.2rem); font-weight: 700; line-height: 1; color: var(--lama); }
+.pessoa .quadrados { display: flex; flex-wrap: wrap; gap: 3px; margin: 0 0 8px; min-height: 12px; }
+.pessoa .quadrados i { display: block; width: 12px; height: 12px; border-radius: 3px; background: var(--lama-clara); }
+.pessoa.porquinho { background: var(--focinho); }
+.pessoa.porquinho .quadrados i { background: var(--rosa-escuro); }
+.pessoa .ritmo { margin: 0; font-size: 0.92rem; color: var(--tinta-suave); }
+.veredicto { margin: 12px 0 0; font-size: 1.12rem; font-weight: 600; }
 .provas-dos-outros h3 { margin: 18px 0 4px; font-size: 1.1rem; }
 /* Num telemovel de 390 pixeis a data partia-se em duas linhas por causa
    do "(tambem na ...)" do canal. Aqui parte-se o canal, nunca a data. */
@@ -195,8 +199,6 @@ section h2 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; letter-spaci
 @media (max-width: 560px) {
   .canais li { grid-template-columns: 14px 1fr auto; }
   .canais .pista { grid-column: 1 / -1; }
-  .frente li { grid-template-columns: 1fr auto; gap: 6px 12px; }
-  .frente .pista { grid-column: 1 / -1; grid-row: 2; }
 }
 
 /* grafico de evolucao */

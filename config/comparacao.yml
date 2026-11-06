@@ -33,27 +33,36 @@
 # Decisoes do autor a 2026-11-06: pagina nova no menu; satira so sobre o
 # porquinho, as outras duas pessoas em tom factual; o site oficial de um
 # partido vale como prova, pela mesma razao por que vale a conta do
-# proprio entrevistado; as duas janelas, com destaque para a comum.
+# proprio entrevistado. Mais tarde no mesmo dia: uma janela so para os
+# tres, e nada fora dela, porque tres anos de uma pessoa nao se comparam
+# com ano e meio de outra.
 
 versao: 1
 
-# A janela comum comeca no dia em que a pessoa mais recente no cargo o
-# assumiu, para que todos sejam medidos no mesmo periodo. Acaba no dia em
-# que o levantamento das outras duas pessoas fechou. O sujeito e contado
-# ate ao mesmo dia: sem isso, o numero dele continuava a crescer com cada
-# entrevista nova e o das outras ficava parado, e o contraste crescia
-# sozinho.
+# A janela comeca no dia em que a pessoa mais recente no cargo o assumiu,
+# para que todos sejam medidos no mesmo periodo. Acaba no ultimo dia ate
+# onde se procuraram as entrevistas das outras duas pessoas. O sujeito e
+# contado ate ao mesmo dia: sem isso, o numero dele continuava a crescer
+# com cada entrevista nova e o das outras ficava parado, e o contraste
+# crescia sozinho.
+#
+# Fecho: o levantamento fechou a 2026-10-30; a 2026-11-06 uma pesquisa
+# dirigida a 31 out a 6 nov nao encontrou nenhuma entrevista das duas
+# pessoas nos nove canais (so a da Euronews, registada abaixo como fora do
+# ambito, e uma declaracao ao pais, que nao e entrevista). Com o fecho no
+# mesmo dia da pagina inicial, o numero do sujeito aqui sao todas as
+# entrevistas dele desde o inicio da janela.
 janela:
   desde: 2025-06-28
-  ate: 2026-10-30
+  ate: 2026-11-06
 
 sujeito:
   cargo: presidente do Chega
 
-# `desde`: a partir de quando a pessoa entra nas contagens. Uma pessoa com
-# `desde` posterior ao inicio do ambito visivel do site (2024-01-01) so
-# aparece na janela comum, e a `nota_periodo` diz porque. A `nota` e so
-# para quem le este ficheiro: a pagina nao a mostra.
+# `desde`: a partir de quando a pessoa entra nas contagens; as linhas
+# anteriores a janela ficam no ficheiro como registo e a pagina so usa a
+# ultima delas, para dizer quando foi a entrevista mais recente de quem
+# nao tem nenhuma na janela. A `nota` e so para quem le este ficheiro.
 pessoas:
   - id: montenegro
     nome: Luís Montenegro
@@ -74,7 +83,6 @@ pessoas:
     nome: José Luís Carneiro
     cargo: secretário-geral do PS
     desde: 2025-06-28
-    nota_periodo: José Luís Carneiro só entra na janela comum, porque lidera o PS desde 28 de junho de 2025.
 
 # Rotulo da ligacao na tabela das provas. A pagina diz que tipo de prova
 # e, para quem le saber, antes de abrir, que uma linha assenta no site de
@@ -89,28 +97,29 @@ rotulos_de_prova:
 textos:
   titulo: O porquinho ao lado dos outros
   intro: >-
-    Para pôr a lama em perspetiva: as entrevistas exclusivas do
-    primeiro-ministro e do secretário-geral do PS na televisão portuguesa,
-    contadas com as mesmas regras, nos mesmos nove canais, com uma prova
-    pública por linha.
-  janela_titulo: 'Na mesma janela: de {desde} a {ate}'
-  janela_legenda: >-
-    A {desde} José Luís Carneiro passou a liderar o PS. A {ate} fechou o
-    levantamento dos outros dois, e o porquinho também só é contado até
-    esse dia: a lama que fez depois conta no resto do site, aqui não.
-  frase_mais: >-
-    Na mesma janela, o porquinho foi a {n} entrevistas exclusivas, mais do
-    que os outros dois juntos ({soma}). Onde há lama, há câmaras.
-  frase_menos: >-
-    Na mesma janela, o porquinho foi a {n} entrevistas exclusivas, e os
-    outros dois juntos a {soma}. Desta vez a lama está mais repartida.
-  total_titulo: 'De {desde} a {ate}'
+    Entrevistas exclusivas na televisão portuguesa de {desde}, o dia em que
+    José Luís Carneiro passou a liderar o PS, a {ate}. O mesmo período, as
+    mesmas regras e os mesmos nove canais para os três.
+  frase_razao: Por cada entrevista de {nome}, o porquinho deu {razao}.
+  frase_zero: '{nome} não deu nenhuma.'
+  frase_empate: '{nome} deu {n}, tantas ou mais do que o porquinho.'
+  remate: Onde há lama, há câmaras.
+  ritmo: uma a cada {dias} dias
+  ritmo_zero: nenhuma
   provas_titulo: As provas dos outros dois
   provas_legenda: >-
     Cada linha tem a ligação que prova o canal e o dia. As do porquinho
     estão na {fontes}.
+  nenhuma_na_janela: >-
+    Nenhuma na janela. A última foi a {data}, na {canal}, antes de a
+    janela começar:
   metodo_titulo: Como se contou
   metodo:
+    - >-
+      Uma janela só, de {desde} a {ate}, igual para os três: comparar três
+      anos de um com ano e meio de outro não seria comparar. Na página
+      inicial o porquinho tem {total}, que são as entrevistas desde o
+      início de 2024; aqui conta-se só esta janela.
     - >-
       Com as regras do resto do site: entrevista exclusiva, informativa ou
       de entretenimento, num dos nove canais, com uma prova pública que
@@ -118,14 +127,12 @@ textos:
       canais conta uma vez.
     - >-
       Os números do primeiro-ministro e do secretário-geral do PS vêm de
-      um levantamento feito para esta página, fechado a {ate} e confirmado
-      prova a prova. Não vêm da recolha que construiu o histórico do
-      porquinho, e por isso são mínimos: uma entrevista que o levantamento
-      não encontrou não entra.
-    - >-
-      Para estes dois, vale também como prova uma publicação no site
-      oficial do partido, pela mesma razão por que vale a conta do próprio
-      entrevistado.
+      um levantamento feito para esta página e confirmado prova a prova,
+      com as entrevistas procuradas até {ate}. Não vêm da recolha que
+      construiu o histórico do porquinho, e por isso são mínimos: uma
+      entrevista que ninguém encontrou não entra. Para estes dois, vale
+      também como prova uma publicação no site oficial do partido, pela
+      mesma razão por que vale a conta do próprio entrevistado.
   por_verificar: >-
     Ficaram de fora, por falta de uma prova que fixe o dia e o canal: {k}.
     Entram se essa prova aparecer.
@@ -577,3 +584,15 @@ entrevistas:
     tipo_prova: canal
     prova: https://www.rtp.pt/noticias/politica/entrevista-ao-programa-decisao-nacional-carneiro-contra-voto-eletronico-a-distancia-nas-presidenciais_n1703918
     nota: RTP Internacional, Decisão Nacional. Fora dos nove canais; a data é a da notícia.
+
+  - pessoa: carneiro
+    data: 2026-11-04
+    canal: null
+    formato: informativa
+    estado: fora_do_ambito
+    tipo_prova: canal
+    prova: https://pt.euronews.com/video/2026/11/06/exclusivo-jose-luis-carneiro-rejeita-bloco-central-mesmo-que-chega-ganhe-eleicoes
+    nota: >-
+      Euronews, nas Conferências do Estoril, 4 nov 2026. Canal estrangeiro,
+      fora dos nove. Encontrada na pesquisa de 2026-11-06 que fechou a
+      janela nesse dia.
