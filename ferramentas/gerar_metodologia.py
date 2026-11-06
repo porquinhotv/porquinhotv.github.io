@@ -50,6 +50,7 @@ CABECA = """<!doctype html>
     <a href="index.html">Hoje</a>
     <a href="calendario.html">Calendário</a>
     <a href="fontes.html">Fontes</a>
+    <a href="comparacao.html">Comparação</a>
   </nav>
 </header>
 <main class="texto">

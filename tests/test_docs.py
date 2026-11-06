@@ -239,12 +239,14 @@ class TestConvencoes(unittest.TestCase):
         link "voltar" e mais nada. Quem chegava la por uma pesquisa nao via
         de que site se tratava nem tinha como ir as outras paginas. O topo
         da Metodologia e gerado por ferramentas/gerar_metodologia.py, por
-        isso este teste le o ficheiro publicado como os outros."""
+        isso este teste le o ficheiro publicado como os outros. A
+        Comparacao entrou no menu a 2026-11-06: uma pagina nova que so
+        algumas ligassem ficava escondida de quem chega pelas outras."""
         for caminho in sorted((RAIZ / "docs").glob("*.html")):
             texto = caminho.read_text(encoding="utf-8")
             with self.subTest(ficheiro=caminho.name):
                 self.assertIn('class="marca"', texto, f"{caminho.name} nao tem a marca")
-                for pagina in ("index.html", "calendario.html", "fontes.html"):
+                for pagina in ("index.html", "calendario.html", "fontes.html", "comparacao.html"):
                     self.assertIn(f'<a href="{pagina}"', texto, f"{caminho.name} nao liga a {pagina}")
 
     def test_o_rodape_completo_esta_em_todas_as_paginas(self):
@@ -252,7 +254,7 @@ class TestConvencoes(unittest.TestCase):
         sem contacto e sem a explicacao do que o site conta. Quem chega a
         uma dessas paginas por um motor de busca nao tinha, dali, forma de
         reportar uma linha errada. O rodape e o mesmo nas tres."""
-        for nome in ("index.html", "calendario.html", "fontes.html"):
+        for nome in ("index.html", "calendario.html", "fontes.html", "comparacao.html"):
             caminho = RAIZ / "docs" / nome
             texto = caminho.read_text(encoding="utf-8")
             with self.subTest(ficheiro=nome):

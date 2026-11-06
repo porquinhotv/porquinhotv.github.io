@@ -57,6 +57,14 @@ A data que conta é o dia em que a entrevista passou. Quando a prova só fixa a 
 
 Isto é sempre uma conta por baixo. Uma entrevista que não deixou rasto público, ou que ninguém registou, não entra, e o porquinho não a fareja. Na dúvida, o site fica curto: inflacionar uma contagem é o pior que aqui pode acontecer.
 
+## A comparação
+
+A página de Comparação põe ao lado do porquinho as entrevistas exclusivas de Luís Montenegro e de José Luís Carneiro, contadas com as mesmas regras: a mesma definição, os mesmos nove canais, uma entrevista que passou em dois canais conta uma vez, e cada linha tem uma prova pública que nomeia o canal e fixa o dia.
+
+**De onde vêm esses números.** De um levantamento feito para essa página, por pesquisa, e confirmado prova a prova. Não vêm da recolha que construiu o histórico do porquinho. Para estes dois, vale também como prova uma publicação no site oficial do partido, pela mesma razão por que vale a conta do próprio entrevistado. Uma entrevista sem prova que fixe o dia e o canal fica de fora, e a página diz quantas ficaram.
+
+**O que isto custa:** os números dos outros dois são mínimos. Uma entrevista que o levantamento não encontrou não entra, e cada uma que falte aumenta a distância para o porquinho. Por isso a janela é a mesma para os três e acaba no dia em que o levantamento fechou, também para o porquinho: as entrevistas do porquinho depois dessa data contam no resto do site, mas não na comparação.
+
 ## Correções e sugestões
 
 Uma linha errada, uma entrevista que falta, uma prova que não abre: [porquinhotvmail@proton.me](mailto:porquinhotvmail@proton.me?subject=Porquinho%20TV). Basta mandar a ligação da prova e o dia.

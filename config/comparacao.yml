@@ -1,0 +1,567 @@
+---
+# Pagina de comparacao: as entrevistas exclusivas de outras duas pessoas,
+# contadas com as regras do resto do site, ao lado das do sujeito.
+#
+# De onde vem: um levantamento pontual feito por pesquisa, fechado a
+# 2026-10-30, e confirmado a 2026-11-06 abrindo cada prova no browser.
+# NAO vem da recolha que construiu o historico do sujeito. Por isso os
+# numeros destas duas pessoas sao minimos, e a pagina diz isso.
+#
+# Quem le isto: `ferramentas/comparacao.py`, chamado pelo `gerar_seo`.
+# Todos os workflows que escrevem dados ja correm o `gerar_seo`, por isso
+# a pagina acompanha sozinha qualquer entrevista nova do sujeito. Depois
+# de mexer neste ficheiro a mao, correr `python -m ferramentas.gerar_seo`
+# e commitar o `docs/comparacao.html` regenerado.
+#
+# Regras, cada uma com a razao:
+#
+# - So conta `estado: confirmada`. `por_verificar` fica aqui com o motivo,
+#   para a decisao ficar registada, e nao entra em numero nenhum: "nao
+#   sei" nao e "sim". `fora_do_ambito` nunca entra (antes de 2024, ou um
+#   canal fora dos nove).
+# - Uma confirmada tem de ter `canal` (id de config/porquinho.yml) e
+#   `prova` (endereco publico que nomeia o canal e fixa o dia).
+# - Uma entrevista que passou em dois canais e UMA linha, com o canal a
+#   que fica atribuida em `canal` e os outros em `tambem_em`. Conta uma
+#   vez, como no resto do site.
+# - Uma confirmada depois de `janela.ate` faz falhar o gerador: quem
+#   acrescenta uma entrevista nova tem de mover tambem a data de fecho,
+#   senao a linha ficava no ficheiro sem contar e ninguem dava por isso.
+# - O programa fica so na `nota`. A pagina mostra o canal, nunca o
+#   programa, como a de Fontes desde 2026-10-21.
+#
+# Decisoes do autor a 2026-11-06: pagina nova no menu; satira so sobre o
+# porquinho, as outras duas pessoas em tom factual; o site oficial de um
+# partido vale como prova, pela mesma razao por que vale a conta do
+# proprio entrevistado; as duas janelas, com destaque para a comum.
+
+versao: 1
+
+# A janela comum comeca no dia em que a pessoa mais recente no cargo o
+# assumiu, para que todos sejam medidos no mesmo periodo. Acaba no dia em
+# que o levantamento das outras duas pessoas fechou. O sujeito e contado
+# ate ao mesmo dia: sem isso, o numero dele continuava a crescer com cada
+# entrevista nova e o das outras ficava parado, e o contraste crescia
+# sozinho.
+janela:
+  desde: 2025-06-28
+  ate: 2026-10-30
+
+sujeito:
+  cargo: presidente do Chega
+
+# `desde`: a partir de quando a pessoa entra nas contagens. Uma pessoa com
+# `desde` posterior ao inicio do ambito visivel do site (2024-01-01) so
+# aparece na janela comum, e a `nota_periodo` diz porque.
+pessoas:
+  - id: montenegro
+    nome: Luís Montenegro
+    cargo: primeiro-ministro, PSD
+    desde: 2024-01-01
+  - id: carneiro
+    nome: José Luís Carneiro
+    cargo: secretário-geral do PS
+    desde: 2025-06-28
+    nota_periodo: José Luís Carneiro só entra na janela comum, porque lidera o PS desde 28 de junho de 2025.
+
+# Rotulo da ligacao na tabela das provas. A pagina diz que tipo de prova
+# e, para quem le saber, antes de abrir, que uma linha assenta no site de
+# um partido.
+rotulos_de_prova:
+  canal: ver
+  video: ver
+  imprensa: notícia
+  anuncio: anúncio
+  partido: site do partido
+
+textos:
+  titulo: O porquinho ao lado dos outros
+  intro: >-
+    Para pôr a lama em perspetiva: as entrevistas exclusivas do
+    primeiro-ministro e do secretário-geral do PS na televisão portuguesa,
+    contadas com as mesmas regras, nos mesmos nove canais, com uma prova
+    pública por linha.
+  janela_titulo: 'Na mesma janela: de {desde} a {ate}'
+  janela_legenda: >-
+    A {desde} José Luís Carneiro passou a liderar o PS. A {ate} fechou o
+    levantamento dos outros dois, e o porquinho também só é contado até
+    esse dia: a lama que fez depois conta no resto do site, aqui não.
+  frase_mais: >-
+    Na mesma janela, o porquinho foi a {n} entrevistas exclusivas, mais do
+    que os outros dois juntos ({soma}). Onde há lama, há câmaras.
+  frase_menos: >-
+    Na mesma janela, o porquinho foi a {n} entrevistas exclusivas, e os
+    outros dois juntos a {soma}. Desta vez a lama está mais repartida.
+  total_titulo: 'De {desde} a {ate}'
+  provas_titulo: As provas dos outros dois
+  provas_legenda: >-
+    Cada linha tem a ligação que prova o canal e o dia. As do porquinho
+    estão na {fontes}.
+  metodo_titulo: Como se contou
+  metodo:
+    - >-
+      Com as regras do resto do site: entrevista exclusiva, informativa ou
+      de entretenimento, num dos nove canais, com uma prova pública que
+      nomeia o canal e fixa o dia. Uma entrevista que passou em dois
+      canais conta uma vez.
+    - >-
+      Os números do primeiro-ministro e do secretário-geral do PS vêm de
+      um levantamento feito para esta página, fechado a {ate} e confirmado
+      prova a prova. Não vêm da recolha que construiu o histórico do
+      porquinho, e por isso são mínimos: uma entrevista que o levantamento
+      não encontrou não entra.
+    - >-
+      Para estes dois, vale também como prova uma publicação no site
+      oficial do partido, pela mesma razão por que vale a conta do próprio
+      entrevistado.
+  por_verificar: >-
+    Ficaram de fora, por falta de uma prova que fixe o dia e o canal: {k}.
+    Entram se essa prova aparecer.
+
+entrevistas:
+
+  # ---------------- Luis Montenegro ----------------
+
+  - pessoa: montenegro
+    data: 2024-02-10
+    canal: sic
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: anuncio
+    prova: https://tvindependenteblogue.org/2024/02/08/luis-montenegro-este-sabado-em-alta-definicao/
+    nota: >-
+      Alta Definição. Anúncio de 8 fev 2024 ("este sábado") num blogue de
+      televisão com autor e página "Quem somos". Conta como anúncio; se o
+      autor decidir que o blogue é um particular, passa a por_verificar.
+
+  - pessoa: montenegro
+    data: 2024-02-13
+    canal: tvi
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ad2024.pt/fotografias/72177720314759381
+    nota: Dois às 10. Álbum da AD com a data de 13 de fevereiro de 2024.
+
+  - pessoa: montenegro
+    data: 2024-02-20
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/politica/detalhe/luis-montenegro-em-entrevista-no-grande-jornal
+    nota: Grande Jornal. CM de 20 fev 2024, entrevistado "esta terça-feira" na CMTV.
+
+  - pessoa: montenegro
+    data: 2024-03-05
+    canal: rtp1
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.rtp.pt/play/p13071/e752821/eleicoes-legislativas-2024-entrevistas-lideres-partidarios
+    nota: >-
+      Ciclo de entrevistas aos líderes, ep. 7. A página diz RTP sem
+      precisar o canal; fica na RTP1, como o ep. 6 do mesmo ciclo nos
+      dados do sujeito.
+
+  - pessoa: montenegro
+    data: 2024-03-08
+    canal: sic
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: anuncio
+    prova: https://www.atelevisao.com/sic/luis-montenegro-e-o-ultimo-convidado-de-ricardo-araujo-pereira/
+    nota: Isto É Gozar Com Quem Trabalha, especial eleições, sexta-feira 8 de março.
+
+  - pessoa: montenegro
+    data: 2024-06-17
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/politica/detalhe/luis-montenegro-fala-em-exclusivo-no-now
+    nota: >-
+      Dia de estreia do canal. CM de 17 jun 2024. Troca a peça da Sábado
+      do levantamento, que não fixava o dia por palavras.
+
+  - pessoa: montenegro
+    data: 2024-10-08
+    canal: sic
+    formato: informativa
+    estado: confirmada
+    tipo_prova: anuncio
+    prova: https://www.atelevisao.com/sic/luis-montenegro-em-entrevista-a-sic-saiba-quando-e-transmitida/
+    nota: >-
+      Jornal da Noite, "terça-feira, dia 8 de outubro". O anúncio só nomeia
+      a SIC; o levantamento dizia que passou também na SIC Notícias, e
+      isso fica por provar.
+
+  - pessoa: montenegro
+    data: 2025-03-10
+    canal: tvi
+    tambem_em: [cnn-portugal]
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://tviplayer.iol.pt/programa/entrevista-a-luis-montenegro/67cf0325d34e3f0bae9b70ee/video/67cf5f380cf216cd3ad33599
+    nota: >-
+      A página diz "à TVI e à CNN Portugal". Conta uma vez, atribuída à
+      TVI por decisão do autor. Página da CNN do mesmo dia:
+      https://cnnportugal.iol.pt/programa/entrevista-a-luis-montenegro/67cf0325d34e3f0bae9b70ee
+
+  - pessoa: montenegro
+    data: 2025-03-25
+    canal: tvi
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://tviplayer.iol.pt/programa/goucha/5fe21c220cf2ec6e471a5d6b/video/67e2f2420cf20ac1d5f2f60b
+    nota: Goucha, "entrevista exclusiva", terça 25 mar 2025.
+
+  - pessoa: montenegro
+    data: 2025-04-17
+    canal: sic
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://rr.pt/noticia/politica/2025/04/17/montenegro-defende-regulacao-nas-redes-sociais-e-compara-as-regras-na-via-publica/421939/
+    nota: Júlia. Renascença, "esteve, esta quinta-feira à tarde, na SIC".
+
+  - pessoa: montenegro
+    data: 2025-05-11
+    canal: sic
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://podcasts.apple.com/pt/podcast/lu%C3%ADs-montenegro-o-tema-da-minha-campanha-d%C3%A1-muito-jeito/id1585178009?i=1000708029965
+    nota: >-
+      Isto É Gozar Com Quem Trabalha. O episódio oficial diz "programa
+      emitido a 11 de maio na SIC".
+
+  - pessoa: montenegro
+    data: 2025-06-25
+    canal: rtp1
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.rtp.pt/play/p15164/e859860/a-entrevista-luis-montenegro
+    nota: >-
+      A Entrevista, gravada em Bruxelas. A página diz RTP sem precisar o
+      canal; RTP1 é a leitura do levantamento, por confirmar.
+
+  - pessoa: montenegro
+    data: 2025-05-02
+    canal: cmtv
+    formato: informativa
+    estado: por_verificar
+    tipo_prova: anuncio
+    prova: https://www.cmjornal.pt/tv-media/detalhe/entrevistas-aos-lideres-partidarios-arrancam-na-cmtv-esta-segunda-feira
+    nota: >-
+      Ciclo anunciado "com datas a confirmar". Não se encontrou registo de
+      que a entrevista tenha passado.
+
+  - pessoa: montenegro
+    data: 2025-05-12
+    canal: rtp3
+    formato: informativa
+    estado: por_verificar
+    tipo_prova: canal
+    prova: https://www.rtp.pt/play/p14976/eleicoes-legislativas-2025-entrevistas-lideres-partidarios
+    nota: Ep. 6 (12 mai) ou ep. 7 (14 mai) do ciclo de líderes; a página não identifica o entrevistado.
+
+  - pessoa: montenegro
+    data: 2023-12-20
+    canal: cmtv
+    formato: informativa
+    estado: fora_do_ambito
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/tv-media/amp/cmtv-lider-com-entrevista-a-montenegro-a-registar-acima-de-um-milhao-de-espectadores
+    nota: Antes de 2024.
+
+  # ---------------- Jose Luis Carneiro ----------------
+
+  - pessoa: carneiro
+    data: 2025-07-08
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.nowcanal.pt/ultimas/detalhe/assista-aqui-a-entrevista-completa-ao-novo-lider-do-ps-jose-luis-carneiro
+    nota: Primeira depois da eleição. "Entrevista exclusiva ao NOW", 8 jul 2025.
+
+  - pessoa: carneiro
+    data: 2025-07-24
+    canal: sic-noticias
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/ps-cria-conselho-estrategico-para-preparar-o-futuro-do-pais/
+    nota: ps.pt de 25 jul 2025, "em entrevista concedida, ontem, à SIC Notícias".
+
+  - pessoa: carneiro
+    data: 2025-09-08
+    canal: cnn-portugal
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://cnnportugal.iol.pt/videos/a-entrevista-a-jose-luis-carneiro-na-integra/68bf58890cf285ab53a5e451
+    nota: CNN Prime Time, 8 set 2025.
+
+  - pessoa: carneiro
+    data: 2025-10-23
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/politica/detalhe/buscas-na-protecao-civil-resultados-autarquicos-e-corrida-a-belem-o-que-disse-jose-luis-carneiro-em-entrevista-ao-now
+    nota: Depois das autárquicas. CM de 23 out 2025, 22:41.
+
+  - pessoa: carneiro
+    data: 2025-10-29
+    canal: rtp3
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.rtp.pt/programa/tv/p46717/e33
+    nota: Grande Entrevista, ep. 33, no dia seguinte à votação do OE2026 na generalidade.
+
+  - pessoa: carneiro
+    data: 2025-10-29
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/portugal-precisa-de-uma-politica-de-saude-forte-e-nao-de-cortes-cegos-que-poem-em-risco-a-vida-das-pessoas/
+    nota: >-
+      ps.pt de 30 out 2025, "em entrevista à CMTV, esta quarta-feira".
+      Mesmo dia da Grande Entrevista, outro canal: contam as duas.
+
+  - pessoa: carneiro
+    data: 2025-11-27
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/cumprimos-o-que-prometemos-aos-portugueses/
+    nota: Informação Privilegiada. ps.pt de 28 nov 2025, "esta quinta-feira".
+
+  - pessoa: carneiro
+    data: 2026-02-18
+    canal: rtp3
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.rtp.pt/play/p16214/e909871/grande-entrevista
+    nota: Grande Entrevista, ep. 5.
+
+  - pessoa: carneiro
+    data: 2026-02-18
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/jose-luis-carneiro-mantem-abertura-ao-dialogo-mas-avisa-que-ha-limites-perante-a-sobranceria-e-ausencia-de-resposta-do-governo/
+    nota: >-
+      Guerra e Paz. ps.pt de 19 fev 2026, "esta quarta-feira à noite".
+      Mesmo dia da Grande Entrevista, outro canal: contam as duas.
+
+  - pessoa: carneiro
+    data: 2026-03-18
+    canal: sic-noticias
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/ps-e-o-partido-da-esperanca-para-uma-expressiva-maioria-de-portugueses/
+    nota: >-
+      Depois da reeleição como secretário-geral. ps.pt de 19 mar 2026,
+      "afirmou esta quarta-feira". O levantamento dizia 19 mar; corrigido
+      a 2026-11-06.
+
+  - pessoa: carneiro
+    data: 2026-03-29
+    canal: sic
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://observador.pt/liveblogs/ps-encerra-congresso-este-domingo/
+    nota: >-
+      Isto É Gozar Com Quem Trabalha, depois do congresso do PS. Liveblog
+      do Observador, entrada de 29 mar às 23:11.
+
+  - pessoa: carneiro
+    data: 2026-04-29
+    canal: cmtv
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.cmjornal.pt/cmtv/programas/entretenimento/ola-bom-dia/detalhe/jose-luis-carneiro-deu-toques-na-bola-em-direto-do-ola-bom-dia
+    nota: >-
+      Olá, Bom Dia!, "convidado desta quarta-feira", 29 abr 2026. O
+      dioguinho.com chama-lhe entrevista:
+      https://dioguinho.com/tag/jose-luis-carneiro/
+
+  - pessoa: carneiro
+    data: 2026-05-06
+    canal: tvi
+    formato: entretenimento
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://tviplayer.iol.pt/programa/dois-as-10/5fe219a40cf2cc9de7ef9590/video/69fb14c00cf21fcd8377377d
+    nota: Dois às 10, quarta 6 mai 2026.
+
+  - pessoa: carneiro
+    data: 2026-05-13
+    canal: cnn-portugal
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://cnnportugal.iol.pt/videos/a-entrevista-a-jose-luis-carneiro-na-integra/6a04fcd30cf2d0ed34b8451f
+    nota: CNN Prime Time, "esta quarta-feira", 13 mai.
+
+  - pessoa: carneiro
+    data: 2026-05-19
+    canal: now
+    formato: informativa
+    estado: confirmada
+    tipo_prova: video
+    prova: https://www.youtube.com/watch?v=lpH1GAUJhhA
+    nota: >-
+      Vídeo do canal oficial NOW Canal no YouTube, publicado a 19 mai 2026:
+      "esteve no NOW esta terça-feira". Conta oficial do canal.
+
+  - pessoa: carneiro
+    data: 2026-06-17
+    canal: rtp3
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.rtp.pt/play/p16214/e936879/grande-entrevista
+    nota: Grande Entrevista, ep. 18.
+
+  - pessoa: carneiro
+    data: 2026-07-15
+    canal: cnn-portugal
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://cnnportugal.iol.pt/videos/a-entrevista-a-jose-luis-carneiro-na-integra/6a57c26a0cf2b42132dbaae7
+    nota: >-
+      Exames nacionais e obras do ministro. Estava por verificar no
+      levantamento; a página diz 15 jul, confirmada a 2026-11-06.
+
+  - pessoa: carneiro
+    data: 2026-07-16
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/politica/detalhe/jose-luis-carneiro-em-entrevista-na-cmtv
+    nota: Em direto na CMTV, depois do debate do Estado da Nação. CM de 16 jul 2026.
+
+  - pessoa: carneiro
+    data: 2026-07-17
+    canal: sic-noticias
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.dnoticias.pt/2026/7/18/499538-carneiro-diz-que-luis-neves-deve-dar-explicacoes-de-forma-clara-e-inequivoca/
+    nota: >-
+      Caso Luís Neves. Lusa no DN Madeira, 18 jul às 05:07, "na sexta-feira
+      à noite, em entrevista à SIC Notícias".
+
+  - pessoa: carneiro
+    data: 2026-08-19
+    canal: sic-noticias
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://eco.sapo.pt/2026/08/19/mistura-alhos-com-bugalhos-carneiro-critica-estudo-sobre-seguranca-social/
+    nota: >-
+      Estudo da Segurança Social. ECO de 19 ago, "criticou esta
+      quarta-feira" em entrevista à SIC Notícias. Estava por verificar no
+      levantamento; confirmada a 2026-11-06.
+
+  - pessoa: carneiro
+    data: 2026-09-08
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://www.cmjornal.pt/cmtv/videos/detalhe/a-mocao-visava-criar-uma-crise-politica-o-ps-nao-contribuiu-para-isso-jose-luis-carneiro-justifica-abstencao
+    nota: Moção de censura. "Entrevista exclusiva à CMTV", 8 set 2026.
+
+  - pessoa: carneiro
+    data: 2026-09-16
+    canal: sic-noticias
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://rr.pt/noticia/politica/2026/09/16/lider-do-ps-propoe-medidas-anti-crise-no-valor-de-132-milhoes-por-mes/485738/
+    nota: >-
+      Pacote anticrise. Renascença de 16 set às 23:01, "nesta entrevista à
+      SIC Notícias". Estava por verificar no levantamento; confirmada a
+      2026-11-06.
+
+  - pessoa: carneiro
+    data: 2026-09-24
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: partido
+    prova: https://ps.pt/a-habitacao-e-a-minha-grande-paixao-e-prioridade-politica/
+    nota: Custo de vida e habitação. ps.pt de 25 set 2026, "acusou, esta quinta-feira".
+
+  - pessoa: carneiro
+    data: 2026-09-29
+    canal: tvi
+    tambem_em: [cnn-portugal]
+    formato: informativa
+    estado: confirmada
+    tipo_prova: canal
+    prova: https://cnnportugal.iol.pt/jose-luis-carneiro/ps/governo-esta-a-revelar-grande-insensibilidade-e-indiferenca-a-quem-vive-momentos-dificeis-diz-jose-luis-carneiro/20260929/6abc287dd34e9a786e75a323
+    nota: >-
+      A página diz "em entrevista à TVI e à CNN Portugal". Conta uma vez,
+      atribuída à TVI por decisão do autor.
+
+  - pessoa: carneiro
+    data: 2026-10-07
+    canal: cmtv
+    formato: informativa
+    estado: confirmada
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/politica/detalhe/jose-luis-carneiro-em-entrevista-exclusiva-no-grande-jornal-da-noite-na-cmtv
+    nota: >-
+      Grande Jornal da Noite. CM de 7 out, "esta quarta-feira, em
+      entrevista à CMTV". Um anúncio do CM de 6 out dava terça-feira; conta
+      o relato, porque um anúncio não é o registo de quem passou.
+
+  - pessoa: carneiro
+    data: 2026-06-25
+    canal: cmtv
+    formato: informativa
+    estado: por_verificar
+    tipo_prova: imprensa
+    prova: https://www.cmjornal.pt/maissobre/GRANDE-JORNAL
+    nota: >-
+      Grande Jornal. O endereço é uma página de etiqueta, e a 2026-11-06 o
+      artigo da entrevista não estava nela nem foi encontrado.
+
+  - pessoa: carneiro
+    data: 2026-10-13
+    canal: null
+    formato: informativa
+    estado: por_verificar
+    tipo_prova: imprensa
+    prova: https://www.rtp.pt/noticias/economia/oe2027-carneiro-garante-que-ps-nao-estara-na-origem-de-qualquer-crise-politica_n1771510
+    nota: >-
+      OE2027. A notícia diz "em entrevista à RTP" e só traz "atualizado 14
+      outubro 2026": não fixa o dia nem diz se foi RTP1 ou RTP3.
+
+  - pessoa: carneiro
+    data: 2025-12-12
+    canal: null
+    formato: informativa
+    estado: fora_do_ambito
+    tipo_prova: canal
+    prova: https://www.rtp.pt/noticias/politica/entrevista-ao-programa-decisao-nacional-carneiro-contra-voto-eletronico-a-distancia-nas-presidenciais_n1703918
+    nota: RTP Internacional, Decisão Nacional. Fora dos nove canais; a data é a da notícia.

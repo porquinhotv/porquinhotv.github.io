@@ -12,6 +12,7 @@ O site publica, por período (semana, mês, ano, desde sempre), um número só: 
 - Uma transmissão vinda de fonte automática não entra na primeira vez que é vista: só entra depois de o mesmo bloco aparecer em rondas distintas. O registo de avistamentos está em `docs/dados/candidatos.json`, e ao lado de cada linha ficam as rondas e o número de fontes distintas que a viram. Ver a Metodologia para o que isto protege e o que não protege.
 - `recolha/` aplica o critério em `config/porquinho.yml`, dobra as transmissões em entrevistas (`recolha/entrevistas.py`) e escreve `docs/dados/entrevistas.json` (uma entrada por entrevista, com as transmissões dentro; append-only ao nível da transmissão), `docs/dados/quarentena.json` (tudo o que ficou de fora, com motivo) e `docs/dados/resumo.json` (os agregados).
 - `docs/` é o site. Sem CDN e sem fontes remotas. A fonte tipográfica é servida localmente, licença OFL ao lado.
+- `config/comparacao.yml` são as entrevistas de outras duas pessoas para a página de Comparação, com as regras do resto do site e uma prova por linha. Vêm de um levantamento pontual confirmado prova a prova, não da recolha. `ferramentas/comparacao.py` escreve essa página inteira, dentro do `gerar_seo`, e conta o sujeito até ao mesmo dia de fecho (`janela.ate`) que os outros. Só conta `estado: confirmada`. Para acrescentar uma linha: escrevê-la no ficheiro, mover `janela.ate` se for depois do fecho, correr `python -m ferramentas.comparacao` para ver as contagens na consola e `python -m ferramentas.gerar_seo` para regenerar a página.
 - Desde 2026-10-27 não há recolha agendada. Com o histórico consolidado, cada entrevista nova entra pelo formulário `adicionar` (ver em baixo), que publica sozinho; o workflow `recolha` fica para correr a pedido.
 
 A [Metodologia](METODOLOGIA.md) diz o que conta, o que não conta e onde o método falha.
@@ -20,7 +21,7 @@ A [Metodologia](METODOLOGIA.md) diz o que conta, o que não conta e onde o méto
 
 ```bash
 pip install -r requirements.txt
-python -m unittest discover -s tests -t .      # 430 testes, offline
+python -m unittest discover -s tests -t .      # 439 testes, offline
 node --test tests/frontend/*.test.js           # 33 testes a logica do site, sem browser
 python -m recolha.principal --dry-run          # nao escreve nada
 python -m recolha.principal                    # escreve docs/dados

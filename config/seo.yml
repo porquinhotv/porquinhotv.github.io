@@ -82,6 +82,26 @@ paginas:
       A lista completa das entrevistas exclusivas de André Ventura na televisão
       portuguesa, cada uma com a ligação para a página do canal ou para a
       notícia que a prova.
+  # Unica pagina com palavras proprias (decisao do autor, 2026-11-06): as
+  # das outras pessoas e partidos entram so aqui, para nao mudarem o que
+  # as outras paginas dizem aos motores.
+  comparacao.html:
+    titulo: 'André Ventura, Luís Montenegro e José Luís Carneiro: entrevistas na TV | Porquinho TV'
+    descricao: >-
+      As entrevistas exclusivas de André Ventura na televisão portuguesa ao
+      lado das de Luís Montenegro (PSD) e José Luís Carneiro (PS), contadas
+      com as mesmas regras e com prova pública em cada linha.
+    palavras_chave:
+      - André Ventura
+      - Luís Montenegro
+      - Montenegro
+      - José Luís Carneiro
+      - Carneiro
+      - Chega
+      - PSD
+      - PS
+      - entrevista exclusiva
+      - televisão portuguesa
   metodologia.html:
     titulo: 'Metodologia da contagem | Porquinho TV'
     descricao: >-

@@ -173,8 +173,12 @@ def _lista_das_provas(cfg: dict, resumo: dict, lista: list) -> dict:
 
 
 def _pagina_web(cfg: dict, pagina: str) -> dict:
+    """As palavras de pesquisa de uma pagina so entram se a pagina as
+    declarar no `config/seo.yml`. A de comparacao declara as das outras
+    pessoas e partidos (decisao do autor, 2026-11-06); as outras paginas
+    ficam exactamente como estavam."""
     p = cfg["paginas"][pagina]
-    return {
+    objecto = {
         "@type": "WebPage",
         "name": p["titulo"],
         "description": p["descricao"].strip(),
@@ -182,6 +186,9 @@ def _pagina_web(cfg: dict, pagina: str) -> dict:
         "inLanguage": cfg["idioma"],
         "isPartOf": {"@type": "WebSite", "name": cfg["nome"], "url": cfg["base"]},
     }
+    if p.get("palavras_chave"):
+        objecto["keywords"] = list(p["palavras_chave"])
+    return objecto
 
 
 def dados_estruturados(cfg: dict, pagina: str, resumo: dict, lista: list) -> dict:
@@ -334,16 +341,26 @@ def corpo_fontes(cfg: dict, resumo: dict, lista: list) -> str:
     return "\n".join(linhas)
 
 
+def corpo_comparacao(cfg: dict, resumo: dict, lista: list) -> str:
+    """A pagina de comparacao vem toda daqui, e nao so a versao para quem
+    le sem JavaScript: o browser nao recalcula nada. O modulo importa-se
+    aqui dentro porque ele proprio usa este."""
+    from ferramentas import comparacao
+    return comparacao.corpo(resumo, lista)
+
+
 CORPOS = {
     "index.html": corpo_index,
     "calendario.html": corpo_calendario,
     "fontes.html": corpo_fontes,
+    "comparacao.html": corpo_comparacao,
 }
 
 
 def sitemap(cfg: dict, resumo: dict) -> str:
-    """As quatro paginas, com a data da ultima recolha. Um sitemap num
-    subdirectorio so e encontrado se alguem o apontar: ver o robots."""
+    """As paginas declaradas no `config/seo.yml`, com a data da ultima
+    recolha. Um sitemap num subdirectorio so e encontrado se alguem o
+    apontar: ver o robots."""
     data = str(resumo.get("gerado_em", ""))[:10]
     linhas = ['<?xml version="1.0" encoding="UTF-8"?>',
               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']

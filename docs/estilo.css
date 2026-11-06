@@ -176,9 +176,27 @@ section h2 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; letter-spaci
 .canais .pista span { display: block; height: 100%; }
 .canais .valor { font-size: 0.92rem; color: var(--tinta-suave); white-space: nowrap; }
 .canais .zero .valor { font-style: italic; }
+
+/* pagina de comparacao: uma barra por pessoa, a mesma escala dentro de
+   cada periodo. A largura vem escrita no HTML pelo gerador. */
+.frente { list-style: none; margin: 10px 0 12px; padding: 0; display: grid; gap: 12px; }
+.frente li { display: grid; grid-template-columns: 200px 1fr 3em; gap: 12px; align-items: center; }
+.frente .quem { font-weight: 600; line-height: 1.2; }
+.frente .quem small { display: block; font-weight: 400; font-size: 0.85rem; color: var(--tinta-suave); }
+.frente .pista { height: 22px; background: var(--branco); border: 3px solid var(--tinta); border-radius: 999px; overflow: hidden; }
+.frente .pista span { display: block; height: 100%; background: var(--lama-clara); }
+.frente .porquinho .pista span { background: var(--rosa-escuro); }
+.frente .valor { font-size: 1.6rem; font-weight: 700; color: var(--lama); text-align: right; }
+.provas-dos-outros h3 { margin: 18px 0 4px; font-size: 1.1rem; }
+/* Num telemovel de 390 pixeis a data partia-se em duas linhas por causa
+   do "(tambem na ...)" do canal. Aqui parte-se o canal, nunca a data. */
+.provas-dos-outros .tabela td:first-child { white-space: nowrap; }
+.provas-dos-outros .tabela .canal { white-space: normal; }
 @media (max-width: 560px) {
   .canais li { grid-template-columns: 14px 1fr auto; }
   .canais .pista { grid-column: 1 / -1; }
+  .frente li { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .frente .pista { grid-column: 1 / -1; grid-row: 2; }
 }
 
 /* grafico de evolucao */

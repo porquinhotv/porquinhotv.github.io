@@ -5,9 +5,10 @@
 
 Actualiza, a partir de `config/seo.yml` e dos dados publicados:
 
-- o bloco de metadados no `<head>` das quatro paginas;
+- o bloco de metadados no `<head>` das cinco paginas;
 - o conteudo pre-renderizado do corpo, nas tres paginas que o
-  JavaScript constroi a partir dos dados;
+  JavaScript constroi a partir dos dados, e a pagina de comparacao
+  inteira, que so existe assim (ver `ferramentas/comparacao.py`);
 - `docs/sitemap.xml` e `docs/robots.txt`.
 
 A Metodologia recebe o bloco do `<head>` pela mao do proprio gerador
@@ -39,7 +40,7 @@ def construir() -> dict[Path, str]:
     resumo, entrevistas = seo.dados()
     lista = seo.visiveis(resumo, entrevistas)
     saida: dict[Path, str] = {}
-    for pagina in ("index.html", "calendario.html", "fontes.html"):
+    for pagina in ("index.html", "calendario.html", "fontes.html", "comparacao.html"):
         caminho = DOCS / pagina
         saida[caminho] = seo.aplicar(pagina, caminho.read_text(encoding="utf-8"), cfg, resumo, lista)
     saida[DOCS / "sitemap.xml"] = seo.sitemap(cfg, resumo)

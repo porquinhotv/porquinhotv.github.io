@@ -1,4 +1,4 @@
-/* Utilitarios de pagina partilhados pelas tres paginas. So DOM e
+/* Utilitarios de pagina partilhados pelas paginas do site. So DOM e
    carregamento de ficheiros locais. A logica vive em logica.js. */
 
 var PTVDOM = (function () {
@@ -62,5 +62,8 @@ var PTVDOM = (function () {
     ]));
   }
 
-  return { el: el, escapar: escapar, carregar: carregar, corDoCanal: corDoCanal, marcarGerado: marcarGerado, mostrarErro: mostrarErro };
+  /* `marcarPronto` sai para fora por causa da pagina de comparacao, que
+     vem completa no HTML: se o resumo falhar, o botao tem de se libertar
+     sem o painel de erro apagar um conteudo que esta certo. */
+  return { el: el, escapar: escapar, carregar: carregar, corDoCanal: corDoCanal, marcarGerado: marcarGerado, marcarPronto: marcarPronto, mostrarErro: mostrarErro };
 })();
