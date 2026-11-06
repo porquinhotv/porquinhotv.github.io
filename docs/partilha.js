@@ -591,12 +591,18 @@
 
   /* ---- botao -------------------------------------------------------- */
 
+  /* Tres pontos ligados, o simbolo generico de partilha (Android, web,
+     desktop). A seta a sair de uma caixa, da familia do iPhone, lia-se
+     como "carregar um ficheiro" (observacao do autor a 2026-11-06). Os
+     pontos cheios foram escolhidos pelo autor contra a versao em
+     contorno, as duas vistas no botao real: cheios leem-se melhor no
+     tamanho de um telemovel. */
   ui.botao = el("button", {
     type: "button",
     class: "ptv-partilhar " + IGNORAR,
     "aria-label": "Partilhar o que está no ecrã",
     title: "Partilhar o que está no ecrã",
-    html: '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14.5V3.5"/><path d="M7.5 8L12 3.5 16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>'
+    html: '<svg viewBox="0 0 24 24" width="31" height="31" aria-hidden="true" focusable="false" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path fill="none" d="M6.5 12L17.5 5.5M6.5 12l11 6.5"/><circle stroke="none" cx="17.5" cy="5.5" r="3.3"/><circle stroke="none" cx="6.5" cy="12" r="3.3"/><circle stroke="none" cx="17.5" cy="18.5" r="3.3"/></svg>'
   });
   ui.botao.addEventListener("click", abrir);
   document.body.appendChild(ui.botao);
