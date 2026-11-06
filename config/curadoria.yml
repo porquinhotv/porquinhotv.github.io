@@ -592,6 +592,12 @@ entrevistas:
     canal: cnn-portugal
     prova: https://www.instagram.com/p/DfFhXsdFlMO/
 
+  # Formulario `adicionar`, 2026-11-06: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-11-03 19:30 de Lisboa, pelo identificador.
+  - data: 2026-11-03
+    canal: now
+    prova: https://www.instagram.com/p/DfSouM5lKmN/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
