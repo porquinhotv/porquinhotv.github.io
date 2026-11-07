@@ -19,7 +19,7 @@ from pathlib import Path
 
 import yaml
 
-from ferramentas import adicionar, remover
+from ferramentas import adicionar, comparacao, remover, seo
 from recolha import armazem
 from recolha.curadoria import ler_remocoes
 from recolha.fontes.manual import ler_registo
@@ -35,6 +35,7 @@ RTP1 = "https://www.rtp.pt/play/p10324/e938640/grande-entrevista"
 RTP3 = "https://www.rtp.pt/play/p16214/e938491/grande-entrevista"
 SO_NO_TESTE = "https://exemplo.pt/so-existe-neste-teste"
 WORKFLOWS = {nome: RAIZ / ".github" / "workflows" / f"{nome}.yml" for nome in ("adicionar", "remover")}
+COMPARACAO_REAL = RAIZ / "config" / "comparacao.yml"
 
 CURADORIA = """# cabecalho que tem de sobreviver
 entrevistas:
@@ -75,9 +76,15 @@ class Base(unittest.TestCase):
         self.curadoria.write_text(CURADORIA, encoding="utf-8", newline="\n")
         self.publicadas = self.pasta / "entrevistas.json"
         self.publicadas.write_text(json.dumps(PUBLICADAS), encoding="utf-8")
+        # A comparacao real, copiada: os testes da outra pessoa escrevem
+        # nela, e o ficheiro do repositorio nunca e tocado.
+        self.comparacao = self.pasta / "comparacao.yml"
+        self.comparacao_original = COMPARACAO_REAL.read_text(encoding="utf-8")
+        self.comparacao.write_text(self.comparacao_original, encoding="utf-8", newline="\n")
 
-    def adicionar(self, entradas):
-        return adicionar.correr(entradas, curadoria=self.curadoria, publicadas=self.publicadas, hoje=HOJE)
+    def adicionar(self, entradas, pessoa=""):
+        return adicionar.correr(entradas, pessoa, curadoria=self.curadoria, publicadas=self.publicadas,
+                                comparacao=self.comparacao, hoje=HOJE)
 
     def remover(self, provas, motivo="prova substituida"):
         return remover.correr(provas, motivo, curadoria=self.curadoria, publicadas=self.publicadas, hoje=HOJE)
@@ -283,7 +290,129 @@ class TestRemover(Base):
                          len(yaml.safe_load((RAIZ / "config" / "curadoria.yml").read_text(encoding="utf-8"))["mesma_entrevista"]))
 
 
+class TestAdicionarOutraPessoa(Base):
+    """Pedido do autor a 2026-11-07: acrescentar entrevistas de qualquer
+    das tres pessoas pelo mesmo formulario, e o site inteiro acompanhar.
+    As datas de teste caem na RTP2, onde o levantamento nao encontrou
+    nenhuma entrevista das outras duas pessoas, para nao colidirem com
+    uma linha real que o formulario venha a escrever."""
+
+    PESSOA = "José Luís Carneiro"
+
+    def lida(self):
+        return yaml.safe_load(self.comparacao.read_text(encoding="utf-8"))
+
+    def intacta(self):
+        self.assertEqual(self.comparacao.read_text(encoding="utf-8"), self.comparacao_original)
+
+    def confirmadas(self, pid):
+        return [e for e in self.lida()["entrevistas"] if e["pessoa"] == pid and e["estado"] == "confirmada"]
+
+    def test_vai_para_o_fim_da_comparacao_e_nao_toca_na_curadoria(self):
+        """A linha entra como a pagina a conta (confirmada, com canal e
+        prova) e sem o que o formulario nao perguntou: o formato fica
+        vazio, e o tipo de prova fica `ligacao`, sem adivinhar pelo
+        dominio se e pagina de canal ou noticia. O resto do ficheiro,
+        comentarios incluidos, fica byte a byte."""
+        antes = len(self.confirmadas("carneiro"))
+        codigo, relatorio = self.adicionar("2025-07-02 RTP2 https://exemplo.pt/carneiro-rtp2", self.PESSOA)
+        self.assertEqual(codigo, 0, relatorio)
+        self.intacto()
+        texto = self.comparacao.read_text(encoding="utf-8")
+        self.assertTrue(texto.startswith(self.comparacao_original.rstrip("\n")))
+        nova = self.lida()["entrevistas"][-1]
+        self.assertEqual(nova, {"pessoa": "carneiro", "data": date(2025, 7, 2), "canal": "rtp2",
+                                "estado": "confirmada", "tipo_prova": "ligacao",
+                                "prova": "https://exemplo.pt/carneiro-rtp2"})
+        self.assertEqual(len(self.confirmadas("carneiro")), antes + 1)
+        resumo, entrevistas = seo.dados()
+        visivel = comparacao.visivel_de(resumo)
+        norm = comparacao.validar(self.lida(), comparacao.canais_validos(), visivel)
+        contas = comparacao.contar(norm, seo.visiveis(resumo, entrevistas), visivel)
+        self.assertEqual(next(p for p in contas["pessoas"] if p["id"] == "carneiro")["total"], antes + 1)
+
+    def test_uma_entrevista_nova_move_o_fecho_da_pagina(self):
+        """Com o fecho escrito a mao, uma entrevista nova depois dele fazia
+        falhar o gerador, ou ficava fora da pagina. Agora a pagina conta
+        todos ate a entrevista mais recente, de qualquer pessoa. A data e
+        no futuro de proposito: e a unica que nenhuma linha real passa."""
+        codigo, relatorio = self.adicionar("01-01-2099 RTP2 https://exemplo.pt/montenegro-futuro", "Luís Montenegro")
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertIn("AVISO: data no futuro", relatorio)
+        resumo, entrevistas = seo.dados()
+        gerado = comparacao.corpo(resumo, seo.visiveis(resumo, entrevistas), self.lida())
+        self.assertIn("a 1 de janeiro de 2099</p>", gerado)
+
+    def test_uma_prova_do_site_do_partido_fica_marcada_como_tal(self):
+        """A pagina escreve "site do partido" para quem le saber, antes de
+        abrir, que a linha assenta numa parte interessada. E o unico tipo
+        que o dominio decide, pela lista do YAML."""
+        codigo, relatorio = self.adicionar("2025-07-03 RTP2 https://ps.pt/exemplo-do-formulario", self.PESSOA)
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertIn("[partido]", relatorio)
+        self.assertEqual(self.lida()["entrevistas"][-1]["tipo_prova"], "partido")
+
+    def test_recusa_sem_escrever_o_que_a_pagina_nao_contaria(self):
+        """Cada caso deixava uma linha no ficheiro que a pagina nao conta
+        ou conta mal: antes de a pessoa contar, a mesma prova duas vezes,
+        a mesma pessoa no mesmo dia e canal, uma prova que ja e do
+        sujeito, uma pessoa que nao existe."""
+        real = self.confirmadas("carneiro")[0]
+        canal_real = next(c["nome"] for c in yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(
+            encoding="utf-8"))["canais"] if c["id"] == real["canal"])
+        casos = {
+            "antes de assumir o cargo": ("2025-06-01 RTP2 https://exemplo.pt/cedo", self.PESSOA),
+            "prova ja na comparacao": (f"2025-07-04 RTP2 {real['prova']}", self.PESSOA),
+            "mesma pessoa, dia e canal": (f"{real['data']} {canal_real} https://exemplo.pt/outra", self.PESSOA),
+            "prova do sujeito": (f"2025-07-05 RTP2 {SO_NO_TESTE}", self.PESSOA),
+            "pessoa desconhecida": ("2025-07-06 RTP2 https://exemplo.pt/x", "Pessoa Que Nao Existe"),
+            "lote com uma ma": ("2025-07-07 RTP2 https://exemplo.pt/boa; 2025-06-01 RTP2 https://exemplo.pt/ma",
+                                self.PESSOA),
+        }
+        for nome, (entradas, pessoa) in casos.items():
+            with self.subTest(caso=nome):
+                codigo, relatorio = self.adicionar(entradas, pessoa)
+                self.assertEqual(codigo, 1, relatorio)
+                self.assertIn("NADA FOI ESCRITO", relatorio)
+                self.intacta()
+                self.intacto()
+
+    def test_uma_prova_da_comparacao_nao_entra_como_do_sujeito(self):
+        """O seletor esquecido em "sujeito" com a ligacao de uma entrevista
+        de outra pessoa punha-a na contagem errada."""
+        real = self.confirmadas("carneiro")[0]
+        codigo, relatorio = self.adicionar(f"2026-10-11 RTP2 {real['prova']}")
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("escolher a pessoa certa", relatorio)
+        self.intacto()
+
+    def test_a_pessoa_escreve_se_pelo_nome_ou_pelo_id(self):
+        cfg = yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(encoding="utf-8"))
+        pessoas = yaml.safe_load(COMPARACAO_REAL.read_text(encoding="utf-8"))["pessoas"]
+        for escrita in ("José Luís Carneiro", "jose luis carneiro", "carneiro"):
+            with self.subTest(escrita=escrita):
+                self.assertEqual(adicionar.escolher_pessoa(escrita, cfg["sujeito"], pessoas)[0]["id"], "carneiro")
+        for escrita in ("", cfg["sujeito"]["nome"], cfg["sujeito"]["id"]):
+            with self.subTest(escrita=escrita):
+                self.assertEqual(adicionar.escolher_pessoa(escrita, cfg["sujeito"], pessoas), (None, ""))
+
+
 class TestFormularios(unittest.TestCase):
+    def test_as_opcoes_do_seletor_sao_as_pessoas_da_configuracao(self):
+        """As opcoes do seletor vivem no workflow, porque o GitHub nao as le
+        de outro ficheiro. Uma pessoa acrescentada ao YAML sem opcao no
+        formulario nao se podia escolher, e uma opcao com o nome mal
+        escrito falhava so no dia em que alguem a escolhesse."""
+        workflow = yaml.safe_load(WORKFLOWS["adicionar"].read_text(encoding="utf-8"))
+        campo = (workflow.get("on") or workflow[True])["workflow_dispatch"]["inputs"]["pessoa"]
+        sujeito = yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(encoding="utf-8"))["sujeito"]["nome"]
+        pessoas = [p["nome"] for p in yaml.safe_load(COMPARACAO_REAL.read_text(encoding="utf-8"))["pessoas"]]
+        self.assertEqual(campo["type"], "choice")
+        self.assertEqual(campo["options"], [sujeito, *pessoas])
+        self.assertEqual(campo["default"], sujeito)
+        texto = WORKFLOWS["adicionar"].read_text(encoding="utf-8")
+        self.assertIn("config/comparacao.yml", texto.split("git add", 1)[1].splitlines()[0])
+
     def test_os_campos_nunca_sao_colados_no_shell(self):
         """Um `${{ inputs.x }}` dentro de `run` e texto colado no script: uma
         ligacao com `$(...)` correria como comando com permissao de escrita
@@ -311,6 +440,19 @@ class TestFormularios(unittest.TestCase):
             with self.subTest(workflow=nome):
                 self.assertLess(texto.index("python -m unittest"), texto.index("python -m recolha.principal"))
                 self.assertLess(texto.index("node --test"), texto.index("git push"))
+
+
+    def test_o_site_e_regenerado_antes_dos_testes(self):
+        """Simulacao de 2026-11-07: uma entrevista de outra pessoa escrita
+        em config/comparacao.yml e os testes corridos logo a seguir davam 3
+        falhas (pagina publicada atras do gerado, 37 provas em vez de 38,
+        periodo antigo), e o formulario parava sem publicar. A pagina de
+        Comparacao le o YAML diretamente; tem de ser regenerada entre o
+        formulario escrever e os testes correrem."""
+        texto = WORKFLOWS["adicionar"].read_text(encoding="utf-8")
+        escreve = texto.index("python -m ferramentas.adicionar")
+        self.assertLess(escreve, texto.index("python -m ferramentas.gerar_seo", escreve))
+        self.assertLess(texto.index("python -m ferramentas.gerar_seo", escreve), texto.index("python -m unittest"))
 
 
 class TestQuarentena(unittest.TestCase):

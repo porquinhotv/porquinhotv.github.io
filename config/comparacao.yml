@@ -7,11 +7,18 @@
 # NAO vem da recolha que construiu o historico do sujeito. Por isso os
 # numeros destas duas pessoas sao minimos, e a pagina diz isso.
 #
+# Desde 2026-11-07 as entrevistas novas das duas pessoas entram pelo
+# formulario `adicionar`, escolhendo a pessoa, como as do sujeito. O
+# formulario escreve no fim deste ficheiro e valida-o inteiro com as
+# regras do gerador antes de gravar: o que o gerador recusaria, o
+# formulario recusa, e nada fica escrito.
+#
 # Quem le isto: `ferramentas/comparacao.py`, chamado pelo `gerar_seo`.
 # Todos os workflows que escrevem dados ja correm o `gerar_seo`, por isso
-# a pagina acompanha sozinha qualquer entrevista nova do sujeito. Depois
-# de mexer neste ficheiro a mao, correr `python -m ferramentas.gerar_seo`
-# e commitar o `docs/comparacao.html` regenerado.
+# a pagina acompanha sozinha qualquer entrevista nova de qualquer das
+# tres pessoas. Depois de mexer neste ficheiro a mao, correr
+# `python -m ferramentas.gerar_seo` e commitar o `docs/comparacao.html`
+# regenerado.
 #
 # Regras, cada uma com a razao:
 #
@@ -24,9 +31,10 @@
 # - Uma entrevista que passou em dois canais e UMA linha, com o canal a
 #   que fica atribuida em `canal` e os outros em `tambem_em`. Conta uma
 #   vez, como no resto do site.
-# - Uma confirmada depois de `janela.ate` faz falhar o gerador: quem
-#   acrescenta uma entrevista nova tem de mover tambem a data de fecho,
-#   senao a linha ficava no ficheiro sem contar e ninguem dava por isso.
+# - `formato` e opcional: so fica registado, a pagina nao o mostra, e o
+#   formulario nao o pergunta. Quando falta, fica vazio, nunca adivinhado.
+# - Uma prova num dominio de `dominios_de_partido` tem `tipo_prova:
+#   partido`, e so essas. O gerador falha se uma das duas coisas falhar.
 # - O programa fica so na `nota`. A pagina mostra o canal, nunca o
 #   programa, como a de Fontes desde 2026-10-21.
 #
@@ -42,21 +50,30 @@
 versao: 1
 
 # `desde` e o inicio do periodo comum: o dia em que a pessoa mais recente
-# no cargo o assumiu. So ai se compara numero contra numero. Acaba no ultimo dia ate
-# onde se procuraram as entrevistas das outras duas pessoas. O sujeito e
-# contado ate ao mesmo dia: sem isso, o numero dele continuava a crescer
-# com cada entrevista nova e o das outras ficava parado, e o contraste
-# crescia sozinho.
+# no cargo o assumiu. So ai se compara numero contra numero.
 #
-# Fecho: o levantamento fechou a 2026-10-30; a 2026-11-06 uma pesquisa
-# dirigida a 31 out a 6 nov nao encontrou nenhuma entrevista das duas
-# pessoas nos nove canais (so a da Euronews, registada abaixo como fora do
-# ambito, e uma declaracao ao pais, que nao e entrevista). Com o fecho no
-# mesmo dia da pagina inicial, o numero do sujeito aqui sao todas as
-# entrevistas dele desde o inicio da janela.
+# `levantamento` e o ultimo dia ate onde as entrevistas das outras duas
+# pessoas foram procuradas por pesquisa. O levantamento fechou a
+# 2026-10-30; a 2026-11-06 uma pesquisa dirigida a 31 out a 6 nov nao
+# encontrou nenhuma entrevista das duas pessoas nos nove canais (so a da
+# Euronews, registada abaixo como fora do ambito, e uma declaracao ao
+# pais, que nao e entrevista). Esta data nao se move: e um facto sobre a
+# pesquisa, e a pagina escreve-a.
+#
+# O fecho da pagina (o dia ate onde todos se contam) nao se escreve aqui.
+# E o dia da entrevista mais recente de qualquer das tres pessoas, e
+# nunca antes de `levantamento`. Ate 2026-11-07 escrevia-se a mao
+# (`janela.ate`), para o numero do sujeito nao crescer sozinho enquanto o
+# das outras ficava parado. O autor pediu nesse dia que uma entrevista
+# nova de qualquer dos tres, entrada pelo formulario, atualize o site
+# inteiro de forma coerente: com o fecho a mao, a pagina inicial contava
+# a entrevista nova do sujeito e esta nao. O custo dessa decisao, dito na
+# pagina e na Metodologia: desde o levantamento as outras duas pessoas
+# tambem se contam a mao, e uma entrevista delas que ninguem registe faz
+# crescer a distancia para o sujeito.
 janela:
   desde: 2025-06-28
-  ate: 2026-11-06
+  levantamento: 2026-11-06
 
 sujeito:
   cargo: presidente do Chega
@@ -93,12 +110,30 @@ pessoas:
 # Rotulo da ligacao na tabela das provas. A pagina diz que tipo de prova
 # e, para quem le saber, antes de abrir, que uma linha assenta no site de
 # um partido.
+#
+# `ligacao` e o tipo que o formulario escreve quando a prova nao esta num
+# dominio de partido: quem preenche so da o dia, o canal e a ligacao, e
+# distinguir pagina de canal, noticia ou anuncio seria adivinhar pelo
+# dominio. "ver" e o rotulo de todas as provas da pagina de Fontes.
 rotulos_de_prova:
   canal: ver
   video: ver
   imprensa: notícia
   anuncio: anúncio
   partido: site do partido
+  ligacao: ver
+
+# Os dominios em que uma prova e do site de um partido. Medido a
+# 2026-11-07 contra as 37 confirmadas: as 7 linhas `partido` estao todas
+# em ps.pt (6) ou ad2024.pt (1), e nenhuma outra linha esta nesses
+# dominios. psd.pt nao aparece nos dados e entra por ser o site oficial
+# do partido do primeiro-ministro. Um dominio novo de partido escreve-se
+# aqui antes da primeira linha que o use: sem isso o gerador falha, de
+# proposito.
+dominios_de_partido:
+  - ps.pt
+  - psd.pt
+  - ad2024.pt
 
 textos:
   titulo: Entrevistas exclusivas na televisão portuguesa
@@ -144,12 +179,15 @@ textos:
       canais conta uma vez.
     - >-
       Os números do primeiro-ministro e do secretário-geral do PS vêm de
-      um levantamento feito para esta página e confirmado prova a prova,
-      com as entrevistas procuradas até {ate}. Não vêm da recolha que
-      construiu o histórico do porquinho, e por isso são mínimos: uma
-      entrevista que ninguém encontrou não entra. Para estes dois, vale
-      também como prova uma publicação no site oficial do partido, pela
-      mesma razão por que vale a conta do próprio entrevistado.
+      um levantamento feito para esta página, com as entrevistas
+      procuradas até {levantamento} e confirmadas prova a prova. Desde
+      então, as entrevistas novas dos três entram da mesma forma, uma a
+      uma, por quem as encontra. Não vêm da recolha que construiu o
+      histórico do porquinho, e por isso são mínimos: uma entrevista que
+      ninguém registou não entra, e cada uma que falte aumenta a
+      distância para o porquinho. Para estes dois, vale também como prova
+      uma publicação no site oficial do partido, pela mesma razão por que
+      vale a conta do próprio entrevistado.
   por_verificar: >-
     Ficaram de fora, por falta de uma prova que fixe o dia e o canal: {k}.
     Entram se essa prova aparecer.

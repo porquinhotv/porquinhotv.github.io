@@ -3,8 +3,8 @@
 Cada teste trava um erro concreto:
 
 - uma linha por verificar entrar na contagem;
-- o numero do sujeito crescer depois de o levantamento dos outros ter
-  fechado, e o contraste crescer sozinho;
+- o fecho ficar atras da entrevista mais recente, e a pagina contar
+  menos do que a pagina inicial, ou recuar para antes do levantamento;
 - um ritmo datado, medido sobre meses que ja nao descrevem o presente;
 - a pagina por periodos diferentes a competir pelo total, esconder que
   alguem entrou mais tarde, ou mostrar um numero do sujeito que nao bate
@@ -12,7 +12,8 @@ Cada teste trava um erro concreto:
 - uma entrevista em dois canais contar duas vezes, ou duas entrevistas
   no mesmo dia em canais diferentes contarem uma;
 - um erro no YAML (canal mal escrito, prova em falta, linha repetida,
-  confirmada fora da janela) ficar calado na pagina;
+  uma prova do site de um partido sem o rotulo que o diz) ficar calado
+  na pagina;
 - a frase satirica afirmar uma comparacao que os numeros ja nao dizem;
 - a pagina publicada perder uma prova, ou mostrar uma por verificar.
 """
@@ -51,14 +52,15 @@ def cfg_minima(entrevistas=()):
     usaria."""
     real = comparacao.carregar()
     return {
-        "janela": {"desde": "2025-06-28", "ate": "2026-10-30"},
+        "janela": {"desde": "2025-06-28", "levantamento": "2026-10-30"},
         "sujeito": {"cargo": "cargo do sujeito"},
         "pessoas": [
             {"id": "a", "nome": "Pessoa A", "cargo": "cargo A", "desde": "2024-01-01"},
             {"id": "b", "nome": "Pessoa B", "cargo": "cargo B", "desde": "2025-06-28",
              "marco": "Pessoa B assume o cargo", "antes": "ainda sem o cargo"},
         ],
-        "rotulos_de_prova": {"canal": "ver", "imprensa": "notícia"},
+        "rotulos_de_prova": {"canal": "ver", "imprensa": "notícia", "partido": "site do partido", "ligacao": "ver"},
+        "dominios_de_partido": ["partido.pt"],
         "textos": copy.deepcopy(real["textos"]),
         "entrevistas": list(entrevistas),
     }
@@ -98,16 +100,26 @@ class TestContagem(unittest.TestCase):
         self.assertNotIn("2025-08-01", gerado)
         self.assertNotIn("2023-12-20", gerado)
 
-    def test_o_sujeito_conta_ate_ao_mesmo_dia_que_os_outros(self):
-        """A 2026-11-06 o sujeito ja tinha uma entrevista (NOW, 2026-11-03)
-        depois do dia em que o levantamento dos outros fechou. Contada,
-        cada entrevista nova do sujeito aumentava a distancia sem que os
-        outros pudessem acompanhar: o contraste crescia sozinho. A janela
-        acaba no mesmo dia para todos."""
+    def test_o_fecho_segue_a_entrevista_mais_recente_de_qualquer_dos_tres(self):
+        """Ate 2026-11-07 o fecho escrevia-se a mao: uma entrevista nova do
+        sujeito entrava na pagina inicial e ficava fora desta, e as duas
+        paginas discordavam ate alguem mover a data. Pedido do autor nesse
+        dia: o site inteiro acompanha cada entrevista nova, de qualquer
+        dos tres. O fecho e a entrevista confirmada mais recente, de
+        qualquer pessoa, e nunca antes do fim do levantamento, ate onde as
+        outras foram procuradas; uma por verificar nao o move."""
         lista = [{"data": "2025-06-27"}, {"data": "2025-06-28"}, {"data": "2026-10-30"}, {"data": "2026-11-03"},
                  {"data": "2024-01-01"}]
-        s = contas(cfg_minima(), lista)["sujeito"]
-        self.assertEqual((s["janela"], s["total"]), (2, 4))
+        c = contas(cfg_minima(), lista)
+        self.assertEqual(c["ate"], dt.date(2026, 11, 3))
+        self.assertEqual((c["sujeito"]["janela"], c["sujeito"]["total"]), (3, 5))
+        outra = contas(cfg_minima([linha(pessoa="b", data="2026-11-10")]), lista)
+        self.assertEqual(outra["ate"], dt.date(2026, 11, 10))
+        self.assertEqual(contas(cfg_minima(), [{"data": "2026-01-05"}])["ate"], dt.date(2026, 10, 30))
+        incerta = cfg_minima([linha(pessoa="b", data="2026-12-01", estado="por_verificar")])
+        self.assertEqual(contas(incerta, lista)["ate"], dt.date(2026, 11, 3))
+        gerado = comparacao.corpo(RESUMO, lista, cfg_minima(), CANAIS)
+        self.assertIn('<p class="periodo">1 de janeiro de 2024 a 3 de novembro de 2026</p>', gerado)
 
     def test_uma_entrevista_em_dois_canais_conta_uma_vez(self):
         """O levantamento tem dois casos de simulcast, os dois num par de
@@ -199,17 +211,19 @@ class TestTexto(unittest.TestCase):
 
     def test_o_numero_do_sujeito_bate_com_a_pagina_inicial(self):
         """A primeira versao mostrava 81 (cortado a 30 out) e a pagina
-        inicial 82; o autor viu-o a 2026-11-06. O cartao do sujeito conta
-        desde o mesmo dia que a inicial, e com o fecho no dia da ultima
-        publicacao o numero e o mesmo; o periodo vem escrito por extenso."""
+        inicial 82; o autor viu-o a 2026-11-06. Com o fecho derivado
+        (2026-11-07), o cartao do sujeito e exactamente o total da pagina
+        inicial, sempre, e o periodo acaba no fecho, escrito por extenso."""
         resumo, entrevistas = seo.dados()
-        cfg = comparacao.carregar()
-        ate = comparacao.data(cfg["janela"]["ate"], "janela.ate")
-        esperado = sum(1 for e in seo.visiveis(resumo, entrevistas) if dt.date.fromisoformat(e["data"]) <= ate)
+        visivel = comparacao.visivel_de(resumo)
+        norm = comparacao.validar(comparacao.carregar(), comparacao.canais_validos(), visivel)
+        contas_ = comparacao.contar(norm, seo.visiveis(resumo, entrevistas), visivel)
         texto = (RAIZ / "docs" / "comparacao.html").read_text(encoding="utf-8")
+        self.assertEqual(contas_["sujeito"]["total"], resumo["totais"]["entrevistas"])
         self.assertIn(f'<article class="pessoa porquinho">\n<h3>{resumo["sujeito"]["nome"]}', texto)
-        self.assertIn(f'<p class="quantas">{esperado}</p>', texto)
-        self.assertIn(f"<p class=\"periodo\">1 de janeiro de 2024 a {comparacao.por_extenso(ate)}</p>", texto)
+        self.assertIn(f'<p class="quantas">{resumo["totais"]["entrevistas"]}</p>', texto)
+        self.assertIn(f"<p class=\"periodo\">1 de janeiro de 2024 a {comparacao.por_extenso(contas_['ate'])}</p>",
+                      texto)
 
 
 class TestValidacao(unittest.TestCase):
@@ -219,7 +233,10 @@ class TestValidacao(unittest.TestCase):
         prova afirmava uma entrevista que ninguem pode abrir, uma linha
         repetida contava duas vezes, e uma confirmada depois do fecho
         ficava no ficheiro sem contar. Um texto com um espaco que o gerador
-        nao preenche mostrava as chavetas no ecra."""
+        nao preenche mostrava as chavetas no ecra. Uma prova do site de um
+        partido sem o rotulo que o diz escondia de quem le que a linha
+        assenta numa parte interessada; e uma `janela.ate` esquecida no
+        ficheiro parecia mandar no fecho sem mandar."""
         casos = {
             "canal desconhecido": [linha(canal="x9")],
             "confirmada sem canal": [linha(canal=None)],
@@ -227,7 +244,9 @@ class TestValidacao(unittest.TestCase):
             "mesma pessoa, dia e canal": [linha(prova="https://exemplo.pt/1"), linha(prova="https://exemplo.pt/2")],
             "mesma prova em duas linhas": [linha(data="2025-07-01", prova="https://exemplo.pt/1"),
                                            linha(data="2025-07-02", prova="https://exemplo.pt/1")],
-            "confirmada depois do fecho": [linha(data="2026-10-31")],
+            "prova de partido sem o tipo": [linha(prova="https://www.partido.pt/noticia")],
+            "tipo partido fora dos dominios": [linha(tipo_prova="partido")],
+            "formato invalido": [linha(formato="debate")],
             "confirmada antes de a pessoa contar": [linha(pessoa="b", data="2025-06-27")],
             "confirmada antes do site": [linha(data="2023-12-31")],
             "pessoa desconhecida": [linha(pessoa="z")],
@@ -243,11 +262,29 @@ class TestValidacao(unittest.TestCase):
         del sem_texto["textos"]["titulo"]
         espaco_a_mais = cfg_minima()
         espaco_a_mais["textos"]["intro"] = "Texto com {canal}."
-        for nome, cfg in (("texto em falta", sem_texto), ("espaco por preencher", espaco_a_mais)):
+        com_ate = cfg_minima()
+        com_ate["janela"]["ate"] = "2026-10-30"
+        for nome, cfg in (("texto em falta", sem_texto), ("espaco por preencher", espaco_a_mais),
+                          ("janela.ate escrita", com_ate)):
             with self.subTest(caso=nome):
                 with self.assertRaises(ValueError):
                     comparacao.validar(cfg, CANAIS, VISIVEL)
         comparacao.validar(cfg_minima([linha()]), CANAIS, VISIVEL)  # o caso bom continua a passar
+        sem_formato = linha(tipo_prova="partido", prova="https://partido.pt/a")
+        del sem_formato["formato"]
+        comparacao.validar(cfg_minima([sem_formato]), CANAIS, VISIVEL)  # como o formulario a escreve
+
+    def test_os_dominios_de_partido_batem_com_as_linhas_reais(self):
+        """Medido a 2026-11-07, antes de o formulario passar a decidir o
+        tipo de prova pelo dominio: as 7 linhas `partido` estao em ps.pt (6)
+        ou ad2024.pt (1) e nenhuma outra linha esta nesses dominios. A
+        validacao do ficheiro real e a garantia de que continua assim. So
+        pode crescer: o formulario corre esta suite depois de escrever, e
+        uma igualdade aqui travava a primeira entrevista nova em ps.pt."""
+        cfg = comparacao.carregar()
+        partido = [e for e in cfg["entrevistas"] if e["tipo_prova"] == "partido"]
+        self.assertGreaterEqual(len(partido), 7)
+        self.assertLessEqual({"ps.pt", "ad2024.pt"}, {comparacao.anfitriao(e["prova"]) for e in partido})
 
 
 class TestPublicado(unittest.TestCase):

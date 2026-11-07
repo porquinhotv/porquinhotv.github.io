@@ -33,6 +33,17 @@ publicacao e de outro dia, o mesmo canal ja tem uma entrevista a um dia
 de distancia, a data esta fora do ambito visivel ou no futuro. Um aviso
 nao trava porque os tres casos existem de verdade: um anuncio na
 vespera, duas entrevistas em dias seguidos, um registo antigo.
+
+**De quem e a entrevista.** `--pessoa` escolhe, para o lote inteiro, o
+sujeito (por omissao) ou uma das pessoas de `config/comparacao.yml`.
+Pedido do autor a 2026-11-07: acrescentar entrevistas de qualquer dos
+tres da mesma forma, e o site inteiro acompanhar. As de outra pessoa vao
+para o fim de `config/comparacao.yml`, como `confirmada`, e o ficheiro
+inteiro passa pela validacao do gerador antes de gravar: o que a pagina
+recusaria, o formulario recusa, e nada fica escrito. O tipo de prova so
+se decide num caso, o dominio de um partido, porque a pagina tem de o
+dizer a quem le; nos outros fica `ligacao`, sem adivinhar se e pagina de
+canal, noticia ou anuncio. O formato fica vazio pela mesma razao.
 """
 
 from __future__ import annotations
@@ -50,6 +61,7 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
+from ferramentas import comparacao as comp
 from recolha.extracao import data_para_iso
 from recolha.modelos import RAIZ, url_normalizado
 
@@ -57,6 +69,10 @@ CURADORIA = RAIZ / "config" / "curadoria.yml"
 PORQUINHO = RAIZ / "config" / "porquinho.yml"
 PISTAS = RAIZ / "config" / "pistas.yml"
 PUBLICADAS = RAIZ / "docs" / "dados" / "entrevistas.json"
+COMPARACAO = RAIZ / "config" / "comparacao.yml"
+# O tipo de prova que o formulario escreve fora dos dominios de partido.
+# Tem rotulo em `rotulos_de_prova`, e o gerador falha se deixar de ter.
+TIPO_FORMULARIO = "ligacao"
 LISBOA = ZoneInfo("Europe/Lisbon")
 
 # As escritas aceites para a data. A compacta e a de dia primeiro existem
@@ -270,6 +286,91 @@ def acrescentar(texto: str, blocos: list[str], fim_da_lista: str = FIM_DA_LISTA)
     return antes.rstrip("\n") + "\n\n" + "\n".join(blocos) + fim_da_lista + depois
 
 
+def escolher_pessoa(escrita: str, sujeito: dict, pessoas: list[dict]) -> tuple[dict | None, str]:
+    """(pessoa, erro). `None` sem erro e o sujeito. Aceita o nome, com ou
+    sem acentos, ou o id: o formulario manda o nome da lista, e a linha
+    de comandos pode mandar o id."""
+    chave = _simples(escrita or "")
+    if not chave or chave in (_simples(str(sujeito.get("id", ""))), _simples(str(sujeito.get("nome", "")))):
+        return None, ""
+    for p in pessoas:
+        if chave in (_simples(str(p.get("id", ""))), _simples(str(p.get("nome", "")))):
+            return p, ""
+    opcoes = [str(sujeito.get("nome", ""))] + [str(p.get("nome", "")) for p in pessoas]
+    return None, f"pessoa '{escrita}' nao reconhecida; usar uma de: {', '.join(opcoes)}"
+
+
+def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevistas: list[dict],
+                    curadoria: dict, publicadas: list[dict], visivel_desde: str, dominio: str,
+                    hoje: date) -> tuple[list[str], list[str]]:
+    """As verificacoes de uma entrevista de outra pessoa, com as mensagens
+    para quem preenche. A validacao do gerador corre depois sobre o
+    ficheiro inteiro e apanha o resto, mas com mensagens para quem le o
+    YAML; estas dizem o que fazer no formulario."""
+    erros: list[str] = []
+    avisos: list[str] = []
+    chave = chave_de_prova(prova, dominio)
+    for e in entrevistas:
+        if chave_de_prova(str(e.get("prova", "")), dominio) == chave:
+            erros.append(f"esta prova ja esta na comparacao, em {e.get('data')} {e.get('pessoa')} ({e.get('estado')})")
+    do_sujeito = [str(l.get("prova", "")) for l in (curadoria.get("entrevistas") or []) + (curadoria.get("remover") or [])]
+    do_sujeito += [p["prova"] for p in publicadas]
+    if any(chave_de_prova(x, dominio) == chave for x in do_sujeito):
+        # Uma entrevista exclusiva tem um entrevistado so: a mesma prova
+        # nas duas listas e uma das duas linhas errada.
+        erros.append("esta prova ja e de uma entrevista do sujeito; uma entrevista exclusiva tem um entrevistado so")
+    inicio = max(visivel_desde, str(pessoa.get("desde", "")))
+    if data < inicio:
+        erros.append(f"data anterior a {inicio}, quando {pessoa.get('nome')} passa a contar; a linha nao contaria")
+    suas = [e for e in entrevistas if e.get("pessoa") == pessoa.get("id")]
+    dia = date.fromisoformat(data)
+    for e in suas:
+        d = str(e.get("data", ""))
+        if e.get("estado") == "confirmada" and d == data and e.get("canal") == canal:
+            erros.append(f"{pessoa.get('nome')} ja tem uma entrevista confirmada a {d} neste canal")
+    if erros:
+        return sorted(set(erros)), avisos
+
+    social = codigo_social(prova, dominio)
+    if social:
+        publicada = hora_da_publicacao(social[1])
+        if publicada.date().isoformat() != data:
+            avisos.append(f"a publicacao e de {publicada:%Y-%m-%d %H:%M} (Lisboa) e a entrevista ficou a {data}; "
+                          "certo se for um anuncio de vespera ou um video do dia seguinte")
+    for e in sorted(suas, key=lambda e: str(e.get("data", ""))):
+        d = str(e.get("data", ""))
+        if e.get("estado") == "confirmada" and e.get("canal") == canal and d != data \
+                and abs((date.fromisoformat(d) - dia).days) <= 1:
+            avisos.append(f"o mesmo canal ja tem uma entrevista desta pessoa a {d}; confirmar que nao e a mesma")
+        if e.get("estado") == "por_verificar" and d == data:
+            # A linha por verificar continua a contar nos "ficaram de
+            # fora" da pagina. Se for a mesma entrevista, muda-se a mao.
+            avisos.append(f"ha uma linha por verificar desta pessoa a {d}; se for a mesma entrevista, "
+                          "apagar essa linha de config/comparacao.yml")
+    if dia > hoje:
+        avisos.append("data no futuro: conta como anuncio, e o fecho da comparacao passa a esse dia")
+    return erros, avisos
+
+
+def bloco_comparacao(pessoa_id: str, data: str, canal: str, prova: str, tipo: str, dominio: str, hoje: date) -> str:
+    linhas = [f"  # Formulario `adicionar`, {hoje.isoformat()}: canal e dia lidos por quem o preencheu."]
+    social = codigo_social(prova, dominio)
+    if social:
+        linhas.append(f"  # Publicacao de {hora_da_publicacao(social[1]):%Y-%m-%d %H:%M} de Lisboa, pelo identificador.")
+    linhas += [f"  - pessoa: {pessoa_id}", f"    data: {data}", f"    canal: {canal}", "    estado: confirmada",
+               f"    tipo_prova: {tipo}", f"    prova: {prova}"]
+    return "\n".join(linhas) + "\n"
+
+
+def acrescentar_no_fim(texto: str, blocos: list[str]) -> str:
+    """Os blocos no fim do ficheiro, que tem de acabar na lista
+    `entrevistas`. Como na curadoria, tudo o resto fica byte a byte."""
+    chaves = re.findall(r"^([A-Za-z_]+):", texto, flags=re.MULTILINE)
+    if not chaves or chaves[-1] != "entrevistas":
+        raise ValueError("config/comparacao.yml mudou de forma: a lista `entrevistas` ja nao e a ultima")
+    return texto.rstrip("\n") + "\n\n" + "\n".join(blocos)
+
+
 def ler_yaml(caminho: Path) -> dict:
     return yaml.safe_load(caminho.read_text(encoding="utf-8")) or {}
 
@@ -278,8 +379,9 @@ def separar_entradas(texto: str) -> list[str]:
     return [e.strip() for e in re.split(r"[;\n]+", texto or "") if e.strip()]
 
 
-def correr(entradas: str, *, curadoria: Path = CURADORIA, porquinho: Path = PORQUINHO,
-           pistas: Path = PISTAS, publicadas: Path = PUBLICADAS, hoje: date | None = None) -> tuple[int, str]:
+def correr(entradas: str, pessoa: str = "", *, curadoria: Path = CURADORIA, porquinho: Path = PORQUINHO,
+           pistas: Path = PISTAS, publicadas: Path = PUBLICADAS, comparacao: Path = COMPARACAO,
+           hoje: date | None = None) -> tuple[int, str]:
     """Devolve (codigo de saida, relatorio). So escreve se nenhuma entrada falhar."""
     hoje = hoje or datetime.now(LISBOA).date()
     config = ler_yaml(porquinho)
@@ -293,7 +395,15 @@ def correr(entradas: str, *, curadoria: Path = CURADORIA, porquinho: Path = PORQ
     lista = separar_entradas(entradas)
     if not lista:
         return 1, "NADA FOI ESCRITO: nenhuma entrada; escrever o dia, o canal e a ligacao"
-    relatorio: list[str] = []
+    escolhida, erro = escolher_pessoa(pessoa, config.get("sujeito") or {}, ler_yaml(comparacao).get("pessoas") or [])
+    if erro:
+        return 1, f"NADA FOI ESCRITO: {erro}"
+    if escolhida is not None:
+        return correr_outra(lista, escolhida, config=config, dominio=dominio, nomes=nomes, curadoria=atual,
+                            publicadas=ja_publicadas, comparacao=comparacao, hoje=hoje)
+    das_outras = {chave_de_prova(str(e.get("prova", "")), dominio)
+                  for e in ler_yaml(comparacao).get("entrevistas") or []}
+    relatorio: list[str] = [f"Pessoa: {(config.get('sujeito') or {}).get('nome', '')} (config/curadoria.yml)"]
     blocos: list[str] = []
     falhadas = 0
     vistas: dict[str, int] = {}
@@ -308,6 +418,9 @@ def correr(entradas: str, *, curadoria: Path = CURADORIA, porquinho: Path = PORQ
             if chave in vistas:
                 erros.append(f"a mesma prova esta na entrada {vistas[chave]} deste lote")
             vistas.setdefault(chave, numero)
+            if chave in das_outras:
+                erros.append("esta prova ja e de uma entrevista de outra pessoa, na comparacao; "
+                             "escolher a pessoa certa no formulario")
         relatorio.append(f"{numero}. {linha['data'] or '?'} {linha['canal'] or '?'} {linha['prova'] or escrita}")
         relatorio += [f"   AVISO: {a}" for a in avisos]
         relatorio += [f"   RECUSADA: {e}" for e in erros]
@@ -334,6 +447,67 @@ def correr(entradas: str, *, curadoria: Path = CURADORIA, porquinho: Path = PORQ
     return 0, "\n".join(relatorio)
 
 
+def correr_outra(lista: list[str], pessoa: dict, *, config: dict, dominio: str, nomes: dict[str, str],
+                 curadoria: dict, publicadas: list[dict], comparacao: Path, hoje: date) -> tuple[int, str]:
+    """O mesmo lote, tudo ou nada, para uma pessoa da comparacao."""
+    texto = comparacao.read_text(encoding="utf-8")
+    atual = yaml.safe_load(texto) or {}
+    entrevistas = atual.get("entrevistas") or []
+    dominios_partido = [str(d).lower() for d in atual.get("dominios_de_partido") or []]
+    visivel = str((config.get("tema") or {}).get("visivel_desde", ""))
+    relatorio = [f"Pessoa: {pessoa.get('nome')} (config/comparacao.yml)"]
+    blocos: list[str] = []
+    esperadas: list[str] = []
+    falhadas = 0
+    vistas: dict[str, int] = {}
+    for numero, escrita in enumerate(lista, start=1):
+        linha, erros = separar_entrada(escrita, nomes)
+        avisos: list[str] = []
+        tipo = ""
+        if not erros:
+            linha["prova"] = limpar_prova(linha["prova"], dominio)
+            erros, avisos = verificar_outra(linha["data"], linha["canal"], linha["prova"], pessoa=pessoa,
+                                            entrevistas=entrevistas, curadoria=curadoria, publicadas=publicadas,
+                                            visivel_desde=visivel, dominio=dominio, hoje=hoje)
+            chave = chave_de_prova(linha["prova"], dominio)
+            if chave in vistas:
+                erros.append(f"a mesma prova esta na entrada {vistas[chave]} deste lote")
+            vistas.setdefault(chave, numero)
+            tipo = comp.TIPO_PARTIDO if comp.de_partido(linha["prova"], dominios_partido) else TIPO_FORMULARIO
+        relatorio.append(f"{numero}. {linha['data'] or '?'} {linha['canal'] or '?'} {linha['prova'] or escrita}"
+                         + (f" [{tipo}]" if tipo and not erros else ""))
+        relatorio += [f"   AVISO: {a}" for a in avisos]
+        relatorio += [f"   RECUSADA: {e}" for e in erros]
+        if erros:
+            falhadas += 1
+        else:
+            blocos.append(bloco_comparacao(str(pessoa["id"]), linha["data"], linha["canal"], linha["prova"],
+                                           tipo, dominio, hoje))
+            esperadas.append(linha["prova"])
+
+    if falhadas:
+        relatorio.append(f"NADA FOI ESCRITO: {falhadas} de {len(lista)} entradas recusadas; "
+                         "corrigir e voltar a enviar o lote inteiro")
+        return 1, "\n".join(relatorio)
+
+    novo = acrescentar_no_fim(texto, blocos)
+    lido = yaml.safe_load(novo) or {}
+    entraram = [str(e.get("prova")) for e in (lido.get("entrevistas") or [])[len(entrevistas):]]
+    if entraram != esperadas:
+        raise ValueError(f"esperava as provas {esperadas} no fim de config/comparacao.yml e ficam {entraram}")
+    try:
+        # A mesma validacao que o gerador corre dentro do `gerar_seo`. Sem
+        # ela, um erro so aparecia depois dos testes, longe do formulario.
+        comp.validar(lido, {c["id"] for c in config.get("canais", [])}, date.fromisoformat(visivel))
+    except ValueError as e:
+        relatorio.append(f"NADA FOI ESCRITO: o ficheiro ficaria invalido para a pagina de Comparacao:\n{e}")
+        return 1, "\n".join(relatorio)
+    comparacao.write_text(novo, encoding="utf-8", newline="\n")
+    relatorio.append(f"ACRESCENTADAS {len(blocos)}: a comparacao passa de {len(entrevistas)} para "
+                     f"{len(entrevistas) + len(blocos)} linhas")
+    return 0, "\n".join(relatorio)
+
+
 def escrever_resumo(relatorio: str) -> None:
     """O resumo da corrida e o que se ve no telemovel sem abrir o log."""
     resumo = os.environ.get("GITHUB_STEP_SUMMARY")
@@ -346,8 +520,10 @@ def main(argv: list[str]) -> int:
     analisador = argparse.ArgumentParser(description="Acrescentar entrevistas a curadoria.")
     analisador.add_argument("--entradas", required=True,
                             help="dia, canal e ligacao por entrada; varias entradas separadas por ';'")
+    analisador.add_argument("--pessoa", default="",
+                            help="de quem sao as entrevistas, nome ou id; por omissao o sujeito")
     args = analisador.parse_args(argv)
-    codigo, relatorio = correr(args.entradas)
+    codigo, relatorio = correr(args.entradas, args.pessoa)
     print(relatorio, flush=True)
     escrever_resumo(relatorio)
     return codigo

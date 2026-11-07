@@ -14,9 +14,26 @@ name: adicionar
 # O canal e o dia sao a leitura de quem preenche, como em todo o
 # `config/curadoria.yml`, e e isso que da a esta via a isencao da prova de
 # formato e das rondas.
+#
+# A pessoa (pedido do autor a 2026-11-07) escolhe de quem sao as
+# entrevistas do lote: o sujeito por omissao, ou uma das pessoas da pagina
+# de Comparacao, cujas linhas vao para `config/comparacao.yml`. Em
+# qualquer dos casos o `gerar_seo` regenera o site inteiro, e a
+# comparacao conta todos ate a entrevista mais recente. As opcoes tem de
+# ser os nomes de `config/porquinho.yml` (sujeito) e de
+# `config/comparacao.yml` (pessoas), o primeiro por omissao: ha teste.
 on:
   workflow_dispatch:
     inputs:
+      pessoa:
+        description: 'De quem sao as entrevistas (vale para todas as entradas)'
+        required: true
+        type: choice
+        default: André Ventura
+        options:
+          - André Ventura
+          - Luís Montenegro
+          - José Luís Carneiro
       entradas:
         description: 'Dia, canal e ligacao. Varias: separar com ; (ex.: 2026-10-05 NOW https://... ; 08-10-2026 CMTV https://...)'
         required: true
@@ -59,6 +76,7 @@ jobs:
       - name: Acrescentar e publicar
         shell: bash
         env:
+          PESSOA: ${{ inputs.pessoa }}
           ENTRADAS: ${{ inputs.entradas }}
         run: |
           git config user.name "github-actions[bot]"
@@ -68,7 +86,13 @@ jobs:
             git reset --hard origin/main
             # Recusa sem escrever nada se alguma linha nao serve; o motivo
             # de cada uma fica no resumo da corrida.
-            python -m ferramentas.adicionar --entradas "$ENTRADAS" || exit 1
+            python -m ferramentas.adicionar --pessoa "$PESSOA" --entradas "$ENTRADAS" || exit 1
+            # A pagina de Comparacao le config/comparacao.yml diretamente:
+            # sem regenerar aqui, os testes viam a pagina publicada atras
+            # do ficheiro e travavam o formulario (3 testes falhados na
+            # simulacao de 2026-11-07). Na via do sujeito nao muda nada,
+            # porque a curadoria so chega as paginas depois do coletor.
+            python -m ferramentas.gerar_seo
             # A mesma barreira da recolha: uma regressao nunca chega
             # a escrever dados.
             python -m unittest discover -s tests -t . || exit 1
@@ -81,8 +105,11 @@ jobs:
             grep -E "entrevistas exclusivas publicadas|retiradas por veto" saida.txt >> "$GITHUB_STEP_SUMMARY" || true
             rm -f saida.txt
             python -m ferramentas.gerar_seo
-            git add config/curadoria.yml docs
-            git commit -q -m "curadoria: acrescenta entrevistas pelo formulario"
+            # As contagens da comparacao no resumo da corrida, para se ver
+            # no telemovel o fecho e os tres numeros sem abrir a pagina.
+            { echo '```'; python -m ferramentas.comparacao; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+            git add config/curadoria.yml config/comparacao.yml docs
+            git commit -q -m "formulario adicionar: acrescenta entrevistas ($PESSOA)"
             if git push origin HEAD:main; then
               exit 0
             fi

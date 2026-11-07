@@ -16,11 +16,20 @@ Tres regras, cada uma com a razao:
    ficheiro com o motivo, para a decisao ficar registada, e nao entra em
    numero nenhum: "nao sei" nao e "sim".
 2. Cada pessoa conta-se desde que o site conta ou desde que assumiu o
-   cargo, o que for mais tarde, e todas ate ao mesmo dia de fecho
-   (`janela.ate`), incluindo o sujeito. Os periodos diferentes mostram-se
+   cargo, o que for mais tarde, e todas ate ao mesmo dia de fecho,
+   incluindo o sujeito. O fecho nao se escreve: e o dia da entrevista
+   mais recente de qualquer das pessoas, e nunca antes do dia em que o
+   levantamento das outras fechou (`janela.levantamento`). Pedido do
+   autor a 2026-11-07: uma entrevista nova, de qualquer dos tres, entra
+   pelo formulario e a pagina acompanha-a sem ninguem mover uma data.
+   Com o fecho escrito a mao, a pagina inicial contava uma entrevista
+   nova do sujeito e esta nao, e as duas paginas discordavam. O custo
+   fica dito na pagina: os outros contam-se tambem a mao desde o
+   levantamento, e uma entrevista deles que ninguem registe aumenta a
+   distancia. Os periodos diferentes mostram-se
    numa linha do tempo comum, com a faixa de quem entrou mais tarde
    riscada antes da entrada. A comparacao directa, numero contra
-   numero, faz-se so na janela comum (`janela.desde` a `janela.ate`):
+   numero, faz-se so na janela comum (de `janela.desde` ao fecho):
    tres anos de uma pessoa ao lado de ano e meio de outra nao se comparam
    pelo total. Pedido do autor a 2026-11-06: dar o peso visual a todas as
    entrevistas do sujeito, sendo honesto quanto a quem entrou quando.
@@ -49,6 +58,8 @@ import datetime as dt
 import re
 import sys
 
+from urllib.parse import urlsplit
+
 import yaml
 
 from ferramentas import seo
@@ -58,7 +69,14 @@ CONFIG = RAIZ / "config" / "comparacao.yml"
 EDITORIAL = RAIZ / "config" / "porquinho.yml"
 
 ESTADOS = ("confirmada", "por_verificar", "fora_do_ambito")
+# O formato fica so registado, a pagina nao o mostra. Uma linha que entra
+# pelo formulario nao o traz, porque o formulario so pede o dia, o canal
+# e a ligacao: fica vazio, nunca adivinhado.
 FORMATOS = ("informativa", "entretenimento")
+# O tipo de prova que exige o dominio de um partido, e o unico que o
+# dominio decide. A pagina escreve "site do partido" para quem le saber,
+# antes de abrir, que a linha assenta numa fonte de parte interessada.
+TIPO_PARTIDO = "partido"
 
 # Os espacos que cada texto pode usar. Um espaco que o gerador nao
 # preenche apareceria no ecra com as chavetas a vista, e um texto em falta
@@ -82,7 +100,7 @@ ESPACOS = {
     "provas_titulo": set(),
     "provas_legenda": {"fontes"},
     "metodo_titulo": set(),
-    "metodo": {"inicio", "desde", "ate", "ano"},
+    "metodo": {"inicio", "desde", "ate", "ano", "levantamento"},
     "por_verificar": {"k"},
 }
 
@@ -120,6 +138,15 @@ def data(valor, onde: str) -> dt.date:
         raise ValueError(f"{onde}: data invalida {valor!r}") from None
 
 
+def anfitriao(endereco: str) -> str:
+    return urlsplit(endereco).netloc.lower().removeprefix("www.")
+
+
+def de_partido(endereco: str, dominios: list) -> bool:
+    casa = anfitriao(endereco)
+    return any(casa == d or casa.endswith("." + d) for d in dominios)
+
+
 def por_extenso(dia: dt.date) -> str:
     return f"{dia.day} de {MESES[dia.month - 1]} de {dia.year}"
 
@@ -147,17 +174,19 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
     """Devolve a configuracao com as datas ja convertidas, ou falha com a
     lista de todos os problemas. Cada verificacao trava um erro que, de
     outra forma, ficava calado na pagina: um canal mal escrito, uma linha
-    confirmada sem prova, a mesma entrevista duas vezes, uma confirmada
-    fora da janela que ninguem via contar."""
+    confirmada sem prova, a mesma entrevista duas vezes, uma linha do site
+    de um partido a mostrar-se como outra coisa."""
     erros: list = []
     janela = cfg.get("janela") or {}
     try:
         desde = data(janela.get("desde"), "janela.desde")
-        ate = data(janela.get("ate"), "janela.ate")
+        levantamento = data(janela.get("levantamento"), "janela.levantamento")
     except ValueError as e:
         raise ValueError(f"config/comparacao.yml: {e}") from None
-    if desde > ate:
-        erros.append("janela: `desde` depois de `ate`")
+    if "ate" in janela:
+        erros.append("janela.ate: o fecho ja nao se escreve, segue a entrevista mais recente; apagar a chave")
+    if desde > levantamento:
+        erros.append("janela: `desde` depois de `levantamento`")
 
     pessoas = []
     ids = set()
@@ -190,6 +219,9 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
     textos = cfg.get("textos") or {}
     _validar_textos(textos, erros)
     rotulos = cfg.get("rotulos_de_prova") or {}
+    dominios_partido = [str(d).lower() for d in cfg.get("dominios_de_partido") or []]
+    if TIPO_PARTIDO in rotulos and not dominios_partido:
+        erros.append("dominios_de_partido: em falta, e o formulario precisa deles para escrever o tipo de prova")
     cargo_sujeito = (cfg.get("sujeito") or {}).get("cargo") or ""
     if not cargo_sujeito:
         erros.append("sujeito.cargo: em falta")
@@ -213,7 +245,7 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
             erros.append(f"{onde}: pessoa desconhecida")
         if estado not in ESTADOS:
             erros.append(f"{onde}: estado {estado!r} nao e um de {list(ESTADOS)}")
-        if e.get("formato") not in FORMATOS:
+        if e.get("formato") is not None and e.get("formato") not in FORMATOS:
             erros.append(f"{onde}: formato {e.get('formato')!r} nao e um de {list(FORMATOS)}")
         if canal is not None and canal not in canais:
             erros.append(f"{onde}: canal {canal!r} nao e um id de config/porquinho.yml")
@@ -227,6 +259,8 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
         vistas_prova[prova] = onde
         if e.get("tipo_prova") not in rotulos:
             erros.append(f"{onde}: tipo_prova {e.get('tipo_prova')!r} sem rotulo em rotulos_de_prova")
+        if de_partido(prova, dominios_partido) != (e.get("tipo_prova") == TIPO_PARTIDO):
+            erros.append(f"{onde}: tipo_prova `{TIPO_PARTIDO}` se e so se a prova estiver num dominio de partido")
         if estado == "confirmada":
             if canal is None:
                 erros.append(f"{onde}: confirmada sem canal")
@@ -237,14 +271,23 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
             inicio = inicio_de.get(e.get("pessoa"))
             if dia < visivel_desde or (inicio and dia < inicio):
                 erros.append(f"{onde}: confirmada antes do inicio da contagem; e fora_do_ambito")
-            if dia > ate:
-                erros.append(f"{onde}: confirmada depois de janela.ate; mover a data de fecho")
         entrevistas.append({"pessoa": e.get("pessoa"), "data": dia, "canal": canal, "tambem_em": tambem,
                             "estado": estado, "tipo_prova": e.get("tipo_prova"), "prova": prova})
     if erros:
         raise ValueError("config/comparacao.yml:\n- " + "\n- ".join(erros))
-    return {"desde": desde, "ate": ate, "cargo_sujeito": cargo_sujeito, "pessoas": pessoas,
-            "rotulos": rotulos, "textos": textos, "entrevistas": entrevistas}
+    return {"desde": desde, "levantamento": levantamento, "cargo_sujeito": cargo_sujeito, "pessoas": pessoas,
+            "rotulos": rotulos, "dominios_partido": dominios_partido, "textos": textos, "entrevistas": entrevistas}
+
+
+def fecho(norm: dict, dias_sujeito: list) -> dt.date:
+    """O dia ate onde todos se contam: o da entrevista mais recente de
+    qualquer das pessoas, e nunca antes do fecho do levantamento, ate onde
+    as outras foram procuradas. Deriva-se dos dados em vez de se escrever,
+    para a pagina nao poder ficar atras da pagina inicial: uma entrevista
+    nova do sujeito move o fecho, e o sujeito conta aqui exactamente o
+    mesmo que la."""
+    confirmadas = [e["data"] for e in norm["entrevistas"] if e["estado"] == "confirmada"]
+    return max([norm["levantamento"], *dias_sujeito, *confirmadas])
 
 
 def inicio_do_ultimo_ano(ate: dt.date) -> dt.date:
@@ -267,10 +310,9 @@ def contar(norm: dict, lista: list, visivel_desde: dt.date) -> dict:
     """As contagens da pagina. O sujeito conta-se sobre a lista publicada,
     a mesma que o resto do site mostra (ja com uma entrevista por linha,
     mesmo quando passou em dois canais). Todos acabam no mesmo dia."""
-    desde, ate = norm["desde"], norm["ate"]
+    dias_sujeito = sorted(d for d in (data(e["data"], "entrevistas.json") for e in lista) if visivel_desde <= d)
+    desde, ate = norm["desde"], fecho(norm, dias_sujeito)
     ano = inicio_do_ultimo_ano(ate)
-    dias_sujeito = sorted(d for d in (data(e["data"], "entrevistas.json") for e in lista)
-                          if visivel_desde <= d <= ate)
     sujeito = {"inicio": visivel_desde, "dias": dias_sujeito, "total": len(dias_sujeito),
                "janela": sum(desde <= d for d in dias_sujeito),
                "duracao": (ate - visivel_desde).days + 1,
@@ -288,7 +330,7 @@ def contar(norm: dict, lista: list, visivel_desde: dt.date) -> dict:
                             duracao=(ate - inicio).days + 1,
                             por_verificar=sum(1 for e in suas if e["estado"] == "por_verificar"
                                               and inicio <= e["data"] <= ate)))
-    return {"sujeito": sujeito, "pessoas": pessoas, "ano": ano}
+    return {"sujeito": sujeito, "pessoas": pessoas, "ano": ano, "ate": ate}
 
 
 def _preencher(modelo: str, **valores) -> str:
@@ -407,7 +449,7 @@ def desenhar(norm: dict, contas: dict, resumo: dict, visivel_desde: dt.date) -> 
     t = norm["textos"]
     nomes = seo.nomes_dos_canais(resumo)
     sujeito = seo.sujeito_de(resumo)
-    ate = norm["ate"]
+    ate = contas["ate"]
     s, pessoas = contas["sujeito"], contas["pessoas"]
     ordem = sorted(pessoas, key=lambda p: (p["inicio"], -p["total"]))
 
@@ -462,8 +504,10 @@ def desenhar(norm: dict, contas: dict, resumo: dict, visivel_desde: dt.date) -> 
     linhas.append("</section>")
 
     linhas += ["<section>", f"<h2>{_preencher(t['metodo_titulo'])}</h2>"]
-    linhas += [f"<p>{_preencher(par, inicio=por_extenso(visivel_desde), desde=desde_j, ate=ate_j, ano=ano_texto)}</p>"
-               for par in t["metodo"]]
+    levantamento = por_extenso(norm["levantamento"])
+    valores = {"inicio": por_extenso(visivel_desde), "desde": desde_j, "ate": ate_j, "ano": ano_texto,
+               "levantamento": levantamento}
+    linhas += [f"<p>{_preencher(par, **valores)}</p>" for par in t["metodo"]]
     linhas.append('<p><a href="metodologia.html">Como o resto do site é contado</a>.</p>')
     linhas += ["</section>", seo.FIM_CORPO]
     return "\n".join(linhas)
@@ -492,7 +536,8 @@ def main() -> int:
     norm = validar(carregar(), canais_validos(), visivel)
     contas = contar(norm, lista, visivel)
     s = contas["sujeito"]
-    print(f"fecho: {norm['ate']}; periodo comum desde {norm['desde']}")
+    print(f"fecho: {contas['ate']} (levantamento fechado a {norm['levantamento']}); "
+          f"periodo comum desde {norm['desde']}")
     print(f"  {seo.sujeito_de(resumo)}: {s['total']} desde {visivel}, {s['janela']} no periodo comum")
     for p in contas["pessoas"]:
         print(f"  {p['nome']}: {p['total']} desde {p['inicio']}, {p['janela']} no periodo comum, "
