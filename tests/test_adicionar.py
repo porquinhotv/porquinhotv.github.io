@@ -9,6 +9,7 @@ pasta temporaria.
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import shutil
@@ -86,8 +87,9 @@ class Base(unittest.TestCase):
         return adicionar.correr(entradas, pessoa, curadoria=self.curadoria, publicadas=self.publicadas,
                                 comparacao=self.comparacao, hoje=HOJE)
 
-    def remover(self, provas, motivo="prova substituida"):
-        return remover.correr(provas, motivo, curadoria=self.curadoria, publicadas=self.publicadas, hoje=HOJE)
+    def remover(self, provas, motivo="prova substituida", pessoa=""):
+        return remover.correr(provas, motivo, pessoa, curadoria=self.curadoria, publicadas=self.publicadas,
+                              comparacao=self.comparacao, hoje=HOJE)
 
     def ficheiro(self):
         return yaml.safe_load(self.curadoria.read_text(encoding="utf-8"))
@@ -294,8 +296,9 @@ class TestAdicionarOutraPessoa(Base):
     """Pedido do autor a 2026-11-07: acrescentar entrevistas de qualquer
     das tres pessoas pelo mesmo formulario, e o site inteiro acompanhar.
     As datas de teste caem na RTP2, onde o levantamento nao encontrou
-    nenhuma entrevista das outras duas pessoas, para nao colidirem com
-    uma linha real que o formulario venha a escrever."""
+    nenhuma entrevista das outras duas pessoas, e os enderecos inventados
+    no dominio reservado `.invalid`, para nao colidirem com uma linha real
+    que o formulario venha a escrever no ficheiro que estes testes copiam."""
 
     PESSOA = "José Luís Carneiro"
 
@@ -306,7 +309,13 @@ class TestAdicionarOutraPessoa(Base):
         self.assertEqual(self.comparacao.read_text(encoding="utf-8"), self.comparacao_original)
 
     def confirmadas(self, pid):
-        return [e for e in self.lida()["entrevistas"] if e["pessoa"] == pid and e["estado"] == "confirmada"]
+        """As que a pagina conta: confirmadas e sem veto. Contar tambem as
+        vetadas partia estes testes no primeiro veto real, e o formulario
+        que o escreveu parava (simulacao de 2026-11-07)."""
+        lida = self.lida()
+        vetadas = {v["prova"] for v in lida.get("remover") or []}
+        return [e for e in lida["entrevistas"]
+                if e["pessoa"] == pid and e["estado"] == "confirmada" and e["prova"] not in vetadas]
 
     def test_vai_para_o_fim_da_comparacao_e_nao_toca_na_curadoria(self):
         """A linha entra como a pagina a conta (confirmada, com canal e
@@ -315,15 +324,17 @@ class TestAdicionarOutraPessoa(Base):
         dominio se e pagina de canal ou noticia. O resto do ficheiro,
         comentarios incluidos, fica byte a byte."""
         antes = len(self.confirmadas("carneiro"))
-        codigo, relatorio = self.adicionar("2025-07-02 RTP2 https://exemplo.pt/carneiro-rtp2", self.PESSOA)
+        n_antes = len(self.lida()["entrevistas"])
+        codigo, relatorio = self.adicionar("2025-07-02 RTP2 https://teste.invalid/carneiro-rtp2", self.PESSOA)
         self.assertEqual(codigo, 0, relatorio)
         self.intacto()
         texto = self.comparacao.read_text(encoding="utf-8")
         self.assertTrue(texto.startswith(self.comparacao_original.rstrip("\n")))
+        self.assertEqual(len(self.lida()["entrevistas"]), n_antes + 1)
         nova = self.lida()["entrevistas"][-1]
         self.assertEqual(nova, {"pessoa": "carneiro", "data": date(2025, 7, 2), "canal": "rtp2",
                                 "estado": "confirmada", "tipo_prova": "ligacao",
-                                "prova": "https://exemplo.pt/carneiro-rtp2"})
+                                "prova": "https://teste.invalid/carneiro-rtp2"})
         self.assertEqual(len(self.confirmadas("carneiro")), antes + 1)
         resumo, entrevistas = seo.dados()
         visivel = comparacao.visivel_de(resumo)
@@ -336,7 +347,7 @@ class TestAdicionarOutraPessoa(Base):
         falhar o gerador, ou ficava fora da pagina. Agora a pagina conta
         todos ate a entrevista mais recente, de qualquer pessoa. A data e
         no futuro de proposito: e a unica que nenhuma linha real passa."""
-        codigo, relatorio = self.adicionar("01-01-2099 RTP2 https://exemplo.pt/montenegro-futuro", "Luís Montenegro")
+        codigo, relatorio = self.adicionar("01-01-2099 RTP2 https://teste.invalid/montenegro-futuro", "Luís Montenegro")
         self.assertEqual(codigo, 0, relatorio)
         self.assertIn("AVISO: data no futuro", relatorio)
         resumo, entrevistas = seo.dados()
@@ -361,12 +372,12 @@ class TestAdicionarOutraPessoa(Base):
         canal_real = next(c["nome"] for c in yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(
             encoding="utf-8"))["canais"] if c["id"] == real["canal"])
         casos = {
-            "antes de assumir o cargo": ("2025-06-01 RTP2 https://exemplo.pt/cedo", self.PESSOA),
+            "antes de assumir o cargo": ("2025-06-01 RTP2 https://teste.invalid/cedo", self.PESSOA),
             "prova ja na comparacao": (f"2025-07-04 RTP2 {real['prova']}", self.PESSOA),
-            "mesma pessoa, dia e canal": (f"{real['data']} {canal_real} https://exemplo.pt/outra", self.PESSOA),
+            "mesma pessoa, dia e canal": (f"{real['data']} {canal_real} https://teste.invalid/outra", self.PESSOA),
             "prova do sujeito": (f"2025-07-05 RTP2 {SO_NO_TESTE}", self.PESSOA),
-            "pessoa desconhecida": ("2025-07-06 RTP2 https://exemplo.pt/x", "Pessoa Que Nao Existe"),
-            "lote com uma ma": ("2025-07-07 RTP2 https://exemplo.pt/boa; 2025-06-01 RTP2 https://exemplo.pt/ma",
+            "pessoa desconhecida": ("2025-07-06 RTP2 https://teste.invalid/x", "Pessoa Que Nao Existe"),
+            "lote com uma ma": ("2025-07-07 RTP2 https://teste.invalid/boa; 2025-06-01 RTP2 https://teste.invalid/ma",
                                 self.PESSOA),
         }
         for nome, (entradas, pessoa) in casos.items():
@@ -397,21 +408,122 @@ class TestAdicionarOutraPessoa(Base):
                 self.assertEqual(adicionar.escolher_pessoa(escrita, cfg["sujeito"], pessoas), (None, ""))
 
 
+class TestRemoverOutraPessoa(Base):
+    """Pedido do autor a 2026-11-07: retirar provas de qualquer das tres
+    pessoas pelo mesmo formulario. Retirar e vetar, nao apagar, como na
+    curadoria: a linha fica no ficheiro e o veto tira-a da pagina."""
+
+    PESSOA = "José Luís Carneiro"
+
+    def lida(self):
+        return yaml.safe_load(self.comparacao.read_text(encoding="utf-8"))
+
+    def intacta(self):
+        self.assertEqual(self.comparacao.read_text(encoding="utf-8"), self.comparacao_original)
+
+    def linha_real(self, estado="confirmada"):
+        """Uma linha real sem veto: o ficheiro real pode ja ter vetos."""
+        lida = self.lida()
+        vetadas = {v["prova"] for v in lida.get("remover") or []}
+        return next(e for e in lida["entrevistas"]
+                    if e["pessoa"] == "carneiro" and e["estado"] == estado and e["prova"] not in vetadas)
+
+    def contas(self):
+        resumo, entrevistas = seo.dados()
+        visivel = comparacao.visivel_de(resumo)
+        norm = comparacao.validar(self.lida(), comparacao.canais_validos(), visivel)
+        return comparacao.contar(norm, seo.visiveis(resumo, entrevistas), visivel), resumo, entrevistas
+
+    def test_o_veto_tira_a_linha_da_pagina_e_deixa_a_no_ficheiro(self):
+        """A linha da entrevista fica byte a byte no ficheiro e deixa de
+        contar e de aparecer; o motivo fica no veto. Um motivo com dois
+        pontos nao pode partir o YAML."""
+        real = self.linha_real()
+        antes = next(p for p in self.contas()[0]["pessoas"] if p["id"] == "carneiro")["total"]
+        codigo, relatorio = self.remover(real["prova"], "nota: canal errado", self.PESSOA)
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertIn("sai da contagem", relatorio)
+        self.intacto()
+        lida = self.lida()
+        vetos_antes = yaml.safe_load(self.comparacao_original).get("remover") or []
+        self.assertEqual(lida["remover"], [*vetos_antes, {"prova": real["prova"], "motivo": "nota: canal errado"}])
+        self.assertIn(real, lida["entrevistas"])
+        contas, resumo, entrevistas = self.contas()
+        self.assertEqual(next(p for p in contas["pessoas"] if p["id"] == "carneiro")["total"], antes - 1)
+        gerado = comparacao.corpo(resumo, seo.visiveis(resumo, entrevistas), lida)
+        self.assertNotIn(html.escape(real["prova"], quote=True), gerado)
+
+    def test_trocar_uma_prova_por_outra_melhor(self):
+        """O caminho para substituir uma prova e `remover` e depois
+        `adicionar` no mesmo dia e canal. Sem excluir as linhas vetadas, a
+        segunda recusava "ja tem uma entrevista confirmada a esse dia", e
+        trocar uma prova ficava impossivel pelo formulario."""
+        real = self.linha_real()
+        nome_canal = next(c["nome"] for c in yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(
+            encoding="utf-8"))["canais"] if c["id"] == real["canal"])
+        self.assertEqual(self.remover(real["prova"], "troca por prova melhor", self.PESSOA)[0], 0)
+        codigo, relatorio = self.adicionar(f"{real['data']} {nome_canal} https://teste.invalid/prova-melhor", self.PESSOA)
+        self.assertEqual(codigo, 0, relatorio)
+        codigo, relatorio = self.adicionar(f"2025-07-02 RTP2 {real['prova']}", self.PESSOA)
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("foi vetada na comparacao: troca por prova melhor", relatorio)
+
+    def test_recusa_sem_escrever_o_que_nao_retirava_nada(self):
+        """Cada caso era um veto que nao mudava a pagina, ou mudava a
+        pessoa errada, e deixava quem preencheu convencido do contrario."""
+        real = self.linha_real()
+        incerta = self.linha_real("por_verificar")
+        vetadas = {v["prova"] for v in self.lida().get("remover") or []}
+        outra = next(e for e in self.lida()["entrevistas"]
+                     if e["pessoa"] == "montenegro" and e["estado"] == "confirmada" and e["prova"] not in vetadas)
+        casos = {
+            "nao esta na comparacao": (["https://teste.invalid/nao-existe"], self.PESSOA, "nao esta na comparacao"),
+            "de outra pessoa": ([outra["prova"]], self.PESSOA, "de outra pessoa"),
+            "linha por verificar": ([incerta["prova"]], self.PESSOA, "nao conta"),
+            "prova do sujeito": ([SO_NO_TESTE], self.PESSOA, "e do sujeito"),
+            "repetida no lote": ([real["prova"], real["prova"]], self.PESSOA, "repetida"),
+            "pessoa desconhecida": ([real["prova"]], "Pessoa Que Nao Existe", "nao reconhecida"),
+        }
+        for nome, (provas, pessoa, motivo) in casos.items():
+            with self.subTest(caso=nome):
+                codigo, relatorio = self.remover("; ".join(provas), pessoa=pessoa)
+                self.assertEqual(codigo, 1, relatorio)
+                self.assertIn(motivo, relatorio)
+                self.assertIn("NADA FOI ESCRITO", relatorio)
+                self.intacta()
+                self.intacto()
+        self.assertEqual(self.remover(real["prova"], pessoa=self.PESSOA)[0], 0)
+        codigo, relatorio = self.remover(real["prova"], pessoa=self.PESSOA)
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("ja estava vetada", relatorio)
+
+    def test_uma_prova_da_comparacao_nao_se_retira_como_do_sujeito(self):
+        """Com o seletor esquecido no sujeito, a mensagem antiga dizia que
+        a ligacao nao estava no site, que e falso: esta, mas e de outra
+        pessoa."""
+        codigo, relatorio = self.remover(self.linha_real()["prova"])
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("escolher a pessoa certa", relatorio)
+        self.intacto()
+
+
 class TestFormularios(unittest.TestCase):
     def test_as_opcoes_do_seletor_sao_as_pessoas_da_configuracao(self):
-        """As opcoes do seletor vivem no workflow, porque o GitHub nao as le
-        de outro ficheiro. Uma pessoa acrescentada ao YAML sem opcao no
+        """As opcoes do seletor vivem nos workflows, porque o GitHub nao as
+        le de outro ficheiro. Uma pessoa acrescentada ao YAML sem opcao no
         formulario nao se podia escolher, e uma opcao com o nome mal
         escrito falhava so no dia em que alguem a escolhesse."""
-        workflow = yaml.safe_load(WORKFLOWS["adicionar"].read_text(encoding="utf-8"))
-        campo = (workflow.get("on") or workflow[True])["workflow_dispatch"]["inputs"]["pessoa"]
         sujeito = yaml.safe_load((RAIZ / "config" / "porquinho.yml").read_text(encoding="utf-8"))["sujeito"]["nome"]
         pessoas = [p["nome"] for p in yaml.safe_load(COMPARACAO_REAL.read_text(encoding="utf-8"))["pessoas"]]
-        self.assertEqual(campo["type"], "choice")
-        self.assertEqual(campo["options"], [sujeito, *pessoas])
-        self.assertEqual(campo["default"], sujeito)
-        texto = WORKFLOWS["adicionar"].read_text(encoding="utf-8")
-        self.assertIn("config/comparacao.yml", texto.split("git add", 1)[1].splitlines()[0])
+        for nome, caminho in WORKFLOWS.items():
+            with self.subTest(workflow=nome):
+                workflow = yaml.safe_load(caminho.read_text(encoding="utf-8"))
+                campo = (workflow.get("on") or workflow[True])["workflow_dispatch"]["inputs"]["pessoa"]
+                self.assertEqual(campo["type"], "choice")
+                self.assertEqual(campo["options"], [sujeito, *pessoas])
+                self.assertEqual(campo["default"], sujeito)
+                texto = caminho.read_text(encoding="utf-8")
+                self.assertIn("config/comparacao.yml", texto.split("git add", 1)[1].splitlines()[0])
 
     def test_os_campos_nunca_sao_colados_no_shell(self):
         """Um `${{ inputs.x }}` dentro de `run` e texto colado no script: uma
@@ -449,10 +561,11 @@ class TestFormularios(unittest.TestCase):
         periodo antigo), e o formulario parava sem publicar. A pagina de
         Comparacao le o YAML diretamente; tem de ser regenerada entre o
         formulario escrever e os testes correrem."""
-        texto = WORKFLOWS["adicionar"].read_text(encoding="utf-8")
-        escreve = texto.index("python -m ferramentas.adicionar")
-        self.assertLess(escreve, texto.index("python -m ferramentas.gerar_seo", escreve))
-        self.assertLess(texto.index("python -m ferramentas.gerar_seo", escreve), texto.index("python -m unittest"))
+        for nome, caminho in WORKFLOWS.items():
+            with self.subTest(workflow=nome):
+                texto = caminho.read_text(encoding="utf-8")
+                escreve = texto.index(f"python -m ferramentas.{nome}")
+                self.assertLess(texto.index("python -m ferramentas.gerar_seo", escreve), texto.index("python -m unittest"))
 
 
 class TestQuarentena(unittest.TestCase):

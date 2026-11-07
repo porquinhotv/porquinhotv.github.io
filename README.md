@@ -44,6 +44,8 @@ O campo `pessoa` diz de quem é a entrevista, e vale para o lote inteiro: o suje
 
 **Para retirar provas, o formulário `remover`:** uma ou várias ligações e um motivo, que fica publicado na quarentena da página de Fontes. Cada ligação entra na lista `remover` da curadoria; desfazer é apagar a linha do veto. Uma ligação que não está no site trava o lote inteiro. Retira-se uma prova e não uma entrevista: uma entrevista que passou em dois canais continua contada pela outra prova, e o resumo da corrida diz qual.
 
+O formulário `remover` tem o mesmo campo `pessoa` que o `adicionar`. Para uma pessoa da página de Comparação, cada ligação entra na lista `remover` de `config/comparacao.yml` com o motivo, e a linha da entrevista fica no ficheiro sem contar: desfazer é apagar o veto. Ali cada linha tem uma prova só, por isso retirar a prova retira a entrevista. Recusa uma ligação de outra pessoa ou de uma linha que não conta (por verificar, fora do âmbito). Uma linha vetada não impede outra no mesmo dia e canal: trocar uma prova por outra melhor é `remover` e depois `adicionar`.
+
 Os dois formulários correm os testes, publicam só a curadoria (`--fonte curadoria`, sem rede) e regeneram o HTML. A `--fonte` substitui apenas a quarentena dessa fonte; as outras ficam como a última recolha completa as deixou.
 
 Para acrescentar ou retirar uma entrevista à mão, usar `config/curadoria.yml`: a lista `entrevistas` precisa apenas de `data`, `canal` e `prova` (mais `origem: imprensa` se a prova for uma notícia), e a lista `remover` leva a `prova` e o `motivo`. Uma linha removida passa a aparecer na quarentena com o motivo, em vez de desaparecer.

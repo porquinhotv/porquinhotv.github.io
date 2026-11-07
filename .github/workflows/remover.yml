@@ -11,9 +11,25 @@ name: remover
 #
 # O que se retira e uma prova. Uma entrevista que passou em dois canais
 # continua contada pela outra prova, e o resumo da corrida diz qual.
+#
+# A pessoa (pedido do autor a 2026-11-07, como no `adicionar`) escolhe de
+# quem sao as provas do lote: o sujeito por omissao, ou uma das pessoas
+# da pagina de Comparacao, cujos vetos vao para a lista `remover` de
+# `config/comparacao.yml`. As opcoes tem de ser os nomes de
+# `config/porquinho.yml` (sujeito) e de `config/comparacao.yml`
+# (pessoas), o primeiro por omissao: ha teste.
 on:
   workflow_dispatch:
     inputs:
+      pessoa:
+        description: 'De quem sao as provas (vale para todas as ligacoes)'
+        required: true
+        type: choice
+        default: André Ventura
+        options:
+          - André Ventura
+          - Luís Montenegro
+          - José Luís Carneiro
       provas:
         description: 'Ligacoes a retirar, separadas por espacos ou ;'
         required: true
@@ -60,6 +76,7 @@ jobs:
       - name: Retirar e publicar
         shell: bash
         env:
+          PESSOA: ${{ inputs.pessoa }}
           PROVAS: ${{ inputs.provas }}
           MOTIVO: ${{ inputs.motivo }}
         run: |
@@ -70,7 +87,12 @@ jobs:
             git reset --hard origin/main
             # Recusa sem escrever nada se alguma linha nao serve; o motivo
             # de cada uma fica no resumo da corrida.
-            python -m ferramentas.remover --provas "$PROVAS" --motivo "$MOTIVO" || exit 1
+            python -m ferramentas.remover --pessoa "$PESSOA" --provas "$PROVAS" --motivo "$MOTIVO" || exit 1
+            # A pagina de Comparacao le config/comparacao.yml diretamente:
+            # sem regenerar aqui, os testes viam a pagina publicada atras
+            # do ficheiro e travavam o formulario (o mesmo defeito que a
+            # simulacao do `adicionar` mostrou a 2026-11-07).
+            python -m ferramentas.gerar_seo
             # A mesma barreira da recolha: uma regressao nunca chega
             # a escrever dados.
             python -m unittest discover -s tests -t . || exit 1
@@ -83,8 +105,9 @@ jobs:
             grep -E "entrevistas exclusivas publicadas|retiradas por veto" saida.txt >> "$GITHUB_STEP_SUMMARY" || true
             rm -f saida.txt
             python -m ferramentas.gerar_seo
-            git add config/curadoria.yml docs
-            git commit -q -m "curadoria: retira provas pelo formulario"
+            { echo '```'; python -m ferramentas.comparacao; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+            git add config/curadoria.yml config/comparacao.yml docs
+            git commit -q -m "formulario remover: retira provas ($PESSOA)"
             if git push origin HEAD:main; then
               exit 0
             fi

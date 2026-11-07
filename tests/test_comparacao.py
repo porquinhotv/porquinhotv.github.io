@@ -274,6 +274,38 @@ class TestValidacao(unittest.TestCase):
         del sem_formato["formato"]
         comparacao.validar(cfg_minima([sem_formato]), CANAIS, VISIVEL)  # como o formulario a escreve
 
+    def test_um_veto_retira_a_linha_e_tem_de_retirar_alguma(self):
+        """Os vetos do formulario `remover` (2026-11-07). Uma linha vetada
+        deixa de contar e de mover o fecho, e nao impede a que a substitui
+        no mesmo dia e canal. Um veto que nao aponta para uma confirmada
+        nao retira nada e parecia uma linha retirada; um veto sem motivo e
+        indistinguivel de um engano."""
+        errada = linha(pessoa="b", data="2026-11-20", canal="c1", prova="https://exemplo.pt/errada")
+        certa = linha(pessoa="b", data="2026-11-20", canal="c1", prova="https://exemplo.pt/certa")
+        cfg = cfg_minima([errada, certa])
+        cfg["remover"] = [{"prova": "https://exemplo.pt/errada", "motivo": "canal errado"}]
+        c = contas(cfg)
+        self.assertEqual(pessoa(c, "b")["total"], 1)
+        gerado = comparacao.corpo(RESUMO, [], cfg, CANAIS)
+        self.assertIn("exemplo.pt/certa", gerado)
+        self.assertNotIn("exemplo.pt/errada", gerado)
+        so_vetada = cfg_minima([errada])
+        so_vetada["remover"] = cfg["remover"]
+        self.assertEqual(contas(so_vetada)["ate"], dt.date(2026, 10, 30))  # o fecho volta ao levantamento
+        casos = {
+            "veto que nao retira nada": [{"prova": "https://exemplo.pt/nenhuma", "motivo": "x"}],
+            "veto de uma por verificar": [{"prova": "https://exemplo.pt/incerta", "motivo": "x"}],
+            "veto sem motivo": [{"prova": "https://exemplo.pt/errada", "motivo": " "}],
+            "veto repetido": [{"prova": "https://exemplo.pt/errada", "motivo": "x"}] * 2,
+        }
+        for nome, vetos in casos.items():
+            with self.subTest(caso=nome):
+                mau = cfg_minima([errada, linha(data="2025-08-01", estado="por_verificar",
+                                                prova="https://exemplo.pt/incerta")])
+                mau["remover"] = vetos
+                with self.assertRaises(ValueError):
+                    comparacao.validar(mau, CANAIS, VISIVEL)
+
     def test_os_dominios_de_partido_batem_com_as_linhas_reais(self):
         """Medido a 2026-11-07, antes de o formulario passar a decidir o
         tipo de prova pelo dominio: as 7 linhas `partido` estao em ps.pt (6)

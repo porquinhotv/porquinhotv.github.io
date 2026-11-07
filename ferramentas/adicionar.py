@@ -302,7 +302,7 @@ def escolher_pessoa(escrita: str, sujeito: dict, pessoas: list[dict]) -> tuple[d
 
 def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevistas: list[dict],
                     curadoria: dict, publicadas: list[dict], visivel_desde: str, dominio: str,
-                    hoje: date) -> tuple[list[str], list[str]]:
+                    hoje: date, vetos: list[dict] | None = None) -> tuple[list[str], list[str]]:
     """As verificacoes de uma entrevista de outra pessoa, com as mensagens
     para quem preenche. A validacao do gerador corre depois sobre o
     ficheiro inteiro e apanha o resto, mas com mensagens para quem le o
@@ -310,8 +310,12 @@ def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevis
     erros: list[str] = []
     avisos: list[str] = []
     chave = chave_de_prova(prova, dominio)
+    vetadas = {str(v.get("prova", "")).strip(): str(v.get("motivo", "")) for v in vetos or []}
+    for v_prova, motivo in vetadas.items():
+        if chave_de_prova(v_prova, dominio) == chave:
+            erros.append(f"esta prova foi vetada na comparacao: {motivo}")
     for e in entrevistas:
-        if chave_de_prova(str(e.get("prova", "")), dominio) == chave:
+        if chave_de_prova(str(e.get("prova", "")), dominio) == chave and str(e.get("prova", "")).strip() not in vetadas:
             erros.append(f"esta prova ja esta na comparacao, em {e.get('data')} {e.get('pessoa')} ({e.get('estado')})")
     do_sujeito = [str(l.get("prova", "")) for l in (curadoria.get("entrevistas") or []) + (curadoria.get("remover") or [])]
     do_sujeito += [p["prova"] for p in publicadas]
@@ -322,7 +326,9 @@ def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevis
     inicio = max(visivel_desde, str(pessoa.get("desde", "")))
     if data < inicio:
         erros.append(f"data anterior a {inicio}, quando {pessoa.get('nome')} passa a contar; a linha nao contaria")
-    suas = [e for e in entrevistas if e.get("pessoa") == pessoa.get("id")]
+    # Uma linha vetada ja nao conta, e nao impede a que a substitui.
+    suas = [e for e in entrevistas if e.get("pessoa") == pessoa.get("id")
+            and str(e.get("prova", "")).strip() not in vetadas]
     dia = date.fromisoformat(data)
     for e in suas:
         d = str(e.get("data", ""))
@@ -468,7 +474,8 @@ def correr_outra(lista: list[str], pessoa: dict, *, config: dict, dominio: str, 
             linha["prova"] = limpar_prova(linha["prova"], dominio)
             erros, avisos = verificar_outra(linha["data"], linha["canal"], linha["prova"], pessoa=pessoa,
                                             entrevistas=entrevistas, curadoria=curadoria, publicadas=publicadas,
-                                            visivel_desde=visivel, dominio=dominio, hoje=hoje)
+                                            visivel_desde=visivel, dominio=dominio, hoje=hoje,
+                                            vetos=atual.get("remover") or [])
             chave = chave_de_prova(linha["prova"], dominio)
             if chave in vistas:
                 erros.append(f"a mesma prova esta na entrada {vistas[chave]} deste lote")

@@ -192,6 +192,17 @@ textos:
     Ficaram de fora, por falta de uma prova que fixe o dia e o canal: {k}.
     Entram se essa prova aparecer.
 
+# Vetos: provas retiradas, com o motivo. Escreve-os o formulario
+# `remover`, escolhendo a pessoa (pedido do autor a 2026-11-07), como na
+# lista `remover` de config/curadoria.yml. Retirar e vetar, nao apagar: a
+# linha da entrevista fica no ficheiro, deixa de contar e de aparecer na
+# pagina, e desfazer e apagar o veto. Um veto tem de apontar para uma
+# linha confirmada; um veto que nao retira nada faz falhar o gerador, para
+# um erro de copia nunca parecer uma linha retirada. Uma linha vetada nao
+# impede outra no mesmo dia e canal: e assim que se troca uma prova por
+# outra melhor, `remover` e depois `adicionar`.
+remover:
+
 entrevistas:
 
   # ---------------- Luis Montenegro ----------------

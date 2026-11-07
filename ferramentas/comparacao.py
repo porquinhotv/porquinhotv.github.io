@@ -44,7 +44,11 @@ Tres regras, cada uma com a razao:
    primeiro-ministro nenhuma. Quem entrar a meio do ultimo ano mede-se
    desde que entrou, para nao contar como silencio meses em que ainda
    nao estava la.
-4. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
+4. Uma prova na lista `remover` retira a linha: deixa de contar, de
+   mover o fecho e de aparecer na pagina, e fica no ficheiro com o
+   motivo. Pedido do autor a 2026-11-07, pelo formulario `remover`, como
+   os vetos da curadoria.
+5. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
    nomes dos canais vem do resumo publicado, como no resto do gerador.
 
 A validacao falha alto e diz todos os problemas de uma vez. Como corre
@@ -69,6 +73,10 @@ CONFIG = RAIZ / "config" / "comparacao.yml"
 EDITORIAL = RAIZ / "config" / "porquinho.yml"
 
 ESTADOS = ("confirmada", "por_verificar", "fora_do_ambito")
+# O estado que o gerador da a uma linha confirmada cuja prova esta na
+# lista `remover`. Nao se escreve no ficheiro: a linha fica como estava, e
+# e o veto que a retira.
+RETIRADA = "retirada"
 # O formato fica so registado, a pagina nao o mostra. Uma linha que entra
 # pelo formulario nao o traz, porque o formulario so pede o dia, o canal
 # e a ligacao: fica vazio, nunca adivinhado.
@@ -226,6 +234,22 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
     if not cargo_sujeito:
         erros.append("sujeito.cargo: em falta")
 
+    vetos: dict = {}
+    for i, v in enumerate(cfg.get("remover") or []):
+        prova_v = str((v or {}).get("prova") or "").strip()
+        if not prova_v.startswith(("https://", "http://")):
+            erros.append(f"remover[{i}]: a prova nao e um endereco")
+        elif prova_v in vetos:
+            erros.append(f"remover[{i}]: a mesma prova ja esta vetada")
+        if not " ".join(str((v or {}).get("motivo") or "").split()):
+            erros.append(f"remover[{i}]: falta o motivo")
+        vetos[prova_v] = i
+    confirmadas_por_prova = {str(e.get("prova") or "").strip() for e in cfg.get("entrevistas") or []
+                             if e.get("estado") == "confirmada"}
+    for prova_v, i in vetos.items():
+        if prova_v and prova_v not in confirmadas_por_prova:
+            erros.append(f"remover[{i}]: o veto nao retira nada, nenhuma linha confirmada tem esta prova")
+
     entrevistas = []
     vistas_linha = {}
     vistas_prova = {}
@@ -265,12 +289,15 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
             if canal is None:
                 erros.append(f"{onde}: confirmada sem canal")
             chave = (e.get("pessoa"), dia, canal)
-            if chave in vistas_linha:
-                erros.append(f"{onde}: a mesma pessoa, dia e canal que {vistas_linha[chave]}")
-            vistas_linha[chave] = onde
+            if prova.strip() not in vetos:
+                if chave in vistas_linha:
+                    erros.append(f"{onde}: a mesma pessoa, dia e canal que {vistas_linha[chave]}")
+                vistas_linha[chave] = onde
             inicio = inicio_de.get(e.get("pessoa"))
             if dia < visivel_desde or (inicio and dia < inicio):
                 erros.append(f"{onde}: confirmada antes do inicio da contagem; e fora_do_ambito")
+        if estado == "confirmada" and prova.strip() in vetos:
+            estado = RETIRADA
         entrevistas.append({"pessoa": e.get("pessoa"), "data": dia, "canal": canal, "tambem_em": tambem,
                             "estado": estado, "tipo_prova": e.get("tipo_prova"), "prova": prova})
     if erros:
