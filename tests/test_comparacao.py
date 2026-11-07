@@ -119,7 +119,21 @@ class TestContagem(unittest.TestCase):
         incerta = cfg_minima([linha(pessoa="b", data="2026-12-01", estado="por_verificar")])
         self.assertEqual(contas(incerta, lista)["ate"], dt.date(2026, 11, 3))
         gerado = comparacao.corpo(RESUMO, lista, cfg_minima(), CANAIS)
-        self.assertIn('<p class="periodo">1 de janeiro de 2024 a 3 de novembro de 2026</p>', gerado)
+        self.assertIn('<p class="periodo">1 de janeiro de 2024 até hoje</p>', gerado)
+
+    def test_a_pagina_diz_ate_hoje_e_nunca_a_data_do_fecho(self):
+        """Decisao do autor a 2026-11-07: o site e atualizado a cada
+        entrevista nova, por isso a pagina diz "ate hoje". Escrita, a data
+        do fecho (o dia da ultima entrevista) parecia uma contagem parada
+        nesse dia. So a data do levantamento fica escrita, porque e um
+        facto sobre a pesquisa; aqui e 30 out, e o fecho 3 nov nao pode
+        aparecer em lado nenhum."""
+        gerado = comparacao.corpo(RESUMO, [{"data": "2025-07-01"}, {"data": "2026-11-03"}], cfg_minima(), CANAIS)
+        self.assertNotIn("3 de novembro de 2026", gerado)
+        self.assertNotIn("4 de novembro de 2025", gerado)  # o inicio do ultimo ano denunciava o fecho
+        self.assertIn("No mesmo período, de 28 de junho de 2025 até hoje", gerado)
+        self.assertIn("todos até hoje", gerado)
+        self.assertIn("procuradas até 30 de outubro de 2026", gerado)
 
     def test_uma_entrevista_em_dois_canais_conta_uma_vez(self):
         """O levantamento tem dois casos de simulcast, os dois num par de
@@ -172,7 +186,7 @@ class TestContagem(unittest.TestCase):
         gerado = comparacao.corpo(RESUMO, [{"data": "2024-01-01"}, {"data": "2025-10-31"}], cfg, CANAIS)
         self.assertIn("uma a cada 182 dias no último ano", gerado)  # 365 / 2, da pessoa B
         self.assertIn("nenhuma no último ano", gerado)
-        self.assertIn("de 31 de outubro de 2025 a 30 de outubro de 2026", gerado)
+        self.assertIn("O ritmo conta só o último ano, igual para os três.", gerado)
 
     def test_quem_entra_a_meio_do_ano_mede_se_desde_que_entrou(self):
         """Contar como silencio os meses em que alguem ainda nao estava no
@@ -213,7 +227,7 @@ class TestTexto(unittest.TestCase):
         """A primeira versao mostrava 81 (cortado a 30 out) e a pagina
         inicial 82; o autor viu-o a 2026-11-06. Com o fecho derivado
         (2026-11-07), o cartao do sujeito e exactamente o total da pagina
-        inicial, sempre, e o periodo acaba no fecho, escrito por extenso."""
+        inicial, sempre, e o periodo diz "ate hoje" (decisao de 2026-11-07)."""
         resumo, entrevistas = seo.dados()
         visivel = comparacao.visivel_de(resumo)
         norm = comparacao.validar(comparacao.carregar(), comparacao.canais_validos(), visivel)
@@ -222,8 +236,7 @@ class TestTexto(unittest.TestCase):
         self.assertEqual(contas_["sujeito"]["total"], resumo["totais"]["entrevistas"])
         self.assertIn(f'<article class="pessoa porquinho">\n<h3>{resumo["sujeito"]["nome"]}', texto)
         self.assertIn(f'<p class="quantas">{resumo["totais"]["entrevistas"]}</p>', texto)
-        self.assertIn(f"<p class=\"periodo\">1 de janeiro de 2024 a {comparacao.por_extenso(contas_['ate'])}</p>",
-                      texto)
+        self.assertIn('<p class="periodo">1 de janeiro de 2024 até hoje</p>', texto)
 
 
 class TestValidacao(unittest.TestCase):

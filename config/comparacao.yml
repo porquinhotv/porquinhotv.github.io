@@ -135,9 +135,16 @@ dominios_de_partido:
   - psd.pt
   - ad2024.pt
 
+# O fecho nao se escreve na pagina: le-se "ate hoje". Decisao do autor a
+# 2026-11-07: o fecho e o dia da entrevista mais recente registada, e o
+# site e mantido a cada entrevista nova, por isso nenhuma ficou de fora
+# entre o fecho e hoje. So a data do levantamento fica escrita, porque e
+# um facto sobre a pesquisa e nao o fim da contagem. Uma excepcao,
+# dita: uma entrevista anunciada para um dia futuro conta ja, e ai a
+# contagem vai alem de hoje.
 textos:
   titulo: Entrevistas exclusivas na televisão portuguesa
-  periodo: '{desde} a {ate}'
+  periodo: '{desde} até hoje'
   intro: >-
     Todas as do porquinho desde que o site conta, ao lado das do
     primeiro-ministro e do secretário-geral do PS, com as mesmas regras e
@@ -150,12 +157,12 @@ textos:
   ritmo: uma a cada {dias} dias no último ano
   ritmo_zero: nenhuma no último ano
   ritmo_nota: >-
-    O ritmo conta só o último ano, de {desde} a {ate}, igual para os três.
+    O ritmo conta só o último ano, igual para os três.
     Medido desde o início, ficava datado e enviesado: períodos de tamanho
     diferente para cada um, e meses antigos a pesar tanto como os de agora.
   linha_titulo: Mês a mês
   linha_legenda: Cada quadrado é uma entrevista exclusiva, no mês em que passou.
-  janela_titulo: 'No mesmo período, de {desde} a {ate}'
+  janela_titulo: 'No mesmo período, de {desde} até hoje'
   frase_razao: Por cada entrevista de {nome}, o porquinho deu {razao}.
   frase_zero: '{nome} não deu nenhuma.'
   frase_empate: '{nome} deu {n}, tantas ou mais do que o porquinho.'
@@ -168,9 +175,9 @@ textos:
   metodo:
     - >-
       Cada um conta desde que o site conta, {inicio}, ou desde que assumiu
-      o cargo, e todos até {ate}. Os totais cobrem períodos diferentes e
+      o cargo, e todos até hoje. Os totais cobrem períodos diferentes e
       por isso não se comparam entre si: o ritmo mede os três no último
-      ano, desde {ano}, e a comparação número contra número faz-se só no
+      ano, e a comparação número contra número faz-se só no
       período comum, desde {desde}.
     - >-
       Com as regras do resto do site: entrevista exclusiva, informativa ou

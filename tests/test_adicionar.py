@@ -351,8 +351,12 @@ class TestAdicionarOutraPessoa(Base):
         self.assertEqual(codigo, 0, relatorio)
         self.assertIn("AVISO: data no futuro", relatorio)
         resumo, entrevistas = seo.dados()
-        gerado = comparacao.corpo(resumo, seo.visiveis(resumo, entrevistas), self.lida())
-        self.assertIn("a 1 de janeiro de 2099</p>", gerado)
+        visivel = comparacao.visivel_de(resumo)
+        norm = comparacao.validar(self.lida(), comparacao.canais_validos(), visivel)
+        contas = comparacao.contar(norm, seo.visiveis(resumo, entrevistas), visivel)
+        self.assertEqual(contas["ate"], date(2099, 1, 1))
+        montenegro = next(p for p in contas["pessoas"] if p["id"] == "montenegro")
+        self.assertIn(date(2099, 1, 1), montenegro["dias"])
 
     def test_uma_prova_do_site_do_partido_fica_marcada_como_tal(self):
         """A pagina escreve "site do partido" para quem le saber, antes de
