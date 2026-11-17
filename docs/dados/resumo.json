@@ -741,6 +741,24 @@
     }
    },
    "data": "2026-11-03"
+  },
+  {
+   "canais": {
+    "cmtv": {
+     "declaradas": 1,
+     "entrevistas": 1
+    }
+   },
+   "data": "2026-11-13"
+  },
+  {
+   "canais": {
+    "now": {
+     "declaradas": 1,
+     "entrevistas": 1
+    }
+   },
+   "data": "2026-11-16"
   }
  ],
  "esquema": 3,
@@ -752,7 +770,7 @@
   "motor-rtp3",
   "registo-curado"
  ],
- "gerado_em": "2026-11-06T14:57:10+00:00",
+ "gerado_em": "2026-11-17T08:38:51+00:00",
  "por_ano": [
   {
    "ano": "2024",
@@ -764,7 +782,7 @@
   },
   {
    "ano": "2026",
-   "entrevistas": 39
+   "entrevistas": 41
   }
  ],
  "por_canal": [
@@ -805,12 +823,12 @@
   },
   {
    "canal": "now",
-   "entrevistas": 14,
+   "entrevistas": 15,
    "nome": "NOW"
   },
   {
    "canal": "cmtv",
-   "entrevistas": 14,
+   "entrevistas": 15,
    "nome": "CMTV"
   }
  ],
@@ -1138,6 +1156,14 @@
   {
    "data": "2026-11-03",
    "entrevistas": 1
+  },
+  {
+   "data": "2026-11-13",
+   "entrevistas": 1
+  },
+  {
+   "data": "2026-11-16",
+   "entrevistas": 1
   }
  ],
  "por_mes": [
@@ -1246,13 +1272,13 @@
    "mes": "2026-10"
   },
   {
-   "entrevistas": 1,
+   "entrevistas": 3,
    "mes": "2026-11"
   }
  ],
  "por_origem": {
   "canal": {
-   "entrevistas": 67
+   "entrevistas": 69
   },
   "imprensa": {
    "entrevistas": 15
@@ -1498,6 +1524,14 @@
   {
    "entrevistas": 1,
    "semana": "2026-W45"
+  },
+  {
+   "entrevistas": 1,
+   "semana": "2026-W46"
+  },
+  {
+   "entrevistas": 1,
+   "semana": "2026-W47"
   }
  ],
  "primeiro_registo": "2024-02-21",
@@ -1512,7 +1546,7 @@
    "de": "2024-03-20",
    "dias": 2
   },
-  "ultima_data": "2026-11-03"
+  "ultima_data": "2026-11-16"
  },
  "sujeito": {
   "id": "ventura",
@@ -1526,7 +1560,7 @@
   "pergunta": "Quantas entrevistas exclusivas deu André Ventura na televisão portuguesa?"
  },
  "totais": {
-  "entrevistas": 82
+  "entrevistas": 84
  },
- "ultimo_registo": "2026-11-03"
+ "ultimo_registo": "2026-11-16"
 }

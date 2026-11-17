@@ -3690,8 +3690,88 @@
      "titulo": ""
     }
    ]
+  },
+  {
+   "canais": [
+    "cmtv"
+   ],
+   "canal": "cmtv",
+   "confianca": "alta",
+   "data": "2026-11-13",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "a425fa48684a",
+   "origem": "canal",
+   "primeira_vez": "2026-11-17",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/DfsUMxyNxm7/",
+   "publicado_em": "2026-11-13",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "a425fa48684a",
+     "canal": "cmtv",
+     "confianca": "alta",
+     "data": "2026-11-13",
+     "data_origem": "declarada",
+     "entrevista": "a425fa48684a",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:bb3034cf9e48",
+     "origem": "canal",
+     "primeira_vez": "2026-11-17",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/DfsUMxyNxm7/",
+     "publicado_em": "2026-11-13",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
+    "now"
+   ],
+   "canal": "now",
+   "confianca": "alta",
+   "data": "2026-11-16",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "302c1e1a20af",
+   "origem": "canal",
+   "primeira_vez": "2026-11-17",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.instagram.com/p/Dfz2qSeFYwt/",
+   "publicado_em": "2026-11-16",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "302c1e1a20af",
+     "canal": "now",
+     "confianca": "alta",
+     "data": "2026-11-16",
+     "data_origem": "declarada",
+     "entrevista": "302c1e1a20af",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:e0aa69c01b06",
+     "origem": "canal",
+     "primeira_vez": "2026-11-17",
+     "programa": "",
+     "prova_url": "https://www.instagram.com/p/Dfz2qSeFYwt/",
+     "publicado_em": "2026-11-16",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
   }
  ],
  "esquema": 2,
- "total": 88
+ "total": 90
 }

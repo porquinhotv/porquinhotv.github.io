@@ -598,6 +598,18 @@ entrevistas:
     canal: now
     prova: https://www.instagram.com/p/DfSouM5lKmN/
 
+  # Formulario `adicionar`, 2026-11-17: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-11-13 18:51 de Lisboa, pelo identificador.
+  - data: 2026-11-13
+    canal: cmtv
+    prova: https://www.instagram.com/p/DfsUMxyNxm7/
+
+  # Formulario `adicionar`, 2026-11-17: canal e dia lidos por quem o preencheu.
+  # Publicacao de 2026-11-16 17:06 de Lisboa, pelo identificador.
+  - data: 2026-11-16
+    canal: now
+    prova: https://www.instagram.com/p/Dfz2qSeFYwt/
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela
