@@ -334,15 +334,6 @@
    "url": "https://www.rtp.pt/play/p16206/e960391/especial-informacao"
   },
   {
-   "excerto": "",
-   "fonte": "curadoria",
-   "id_nativo": "curadoria:cceb61423841",
-   "motivo": "vetada_a_mao (era do Carneiro)",
-   "publicado_em": "2026-10-13",
-   "titulo": "",
-   "url": "https://www.rtp.pt/play/p16206/e960391/especial-informacao"
-  },
-  {
    "excerto": "Maria da Graça Carvalho - Que ilações se devem retirar das consequências das tempestades que devastaram a região centro do país? Maria da Graç",
    "fonte": "lista-rtp-grande-entrevista",
    "id_nativo": "https://www.rtp.pt/play/p10324/e911698/grande-entrevista",
@@ -605,5 +596,5 @@
   }
  ],
  "esquema": 2,
- "total": 67
+ "total": 66
 }

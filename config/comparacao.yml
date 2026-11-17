@@ -203,6 +203,10 @@ textos:
 # outra melhor, `remover` e depois `adicionar`.
 remover:
 
+  # Formulario `remover`, 2026-11-17.
+  - prova: https://sicnoticias.pt/pais/politica/2026-11-03-video-a-entrevista-exclusiva-ao-secretario-geral-do-ps-jose-luis-carneiro-79a5a120
+    motivo: 'era do Carneiro'
+
 entrevistas:
 
   # ---------------- Luis Montenegro ----------------
