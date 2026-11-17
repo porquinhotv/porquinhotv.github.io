@@ -296,7 +296,7 @@ class TestValidacao(unittest.TestCase):
         errada = linha(pessoa="b", data="2026-11-20", canal="c1", prova="https://exemplo.pt/errada")
         certa = linha(pessoa="b", data="2026-11-20", canal="c1", prova="https://exemplo.pt/certa")
         cfg = cfg_minima([errada, certa])
-        cfg["remover"] = [{"prova": "https://exemplo.pt/errada", "motivo": "canal errado"}]
+        cfg["remover"] = [{"prova": "https://exemplo.pt/errada", "pessoa": "b", "motivo": "canal errado"}]
         c = contas(cfg)
         self.assertEqual(pessoa(c, "b")["total"], 1)
         gerado = comparacao.corpo(RESUMO, [], cfg, CANAIS)
@@ -306,15 +306,43 @@ class TestValidacao(unittest.TestCase):
         so_vetada["remover"] = cfg["remover"]
         self.assertEqual(contas(so_vetada)["ate"], dt.date(2026, 10, 30))  # o fecho volta ao levantamento
         casos = {
-            "veto que nao retira nada": [{"prova": "https://exemplo.pt/nenhuma", "motivo": "x"}],
-            "veto de uma por verificar": [{"prova": "https://exemplo.pt/incerta", "motivo": "x"}],
-            "veto sem motivo": [{"prova": "https://exemplo.pt/errada", "motivo": " "}],
-            "veto repetido": [{"prova": "https://exemplo.pt/errada", "motivo": "x"}] * 2,
+            "veto que nao retira nada": [{"prova": "https://exemplo.pt/nenhuma", "pessoa": "b", "motivo": "x"}],
+            "veto de uma por verificar": [{"prova": "https://exemplo.pt/incerta", "pessoa": "a", "motivo": "x"}],
+            "veto sem motivo": [{"prova": "https://exemplo.pt/errada", "pessoa": "b", "motivo": " "}],
+            "veto repetido": [{"prova": "https://exemplo.pt/errada", "pessoa": "b", "motivo": "x"}] * 2,
+            "veto sem pessoa": [{"prova": "https://exemplo.pt/errada", "motivo": "x"}],
+            "veto na pessoa errada": [{"prova": "https://exemplo.pt/errada", "pessoa": "a", "motivo": "x"}],
         }
         for nome, vetos in casos.items():
             with self.subTest(caso=nome):
                 mau = cfg_minima([errada, linha(data="2025-08-01", estado="por_verificar",
                                                 prova="https://exemplo.pt/incerta")])
+                mau["remover"] = vetos
+                with self.assertRaises(ValueError):
+                    comparacao.validar(mau, CANAIS, VISIVEL)
+
+    def test_o_veto_e_da_pessoa_e_deixa_a_prova_passar_para_outra(self):
+        """2026-11-17: uma entrevista do Carneiro registada no Montenegro e
+        vetada com "era do Carneiro". Com o veto so pela prova, a linha
+        certa no Carneiro tinha a mesma prova que a vetada e a pagina
+        retirava as duas. A prova so se repete com todas as linhas menos
+        uma retiradas, e nunca na mesma pessoa."""
+        trocada = "https://exemplo.pt/trocada"
+        errada = linha(pessoa="a", data="2026-11-03", prova=trocada)
+        certa = linha(pessoa="b", data="2026-11-03", prova=trocada)
+        cfg = cfg_minima([errada, certa])
+        cfg["remover"] = [{"prova": trocada, "pessoa": "a", "motivo": "era da pessoa B"}]
+        c = contas(cfg)
+        self.assertEqual(pessoa(c, "a")["total"], 0)
+        self.assertEqual(pessoa(c, "b")["total"], 1)
+        casos = {
+            "as duas vivas": [],
+            "a mesma pessoa duas vezes": [{"prova": trocada, "pessoa": "a", "motivo": "x"}],
+        }
+        for nome, vetos in casos.items():
+            with self.subTest(caso=nome):
+                linhas = [errada, certa] if not vetos else [errada, linha(pessoa="a", data="2026-11-04", prova=trocada)]
+                mau = cfg_minima(linhas)
                 mau["remover"] = vetos
                 with self.assertRaises(ValueError):
                     comparacao.validar(mau, CANAIS, VISIVEL)

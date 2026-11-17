@@ -44,10 +44,13 @@ Tres regras, cada uma com a razao:
    primeiro-ministro nenhuma. Quem entrar a meio do ultimo ano mede-se
    desde que entrou, para nao contar como silencio meses em que ainda
    nao estava la.
-4. Uma prova na lista `remover` retira a linha: deixa de contar, de
+4. Um veto na lista `remover` retira a linha: deixa de contar, de
    mover o fecho e de aparecer na pagina, e fica no ficheiro com o
    motivo. Pedido do autor a 2026-11-07, pelo formulario `remover`, como
-   os vetos da curadoria.
+   os vetos da curadoria. O veto e de uma pessoa e de uma prova, nao so
+   de uma prova: a 2026-11-17 uma entrevista do Carneiro registada no
+   Montenegro foi vetada com "era do Carneiro", e um veto so pela prova
+   retirava tambem a linha certa e impedia que ela entrasse.
 5. Nenhum nome aqui. As pessoas, os cargos e os textos vivem no YAML; os
    nomes dos canais vem do resumo publicado, como no resto do gerador.
 
@@ -237,22 +240,28 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
     vetos: dict = {}
     for i, v in enumerate(cfg.get("remover") or []):
         prova_v = str((v or {}).get("prova") or "").strip()
+        pessoa_v = (v or {}).get("pessoa")
         if not prova_v.startswith(("https://", "http://")):
             erros.append(f"remover[{i}]: a prova nao e um endereco")
-        elif prova_v in vetos:
-            erros.append(f"remover[{i}]: a mesma prova ja esta vetada")
+        elif (pessoa_v, prova_v) in vetos:
+            erros.append(f"remover[{i}]: a mesma prova ja esta vetada para esta pessoa")
+        if pessoa_v not in inicio_de:
+            # Sem a pessoa, o veto apanhava todas as linhas com a prova,
+            # incluindo a que corrige uma pessoa trocada.
+            erros.append(f"remover[{i}]: falta a pessoa, ou nao e um id de `pessoas` ({pessoa_v!r})")
         if not " ".join(str((v or {}).get("motivo") or "").split()):
             erros.append(f"remover[{i}]: falta o motivo")
-        vetos[prova_v] = i
-    confirmadas_por_prova = {str(e.get("prova") or "").strip() for e in cfg.get("entrevistas") or []
-                             if e.get("estado") == "confirmada"}
-    for prova_v, i in vetos.items():
-        if prova_v and prova_v not in confirmadas_por_prova:
-            erros.append(f"remover[{i}]: o veto nao retira nada, nenhuma linha confirmada tem esta prova")
+        vetos[(pessoa_v, prova_v)] = i
+    confirmadas = {(e.get("pessoa"), str(e.get("prova") or "").strip()) for e in cfg.get("entrevistas") or []
+                   if e.get("estado") == "confirmada"}
+    for chave_v, i in vetos.items():
+        if chave_v[1] and chave_v not in confirmadas:
+            erros.append(f"remover[{i}]: o veto nao retira nada, nenhuma linha confirmada desta pessoa tem esta prova")
 
     entrevistas = []
     vistas_linha = {}
     vistas_prova = {}
+    vistas_pessoa_prova = {}
     for i, e in enumerate(cfg.get("entrevistas") or []):
         onde = f"entrevistas[{i}]"
         try:
@@ -278,9 +287,19 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
                 erros.append(f"{onde}: tambem_em {outro!r} nao e outro canal valido")
         if not prova.startswith(("https://", "http://")):
             erros.append(f"{onde}: a prova nao e um endereco")
-        if prova in vistas_prova:
-            erros.append(f"{onde}: a mesma prova que {vistas_prova[prova]}")
-        vistas_prova[prova] = onde
+        retirada = estado == "confirmada" and (e.get("pessoa"), prova.strip()) in vetos
+        # Uma prova repete-se so quando todas as linhas menos uma estao
+        # retiradas: e assim que se corrige uma pessoa trocada, vetar a
+        # linha errada e acrescentar a certa com a mesma prova. A mesma
+        # pessoa com a mesma prova duas vezes nunca e correcao, e o veto
+        # retirava as duas em silencio.
+        if (e.get("pessoa"), prova) in vistas_pessoa_prova:
+            erros.append(f"{onde}: a mesma pessoa e prova que {vistas_pessoa_prova[(e.get('pessoa'), prova)]}")
+        vistas_pessoa_prova[(e.get("pessoa"), prova)] = onde
+        if not retirada:
+            if prova in vistas_prova:
+                erros.append(f"{onde}: a mesma prova que {vistas_prova[prova]}")
+            vistas_prova[prova] = onde
         if e.get("tipo_prova") not in rotulos:
             erros.append(f"{onde}: tipo_prova {e.get('tipo_prova')!r} sem rotulo em rotulos_de_prova")
         if de_partido(prova, dominios_partido) != (e.get("tipo_prova") == TIPO_PARTIDO):
@@ -289,14 +308,14 @@ def validar(cfg: dict, canais: set, visivel_desde: dt.date) -> dict:
             if canal is None:
                 erros.append(f"{onde}: confirmada sem canal")
             chave = (e.get("pessoa"), dia, canal)
-            if prova.strip() not in vetos:
+            if not retirada:
                 if chave in vistas_linha:
                     erros.append(f"{onde}: a mesma pessoa, dia e canal que {vistas_linha[chave]}")
                 vistas_linha[chave] = onde
             inicio = inicio_de.get(e.get("pessoa"))
             if dia < visivel_desde or (inicio and dia < inicio):
                 erros.append(f"{onde}: confirmada antes do inicio da contagem; e fora_do_ambito")
-        if estado == "confirmada" and prova.strip() in vetos:
+        if retirada:
             estado = RETIRADA
         entrevistas.append({"pessoa": e.get("pessoa"), "data": dia, "canal": canal, "tambem_em": tambem,
                             "estado": estado, "tipo_prova": e.get("tipo_prova"), "prova": prova})

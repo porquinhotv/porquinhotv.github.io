@@ -208,10 +208,18 @@ textos:
 # um erro de copia nunca parecer uma linha retirada. Uma linha vetada nao
 # impede outra no mesmo dia e canal: e assim que se troca uma prova por
 # outra melhor, `remover` e depois `adicionar`.
+#
+# Cada veto e de uma pessoa e de uma prova. A 2026-11-17 uma entrevista do
+# Carneiro entrou no Montenegro e foi vetada com "era do Carneiro"; com o
+# veto so pela prova, o `adicionar` recusava-a no Carneiro e a pagina
+# retirava-a das duas pessoas. Uma pessoa trocada corrige-se assim:
+# `remover` na pessoa errada, `adicionar` na certa com a mesma ligacao.
 remover:
 
-  # Formulario `remover`, 2026-11-17.
+  # Formulario `remover`, 2026-11-17. A pessoa foi acrescentada a mao no
+  # mesmo dia, quando o veto passou a ser por pessoa: era a do formulario.
   - prova: https://sicnoticias.pt/pais/politica/2026-11-03-video-a-entrevista-exclusiva-ao-secretario-geral-do-ps-jose-luis-carneiro-79a5a120
+    pessoa: montenegro
     motivo: 'era do Carneiro'
 
 entrevistas:

@@ -44,6 +44,12 @@ recusaria, o formulario recusa, e nada fica escrito. O tipo de prova so
 se decide num caso, o dominio de um partido, porque a pagina tem de o
 dizer a quem le; nos outros fica `ligacao`, sem adivinhar se e pagina de
 canal, noticia ou anuncio. O formato fica vazio pela mesma razao.
+
+**Uma pessoa trocada corrige-se pelos formularios**: `remover` na pessoa
+errada, `adicionar` na certa com a mesma ligacao. Uma prova vetada deixa
+de ser de quem estava, e por isso nao trava a outra pessoa; o resumo
+avisa de onde vinha. A 2026-11-17 isto falhou nos dois sentidos com duas
+entrevistas do Carneiro, uma registada no sujeito e outra no Montenegro.
 """
 
 from __future__ import annotations
@@ -300,6 +306,42 @@ def escolher_pessoa(escrita: str, sujeito: dict, pessoas: list[dict]) -> tuple[d
     return None, f"pessoa '{escrita}' nao reconhecida; usar uma de: {', '.join(opcoes)}"
 
 
+def vetos_por_pessoa(vetos: list[dict], dominio: str) -> dict[tuple, str]:
+    """{(pessoa, chave da prova): motivo} dos vetos da comparacao."""
+    return {(v.get("pessoa"), chave_de_prova(str(v.get("prova", "")), dominio)): str(v.get("motivo", ""))
+            for v in vetos}
+
+
+def retirada(e: dict, vetadas: dict[tuple, str], dominio: str) -> bool:
+    """Se a linha da comparacao deixou de contar por veto, pela mesma regra
+    do gerador: confirmada, e vetada para a sua pessoa."""
+    return e.get("estado") == "confirmada" and (e.get("pessoa"), chave_de_prova(str(e.get("prova", "")), dominio)) in vetadas
+
+
+def provas_do_sujeito(curadoria: dict, publicadas: list[dict], dominio: str) -> set[str]:
+    """As provas que contam para o sujeito: as da curadoria e as publicadas,
+    menos as vetadas na curadoria.
+
+    Ate 2026-11-17 os vetos contavam como do sujeito, e uma entrevista do
+    Carneiro registada no sujeito e vetada com "era do Carneiro" ficava
+    impossivel de acrescentar ao Carneiro. Uma prova vetada ja nao conta
+    para o sujeito (o coletor tira-a do publicado), por isso pode-la dar a
+    outra pessoa nao conta a mesma entrevista duas vezes.
+    """
+    vetadas = {chave_de_prova(str(l.get("prova", "")), dominio) for l in curadoria.get("remover") or []}
+    todas = [str(l.get("prova", "")) for l in curadoria.get("entrevistas") or []]
+    todas += [p["prova"] for p in publicadas]
+    return {chave_de_prova(x, dominio) for x in todas} - vetadas
+
+
+def provas_da_comparacao(cfg: dict, dominio: str) -> set[str]:
+    """As provas que contam na comparacao: todas menos as retiradas por
+    veto, que deixaram de ser de quem quer que seja."""
+    vetadas = vetos_por_pessoa(cfg.get("remover") or [], dominio)
+    return {chave_de_prova(str(e.get("prova", "")), dominio) for e in cfg.get("entrevistas") or []
+            if not retirada(e, vetadas, dominio)}
+
+
 def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevistas: list[dict],
                     curadoria: dict, publicadas: list[dict], visivel_desde: str, dominio: str,
                     hoje: date, vetos: list[dict] | None = None) -> tuple[list[str], list[str]]:
@@ -310,16 +352,21 @@ def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevis
     erros: list[str] = []
     avisos: list[str] = []
     chave = chave_de_prova(prova, dominio)
-    vetadas = {str(v.get("prova", "")).strip(): str(v.get("motivo", "")) for v in vetos or []}
-    for v_prova, motivo in vetadas.items():
-        if chave_de_prova(v_prova, dominio) == chave:
-            erros.append(f"esta prova foi vetada na comparacao: {motivo}")
+    vetadas = vetos_por_pessoa(vetos or [], dominio)
+    if (pessoa.get("id"), chave) in vetadas:
+        erros.append(f"esta prova foi vetada na comparacao: {vetadas[(pessoa.get('id'), chave)]}")
     for e in entrevistas:
-        if chave_de_prova(str(e.get("prova", "")), dominio) == chave and str(e.get("prova", "")).strip() not in vetadas:
+        if chave_de_prova(str(e.get("prova", "")), dominio) != chave:
+            continue
+        if retirada(e, vetadas, dominio):
+            # Vetada noutra pessoa: e a correcao de uma pessoa trocada
+            # (2026-11-17, uma entrevista do Carneiro registada no
+            # Montenegro). O aviso deixa a troca escrita no resumo.
+            avisos.append(f"esta prova estava em {e.get('data')} {e.get('pessoa')}, retirada: "
+                          f"{vetadas[(e.get('pessoa'), chave)]}")
+        else:
             erros.append(f"esta prova ja esta na comparacao, em {e.get('data')} {e.get('pessoa')} ({e.get('estado')})")
-    do_sujeito = [str(l.get("prova", "")) for l in (curadoria.get("entrevistas") or []) + (curadoria.get("remover") or [])]
-    do_sujeito += [p["prova"] for p in publicadas]
-    if any(chave_de_prova(x, dominio) == chave for x in do_sujeito):
+    if chave in provas_do_sujeito(curadoria, publicadas, dominio):
         # Uma entrevista exclusiva tem um entrevistado so: a mesma prova
         # nas duas listas e uma das duas linhas errada.
         erros.append("esta prova ja e de uma entrevista do sujeito; uma entrevista exclusiva tem um entrevistado so")
@@ -327,8 +374,7 @@ def verificar_outra(data: str, canal: str, prova: str, *, pessoa: dict, entrevis
     if data < inicio:
         erros.append(f"data anterior a {inicio}, quando {pessoa.get('nome')} passa a contar; a linha nao contaria")
     # Uma linha vetada ja nao conta, e nao impede a que a substitui.
-    suas = [e for e in entrevistas if e.get("pessoa") == pessoa.get("id")
-            and str(e.get("prova", "")).strip() not in vetadas]
+    suas = [e for e in entrevistas if e.get("pessoa") == pessoa.get("id") and not retirada(e, vetadas, dominio)]
     dia = date.fromisoformat(data)
     for e in suas:
         d = str(e.get("data", ""))
@@ -407,8 +453,7 @@ def correr(entradas: str, pessoa: str = "", *, curadoria: Path = CURADORIA, porq
     if escolhida is not None:
         return correr_outra(lista, escolhida, config=config, dominio=dominio, nomes=nomes, curadoria=atual,
                             publicadas=ja_publicadas, comparacao=comparacao, hoje=hoje)
-    das_outras = {chave_de_prova(str(e.get("prova", "")), dominio)
-                  for e in ler_yaml(comparacao).get("entrevistas") or []}
+    das_outras = provas_da_comparacao(ler_yaml(comparacao), dominio)
     relatorio: list[str] = [f"Pessoa: {(config.get('sujeito') or {}).get('nome', '')} (config/curadoria.yml)"]
     blocos: list[str] = []
     falhadas = 0

@@ -32,6 +32,11 @@ de vetar e nao apagar. Ali cada linha tem uma prova so, por isso retirar
 a prova retira a entrevista, e o relatorio diz isso. Uma ligacao que e
 de outra pessoa, ou de uma linha que nao conta (por verificar, fora do
 ambito), e recusada: o veto nao retirava nada do que a pagina mostra.
+
+Os vetos da comparacao levam a pessoa: desde 2026-11-17 a mesma prova
+pode estar numa linha retirada de uma pessoa e numa linha viva de outra,
+quando se corrigiu uma pessoa trocada, e o veto so pela prova retirava
+as duas.
 """
 
 from __future__ import annotations
@@ -47,7 +52,8 @@ import yaml
 from ferramentas import comparacao as comp
 from ferramentas.adicionar import (
     COMPARACAO, CURADORIA, LIGACAO, LISBOA, PISTAS, PORQUINHO, PUBLICADAS, acrescentar, chave_de_prova,
-    escolher_pessoa, escrever_resumo, ler_yaml, limpar_prova, provas_publicadas,
+    escolher_pessoa, escrever_resumo, ler_yaml, limpar_prova, provas_da_comparacao, provas_do_sujeito,
+    provas_publicadas, retirada, vetos_por_pessoa,
 )
 
 FIM_DA_LISTA = "\nmesma_entrevista:"
@@ -56,13 +62,14 @@ FIM_DA_LISTA = "\nmesma_entrevista:"
 FIM_DOS_VETOS_DA_COMPARACAO = "\nentrevistas:"
 
 
-def bloco_yaml(prova: str, motivo: str, hoje: date) -> str:
+def bloco_yaml(prova: str, motivo: str, hoje: date, pessoa_id: str = "") -> str:
     # O motivo vai entre aspas simples, dobradas por dentro: um motivo
     # escrito a mao pode trazer dois pontos ou um cardinal, e partia o YAML.
     seguro = motivo.replace("'", "''")
     return (f"  # Formulario `remover`, {hoje.isoformat()}.\n"
             f"  - prova: {prova}\n"
-            f"    motivo: '{seguro}'\n")
+            + (f"    pessoa: {pessoa_id}\n" if pessoa_id else "")
+            + f"    motivo: '{seguro}'\n")
 
 
 def correr(provas: str, motivo: str, pessoa: str = "", *, curadoria: Path = CURADORIA, pistas: Path = PISTAS,
@@ -91,8 +98,7 @@ def correr(provas: str, motivo: str, pessoa: str = "", *, curadoria: Path = CURA
     if escolhida is not None:
         return correr_outra(ligacoes, motivo, escolhida, config=config, dominio=dominio, no_site=no_site,
                             curadoria=atual, comparacao=comparacao, hoje=hoje)
-    das_outras = {chave_de_prova(str(e.get("prova", "")), dominio)
-                  for e in ler_yaml(comparacao).get("entrevistas") or []}
+    das_outras = provas_da_comparacao(ler_yaml(comparacao), dominio)
 
     vetadas = {chave_de_prova(str(l.get("prova", "")), dominio) for l in atual.get("remover") or []}
     na_curadoria = [{"data": str(l.get("data")), "canal": str(l.get("canal")), "prova": str(l.get("prova")), "entrevista": ""}
@@ -154,22 +160,26 @@ def correr_outra(ligacoes: list[str], motivo: str, pessoa: dict, *, config: dict
     texto = comparacao.read_text(encoding="utf-8")
     atual = yaml.safe_load(texto) or {}
     vetos = atual.get("remover") or []
-    vetadas = {chave_de_prova(str(v.get("prova", "")), dominio) for v in vetos}
-    do_sujeito = [p["prova"] for p in no_site]
-    do_sujeito += [str(l.get("prova", "")) for l in curadoria.get("entrevistas") or []]
-    do_sujeito = {chave_de_prova(x, dominio) for x in do_sujeito}
+    vetadas = vetos_por_pessoa(vetos, dominio)
+    do_sujeito = provas_do_sujeito(curadoria, no_site, dominio)
     relatorio = [f"Pessoa: {pessoa.get('nome')} (config/comparacao.yml)"]
     blocos: list[str] = []
     falhadas = 0
     vistas: set[str] = set()
     for numero, escrita in enumerate(ligacoes, start=1):
         chave = chave_de_prova(limpar_prova(escrita, dominio), dominio)
-        linhas = [e for e in atual.get("entrevistas") or [] if chave_de_prova(str(e.get("prova", "")), dominio) == chave]
+        com_a_prova = [e for e in atual.get("entrevistas") or []
+                       if chave_de_prova(str(e.get("prova", "")), dominio) == chave]
+        # A linha desta pessoa primeiro: depois de corrigida uma pessoa
+        # trocada, a mesma prova esta tambem na linha retirada da outra.
+        linhas = sorted(com_a_prova, key=lambda e: e.get("pessoa") != pessoa.get("id"))
         motivo_recusa = ""
         if chave in vistas:
             motivo_recusa = "repetida neste lote"
-        elif chave in vetadas:
+        elif (pessoa.get("id"), chave) in vetadas:
             motivo_recusa = "ja estava vetada"
+        elif linhas and all(retirada(e, vetadas, dominio) for e in linhas):
+            motivo_recusa = f"ja estava vetada, na linha de {linhas[0].get('pessoa')}"
         elif not linhas:
             motivo_recusa = ("esta prova e do sujeito; escolher a pessoa certa no formulario" if chave in do_sujeito
                              else "esta ligacao nao esta na comparacao")
@@ -187,7 +197,7 @@ def correr_outra(ligacoes: list[str], motivo: str, pessoa: dict, *, config: dict
         # Na comparacao cada linha tem uma prova so, mesmo quando passou em
         # dois canais: retirar a prova retira a entrevista.
         relatorio.append(f"   a entrevista sai da contagem de {pessoa.get('nome')}")
-        blocos.append(bloco_yaml(str(alvo.get("prova")), motivo, hoje))
+        blocos.append(bloco_yaml(str(alvo.get("prova")), motivo, hoje, str(pessoa["id"])))
 
     if falhadas:
         relatorio.append(f"NADA FOI ESCRITO: {falhadas} de {len(ligacoes)} ligacoes recusadas; "

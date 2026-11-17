@@ -311,11 +311,14 @@ class TestAdicionarOutraPessoa(Base):
     def confirmadas(self, pid):
         """As que a pagina conta: confirmadas e sem veto. Contar tambem as
         vetadas partia estes testes no primeiro veto real, e o formulario
-        que o escreveu parava (simulacao de 2026-11-07)."""
+        que o escreveu parava (simulacao de 2026-11-07). O veto e da
+        pessoa e da prova: so pela prova, a linha do Carneiro com a prova
+        retirada ao Montenegro ficava de fora e o teste contava menos uma
+        do que a pagina (simulacao de 2026-11-17)."""
         lida = self.lida()
-        vetadas = {v["prova"] for v in lida.get("remover") or []}
+        vetadas = {(v["pessoa"], v["prova"]) for v in lida.get("remover") or []}
         return [e for e in lida["entrevistas"]
-                if e["pessoa"] == pid and e["estado"] == "confirmada" and e["prova"] not in vetadas]
+                if e["pessoa"] == pid and e["estado"] == "confirmada" and (pid, e["prova"]) not in vetadas]
 
     def test_vai_para_o_fim_da_comparacao_e_nao_toca_na_curadoria(self):
         """A linha entra como a pagina a conta (confirmada, com canal e
@@ -426,11 +429,15 @@ class TestRemoverOutraPessoa(Base):
         self.assertEqual(self.comparacao.read_text(encoding="utf-8"), self.comparacao_original)
 
     def linha_real(self, estado="confirmada"):
-        """Uma linha real sem veto: o ficheiro real pode ja ter vetos."""
+        """Uma linha real sem veto e com uma prova so dela: o ficheiro real
+        pode ja ter vetos, e uma prova que passou de uma pessoa para outra
+        esta em duas linhas."""
         lida = self.lida()
-        vetadas = {v["prova"] for v in lida.get("remover") or []}
+        provas = [e["prova"] for e in lida["entrevistas"]]
+        vetadas = {(v["pessoa"], v["prova"]) for v in lida.get("remover") or []}
         return next(e for e in lida["entrevistas"]
-                    if e["pessoa"] == "carneiro" and e["estado"] == estado and e["prova"] not in vetadas)
+                    if e["pessoa"] == "carneiro" and e["estado"] == estado
+                    and ("carneiro", e["prova"]) not in vetadas and provas.count(e["prova"]) == 1)
 
     def contas(self):
         resumo, entrevistas = seo.dados()
@@ -450,7 +457,8 @@ class TestRemoverOutraPessoa(Base):
         self.intacto()
         lida = self.lida()
         vetos_antes = yaml.safe_load(self.comparacao_original).get("remover") or []
-        self.assertEqual(lida["remover"], [*vetos_antes, {"prova": real["prova"], "motivo": "nota: canal errado"}])
+        self.assertEqual(lida["remover"], [*vetos_antes, {"prova": real["prova"], "pessoa": "carneiro",
+                                                          "motivo": "nota: canal errado"}])
         self.assertIn(real, lida["entrevistas"])
         contas, resumo, entrevistas = self.contas()
         self.assertEqual(next(p for p in contas["pessoas"] if p["id"] == "carneiro")["total"], antes - 1)
@@ -477,9 +485,10 @@ class TestRemoverOutraPessoa(Base):
         pessoa errada, e deixava quem preencheu convencido do contrario."""
         real = self.linha_real()
         incerta = self.linha_real("por_verificar")
-        vetadas = {v["prova"] for v in self.lida().get("remover") or []}
+        vetadas = {(v["pessoa"], v["prova"]) for v in self.lida().get("remover") or []}
         outra = next(e for e in self.lida()["entrevistas"]
-                     if e["pessoa"] == "montenegro" and e["estado"] == "confirmada" and e["prova"] not in vetadas)
+                     if e["pessoa"] == "montenegro" and e["estado"] == "confirmada"
+                     and ("montenegro", e["prova"]) not in vetadas)
         casos = {
             "nao esta na comparacao": (["https://teste.invalid/nao-existe"], self.PESSOA, "nao esta na comparacao"),
             "de outra pessoa": ([outra["prova"]], self.PESSOA, "de outra pessoa"),
@@ -509,6 +518,97 @@ class TestRemoverOutraPessoa(Base):
         self.assertEqual(codigo, 1, relatorio)
         self.assertIn("escolher a pessoa certa", relatorio)
         self.intacto()
+
+
+
+class TestPessoaTrocada(Base):
+    """Corrida real de 2026-11-17 (`adicionar` #13): duas entrevistas do
+    Carneiro tinham entrado na pessoa errada e sido vetadas com "era do
+    Carneiro", a da SIC Noticias de 2026-11-03 no Montenegro e a da RTP3 de
+    2026-10-13 no sujeito. O `adicionar` no Carneiro recusou as duas, 2 de
+    2: o veto da comparacao era so pela prova, e os vetos da curadoria
+    contavam como provas do sujeito. Nao havia forma de corrigir uma pessoa
+    trocada pelos formularios.
+
+    A sequencia e a real; os enderecos sao `.invalid` porque estes testes
+    correm sobre a comparacao real, onde as duas ligacoes reais vao ficar
+    (licao de 2026-11-07: um endereco real num teste parte-o no dia em que
+    o formulario o escreve no ficheiro).
+    """
+
+    CARNEIRO = "José Luís Carneiro"
+    MONTENEGRO = "Luís Montenegro"
+
+    def lida(self):
+        return yaml.safe_load(self.comparacao.read_text(encoding="utf-8"))
+
+    def totais(self):
+        resumo, entrevistas = seo.dados()
+        visivel = comparacao.visivel_de(resumo)
+        norm = comparacao.validar(self.lida(), comparacao.canais_validos(), visivel)
+        contas = comparacao.contar(norm, seo.visiveis(resumo, entrevistas), visivel)
+        return {p["id"]: p["total"] for p in contas["pessoas"]}
+
+    def test_do_montenegro_para_o_carneiro(self):
+        """A SIC Noticias de 2026-11-03. Depois da correcao a pagina conta
+        a entrevista no Carneiro e so nele, o veto continua a impedir a
+        prova no Montenegro, e a prova passa a ser do Carneiro para os dois
+        formularios."""
+        prova = "https://teste.invalid/trocada-na-comparacao"
+        self.assertEqual(self.adicionar(f"2025-07-10 RTP2 {prova}", self.MONTENEGRO)[0], 0)
+        antes = self.totais()
+        self.assertEqual(self.remover(prova, "era do Carneiro", self.MONTENEGRO)[0], 0)
+        codigo, relatorio = self.adicionar(f"2025-07-10 RTP2 {prova}", self.CARNEIRO)
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertIn("AVISO: esta prova estava em 2025-07-10 montenegro, retirada: era do Carneiro", relatorio)
+        depois = self.totais()
+        self.assertEqual(depois["montenegro"], antes["montenegro"] - 1)
+        self.assertEqual(depois["carneiro"], antes["carneiro"] + 1)
+        resumo, entrevistas = seo.dados()
+        gerado = comparacao.corpo(resumo, seo.visiveis(resumo, entrevistas), self.lida())
+        self.assertEqual(gerado.count(html.escape(prova, quote=True)), 1)
+
+        codigo, relatorio = self.adicionar(f"2025-07-12 RTP2 {prova}", self.MONTENEGRO)
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("foi vetada na comparacao: era do Carneiro", relatorio)
+        codigo, relatorio = self.adicionar(f"2026-10-10 RTP2 {prova}")
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("escolher a pessoa certa", relatorio)
+
+        # Retirar a linha certa tambem tem de funcionar, e o veto leva a
+        # pessoa para nao voltar a apanhar a linha da outra.
+        codigo, relatorio = self.remover(prova, "afinal nao foi exclusiva", self.CARNEIRO)
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertEqual(self.lida()["remover"][-1]["pessoa"], "carneiro")
+        self.assertEqual(self.totais()["carneiro"], antes["carneiro"])
+        codigo, relatorio = self.remover(prova, "x", self.CARNEIRO)
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("ja estava vetada", relatorio)
+
+    def test_do_sujeito_para_o_carneiro(self):
+        """A RTP3 de 2026-10-13. Enquanto a prova conta para o sujeito a
+        recusa mantem-se, porque uma entrevista exclusiva tem um
+        entrevistado so; depois do veto ja nao conta, e passa."""
+        prova = "https://teste.invalid/trocada-no-sujeito"
+        self.assertEqual(self.adicionar(f"2026-10-10 RTP2 {prova}")[0], 0)
+        codigo, relatorio = self.adicionar(f"2026-10-10 RTP2 {prova}", self.CARNEIRO)
+        self.assertEqual(codigo, 1, relatorio)
+        self.assertIn("ja e de uma entrevista do sujeito", relatorio)
+        self.assertEqual(self.remover(prova, "era do Carneiro")[0], 0)
+        antes = self.totais()["carneiro"]
+        codigo, relatorio = self.adicionar(f"2026-10-10 RTP2 {prova}", self.CARNEIRO)
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertEqual(self.totais()["carneiro"], antes + 1)
+
+    def test_do_montenegro_para_o_sujeito(self):
+        """O mesmo erro no outro sentido: uma entrevista do sujeito
+        registada no Montenegro e vetada la."""
+        prova = "https://teste.invalid/trocada-para-o-sujeito"
+        self.assertEqual(self.adicionar(f"2025-07-10 RTP2 {prova}", self.MONTENEGRO)[0], 0)
+        self.assertEqual(self.remover(prova, "era do sujeito", self.MONTENEGRO)[0], 0)
+        codigo, relatorio = self.adicionar(f"2026-10-10 RTP2 {prova}")
+        self.assertEqual(codigo, 0, relatorio)
+        self.assertEqual(self.ficheiro()["entrevistas"][-1]["prova"], prova)
 
 
 class TestFormularios(unittest.TestCase):
