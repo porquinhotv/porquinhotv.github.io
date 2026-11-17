@@ -697,6 +697,10 @@ remover:
 # A corrida avisa na consola se um grupo escrito aqui nao chegou a juntar
 # duas transmissoes: e como se apanha um endereco mal copiado.
 
+  # Formulario `remover`, 2026-11-17.
+  - prova: https://www.rtp.pt/play/p16206/e960391/especial-informacao
+    motivo: 'era do Carneiro'
+
 mesma_entrevista:
   # Simulcast declarado pela propria pagina, que escreve "Em entrevista a
   # TVI/CNN Portugal". O programa e o Jornal da CNN, e e por isso que a
