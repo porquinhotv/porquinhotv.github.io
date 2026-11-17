@@ -610,6 +610,11 @@ entrevistas:
     canal: now
     prova: https://www.instagram.com/p/Dfz2qSeFYwt/
 
+  # Formulario `adicionar`, 2026-11-17: canal e dia lidos por quem o preencheu.
+  - data: 2026-10-13
+    canal: rtp3
+    prova: https://www.rtp.pt/play/p16206/e960391/especial-informacao
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela

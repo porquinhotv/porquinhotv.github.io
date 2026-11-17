@@ -3533,6 +3533,46 @@
   },
   {
    "canais": [
+    "rtp3"
+   ],
+   "canal": "rtp3",
+   "confianca": "alta",
+   "data": "2026-10-13",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "9a4ce403ce99",
+   "origem": "canal",
+   "primeira_vez": "2026-11-17",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://www.rtp.pt/play/p16206/e960391/especial-informacao",
+   "publicado_em": "2026-10-13",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "9a4ce403ce99",
+     "canal": "rtp3",
+     "confianca": "alta",
+     "data": "2026-10-13",
+     "data_origem": "declarada",
+     "entrevista": "9a4ce403ce99",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:cceb61423841",
+     "origem": "canal",
+     "primeira_vez": "2026-11-17",
+     "programa": "",
+     "prova_url": "https://www.rtp.pt/play/p16206/e960391/especial-informacao",
+     "publicado_em": "2026-10-13",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
     "sic-noticias"
    ],
    "canal": "sic-noticias",
@@ -3773,5 +3813,5 @@
   }
  ],
  "esquema": 2,
- "total": 90
+ "total": 91
 }
