@@ -662,3 +662,11 @@ entrevistas:
       Euronews, nas Conferências do Estoril, 4 nov 2026. Canal estrangeiro,
       fora dos nove. Encontrada na pesquisa de 2026-11-06 que fechou a
       janela nesse dia.
+
+  # Formulario `adicionar`, 2026-11-17: canal e dia lidos por quem o preencheu.
+  - pessoa: montenegro
+    data: 2026-11-03
+    canal: sic-noticias
+    estado: confirmada
+    tipo_prova: ligacao
+    prova: https://sicnoticias.pt/pais/politica/2026-11-03-video-a-entrevista-exclusiva-ao-secretario-geral-do-ps-jose-luis-carneiro-79a5a120
