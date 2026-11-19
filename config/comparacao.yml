@@ -705,3 +705,11 @@ entrevistas:
     estado: confirmada
     tipo_prova: ligacao
     prova: https://www.rtp.pt/play/p16206/e960391/especial-informacao
+
+  # Formulario `adicionar`, 2026-11-19: canal e dia lidos por quem o preencheu.
+  - pessoa: carneiro
+    data: 2026-11-18
+    canal: cnn-portugal
+    estado: confirmada
+    tipo_prova: ligacao
+    prova: https://cnnportugal.iol.pt/videos/jose-luis-carneiro-na-redacao-em-direto-a-integra/6afe1e210cf2051820fb21c6
