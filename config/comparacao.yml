@@ -713,3 +713,11 @@ entrevistas:
     estado: confirmada
     tipo_prova: ligacao
     prova: https://cnnportugal.iol.pt/videos/jose-luis-carneiro-na-redacao-em-direto-a-integra/6afe1e210cf2051820fb21c6
+
+  # Formulario `adicionar`, 2026-11-26: canal e dia lidos por quem o preencheu.
+  - pessoa: montenegro
+    data: 2026-11-25
+    canal: rtp3
+    estado: confirmada
+    tipo_prova: ligacao
+    prova: https://www.rtp.pt/play/p16214/e970216/grande-entrevista
