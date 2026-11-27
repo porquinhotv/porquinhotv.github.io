@@ -621,6 +621,11 @@ entrevistas:
     canal: sic
     prova: https://www.instagram.com/p/DgIuPc_hLW1/
 
+  # Formulario `adicionar`, 2026-11-27: canal e dia lidos por quem o preencheu.
+  - data: 2026-11-23
+    canal: tvi
+    prova: https://cnnportugal.iol.pt/andre-ventura/orcamento-do-estado/esta-na-hora-de-deixarmos-de-ter-medidas-sempre-para-os-coitadinhos-habituais-chega-vai-mesmo-votar-contra-o-orcamento/20261123/6b04be190cf294b9345eb6bc
+
 remover:
   # Lida pelo autor a 2026-09-11: e um resumo de quinze minutos da
   # entrevista do noticiario da noite anterior, que ja esta contada pela

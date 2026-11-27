@@ -3773,6 +3773,46 @@
   },
   {
    "canais": [
+    "tvi"
+   ],
+   "canal": "tvi",
+   "confianca": "alta",
+   "data": "2026-11-23",
+   "data_origem": "declarada",
+   "fonte": "curadoria",
+   "fontes_distintas": 0,
+   "id": "c4ce0c019187",
+   "origem": "canal",
+   "primeira_vez": "2026-11-27",
+   "principal_declarado": false,
+   "programa": "",
+   "prova_url": "https://cnnportugal.iol.pt/andre-ventura/orcamento-do-estado/esta-na-hora-de-deixarmos-de-ter-medidas-sempre-para-os-coitadinhos-habituais-chega-vai-mesmo-votar-contra-o-orcamento/20261123/6b04be190cf294b9345eb6bc",
+   "publicado_em": "2026-11-23",
+   "rondas": 0,
+   "titulo": "",
+   "transmissoes": [
+    {
+     "bloco": "c4ce0c019187",
+     "canal": "tvi",
+     "confianca": "alta",
+     "data": "2026-11-23",
+     "data_origem": "declarada",
+     "entrevista": "c4ce0c019187",
+     "fonte": "curadoria",
+     "fontes_distintas": 0,
+     "id": "curadoria:7cd85e20a8ac",
+     "origem": "canal",
+     "primeira_vez": "2026-11-27",
+     "programa": "",
+     "prova_url": "https://cnnportugal.iol.pt/andre-ventura/orcamento-do-estado/esta-na-hora-de-deixarmos-de-ter-medidas-sempre-para-os-coitadinhos-habituais-chega-vai-mesmo-votar-contra-o-orcamento/20261123/6b04be190cf294b9345eb6bc",
+     "publicado_em": "2026-11-23",
+     "rondas": 0,
+     "titulo": ""
+    }
+   ]
+  },
+  {
+   "canais": [
     "sic"
    ],
    "canal": "sic",
@@ -3813,5 +3853,5 @@
   }
  ],
  "esquema": 2,
- "total": 91
+ "total": 92
 }
